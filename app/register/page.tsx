@@ -192,20 +192,20 @@ function RegisterPageContent() {
             <div className="grid w-full gap-6 lg:grid-cols-1">
               <div className="max-w-3xl">
                 <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_10px_30px_rgba(14,81,160,0.08)] backdrop-blur">
-                  Starte mit talkingHEADS Sales Trainer
+                  Sales-Training für planbare Abschlüsse
                 </div>
                 <h1 className={`${rubik.className} mt-4 text-3xl font-semibold tracking-[-0.03em] text-balance text-[#0E51A0] sm:text-4xl lg:text-5xl`}>
-                  Baue dir den Trainingsvorsprung auf, der im Sales spürbar wird.
+                  Mach dein Team im Verkauf sicher, strukturiert und überzeugend.
                 </h1>
                 <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-                  Erstelle dein Konto und starte mit interaktivem Sales-Training, direktem Feedback und einer klaren Entwicklung hin zu besseren Abschlüssen.
+                  Erstelle in wenigen Minuten eure Organisation und starte mit KI-gestützten Gesprächssimulationen, klarem Feedback und messbarer Entwicklung im Vertrieb.
                 </p>
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-3">
                   {[
-                    "Echte Gesprächssimulation",
-                    "Direktes Feedback",
-                    "Messbarer Sales-Fortschritt",
+                    "Trainieren wie im echten Kundentermin",
+                    "Feedback sofort nach jedem Gespräch",
+                    "Fortschritt im Team sichtbar machen",
                   ].map((benefit) => (
                     <div
                       key={benefit}
@@ -219,10 +219,10 @@ function RegisterPageContent() {
 
                 <div className="mt-6 rounded-[1.25rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_10px_24px_rgba(14,81,160,0.08)]">
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0E51A0]">
-                    Für Teams mit Ambition
+                    Für ambitionierte Vertriebsteams
                   </p>
                   <p className="mt-4 text-sm leading-7 text-slate-600">
-                    Richte deine Organisation in wenigen Schritten ein, lege den passenden Lizenzplan fest und gib deinem Team einen konsistenten Rahmen für bessere Verkaufsgespräche.
+                    Lege die Organisation an, wähle den passenden Lizenzplan und schaffe einen einheitlichen Trainingsstandard für bessere Beratung und mehr Abschlüsse.
                   </p>
                 </div>
               </div>
@@ -232,13 +232,13 @@ function RegisterPageContent() {
                   <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8">
                     <div className="text-center sm:text-left">
                       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#dce8fb]">
-                        talkingHEADS Sales Trainer
+                        talkingHEADS Registration
                       </p>
                       <h2 className={`${rubik.className} mt-4 text-3xl font-semibold tracking-[-0.03em] text-white`}>
-                        Organisation registrieren
+                        Konto für deine Organisation erstellen
                       </h2>
                       <p className="mt-3 text-sm leading-7 text-[#dce8fb]">
-                        Richte dein Konto ein und starte mit einem Sales-Training, das Fortschritt sichtbar und Abschlussstärke trainierbar macht.
+                        Fülle die Angaben aus und starte direkt mit einem Trainingssystem, das Verkaufsgespräche verbessert und Abschlusssicherheit aufbaut.
                       </p>
                     </div>
 
@@ -509,7 +509,7 @@ function RegisterPageContent() {
                         disabled={isLoading}
                         className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35),inset_0_1px_0_rgba(255,255,255,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(234,148,19,0.45),inset_0_1px_0_rgba(255,255,255,0.4)] disabled:cursor-not-allowed disabled:opacity-60"
                       >
-                        {isLoading ? "Registriere..." : "Organisation registrieren"}
+                        {isLoading ? "Konto wird erstellt..." : "Jetzt Organisation anlegen"}
                       </button>
                     </form>
 
@@ -521,7 +521,7 @@ function RegisterPageContent() {
                         className="font-medium text-white transition hover:text-[#dce8fb]"
                         href="/login"
                       >
-                        Du hast bereits ein Konto? Jetzt einloggen
+                        Bereits registriert? Hier einloggen
                       </Link>
                     </div>
                   </div>
