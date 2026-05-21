@@ -6,14 +6,14 @@ import { legalNoticeSections } from "@/lib/legal";
 export const metadata: Metadata = {
   title: "Impressum",
   description:
-    "Anbieterangaben und verfügbare Kontaktdaten für AbschlussIO.",
+    "Anbieterangaben und verfügbare Kontaktdaten für talkingHEADS Sales Trainer.",
 };
 
 export default function ImpressumPage() {
   return (
     <LegalPageShell
       eyebrow="Impressum"
-      title="Anbieterangaben für AbschlussIO."
+      title="Anbieterangaben für talkingHEADS Sales Trainer."
       description="Das Impressum verwendet dieselben Anbieter-Stammdaten wie die Datenschutzerklärung und führt nur die Angaben auf, die im aktuellen Projektstand hinterlegt sind."
     >
       {legalNoticeSections.map((section) => (

@@ -1130,7 +1130,7 @@ export function AdminPageView() {
                       Verwaltung für Organisationen, Seats und Mitglieder.
                     </h1>
                     <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-                      Behalte alle AbschlussIO-Organisationen im Blick, prüfe Belegungen und verwalte Aktivstatus zentral an einem Ort.
+                      Behalte alle talkingHEADS Sales Trainer-Organisationen im Blick, prüfe Belegungen und verwalte Aktivstatus zentral an einem Ort.
                     </p>
                   </div>
 

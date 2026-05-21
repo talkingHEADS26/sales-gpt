@@ -26,7 +26,7 @@ export function CookieBanner({
                 Wir verwenden Cookies nur für klar definierte Zwecke.
               </h2>
               <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
-                Notwendige Cookies sichern den Betrieb von AbschlussIO. Statistik-
+                Notwendige Cookies sichern den Betrieb von talkingHEADS Sales Trainer. Statistik-
                 und Marketing-Cookies aktivieren wir erst nach Ihrer Auswahl.
                 Weitere Informationen finden Sie im{" "}
                 <Link

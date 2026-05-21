@@ -533,7 +533,7 @@ export function ChatSessionView({ sessionId }: ChatSessionViewProps) {
                         <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-[#0e51a0] [animation-delay:-0.2s]" />
                         <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-[#0e51a0]/80 [animation-delay:-0.1s]" />
                         <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-[#0e51a0]/60" />
-                        <span className="ml-1">AbschlussIO antwortet...</span>
+                        <span className="ml-1">talkingHEADS Sales Trainer antwortet...</span>
                       </div>
                     </div>
                   </div>

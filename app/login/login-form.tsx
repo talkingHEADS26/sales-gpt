@@ -116,14 +116,14 @@ function mapLoginError(error: unknown): LoginUiError {
   if (normalizedMessage.includes("account_inactive")) {
     return {
       title: "Dein Konto wurde registriert und wartet aktuell auf Freischaltung.",
-      detail: "Bitte warte auf die manuelle Freigabe durch das AbschlussIO-Team.",
+      detail: "Bitte warte auf die manuelle Freigabe durch das talkingHEADS Sales Trainer-Team.",
     };
   }
 
   if (normalizedMessage.includes("subscription_expired")) {
     return {
       title: "Dein Zugang ist abgelaufen.",
-      detail: "Bitte prüfe den Status deines Abos oder wende dich an das AbschlussIO-Team.",
+      detail: "Bitte prüfe den Status deines Abos oder wende dich an das talkingHEADS Sales Trainer-Team.",
     };
   }
 
@@ -140,7 +140,7 @@ function mapLoginError(error: unknown): LoginUiError {
   if (normalizedMessage.includes("organization_inactive")) {
     return {
       title: "Deine Organisation ist derzeit deaktiviert.",
-      detail: "Bitte wende dich an deine Administration oder an das AbschlussIO-Team.",
+      detail: "Bitte wende dich an deine Administration oder an das talkingHEADS Sales Trainer-Team.",
     };
   }
 
@@ -480,7 +480,7 @@ export function LoginForm({
             <div className="grid w-full gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.95fr)] lg:items-center">
               <div className="max-w-2xl">
                 <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_10px_30px_rgba(14,81,160,0.08)] backdrop-blur">
-                  Dein Zugang zu AbschlussIO
+                  Dein Zugang zu talkingHEADS Sales Trainer
                 </div>
                 <h1 className="mt-6 text-4xl font-semibold tracking-[-0.06em] text-balance text-[#707070] sm:text-5xl lg:text-6xl">
                   Willkommen zurück.
@@ -512,7 +512,7 @@ export function LoginForm({
                   <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8">
                     <div className="text-center sm:text-left">
                       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0e51a0]">
-                        Abschluss<span className="text-[#707070]">IO</span>
+                        talkingHEADS Sales Trainer
                       </p>
                       <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[#707070]">
                         Einloggen

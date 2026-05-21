@@ -13,7 +13,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   description:
-    "AbschlussIO trainiert reale Verkaufsgespräche mit direktem Feedback, klarer Entwicklung und skalierbaren Lizenzen für Einzelpersonen und Teams.",
+    "talkingHEADS Sales Trainer trainiert reale Verkaufsgespräche mit direktem Feedback, klarer Entwicklung und skalierbaren Lizenzen für Einzelpersonen und Teams.",
 };
 
 const benefits = [
@@ -47,7 +47,7 @@ const moduleSections = [
     paragraphs: [
       "Nicht jedes verlorene Gespräch ist ein verlorener Kunde. Oft steckt darin genau der Hinweis, den dein Team gebraucht hätte.",
       "Mit der Situationsanalyse können Trainer echte Beratungssituationen reflektieren: Was wurde gesagt? Wo ist Vertrauen verloren gegangen? Welche Frage hat gefehlt? Und welcher nächste Satz hätte die Gesprächsführung gedreht?",
-      "AbschlussIO liefert realistisches, direkt verwertbares Feedback – damit aus schwierigen Situationen messbarer Fortschritt wird.",
+      "talkingHEADS Sales Trainer liefert realistisches, direkt verwertbares Feedback – damit aus schwierigen Situationen messbarer Fortschritt wird.",
     ],
     highlights: [
       "Analyse realer Verkaufssituationen",
@@ -152,7 +152,7 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-                  AbschlussIO gibt dir ein Trainingssystem, das echte Gesprächsdynamik abbildet, Stärken und Schwachstellen sichtbar macht und dein Team schneller auf konstante Performance bringt.
+                  talkingHEADS Sales Trainer gibt dir ein Trainingssystem, das echte Gesprächsdynamik abbildet, Stärken und Schwachstellen sichtbar macht und dein Team schneller auf konstante Performance bringt.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <a
@@ -200,7 +200,7 @@ export default function Home() {
                           Sales Session Review
                         </p>
                         <p className="mt-1 text-sm text-slate-500">
-                          AbschlussIO analysiert Wirkung, Klarheit und Nähe zum Abschluss.
+                          talkingHEADS Sales Trainer analysiert Wirkung, Klarheit und Nähe zum Abschluss.
                         </p>
                       </div>
                       <div className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
@@ -250,7 +250,7 @@ export default function Home() {
           <section className="pb-10 pt-4 sm:pb-16">
             <div className="mx-auto max-w-3xl text-center">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0e51a0]">
-                Warum AbschlussIO
+                Warum talkingHEADS Sales Trainer
               </p>
               <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[#707070] sm:text-4xl">
                 Sales-Training, das sich nach echtem Fortschritt anfühlt.
@@ -283,7 +283,7 @@ export default function Home() {
                 Trainiere die Gespräche, die im Studio wirklich entscheiden.
               </h2>
               <p className="mt-5 text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
-                AbschlussIO unterstützt dein Team nicht nur im Verkaufsgespräch. Es hilft auch bei den Situationen davor, danach und dazwischen – dort, wo aus Kommunikation echte Performance entsteht.
+                talkingHEADS Sales Trainer unterstützt dein Team nicht nur im Verkaufsgespräch. Es hilft auch bei den Situationen davor, danach und dazwischen – dort, wo aus Kommunikation echte Performance entsteht.
               </p>
             </div>
 
@@ -336,7 +336,7 @@ export default function Home() {
                 </h2>
               </div>
               <p className="max-w-xl text-sm leading-7 text-slate-600 sm:text-base">
-                Starte schlank oder rolle AbschlussIO teamweit aus. Jede Option ist auf klares Training, saubere Umsetzung und schnelle Aktivierung ausgerichtet.
+                Starte schlank oder rolle talkingHEADS Sales Trainer teamweit aus. Jede Option ist auf klares Training, saubere Umsetzung und schnelle Aktivierung ausgerichtet.
               </p>
             </div>
 

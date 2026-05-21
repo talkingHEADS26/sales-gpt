@@ -156,7 +156,7 @@ export function RoiCalculatorSection() {
                       Teamgröße
                     </p>
                     <p className="mt-1 text-sm leading-6 text-slate-500">
-                      Wie viele Mitarbeiter trainieren mit AbschlussIO?
+                      Wie viele Mitarbeiter trainieren mit talkingHEADS Sales Trainer?
                     </p>
                   </div>
                   <span className="rounded-full bg-[#0e51a0]/8 px-3 py-1 text-sm font-semibold text-[#0e51a0]">

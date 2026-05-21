@@ -20,7 +20,7 @@ export function ChatHeader({ sessionType, status, title }: ChatHeaderProps) {
       <div className="flex items-start gap-4">
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0e51a0]">
-            AbschlussIO
+            talkingHEADS Sales Trainer
           </p>
           <h1 className="mt-2 text-xl font-semibold tracking-[-0.04em] text-[#707070] sm:text-2xl">
             {modeLabel}

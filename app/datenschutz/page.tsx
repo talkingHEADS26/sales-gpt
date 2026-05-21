@@ -5,7 +5,7 @@ import { legalPrivacySections } from "@/lib/legal";
 export const metadata: Metadata = {
   title: "Datenschutz",
   description:
-    "Informationen zu Datenschutz, Cookie-Kategorien und der Verarbeitung technischer Nutzungsdaten in AbschlussIO.",
+    "Informationen zu Datenschutz, Cookie-Kategorien und der Verarbeitung technischer Nutzungsdaten in talkingHEADS Sales Trainer.",
 };
 
 export default function DatenschutzPage() {
@@ -13,7 +13,7 @@ export default function DatenschutzPage() {
     <LegalPageShell
       eyebrow="Datenschutz"
       title="Transparenz für Cookies und technische Datennutzung."
-      description="Diese Seite erklärt auf Produkt-Ebene, welche Cookie-Kategorien in AbschlussIO vorgesehen sind, welche Anbieterangaben für die Plattform hinterlegt sind und wie Nutzerinnen und Nutzer ihre Einwilligung steuern können."
+      description="Diese Seite erklärt auf Produkt-Ebene, welche Cookie-Kategorien in talkingHEADS Sales Trainer vorgesehen sind, welche Anbieterangaben für die Plattform hinterlegt sind und wie Nutzerinnen und Nutzer ihre Einwilligung steuern können."
     >
       {legalPrivacySections.map((section) => (
         <section

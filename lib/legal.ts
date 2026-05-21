@@ -35,7 +35,7 @@ export const legalPrivacySections = [
   {
     title: "2. Überblick",
     paragraphs: [
-      "AbschlussIO verarbeitet nur die Daten, die für den Betrieb der Plattform, die Sicherung des Zugangs und ausdrücklich freigegebene optionale Funktionen erforderlich sind.",
+      "talkingHEADS Sales Trainer verarbeitet nur die Daten, die für den Betrieb der Plattform, die Sicherung des Zugangs und ausdrücklich freigegebene optionale Funktionen erforderlich sind.",
     ],
   },
   {
@@ -83,7 +83,7 @@ export const termsSections = [
   {
     title: "Geltungsbereich",
     paragraphs: [
-      'Diese Allgemeinen Geschäftsbedingungen (nachfolgend "AGB") gelten für alle Verträge über die Nutzung der Plattform AbschlussIO (nachfolgend "Plattform"), die zwischen Christian Guzien, Köttlingerweg 11, 44793 Bochum (nachfolgend "Anbieter") und dem jeweiligen Nutzer (nachfolgend "Kunde") geschlossen werden.',
+      'Diese Allgemeinen Geschäftsbedingungen (nachfolgend "AGB") gelten für alle Verträge über die Nutzung der Plattform talkingHEADS Sales Trainer (nachfolgend "Plattform"), die zwischen Christian Guzien, Köttlingerweg 11, 44793 Bochum (nachfolgend "Anbieter") und dem jeweiligen Nutzer (nachfolgend "Kunde") geschlossen werden.',
       "Die Plattform ist ein KI-gestützter interaktiver Sales-Trainer, der auf dem OpenAI Response Model basiert und Soloselbstständigen sowie Teams (3er, 5er oder Enterprise) die Optimierung ihrer Verkaufsgespräche durch Training mit künstlicher Intelligenz ermöglicht.",
     ],
   },
@@ -195,7 +195,7 @@ export const termsSections = [
   {
     title: "Geistiges Eigentum",
     bullets: [
-      'Alle Rechte an der Plattform, einschließlich der Software, des Designs, der Inhalte und der Marke "AbschlussIO", stehen dem Anbieter oder dessen Lizenzgebern zu.',
+      'Alle Rechte an der Plattform, einschließlich der Software, des Designs, der Inhalte und der Marke "talkingHEADS Sales Trainer", stehen dem Anbieter oder dessen Lizenzgebern zu.',
       "Dem Kunden wird lediglich ein einfaches, nicht übertragbares Nutzungsrecht für die Dauer des Vertragsverhältnisses eingeräumt. Eine Vervielfältigung, Verbreitung oder öffentliche Zugänglichmachung der Plattform oder ihrer Inhalte ist ohne vorherige schriftliche Zustimmung des Anbieters untersagt.",
     ],
   },

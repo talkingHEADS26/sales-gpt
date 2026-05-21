@@ -48,7 +48,7 @@ const categoryCards: readonly CategoryCard[] = [
     category: "statistics",
     title: "Statistik / Analyse",
     description:
-      "Hilft uns zu verstehen, wie AbschlussIO genutzt wird, damit wir Inhalte und Performance gezielt verbessern können.",
+      "Hilft uns zu verstehen, wie talkingHEADS Sales Trainer genutzt wird, damit wir Inhalte und Performance gezielt verbessern können.",
     disabled: false,
   },
   {

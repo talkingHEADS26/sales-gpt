@@ -72,7 +72,7 @@ export async function POST(
     const mailResult = await sendInviteEmail({
       inviteToken: invitation.token,
       organizationName:
-        invitation.organizations?.organization_name ?? "AbschlussIO",
+        invitation.organizations?.organization_name ?? "talkingHEADS Sales Trainer",
       recipientEmail: invitation.email,
       requestOrigin: new URL(request.url).origin,
     });

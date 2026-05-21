@@ -6,14 +6,14 @@ import { termsLastUpdated, termsSections } from "@/lib/legal";
 export const metadata: Metadata = {
   title: "AGB",
   description:
-    "Allgemeine Geschäftsbedingungen für die Nutzung von AbschlussIO.",
+    "Allgemeine Geschäftsbedingungen für die Nutzung von talkingHEADS Sales Trainer.",
 };
 
 export default function AgbPage() {
   return (
     <LegalPageShell
       eyebrow="AGB"
-      title="Allgemeine Geschäftsbedingungen für AbschlussIO."
+      title="Allgemeine Geschäftsbedingungen für talkingHEADS Sales Trainer."
       description="Die folgenden AGB wurden aus dem bereitgestellten Dokument in eine strukturierte, direkt lesbare Produktseite überführt."
     >
       {termsSections.map((section) => (

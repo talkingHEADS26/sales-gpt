@@ -13,7 +13,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "Antworten auf häufige Fragen zu AbschlussIO, Training, KI, Sicherheit und Nutzung im Team.",
+    "Antworten auf häufige Fragen zu talkingHEADS Sales Trainer, Training, KI, Sicherheit und Nutzung im Team.",
 };
 
 const faqSections: readonly FaqSectionData[] = [
@@ -21,17 +21,17 @@ const faqSections: readonly FaqSectionData[] = [
     id: "allgemein",
     title: "Allgemein",
     description:
-      "Die wichtigsten Grundlagen zu Produkt, Zielgruppe und Nutzen von AbschlussIO.",
+      "Die wichtigsten Grundlagen zu Produkt, Zielgruppe und Nutzen von talkingHEADS Sales Trainer.",
     items: [
       {
-        question: "Was ist AbschlussIO?",
+        question: "Was ist talkingHEADS Sales Trainer?",
         answer:
-          "AbschlussIO ist ein KI-basiertes Trainingssystem für Verkaufsgespräche. Du trainierst mit realistischen Interessenten, statt nur Theorie zu lesen oder Standardskripte durchzugehen. Nach dem Gespräch bekommst du eine klare Auswertung zu Wirkung, Struktur und Abschlussstärke. Das Ziel ist messbarer Fortschritt im echten Gesprächsverlauf.",
+          "talkingHEADS Sales Trainer ist ein KI-basiertes Trainingssystem für Verkaufsgespräche. Du trainierst mit realistischen Interessenten, statt nur Theorie zu lesen oder Standardskripte durchzugehen. Nach dem Gespräch bekommst du eine klare Auswertung zu Wirkung, Struktur und Abschlussstärke. Das Ziel ist messbarer Fortschritt im echten Gesprächsverlauf.",
       },
       {
-        question: "Für wen ist AbschlussIO geeignet?",
+        question: "Für wen ist talkingHEADS Sales Trainer geeignet?",
         answer:
-          "AbschlussIO ist für Einzelverkäufer, Selbstständige und Vertriebsteams gedacht. Es eignet sich für Menschen, die Verkauf aktiv trainieren wollen, statt nur Wissen zu sammeln. Besonders sinnvoll ist es für Teams, die einen einheitlichen Trainingsstandard aufbauen wollen. Auch branchenspezifische Nutzung ist möglich.",
+          "talkingHEADS Sales Trainer ist für Einzelverkäufer, Selbstständige und Vertriebsteams gedacht. Es eignet sich für Menschen, die Verkauf aktiv trainieren wollen, statt nur Wissen zu sammeln. Besonders sinnvoll ist es für Teams, die einen einheitlichen Trainingsstandard aufbauen wollen. Auch branchenspezifische Nutzung ist möglich.",
       },
       {
         question: "Kann ich das System auch ohne Verkaufserfahrung nutzen?",
@@ -39,9 +39,9 @@ const faqSections: readonly FaqSectionData[] = [
           "Ja. Das System ist so aufgebaut, dass du auch ohne lange Vertriebserfahrung direkt starten kannst. Du bekommst realistische Gesprächssituationen und lernst durch Wiederholung, nicht durch komplizierte Theorie. Gerade Einsteiger profitieren davon, schnell ein Gefühl für gute Fragen, Einwände und Abschlüsse zu entwickeln.",
       },
       {
-        question: "Was unterscheidet AbschlussIO von normalen Verkaufstrainings?",
+        question: "Was unterscheidet talkingHEADS Sales Trainer von normalen Verkaufstrainings?",
         answer:
-          "Normale Verkaufstrainings bleiben oft bei Input, Folien und Rollenspielen mit begrenzter Wiederholbarkeit. AbschlussIO lässt dich direkt in konkrete Gespräche gehen und gibt dir danach eine strukturierte Rückmeldung. Dadurch trainierst du nicht nur Wissen, sondern Verhalten unter echten Gesprächsbedingungen. Das macht Fortschritt deutlich greifbarer.",
+          "Normale Verkaufstrainings bleiben oft bei Input, Folien und Rollenspielen mit begrenzter Wiederholbarkeit. talkingHEADS Sales Trainer lässt dich direkt in konkrete Gespräche gehen und gibt dir danach eine strukturierte Rückmeldung. Dadurch trainierst du nicht nur Wissen, sondern Verhalten unter echten Gesprächsbedingungen. Das macht Fortschritt deutlich greifbarer.",
       },
     ],
   },
@@ -59,7 +59,7 @@ const faqSections: readonly FaqSectionData[] = [
       {
         question: "Welche Szenarien kann ich trainieren?",
         answer:
-          "Mit AbschlussIO kannst du verschiedene Trainingsszenarien realitätsnah abbilden. Neben dem vollständigen Verkaufsgespräch kannst du gezielt einzelne Situationen trainieren, darunter die Situationsanalyse realer Gespräche, Terminsetting am Telefon sowie Beschwerdemanagement und schwierige Kundensituationen. So kannst du nicht nur komplette Sales-Prozesse üben, sondern auch gezielt an kritischen Momenten arbeiten, die im Alltag über den Abschluss entscheiden.",
+          "Mit talkingHEADS Sales Trainer kannst du verschiedene Trainingsszenarien realitätsnah abbilden. Neben dem vollständigen Verkaufsgespräch kannst du gezielt einzelne Situationen trainieren, darunter die Situationsanalyse realer Gespräche, Terminsetting am Telefon sowie Beschwerdemanagement und schwierige Kundensituationen. So kannst du nicht nur komplette Sales-Prozesse üben, sondern auch gezielt an kritischen Momenten arbeiten, die im Alltag über den Abschluss entscheiden.",
       },
       {
         question: "Ist das Training realistisch?",
@@ -87,7 +87,7 @@ const faqSections: readonly FaqSectionData[] = [
       {
         question: "Passt sich das Training an meine Branche an?",
         answer:
-          "Ja. AbschlussIO arbeitet mit branchenspezifischen Trainingslogiken und Szenarien. Das bedeutet, dass Problemsituationen, Motive, Einwände und Zielbilder zur gewählten Branche passen. So trainierst du nicht im luftleeren Raum, sondern in einem Kontext, der für deinen Alltag relevant ist.",
+          "Ja. talkingHEADS Sales Trainer arbeitet mit branchenspezifischen Trainingslogiken und Szenarien. Das bedeutet, dass Problemsituationen, Motive, Einwände und Zielbilder zur gewählten Branche passen. So trainierst du nicht im luftleeren Raum, sondern in einem Kontext, der für deinen Alltag relevant ist.",
       },
       {
         question: "Werden meine Gespräche gespeichert?",
@@ -105,7 +105,7 @@ const faqSections: readonly FaqSectionData[] = [
     id: "kpis-und-auswertung",
     title: "KPIs & Auswertung",
     description:
-      "Wie AbschlussIO Ergebnisse einordnet und welche Kennzahlen für dich sichtbar werden.",
+      "Wie talkingHEADS Sales Trainer Ergebnisse einordnet und welche Kennzahlen für dich sichtbar werden.",
     items: [
       {
         question: "Was bedeutet die Abschlussquote?",
@@ -120,7 +120,7 @@ const faqSections: readonly FaqSectionData[] = [
       {
         question: "Kann ich meine Entwicklung über Zeit sehen?",
         answer:
-          "Ja. AbschlussIO speichert Trainingsauswertungen so, dass Entwicklungen über mehrere Sessions sichtbar werden. Du kannst damit erkennen, ob sich bestimmte Bereiche stabil verbessern oder ob du an denselben Punkten hängen bleibst. Genau dieser Verlauf ist für nachhaltiges Training wichtiger als eine einzelne starke Session.",
+          "Ja. talkingHEADS Sales Trainer speichert Trainingsauswertungen so, dass Entwicklungen über mehrere Sessions sichtbar werden. Du kannst damit erkennen, ob sich bestimmte Bereiche stabil verbessern oder ob du an denselben Punkten hängen bleibst. Genau dieser Verlauf ist für nachhaltiges Training wichtiger als eine einzelne starke Session.",
       },
       {
         question: "Können auch Teams ausgewertet werden?",
@@ -138,7 +138,7 @@ const faqSections: readonly FaqSectionData[] = [
       {
         question: "Kann ich mein Team hinzufügen?",
         answer:
-          "Ja. AbschlussIO ist auf Einzel- und Teamnutzung ausgelegt. Je nach gebuchtem Setup kannst du weitere Nutzer in deine Organisation aufnehmen. Dadurch trainieren mehrere Personen in einer gemeinsamen Struktur statt in isolierten Einzellogins.",
+          "Ja. talkingHEADS Sales Trainer ist auf Einzel- und Teamnutzung ausgelegt. Je nach gebuchtem Setup kannst du weitere Nutzer in deine Organisation aufnehmen. Dadurch trainieren mehrere Personen in einer gemeinsamen Struktur statt in isolierten Einzellogins.",
       },
       {
         question: "Gibt es unterschiedliche Rollen (Admin, Trainer etc.)?",
@@ -161,7 +161,7 @@ const faqSections: readonly FaqSectionData[] = [
       {
         question: "Sind meine Daten sicher?",
         answer:
-          "AbschlussIO ist so aufgebaut, dass Nutzerdaten nicht offen oder beliebig zugänglich verarbeitet werden. Zugriff und Speicherung folgen klaren Plattformprozessen. Dazu gehören abgesicherte Accounts, definierte Rollen und technische Trennung zwischen Nutzern. Für viele Kunden ist genau diese Struktur die Grundlage für vertrauensvolle Nutzung.",
+          "talkingHEADS Sales Trainer ist so aufgebaut, dass Nutzerdaten nicht offen oder beliebig zugänglich verarbeitet werden. Zugriff und Speicherung folgen klaren Plattformprozessen. Dazu gehören abgesicherte Accounts, definierte Rollen und technische Trennung zwischen Nutzern. Für viele Kunden ist genau diese Struktur die Grundlage für vertrauensvolle Nutzung.",
       },
       {
         question: "Wo werden die Daten gespeichert?",
@@ -215,7 +215,7 @@ export default function FaqPage() {
                 FAQ
               </div>
               <h1 className="mt-6 text-4xl font-semibold tracking-[-0.06em] text-[#707070] sm:text-5xl lg:text-6xl">
-                Klare Antworten auf die wichtigsten Fragen zu AbschlussIO.
+                Klare Antworten auf die wichtigsten Fragen zu talkingHEADS Sales Trainer.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
                 Hier findest du kurze, direkte Antworten zu Produkt, Training,

@@ -205,7 +205,7 @@ export function InviteAcceptForm({ token }: InviteAcceptFormProps) {
                 </div>
                 <h1 className="mt-6 text-4xl font-semibold tracking-[-0.06em] text-[#707070] sm:text-5xl lg:text-6xl">
                   Du wurdest zu{" "}
-                  {invitation?.organization_name ?? "einem AbschlussIO-Team"} eingeladen.
+                  {invitation?.organization_name ?? "einem talkingHEADS Sales Trainer-Team"} eingeladen.
                 </h1>
                 <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
                   Lege dein Konto an und starte direkt in die gemeinsame Sales-Trainingsumgebung.
@@ -216,7 +216,7 @@ export function InviteAcceptForm({ token }: InviteAcceptFormProps) {
                 <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8">
                   <div className="mb-8">
                     <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0e51a0]">
-                      Abschluss<span className="text-[#707070]">IO</span>
+                      talkingHEADS Sales Trainer
                     </p>
                     <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[#707070]">
                       Einladung annehmen

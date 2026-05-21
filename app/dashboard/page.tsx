@@ -273,7 +273,7 @@ export default function DashboardPage() {
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                   <div className="max-w-3xl">
                     <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0e51a0]">
-                      AbschlussIO Dashboard
+                      talkingHEADS Sales Trainer Dashboard
                     </p>
                     <h1 className="mt-4 text-4xl font-semibold tracking-[-0.06em] text-[#707070] sm:text-5xl">
                       {displayName

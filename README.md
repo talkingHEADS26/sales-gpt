@@ -563,3 +563,41 @@ Verifikation:
 
 Offene Punkte:
 - Optional Logo-Größe je Breakpoint feinjustieren.
+
+### 2026-05-21 - Footer entfernt, Rebranding auf talkingHEADS, Icons ersetzt
+
+Bereich:
+- fix
+
+Änderung:
+- Globale Footer-Sektion (mit Impressum/Datenschutz-Links) aus dem Root-Layout entfernt.
+- Sichtbare Brand-Texte in App-Seiten und Komponenten von `AbschlussIO` auf `talkingHEADS Sales Trainer` umgestellt.
+- `SiteBrand` auf `public/th_icon.png` umgestellt.
+- App-Icons ersetzt: `app/icon.png` und `app/apple-icon.png` auf Basis von `public/th_icon.png`; alte `app/icon.svg` und `app/favicon.ico` entfernt.
+- Metadata-Icons zentral in `app/layout.tsx` auf `/th_icon.png` gesetzt.
+
+Warum:
+- Einheitliches neues Branding ohne Legacy-Markenreste und ohne globale Footer-Rechtslinks.
+
+Auswirkung:
+- Keine Footer-Leiste mehr auf den Seiten.
+- Konsistente Markenbezeichnung in der UI.
+- Icon-Assets zeigen nun das TH-Icon.
+
+Betroffene Pfade:
+- app/layout.tsx
+- components/site-brand.tsx
+- app/*.tsx, app/**/**/*.tsx (Brand-Textstellen)
+- components/*.tsx, components/**/**/*.tsx (Brand-Textstellen)
+- lib/legal.ts
+- app/icon.png
+- app/apple-icon.png
+- app/icon.svg (entfernt)
+- app/favicon.ico (entfernt)
+- README.md
+
+Verifikation:
+- `npx eslint` auf den betroffenen Kernseiten/-komponenten ausgeführt (ohne Errors; 1 bestehende Warning in `app/login/login-form.tsx`).
+
+Offene Punkte:
+- Optional `components/site-footer.tsx` vollständig entfernen, falls Datei nicht mehr benötigt wird.

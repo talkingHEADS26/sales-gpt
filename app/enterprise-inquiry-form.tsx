@@ -24,8 +24,8 @@ function getInquiryHeading(inquiryType: InquiryType) {
 
 function getInquiryHelperText(inquiryType: InquiryType) {
   return inquiryType === "demo"
-    ? "Hinterlasse deine Kontaktdaten für eine persönliche Demo von AbschlussIO."
-    : "Hinterlasse deine Kontaktdaten für eine Enterprise-Anfrage zu AbschlussIO.";
+    ? "Hinterlasse deine Kontaktdaten für eine persönliche Demo von talkingHEADS Sales Trainer."
+    : "Hinterlasse deine Kontaktdaten für eine Enterprise-Anfrage zu talkingHEADS Sales Trainer.";
 }
 
 export function EnterpriseInquiryForm({

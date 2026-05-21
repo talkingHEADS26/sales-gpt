@@ -2,16 +2,20 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ConsentIntegrations } from "@/components/consent-integrations";
 import { ConsentProvider } from "@/components/consent-provider";
-import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "AbschlussIO",
-    template: "%s | AbschlussIO",
+    default: "talkingHEADS Sales Trainer",
+    template: "%s | talkingHEADS Sales Trainer",
   },
   description: "Sales Performance System",
   appleWebApp: {
-    title: "AbschlussIO",
+    title: "talkingHEADS Sales Trainer",
+  },
+  icons: {
+    icon: "/th_icon.png",
+    apple: "/th_icon.png",
+    shortcut: "/th_icon.png",
   },
 };
 
@@ -25,7 +29,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ConsentProvider>
           <div className="flex-1">{children}</div>
-          <SiteFooter />
           <ConsentIntegrations />
         </ConsentProvider>
       </body>
