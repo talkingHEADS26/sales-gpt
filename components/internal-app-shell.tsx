@@ -24,7 +24,7 @@ type ProfileRecord = {
 };
 
 const defaultContainerClassName =
-  "mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 sm:px-6 lg:px-8";
+  "mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8";
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/dashboard") {
@@ -170,13 +170,13 @@ export function InternalAppShell({
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,#dcecff_0%,#f7fbff_38%,#f6f8fc_72%,#eef3f9_100%)] text-[#707070]">
+    <main className="min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_45%,#f4f9ff_100%)] text-[#707070]">
       <div className="relative isolate min-h-screen">
         <div className="absolute inset-x-0 top-0 -z-10 h-[34rem] bg-[linear-gradient(135deg,rgba(14,81,160,0.18),rgba(14,81,160,0.03)_46%,rgba(255,255,255,0)_72%)]" />
         <div className="absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-[#0e51a0]/12 blur-3xl" />
 
         <div className={getContainerClassName(containerClassName)}>
-          <header className="flex flex-col gap-4 rounded-[2rem] border border-white/80 bg-white/78 px-4 py-4 shadow-[0_18px_48px_rgba(15,23,42,0.08)] backdrop-blur sm:px-5 lg:flex-row lg:items-center lg:justify-between lg:rounded-full lg:px-6">
+          <header className="flex flex-col gap-4 rounded-[1.5rem] border border-[#dbe7f8] bg-white px-4 py-4 shadow-[0_12px_30px_rgba(14,81,160,0.10)] sm:px-5 lg:flex-row lg:items-center lg:justify-between lg:px-6">
             <div className="flex items-center justify-between gap-4">
               <SiteBrand href="/dashboard" />
               <button

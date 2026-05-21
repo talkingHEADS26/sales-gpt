@@ -464,7 +464,7 @@ export function LoginForm({
         <div className="absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-[#0e51a0]/12 blur-3xl" />
 
         <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 sm:px-6 lg:px-8">
-          <header className="flex items-center justify-between gap-3 rounded-full border border-white/70 bg-white/75 px-4 py-3 shadow-[0_18px_48px_rgba(15,23,42,0.08)] backdrop-blur md:px-6">
+          <header className="flex items-center justify-between gap-3 rounded-[1.25rem] border border-[#dbe7f8] bg-white px-4 py-3 shadow-[0_12px_30px_rgba(14,81,160,0.10)] md:px-6">
             <SiteBrand href="/" />
             <div className="flex min-w-0 items-center justify-end gap-2 sm:gap-3">
               <Link
@@ -476,13 +476,13 @@ export function LoginForm({
             </div>
           </header>
 
-          <section className="flex flex-1 items-center py-10 sm:py-14 lg:py-18">
+          <section className="flex flex-1 items-center py-8 sm:py-10 lg:py-12">
             <div className="grid w-full gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.95fr)] lg:items-center">
               <div className="max-w-2xl">
                 <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_10px_30px_rgba(14,81,160,0.08)] backdrop-blur">
                   Dein Zugang zu talkingHEADS Sales Trainer
                 </div>
-                <h1 className="mt-6 text-4xl font-semibold tracking-[-0.06em] text-balance text-[#707070] sm:text-5xl lg:text-6xl">
+                <h1 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-balance text-[#707070] sm:text-4xl lg:text-5xl">
                   Willkommen zurück.
                 </h1>
                 <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">

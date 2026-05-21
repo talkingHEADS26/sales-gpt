@@ -270,12 +270,12 @@ export default function DashboardPage() {
           <section className="flex flex-1 items-center py-8 sm:py-10 lg:py-12">
             <div className="w-full rounded-[2rem] border border-white/80 bg-white/82 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.14)] backdrop-blur sm:p-6 lg:p-8">
               <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8 lg:p-10">
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div className="flex flex-col gap-5">
                   <div className="max-w-3xl">
                     <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0E51A0]">
                       talkingHEADS Sales Trainer Dashboard
                     </p>
-                    <h1 className="mt-4 text-4xl font-semibold tracking-[-0.06em] text-[#707070] sm:text-5xl">
+                    <h1 className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-[#707070] sm:text-4xl">
                       {displayName
                         ? `Willkommen zurück, ${displayName}`
                         : "Willkommen zurück"}
@@ -285,25 +285,9 @@ export default function DashboardPage() {
                         {organizationName}
                       </p>
                     ) : null}
-                    <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+                    <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
                       Starte direkt in dein nächstes Sales-Training und arbeite fokussiert an besseren Gesprächen, klarerer Wirkung und stärkeren Abschlüssen.
                     </p>
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-3 lg:max-w-xl">
-                    {[
-                      "Echte Gesprächssimulation",
-                      "Direktes Feedback",
-                      "Messbarer Sales-Fortschritt",
-                    ].map((benefit) => (
-                      <div
-                        key={benefit}
-                        className="rounded-2xl border border-white/80 bg-white/85 px-4 py-4 text-sm font-medium text-[#707070] shadow-[0_16px_40px_rgba(15,23,42,0.06)]"
-                      >
-                      <span className="mb-3 block h-2 w-12 rounded-full bg-[#0E51A0]" />
-                        {benefit}
-                      </div>
-                    ))}
                   </div>
                 </div>
 

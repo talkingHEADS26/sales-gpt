@@ -641,3 +641,32 @@ Verifikation:
 
 Offene Punkte:
 - Optional finale Produkt-Screenshots statt Mockup-Grafik integrieren.
+
+### 2026-05-21 - App-Seiten visuell auf Landing-Style verdichtet (2. Runde)
+
+Bereich:
+- feature
+
+Änderung:
+- Register/Login-Darstellung weiter vom Legacy-Look gelöst: kompaktere Header, straffere Vertical-Spaces, klarere Hero-Typografie.
+- Dashboard-Hero entschlackt (weniger visuelles Rauschen, Fokus auf Welcome + Trainingsstart).
+- Interne App-Shell an den hellen Premium-Stil angenähert (Kanten, Border-Tone, Shadow-Gewichtung, Background).
+
+Warum:
+- Erste Design-Runde war noch zu nah am alten Seitenaufbau und wirkte nicht konsistent genug mit dem neuen Landing-Ansatz.
+
+Auswirkung:
+- Sichtbar moderneres, ruhigeres Gesamtbild mit klarerer Informationshierarchie in den Kernseiten.
+
+Betroffene Pfade:
+- components/internal-app-shell.tsx
+- app/register/page.tsx
+- app/login/login-form.tsx
+- app/dashboard/page.tsx
+- README.md
+
+Verifikation:
+- `npx eslint` auf den geänderten Dateien ohne Errors (1 bestehende Warning in `app/login/login-form.tsx`).
+
+Offene Punkte:
+- Optional dritte Runde für vollständige Vereinheitlichung der Interaktionskomponenten (Buttons/Inputs/Badges) in Chat und Session-Start-Cards.

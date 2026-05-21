@@ -167,7 +167,7 @@ function RegisterPageContent() {
         <div className="absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-[#0e51a0]/12 blur-3xl" />
 
         <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 sm:px-6 lg:px-8">
-          <header className="flex items-center justify-between rounded-full border border-white/70 bg-white/75 px-4 py-3 shadow-[0_18px_48px_rgba(15,23,42,0.08)] backdrop-blur md:px-6">
+          <header className="flex items-center justify-between rounded-[1.25rem] border border-[#dbe7f8] bg-white px-4 py-3 shadow-[0_12px_30px_rgba(14,81,160,0.10)] md:px-6">
             <SiteBrand href="/" />
             <div className="flex items-center gap-2 sm:gap-3">
               <Link
@@ -185,20 +185,20 @@ function RegisterPageContent() {
             </div>
           </header>
 
-          <section className="flex flex-1 items-center py-10 sm:py-14 lg:py-18">
-            <div className="grid w-full gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(500px,1.05fr)] lg:items-start">
-              <div className="max-w-2xl lg:sticky lg:top-10">
+          <section className="flex flex-1 items-center py-8 sm:py-10 lg:py-12">
+            <div className="grid w-full gap-6 lg:grid-cols-1">
+              <div className="max-w-3xl">
                 <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_10px_30px_rgba(14,81,160,0.08)] backdrop-blur">
                   Starte mit talkingHEADS Sales Trainer
                 </div>
-                <h1 className="mt-6 text-4xl font-semibold tracking-[-0.06em] text-balance text-[#707070] sm:text-5xl lg:text-6xl">
+                <h1 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-balance text-[#707070] sm:text-4xl lg:text-5xl">
                   Baue dir den Trainingsvorsprung auf, der im Sales spürbar wird.
                 </h1>
                 <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
                   Erstelle dein Konto und starte mit interaktivem Sales-Training, direktem Feedback und einer klaren Entwicklung hin zu besseren Abschlüssen.
                 </p>
 
-                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
                   {[
                     "Echte Gesprächssimulation",
                     "Direktes Feedback",
@@ -214,7 +214,7 @@ function RegisterPageContent() {
                   ))}
                 </div>
 
-                <div className="mt-8 rounded-[1.75rem] border border-white/80 bg-white/78 p-6 shadow-[0_20px_50px_rgba(15,23,42,0.07)] backdrop-blur">
+                <div className="mt-6 rounded-[1.25rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_10px_24px_rgba(14,81,160,0.08)]">
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0e51a0]">
                     Für Teams mit Ambition
                   </p>
@@ -224,7 +224,7 @@ function RegisterPageContent() {
                 </div>
               </div>
 
-              <div className="relative">
+              <div className="relative mx-auto w-full max-w-4xl">
                 <div className="absolute -right-6 top-10 hidden h-28 w-28 rounded-full bg-[#0e51a0]/10 blur-2xl sm:block" />
                 <div className="rounded-[2rem] border border-white/80 bg-white/82 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.14)] backdrop-blur sm:p-6">
                   <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8">
