@@ -211,7 +211,7 @@ function RegisterPageContent() {
                       key={benefit}
                       className="rounded-2xl border border-white/80 bg-white/75 px-4 py-4 text-sm font-medium text-[#707070] shadow-[0_16px_40px_rgba(15,23,42,0.06)] backdrop-blur"
                     >
-                      <span className="mb-3 block h-2 w-12 rounded-full bg-[#0e51a0]" />
+                      <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] shadow-[0_10px_20px_rgba(234,148,19,0.35)]" />
                       {benefit}
                     </div>
                   ))}
