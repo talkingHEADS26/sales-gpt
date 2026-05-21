@@ -18,117 +18,6 @@ function OrangeButton({ href, children }: { href: string; children: React.ReactN
   );
 }
 
-function Header() {
-  return (
-    <header className="sticky top-0 z-50 border-b border-[#e6edf6] bg-white/95 backdrop-blur">
-      <div className="mx-auto flex h-22 w-full max-w-[1240px] items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-3">
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d2e2f7] bg-white shadow-[0_6px_14px_rgba(14,81,160,0.15)]">
-            <span className="h-6 w-6 rounded-full bg-[#0E51A0]" />
-          </span>
-          <span className={`${rubik.className} text-[18px] font-semibold tracking-[0.12em] text-[#0E51A0]`}>
-            TALKINGHEADS SALES TRAINER
-          </span>
-        </div>
-
-        <nav className="hidden items-center gap-14 lg:flex">
-          <a href="#vorteile" className="text-[18px] font-medium text-[#1b2b45] hover:text-[#0E51A0]">
-            Vorteile
-          </a>
-          <a href="#fuer-wen" className="text-[18px] font-medium text-[#1b2b45] hover:text-[#0E51A0]">
-            Für wen
-          </a>
-          <a href="#so-funktionierts" className="text-[18px] font-medium text-[#1b2b45] hover:text-[#0E51A0]">
-            So funktioniert&apos;s
-          </a>
-        </nav>
-
-        <OrangeButton href="/register">Jetzt starten</OrangeButton>
-      </div>
-    </header>
-  );
-}
-
-function DashboardMockup() {
-  return (
-    <div className="w-full max-w-full overflow-hidden rounded-[1.6rem] border border-[#d5e3f6] bg-white shadow-[0_20px_44px_rgba(14,81,160,0.20)]">
-      <div className="grid min-h-[620px] lg:grid-cols-[0.72fr_1.35fr]">
-        <aside className="bg-[linear-gradient(165deg,#0E51A0_0%,#0c4a94_100%)] p-4 text-white sm:p-5">
-          <div className="mb-5 h-9 w-9 rounded-full border border-white/70" />
-          <div className="space-y-2">
-            {[
-              "Dashboard",
-              "Gespräche",
-              "Feedback",
-              "Analysen",
-              "Trainingsplan",
-              "Einstellungen",
-            ].map((item, idx) => (
-              <div
-                key={item}
-                className={`rounded-lg px-3 py-2 text-sm ${idx === 0 ? "bg-white/18" : "bg-white/8"}`}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </aside>
-
-        <div className="min-w-0 bg-[#f8fbff] p-4 sm:p-5">
-          <div className="mb-3 rounded-xl border border-[#dce7f7] bg-white px-4 py-3">
-            <div className="flex min-w-0 items-center justify-between gap-3">
-              <p className="truncate text-sm font-semibold text-[#1b2b45]">Verkaufsgespräch - Preisdiskussion</p>
-              <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs text-emerald-700">Live</span>
-            </div>
-          </div>
-
-          <div className="grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="space-y-3 rounded-xl border border-[#dce7f7] bg-white p-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#0E51A0]">KI-Kunde</p>
-              <div className="rounded-lg bg-[#edf4ff] p-3 text-sm text-[#2a598f]">
-                Ich interessiere mich für euer Angebot, aber der Preis ist mir zu hoch.
-              </div>
-
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#0E51A0]">Deine Antwort</p>
-              <div className="rounded-lg bg-[#f4f8ff] p-3 text-sm text-[#445770]">
-                Ich verstehe. Was ist für Sie der wichtigste Faktor bei der Entscheidung?
-              </div>
-
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#0E51A0]">KI-Kunde</p>
-              <div className="rounded-lg bg-[#edf4ff] p-3 text-sm text-[#2a598f]">
-                Es muss wirklich den Mehrwert bringen.
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <div className="rounded-xl border border-[#dce7f7] bg-white p-3">
-                <p className="text-sm font-semibold text-[#1b2b45]">Gesprächsanalyse</p>
-                <div className="mt-3 flex items-center gap-3">
-                  <div className="grid h-16 w-16 place-items-center rounded-full border-4 border-[#0E51A0] text-lg font-bold text-[#0E51A0]">
-                    82%
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-[#1b2b45]">Abschlusschance</p>
-                    <p className="text-xs text-emerald-700">Sehr gut</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-[#dce7f7] bg-white p-3">
-                <p className="text-sm font-semibold text-[#1b2b45]">Feedback der KI</p>
-                <p className="mt-2 text-sm leading-6 text-[#707070]">
-                  Sehr gute Nachfrage-Technik. Versuche, den Nutzen noch klarer auf das Ziel des Kunden zu beziehen.
-                </p>
-                <button className="mt-3 text-sm font-semibold text-[#0E51A0]">Zum Feedback</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function BenefitCard({ title, text }: { title: string; text: string }) {
   return (
     <article className="rounded-2xl border border-[#dce7f7] bg-white p-7 shadow-[0_10px_22px_rgba(14,81,160,0.08)]">
@@ -152,10 +41,8 @@ function AudienceCard({ title, text }: { title: string; text: string }) {
 export default function LandingPage() {
   return (
     <main className={`${roboto.className} bg-[#ffffff] text-[#1b2b45]`}>
-      <Header />
-
       <section className="mx-auto w-full max-w-[1240px] px-4 pb-12 pt-8 sm:px-6 lg:px-8 lg:pb-14 lg:pt-10">
-        <div className="grid items-stretch gap-6 overflow-hidden lg:grid-cols-[2fr_1fr]">
+        <div className="grid items-stretch gap-6 overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -181,10 +68,6 @@ export default function LandingPage() {
               </button>
             </div>
           </motion.div>
-
-          <div className="min-w-0">
-            <DashboardMockup />
-          </div>
         </div>
       </section>
 

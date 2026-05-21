@@ -697,3 +697,30 @@ Verifikation:
 
 Offene Punkte:
 - Feintuning erfolgt auf Basis visueller Review im Browser (Spacing/Typo auf realen Breakpoints).
+
+### 2026-05-21 - Landing Hero vereinfacht (ohne Bild), Hintergrund auf reinweiß
+
+Bereich:
+- fix
+
+Änderung:
+- Rechtes Hero-Bild/Dashboard auf `/landing` vollständig entfernt.
+- Oberer Bereich auf den blauen Hero-Kasten reduziert.
+- Gesamter Seitenhintergrund auf `#ffffff` gesetzt.
+- Overflow-Clipping im Hero-Bereich bereinigt.
+
+Warum:
+- Gewünschtes Layout: kein Hero-Bild, nur klarer blauer Header-/Hero-Block.
+
+Auswirkung:
+- Ruhigeres Hero-Layout ohne abgeschnittenes Bild und konsistenter weißer Seitenhintergrund.
+
+Betroffene Pfade:
+- app/landing/page.tsx
+- README.md
+
+Verifikation:
+- `npx eslint app/landing/page.tsx` ohne Fehler.
+
+Offene Punkte:
+- Keine.
