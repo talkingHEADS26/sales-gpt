@@ -601,3 +601,33 @@ Verifikation:
 
 Offene Punkte:
 - Optional `components/site-footer.tsx` vollständig entfernen, falls Datei nicht mehr benötigt wird.
+
+### 2026-05-21 - Landingpage komplett neu ausgerichtet (helles Premium-Design)
+
+Bereich:
+- feature
+
+Änderung:
+- `app/landing/page.tsx` vollständig neu aufgebaut und klar verkürzt.
+- Struktur auf 5 Kernbereiche reduziert: Header, Hero, 3 Benefits, Zielgruppen, Final CTA.
+- Farbsystem neu nach Vorgabe umgesetzt: `#0E51A0` (Hauptfarbe), `#EA9413` (CTA), `#707070` (Sekundärtext).
+- Dunklen Look entfernt, stattdessen heller Premium-Grundaufbau.
+- Hero neu mit 2-Spalten-Layout und hochwertigem Dashboard-Mockup in talkingHEADS-Farbwelt.
+- CTA-Buttons mit plastischem Orange-Verlauf und Schatten (3D-Look) umgesetzt.
+- Responsive Verhalten gestrafft (keine überlangen Bereiche, keine auslaufenden Inhalte, kompakte Abstände).
+
+Warum:
+- Vorheriger Entwurf war zu dunkel, zu lang und nicht passend zur gewünschten Markenwirkung.
+
+Auswirkung:
+- Deutlich fokussiertere Conversion-Landingpage mit klarem visuellen Branding und kürzerem Scroll-Flow.
+
+Betroffene Pfade:
+- app/landing/page.tsx
+- README.md
+
+Verifikation:
+- `npx eslint app/landing/page.tsx` ohne Fehler.
+
+Offene Punkte:
+- Optional finale Produkt-Screenshots statt Mockup-Grafik integrieren.

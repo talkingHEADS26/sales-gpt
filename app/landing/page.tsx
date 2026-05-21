@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Rubik, Roboto } from "next/font/google";
 import { motion } from "framer-motion";
@@ -8,195 +7,147 @@ import { motion } from "framer-motion";
 const rubik = Rubik({ subsets: ["latin"], weight: ["500", "700"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
-const problemCards = [
+const benefits = [
   {
-    title: "Unsicherheit bei Einwänden",
-    text: "In kritischen Momenten kippen Gespräche oft, obwohl das Angebot passt.",
+    title: "Realistische Verkaufsgespräche",
+    text: "Trainiere mit KI-Kunden in echten Verkaufssituationen und wiederhole so oft du willst.",
   },
   {
-    title: "Keine echte Gesprächspraxis",
-    text: "Theorie ersetzt kein Training unter realem Verkaufsdruck.",
+    title: "Sofortiges Feedback",
+    text: "Erhalte direkt nach jedem Gespräch konkrete, umsetzbare Feedbacks.",
   },
   {
-    title: "Keine objektive Analyse",
-    text: "Ohne präzises Feedback bleibt unklar, was wirklich Abschlüsse kostet.",
-  },
-];
-
-const featureCards = [
-  {
-    title: "KI-Kundensimulation",
-    text: "Trainiere mit dynamischen Buyer-Personas und realistischen Einwänden.",
-  },
-  {
-    title: "Echtzeit-Feedback",
-    text: "Erhalte direkt im Gespräch Hinweise zu Sprache, Wirkung und Struktur.",
-  },
-  {
-    title: "Abschlusswahrscheinlichkeit",
-    text: "Sieh live, wie sich dein Gespräch auf den Deal-Outcome auswirkt.",
-  },
-  {
-    title: "Situationsanalyse",
-    text: "Nach jeder Session: klare Hebel für das nächste Gespräch.",
+    title: "Sicherer abschließen",
+    text: "Verbessere deine Gesprächsführung und erhöhe deine Abschlussquote.",
   },
 ];
 
-const audienceCards = [
+const audiences = [
   {
     title: "Fitnessstudios",
-    text: "Mehr Abschlüsse aus Probetrainings, Beratung und Telefon-Leadflow.",
+    text: "Mehr Abschlüsse bei Probetrainings und Memberships.",
   },
   {
     title: "Coaches & Berater",
-    text: "Sicherere Closing-Calls und bessere Conversion in Premium-Angeboten.",
+    text: "Überzeuge in Beratungsgesprächen und gewinne mehr Kunden.",
   },
   {
     title: "Vertriebsteams",
-    text: "Einheitlicher Sales-Standard mit messbarer Performance pro Teammitglied.",
+    text: "Skaliere Vertriebserfolg durch professionelles Training.",
   },
 ];
 
-const kpis = [
-  "24/7 KI-Training",
-  "Mehr Gesprächssicherheit",
-  "Realistische Verkaufssimulation",
-  "Analyse nach jeder Session",
-];
-
-function SectionHeading({
-  eyebrow,
-  title,
-  subtitle,
-}: {
-  eyebrow?: string;
-  title: string;
-  subtitle?: string;
-}) {
+function CtaButton({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-3xl text-center">
-      {eyebrow ? (
-        <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#EA9413]">
-          {eyebrow}
-        </p>
-      ) : null}
-      <h2
-        className={`${rubik.className} mt-3 text-balance text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl`}
-      >
-        {title}
-      </h2>
-      {subtitle ? (
-        <p className={`${roboto.className} mt-4 text-base text-slate-300`}>
-          {subtitle}
-        </p>
-      ) : null}
-    </div>
+    <Link
+      href={href}
+      className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35),inset_0_1px_0_rgba(255,255,255,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(234,148,19,0.45),inset_0_1px_0_rgba(255,255,255,0.4)]"
+    >
+      {children}
+    </Link>
   );
 }
 
-function GlassCard({ title, text }: { title: string; text: string }) {
+function SimpleCard({ title, text }: { title: string; text: string }) {
   return (
     <motion.article
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.2 }}
-      className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.35 }}
+      className="rounded-2xl border border-[#dbe7f8] bg-white p-6 shadow-[0_10px_24px_rgba(14,81,160,0.08)]"
     >
-      <h3 className={`${rubik.className} text-xl font-semibold text-white`}>
+      <div className="mb-5 h-14 w-14 rounded-full bg-[linear-gradient(150deg,#1f6fcd,#0E51A0)] shadow-[0_10px_20px_rgba(14,81,160,0.26)]" />
+      <h3 className={`${rubik.className} text-3xl font-semibold tracking-[-0.02em] text-[#0E51A0]`}>
         {title}
       </h3>
-      <p className={`${roboto.className} mt-3 text-sm leading-7 text-slate-300`}>
-        {text}
-      </p>
+      <p className={`${roboto.className} mt-3 text-lg leading-8 text-[#707070]`}>{text}</p>
     </motion.article>
   );
 }
 
-function HeroDashboardMockup() {
+function DashboardMockup() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className="relative mt-10 rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900/90 to-[#06142A]/90 p-5 shadow-[0_0_120px_rgba(14,81,160,0.30)] backdrop-blur-xl"
+      transition={{ duration: 0.45 }}
+      className="overflow-hidden rounded-[1.8rem] border border-[#cadef8] bg-white shadow-[0_18px_45px_rgba(14,81,160,0.20)]"
     >
-      <div className="absolute -right-10 -top-10 h-36 w-36 rounded-full bg-[#0E51A0]/50 blur-3xl" />
-      <div className="absolute -bottom-10 -left-10 h-36 w-36 rounded-full bg-[#EA9413]/25 blur-3xl" />
+      <div className="grid min-h-[460px] lg:grid-cols-[1fr_1.45fr]">
+        <aside className="bg-[linear-gradient(165deg,#0E51A0_0%,#0b4a94_70%,#0a4489_100%)] p-4 sm:p-5">
+          <div className="mb-4 h-9 w-9 rounded-full border border-white/50" />
+          <nav className="space-y-2">
+            {[
+              "Dashboard",
+              "Gespräche",
+              "Feedback",
+              "Analysen",
+              "Trainingsplan",
+              "Einstellungen",
+            ].map((item, idx) => (
+              <div
+                key={item}
+                className={`rounded-lg px-3 py-2 text-sm text-white/90 ${
+                  idx === 0 ? "bg-white/12" : "bg-white/6"
+                }`}
+              >
+                {item}
+              </div>
+            ))}
+          </nav>
+        </aside>
 
-      <div className="grid gap-4 lg:grid-cols-[1.25fr_0.75fr]">
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-          <div className="mb-4 flex items-center justify-between">
-            <p
-              className={`${roboto.className} text-xs uppercase tracking-[0.22em] text-slate-300`}
-            >
-              Live Sales Session
+        <div className="bg-[#f9fbff] p-4 sm:p-5">
+          <div className="mb-3 flex items-center justify-between rounded-xl border border-[#dbe7f8] bg-white px-3 py-2">
+            <p className={`${rubik.className} text-base font-semibold text-[#0E51A0]`}>
+              Verkaufsgespräch - Preisdiskussion
             </p>
-            <span className="rounded-full bg-[#EA9413]/20 px-3 py-1 text-xs text-[#EA9413]">
-              AI Active
-            </span>
+            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700">Live</span>
           </div>
-          <div className="space-y-3">
-            <div className="rounded-xl bg-slate-950/80 p-3 text-sm text-slate-200">
-              Kunde: &quot;Ich bin unsicher, ob sich das wirklich lohnt.&quot;
+
+          <div className="grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="space-y-2 rounded-xl border border-[#dbe7f8] bg-white p-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#0E51A0]">KI-Kunde</p>
+              <div className="rounded-lg bg-[#eef4ff] p-3 text-sm text-[#285894]">
+                Ich interessiere mich für euer Angebot, aber der Preis ist mir zu hoch.
+              </div>
+
+              <p className="pt-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#0E51A0]">Deine Antwort</p>
+              <div className="rounded-lg bg-[#f5f8ff] p-3 text-sm text-[#3d4d68]">
+                Ich verstehe. Was ist für Sie der wichtigste Faktor bei der Entscheidung?
+              </div>
+
+              <p className="pt-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#0E51A0]">KI-Kunde</p>
+              <div className="rounded-lg bg-[#eef4ff] p-3 text-sm text-[#285894]">
+                Es muss wirklich den Mehrwert bringen.
+              </div>
             </div>
-            <div className="rounded-xl bg-[#0E51A0]/25 p-3 text-sm text-white">
-              Du: &quot;Darf ich kurz zeigen, wie schnell sich die Investition
-              amortisiert?&quot;
-            </div>
-            <div className="rounded-xl bg-slate-950/80 p-3 text-sm text-slate-200">
-              AI Coach: &quot;Stark. Jetzt Nutzenbeweis + nächste
-              Abschlussfrage setzen.&quot;
+
+            <div className="space-y-3">
+              <div className="rounded-xl border border-[#dbe7f8] bg-white p-3">
+                <p className="text-sm font-semibold text-[#0E51A0]">Gesprächsanalyse</p>
+                <div className="mt-3 flex items-center gap-3">
+                  <div className="grid h-16 w-16 place-items-center rounded-full border-4 border-[#0E51A0] text-lg font-bold text-[#0E51A0]">
+                    82%
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-[#0E51A0]">Abschlusschance</p>
+                    <p className="text-xs text-emerald-700">Sehr gut</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-[#dbe7f8] bg-white p-3">
+                <p className="text-sm font-semibold text-[#0E51A0]">Feedback der KI</p>
+                <p className="mt-2 text-sm leading-6 text-[#707070]">
+                  Sehr gute Nachfrage-Technik. Nutzen noch klarer auf das Ziel des Kunden beziehen.
+                </p>
+                <button className="mt-3 text-sm font-semibold text-[#EA9413]">Zum Feedback</button>
+              </div>
             </div>
           </div>
-          <div className="mt-4 h-10 rounded-xl bg-gradient-to-r from-[#0E51A0]/50 via-[#EA9413]/40 to-[#0E51A0]/50" />
         </div>
-
-        <div className="space-y-4">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p
-              className={`${roboto.className} text-xs uppercase tracking-[0.18em] text-slate-400`}
-            >
-              Sales Score
-            </p>
-            <p className={`${rubik.className} mt-2 text-4xl font-bold text-white`}>
-              86
-            </p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p
-              className={`${roboto.className} text-xs uppercase tracking-[0.18em] text-slate-400`}
-            >
-              Abschlusswahrscheinlichkeit
-            </p>
-            <p className={`${rubik.className} mt-2 text-3xl font-bold text-[#EA9413]`}>
-              73%
-            </p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <p
-              className={`${roboto.className} text-xs uppercase tracking-[0.18em] text-slate-400`}
-            >
-              Einwandanalyse
-            </p>
-            <p className={`${roboto.className} mt-2 text-sm text-slate-200`}>
-              Preis-Einwand sauber geführt, Abschlussfrage zu spät gesetzt.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-4 grid gap-4 sm:grid-cols-3">
-        {[
-          "KPI: Bedarfsanalyse 88",
-          "KPI: Nutzenargumentation 82",
-          "KPI: Closing-Timing 74",
-        ].map((item) => (
-          <div
-            key={item}
-            className="rounded-xl border border-white/10 bg-slate-900/70 p-3 text-xs text-slate-300"
-          >
-            {item}
-          </div>
-        ))}
       </div>
     </motion.div>
   );
@@ -204,171 +155,87 @@ function HeroDashboardMockup() {
 
 export default function LandingPage() {
   return (
-    <main
-      className={`${roboto.className} min-h-screen bg-[radial-gradient(circle_at_20%_0%,rgba(14,81,160,0.40),rgba(2,6,23,1)_45%),linear-gradient(165deg,#020617_0%,#07152d_50%,#0a1f40_100%)] text-[#707070]`}
-    >
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+    <main className={`${roboto.className} bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_40%,#f5f9ff_100%)] text-[#0f172a]`}>
+      <header className="sticky top-0 z-40 border-b border-[#dfe9f8] bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/TH_Logo.png"
-              alt="talkingHEADS Logo"
-              width={148}
-              height={40}
-              className="h-10 w-auto"
-              priority
-            />
-            <span className={`${rubik.className} hidden text-sm font-semibold text-white/90 sm:inline`}>
-              Sales Trainer
-            </span>
-          </Link>
-          <Link
-            href="#final-cta"
-            className="rounded-xl bg-[#EA9413] px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-[#f0a52f]"
-          >
-            Jetzt kostenlos testen
-          </Link>
+          <div className={`${rubik.className} text-xl font-bold text-[#0E51A0]`}>
+            talking<span className="text-[#1f5fae]">HEADS</span>
+          </div>
+
+          <nav className="hidden items-center gap-8 md:flex">
+            <a href="#vorteile" className="text-base font-medium text-[#0f2343] transition hover:text-[#0E51A0]">
+              Vorteile
+            </a>
+            <a href="#fuer-wen" className="text-base font-medium text-[#0f2343] transition hover:text-[#0E51A0]">
+              Für wen
+            </a>
+            <a href="#so-funktionierts" className="text-base font-medium text-[#0f2343] transition hover:text-[#0E51A0]">
+              So funktioniert&apos;s
+            </a>
+          </nav>
+
+          <CtaButton href="/register">Jetzt starten</CtaButton>
         </div>
       </header>
 
-      <section className="mx-auto w-full max-w-7xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24 lg:px-8 lg:pt-28">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#EA9413]">
-            AI Sales Performance
-          </p>
-          <h1
-            className={`${rubik.className} mt-6 max-w-4xl text-balance text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl`}
-          >
-            KI-Verkaufstraining für echte Abschlüsse.
-          </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-            Der talkingHEADS Sales Trainer simuliert echte Verkaufsgespräche,
-            analysiert deine Performance und trainiert dein Closing auf
-            Profi-Niveau.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="#final-cta"
-              className="rounded-xl bg-[#EA9413] px-7 py-3.5 text-center text-base font-semibold text-slate-950 transition hover:bg-[#f0a52f]"
-            >
-              Jetzt kostenlos testen
-            </Link>
-            <button className="rounded-xl border border-white/25 bg-white/5 px-7 py-3.5 text-base font-semibold text-white transition hover:bg-white/10">
-              Demo ansehen
-            </button>
-          </div>
-        </motion.div>
+      <section className="mx-auto w-full max-w-7xl px-4 pb-16 pt-10 sm:px-6 sm:pt-14 lg:px-8 lg:pb-20">
+        <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div>
+            <h1 className={`${rubik.className} text-balance text-5xl font-bold leading-[1.05] text-[#0E51A0] sm:text-6xl lg:text-7xl`}>
+              Mehr Sales.
+              <br />
+              Mehr Abschlüsse.
+              <br />
+              Mit KI-Training.
+            </h1>
+            <p className="mt-5 max-w-xl text-2xl leading-10 text-[#31435f]">
+              Der talkingHEADS Sales Trainer simuliert echte Verkaufsgespräche,
+              gibt sofort Feedback und hilft Verkäufern, sicherer und erfolgreicher
+              abzuschließen.
+            </p>
 
-        <HeroDashboardMockup />
-      </section>
-
-      <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <SectionHeading title="Die meisten Verkäufer verlieren keine Abschlüsse wegen fehlendem Wissen. Sondern wegen fehlender Gesprächssicherheit." />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {problemCards.map((card) => (
-            <GlassCard key={card.title} title={card.title} text={card.text} />
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Solution"
-          title="Trainiere Sales wie Spitzensportler."
-        />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-          {featureCards.map((card) => (
-            <GlassCard key={card.title} title={card.title} text={card.text} />
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Product Preview"
-          title="Performance-Dashboard für Abschlussstärke"
-          subtitle="Glasmorphism UI, klare KPIs und Trainingssteuerung in einem zentralen Cockpit."
-        />
-        <div className="mt-12 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_0_100px_rgba(14,81,160,0.28)] backdrop-blur-2xl sm:p-10">
-          <div className="grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
-            <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-5">
-              <div className="h-56 rounded-xl bg-gradient-to-br from-[#0E51A0]/45 via-slate-900 to-[#EA9413]/20" />
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-xl bg-white/5 p-3 text-xs text-slate-300">
-                  Pipeline Momentum: +18%
-                </div>
-                <div className="rounded-xl bg-white/5 p-3 text-xs text-slate-300">
-                  Closing Consistency: 81
-                </div>
-                <div className="rounded-xl bg-white/5 p-3 text-xs text-slate-300">
-                  Einwand-Qualität: 84
-                </div>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 text-sm text-slate-200">
-                Live-Coaching-Notiz: Abschlussfrage 1 Schritt früher setzen.
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 text-sm text-slate-200">
-                Risikobereich: Preisanker gegen Wettbewerbsvergleich schärfen.
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 text-sm text-slate-200">
-                Nächster Drill: Einwandkette &quot;zu teuer&quot; in 3 Varianten
-                trainieren.
-              </div>
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <CtaButton href="/register">Jetzt kostenlos testen</CtaButton>
+              <button className="inline-flex min-h-12 items-center justify-center rounded-xl border border-[#b4caea] bg-white px-6 py-3 text-sm font-semibold text-[#0E51A0] shadow-[0_8px_20px_rgba(14,81,160,0.10)] transition hover:border-[#0E51A0]/45 hover:bg-[#f7fbff]">
+                Demo ansehen
+              </button>
             </div>
           </div>
+
+          <DashboardMockup />
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {kpis.map((item) => (
-            <motion.div
-              key={item}
-              whileHover={{ scale: 1.02 }}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-xl"
-            >
-              <p className={`${rubik.className} text-xl font-semibold text-white`}>
-                {item}
-              </p>
-            </motion.div>
+      <section id="vorteile" className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-5 md:grid-cols-3">
+          {benefits.map((item) => (
+            <SimpleCard key={item.title} title={item.title} text={item.text} />
           ))}
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Zielgruppen"
-          title="Gebaut für vertriebsstarke Teams und Performer"
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {audienceCards.map((card) => (
-            <GlassCard key={card.title} title={card.title} text={card.text} />
+      <section id="fuer-wen" className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <h2 className={`${rubik.className} text-center text-4xl font-bold text-[#0E51A0] sm:text-5xl`}>
+          Für wen ist der Sales Trainer?
+        </h2>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {audiences.map((item) => (
+            <SimpleCard key={item.title} title={item.title} text={item.text} />
           ))}
         </div>
       </section>
 
-      <section
-        id="final-cta"
-        className="mx-auto w-full max-w-7xl px-4 pb-24 pt-12 sm:px-6 lg:px-8"
-      >
-        <div className="rounded-3xl border border-[#0E51A0]/60 bg-gradient-to-r from-[#0a1d3b] via-[#0b2c58] to-[#102848] p-10 text-center shadow-[0_0_90px_rgba(14,81,160,0.35)]">
-          <h2
-            className={`${rubik.className} text-balance text-3xl font-bold text-white sm:text-4xl md:text-5xl`}
-          >
-            Trainiere heute. Schließe morgen besser ab.
+      <section id="so-funktionierts" className="mx-auto w-full max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pb-20">
+        <div className="rounded-3xl bg-[linear-gradient(135deg,#0E51A0,#1f5fae)] px-6 py-10 text-center shadow-[0_20px_40px_rgba(14,81,160,0.25)] sm:px-10">
+          <h2 className={`${rubik.className} text-4xl font-bold text-white sm:text-5xl`}>
+            Bereit, Verkauf wirklich zu trainieren?
           </h2>
-          <Link
-            href="/register"
-            className="mt-8 inline-flex rounded-xl bg-[#EA9413] px-8 py-3.5 text-base font-semibold text-slate-950 transition hover:bg-[#f0a52f]"
-          >
-            Sales Trainer starten
-          </Link>
+          <p className="mx-auto mt-3 max-w-3xl text-2xl text-[#d9e6fb]">
+            Starte jetzt dein KI-Training und mach jeden Gesprächsabschluss zu deinem Vorteil.
+          </p>
+          <div className="mt-7">
+            <CtaButton href="/register">Sales Trainer starten</CtaButton>
+          </div>
         </div>
       </section>
     </main>
