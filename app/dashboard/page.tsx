@@ -21,62 +21,6 @@ type OrganizationMembership = {
   } | null;
 };
 
-type DashboardKpiSummary = {
-  averages: {
-    finalScore: number | null;
-    module1Score: number | null;
-    module2Score: number | null;
-    module3Score: number | null;
-  };
-  closingRate: {
-    completedSessions: number;
-    sales: number;
-    value: number;
-  };
-  appointmentRate: {
-    appointments: number;
-    completedCalls: number;
-    value: number;
-  };
-  complaintManagement: {
-    averages: {
-      resolutionProbability: number | null;
-    };
-    happyCustomerRate: {
-      completedComplaints: number;
-      happyCustomers: number;
-      value: number;
-    };
-    resolutionRate: {
-      completedComplaints: number;
-      resolvedSessions: number;
-      value: number;
-    };
-  };
-  coaching: {
-    completedSessions: number;
-    score: number;
-  };
-  changeFromLastConversation: number | null;
-  counts: {
-    finalScores: number;
-    module1Scores: number;
-    module2Scores: number;
-    module3Scores: number;
-  };
-  trend: {
-    delta: number | null;
-    text: string;
-    windowDays: number;
-  };
-  overallScore: number;
-};
-
-type DashboardKpiResponse = {
-  error?: string;
-  summary?: DashboardKpiSummary;
-};
-
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
@@ -87,7 +31,6 @@ export default function DashboardPage() {
   const [userId, setUserId] = useState("");
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [organizationName, setOrganizationName] = useState<string | null>(null);
-  const [kpiSummary, setKpiSummary] = useState<DashboardKpiSummary | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -179,22 +122,6 @@ export default function DashboardPage() {
           throw membershipError;
         }
 
-        let resolvedKpiSummary: DashboardKpiSummary | null = null;
-
-        if (accessToken) {
-          const kpiResponse = await fetch("/api/dashboard/kpis", {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          });
-
-          const kpiResponseBody = (await kpiResponse.json()) as DashboardKpiResponse;
-
-          if (kpiResponse.ok) {
-            resolvedKpiSummary = kpiResponseBody.summary ?? null;
-          }
-        }
-
         const resolvedDisplayName =
           profile?.first_name?.trim() ||
           profile?.full_name?.trim() ||
@@ -206,7 +133,6 @@ export default function DashboardPage() {
           setOrganizationName(
             membership?.organizations?.organization_name?.trim() || null
           );
-          setKpiSummary(resolvedKpiSummary);
           setError("");
           setIsLoading(false);
         }
@@ -229,40 +155,6 @@ export default function DashboardPage() {
       isActive = false;
     };
   }, [router]);
-
-  const kpiCards = [
-    {
-      label: "Abschlussquote",
-      value: `${kpiSummary?.closingRate.value ?? 0} %`,
-      detail: `${kpiSummary?.closingRate.sales ?? 0} Sales aus ${
-        kpiSummary?.closingRate.completedSessions ?? 0
-      } Gesprächen`,
-    },
-    {
-      label: "Terminquote",
-      value: `${kpiSummary?.appointmentRate.value ?? 0} %`,
-      detail: `${kpiSummary?.appointmentRate.appointments ?? 0} Termine aus ${
-        kpiSummary?.appointmentRate.completedCalls ?? 0
-      } Calls`,
-    },
-    {
-      label: "Happy Customer Quote",
-      value: `${kpiSummary?.complaintManagement.happyCustomerRate.value ?? 0} %`,
-      detail: `${kpiSummary?.complaintManagement.happyCustomerRate.happyCustomers ?? 0} zufriedene Kunden aus ${
-        kpiSummary?.complaintManagement.happyCustomerRate.completedComplaints ?? 0
-      } Gesprächen`,
-    },
-    {
-      label: "Situationscoachings",
-      value: `${kpiSummary?.coaching.completedSessions ?? 0}`,
-      detail: `${kpiSummary?.coaching.completedSessions ?? 0} durchgeführte Analysen`,
-    },
-    {
-      label: "Overall Score",
-      value: `${kpiSummary?.overallScore ?? 0} %`,
-      detail: "Deine Gesamtperformance über alle Trainingsbereiche",
-    },
-  ];
 
   return (
     <InternalAppShell>
@@ -304,45 +196,6 @@ export default function DashboardPage() {
                 ) : null}
 
                 {!isLoading && !error ? <StartSessionActions userId={userId} /> : null}
-
-                {!isLoading && !error ? (
-                  <section className="mt-10 rounded-[1.75rem] border border-white/80 bg-white/88 p-5 shadow-[0_18px_46px_rgba(15,23,42,0.08)] sm:p-6">
-                    <div className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] lg:items-end">
-                      <div className="max-w-2xl">
-                        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
-                          KPI Überblick
-                        </p>
-                        <h2 className="mt-3 max-w-xl text-2xl font-semibold tracking-[-0.04em] text-[#707070] sm:text-[2rem]">
-                          Deine Performance über alle Trainingsbereiche hinweg.
-                        </h2>
-                      </div>
-                      <p className="max-w-lg text-sm leading-7 text-slate-600 lg:justify-self-end lg:text-right">
-                        Sobald du mehr Gespräche und Trainings absolvierst, entsteht hier deine Entwicklung.
-                      </p>
-                    </div>
-
-                    <div className="mt-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-                      {kpiCards.map((card) => (
-                        <article
-                          key={card.label}
-                          className="flex min-h-[152px] flex-col justify-between rounded-2xl border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-4 py-4 shadow-[0_12px_28px_rgba(15,23,42,0.04)] sm:min-h-[164px] sm:px-5 sm:py-5"
-                        >
-                          <p className="max-w-[16ch] text-[11px] font-semibold uppercase tracking-[0.1em] leading-5 text-slate-500 sm:text-xs">
-                            {card.label}
-                          </p>
-                          <p className="mt-5 text-[1.75rem] font-semibold leading-tight tracking-[-0.05em] text-[#707070] sm:text-[2rem]">
-                            {card.value}
-                          </p>
-                          {card.detail ? (
-                            <p className="mt-3 text-sm leading-6 text-slate-500">
-                              {card.detail}
-                            </p>
-                          ) : null}
-                        </article>
-                      ))}
-                    </div>
-                  </section>
-                ) : null}
               </div>
             </div>
           </section>

@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
 import {
-  APPOINTMENT_LEAD_SOURCE_OPTIONS,
-  COMPLAINT_CHANNEL_OPTIONS,
   type AppointmentLeadSource,
   type ComplaintChannelOption,
 } from "@/lib/training-session-config";
@@ -22,8 +20,6 @@ type SessionType =
   | "full_sales"
   | "situation_coaching"
   | "full_chat";
-
-type SelectableSessionType = "appointment_setting" | "complaint_management";
 
 type StartSessionActionsProps = {
   userId: string;
@@ -332,14 +328,6 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
     pendingSessionType !== null || isCheckingResumableSession;
   const isMonthlyLimitReached = (remainingSessions ?? MONTHLY_SESSION_LIMIT) <= 0;
 
-  const selectableSessionOptions: Record<
-    SelectableSessionType,
-    readonly (AppointmentLeadSource | ComplaintChannelOption)[]
-  > = {
-    appointment_setting: APPOINTMENT_LEAD_SOURCE_OPTIONS,
-    complaint_management: COMPLAINT_CHANNEL_OPTIONS,
-  };
-
   return (
     <div className="mt-8">
       <div className="max-w-2xl">
@@ -400,20 +388,15 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
         </div>
       ) : null}
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-6 grid gap-4 lg:grid-cols-2">
         {([
           "full_sales",
-          "appointment_setting",
-          "complaint_management",
           "situation_coaching",
         ] as const).map((sessionType) => {
           const isPending = pendingSessionType === sessionType;
           const isPrimary = sessionType === "full_sales";
           const { buttonLabel, description, loadingLabel, title } =
             sessionConfig[sessionType];
-          const isSelectableSession =
-            sessionType === "appointment_setting" ||
-            sessionType === "complaint_management";
 
           return (
             <article key={sessionType} className={getCardClasses(isPrimary)}>
@@ -430,67 +413,22 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
                   </p>
                 </div>
 
-                {isSelectableSession ? (
-                  <div className="space-y-3">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                      {sessionType === "appointment_setting"
-                        ? "Leadquelle"
-                        : "Beschwerdekanal"}
-                    </p>
-                    <div
-                      className={`grid gap-2 ${
-                        sessionType === "appointment_setting"
-                          ? "grid-cols-2"
-                          : "grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-1"
-                      }`}
-                    >
-                      {selectableSessionOptions[sessionType].map((option) => (
-                        <button
-                          key={option}
-                          type="button"
-                          onClick={() =>
-                            void handleStartSession(sessionType, {
-                              appointmentLeadSource:
-                                sessionType === "appointment_setting"
-                                  ? (option as AppointmentLeadSource)
-                                  : undefined,
-                              complaintChannel:
-                                sessionType === "complaint_management"
-                                  ? (option as ComplaintChannelOption)
-                                  : undefined,
-                              forceNew: false,
-                            })
-                          }
-                          disabled={isInteractionDisabled || isMonthlyLimitReached}
-                          className={`inline-flex min-h-11 items-center justify-center rounded-full border px-4 py-2.5 text-center text-sm font-semibold leading-tight transition ${
-                            isPending
-                              ? "border-[#0e51a0] bg-[#0e51a0] text-white shadow-[0_16px_36px_rgba(14,81,160,0.28)]"
-                              : "border-slate-200 bg-white text-[#707070] hover:-translate-y-0.5 hover:border-[#0e51a0]/30 hover:text-[#0e51a0]"
-                          } disabled:cursor-not-allowed disabled:opacity-60`}
-                        >
-                          {isPending ? loadingLabel : option}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      void handleStartSession(sessionType, {
-                        forceNew: false,
-                      })
-                    }
-                    disabled={isInteractionDisabled || isMonthlyLimitReached}
-                    className={`inline-flex min-h-11 w-full max-w-[13rem] self-center items-center justify-center rounded-full px-5 py-2.5 text-center text-sm font-semibold leading-tight transition ${
-                      isPrimary
-                        ? "bg-[#0e51a0] text-white shadow-[0_16px_36px_rgba(14,81,160,0.28)]"
-                        : "border border-slate-200 bg-white text-[#707070]"
-                    } hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60`}
-                  >
-                    {isPending ? loadingLabel : buttonLabel}
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={() =>
+                    void handleStartSession(sessionType, {
+                      forceNew: false,
+                    })
+                  }
+                  disabled={isInteractionDisabled || isMonthlyLimitReached}
+                  className={`inline-flex min-h-11 w-full max-w-[13rem] self-center items-center justify-center rounded-full px-5 py-2.5 text-center text-sm font-semibold leading-tight transition ${
+                    isPrimary
+                      ? "bg-[#0e51a0] text-white shadow-[0_16px_36px_rgba(14,81,160,0.28)]"
+                      : "border border-slate-200 bg-white text-[#707070]"
+                  } hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60`}
+                >
+                  {isPending ? loadingLabel : buttonLabel}
+                </button>
               </div>
             </article>
           );
