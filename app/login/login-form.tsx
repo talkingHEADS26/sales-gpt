@@ -494,17 +494,19 @@ export function LoginForm({
                   ].map((benefit) => (
                     <div
                       key={benefit}
-                      className="rounded-2xl border border-white/80 bg-white/75 px-4 py-4 text-sm font-medium text-[#707070] shadow-[0_16px_40px_rgba(15,23,42,0.06)] backdrop-blur"
+                      className="rounded-2xl border border-[#dce7f7] bg-white px-4 py-4 text-sm font-medium text-[#4b5565] shadow-[0_10px_24px_rgba(14,81,160,0.08)]"
                     >
-                      <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] shadow-[0_10px_20px_rgba(234,148,19,0.35)]" />
-                      {benefit}
+                      <div className="mb-3 flex items-center gap-3">
+                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] shadow-[0_8px_18px_rgba(234,148,19,0.32)]" />
+                        <span className="h-1.5 w-9 rounded-full bg-[#0e51a0]/85" />
+                      </div>
+                      <p className="leading-6">{benefit}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div className="relative">
-                <div className="absolute -right-6 top-10 hidden h-28 w-28 rounded-full bg-[#0e51a0]/10 blur-2xl sm:block" />
                 <div className="rounded-[2rem] border border-[#0b478b] bg-[#0E51A0] p-5 shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:p-6">
                   <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8">
                     <div className="text-center sm:text-left">
