@@ -107,11 +107,7 @@ export function RoiCalculatorSection() {
               ROI-Rechner
             </p>
             <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-[-0.05em] text-[#707070] sm:text-4xl">
-              Berechne, was Abschluss
-              <span className="ml-1 inline-block rounded-[0.28em] bg-[#0e51a0] px-[0.18em] py-[0.03em] text-white">
-                IO
-              </span>{" "}
-              in 12 Monaten bewegen kann
+              Berechne, was talkingHEADS Sales Trainer in 12 Monaten bewegen kann
             </h2>
             <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600 sm:text-base">
               Gib 4 Werte ein und sieh in Sekunden, welchen wirtschaftlichen

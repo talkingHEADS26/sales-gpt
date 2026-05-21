@@ -141,12 +141,7 @@ export default function Home() {
                   Sales-Training für echte Abschlüsse
                 </div>
                 <h1 className="mt-6 text-5xl font-semibold tracking-[-0.06em] text-balance text-[#707070] sm:text-6xl lg:text-7xl">
-                  <span className="block">
-                    <span className="text-[1.1em]">A</span>bschluss
-                    <span className="ml-1.5 inline-block rounded-[0.32em] bg-[#0e51a0] px-[0.22em] py-[0.04em] text-white shadow-[0_14px_36px_rgba(14,81,160,0.28)]">
-                      IO
-                    </span>
-                  </span>
+                  <span className="block">talkingHEADS Sales Trainer</span>
                   <span className="mt-4 block text-[0.5em] font-medium leading-tight tracking-[-0.04em] text-[#707070] sm:text-[0.44em]">
                     Trainiere Verkaufsgespräche interaktiv, präzise und mit dem Fokus auf messbar bessere Abschlüsse.
                   </span>
