@@ -670,3 +670,30 @@ Verifikation:
 
 Offene Punkte:
 - Optional dritte Runde für vollständige Vereinheitlichung der Interaktionskomponenten (Buttons/Inputs/Badges) in Chat und Session-Start-Cards.
+
+### 2026-05-21 - Landingpage pixelnah auf Referenzstil nachgebaut
+
+Bereich:
+- feature
+
+Änderung:
+- `/landing` vollständig neu auf den Referenzstil ausgerichtet (ohne Dark-Interpretation).
+- Header, Hero-Zweispalter, Produkt-Dashboard-Mockup, 3-Benefit-Bereich, 3-Zielgruppen-Cards und Final-CTA visuell eng an Referenzproportionen umgesetzt.
+- Farb- und Typografie-System strikt auf `#0E51A0`, `#EA9413`, `#707070`, Rubik/Roboto geführt.
+- Orange CTA-Buttons mit plastischem Verlauf, Glow und Shadow-Layer umgesetzt.
+
+Warum:
+- Vorversion war stilistisch zu weit von der Master-Referenz entfernt.
+
+Auswirkung:
+- Landing wirkt beim ersten Blick deutlich näher an der gewünschten Referenz-SaaS-Ästhetik.
+
+Betroffene Pfade:
+- app/landing/page.tsx
+- README.md
+
+Verifikation:
+- `npx eslint app/landing/page.tsx` ohne Fehler.
+
+Offene Punkte:
+- Feintuning erfolgt auf Basis visueller Review im Browser (Spacing/Typo auf realen Breakpoints).
