@@ -480,20 +480,20 @@ export function LoginForm({
             <div className="grid w-full gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.95fr)] lg:items-center">
               <div className="max-w-2xl">
                 <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_10px_30px_rgba(14,81,160,0.08)] backdrop-blur">
-                  Dein Zugang zu talkingHEADS Sales Trainer
+                  Dein Zugang zum Sales-Training
                 </div>
                 <h1 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-balance text-[#707070] sm:text-4xl lg:text-5xl">
-                  Willkommen zurück.
+                  Willkommen zurück im Training.
                 </h1>
                 <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-                  Logge dich ein und setze dein Sales-Training genau dort fort, wo aus guten Gesprächen echte Abschlüsse werden.
+                  Melde dich an und knüpfe genau dort an, wo dein Team zuletzt trainiert hat: mit klaren Gesprächen, besserer Struktur und mehr Abschlusssicherheit.
                 </p>
 
                 <div className="mt-8 grid gap-3 sm:grid-cols-3">
                   {[
-                    "Echte Gesprächssimulation",
-                    "Direktes Feedback",
-                    "Messbarer Sales-Fortschritt",
+                    "Praxisnahe Verkaufssituationen",
+                    "Direkte Lernimpulse pro Session",
+                    "Fortschritt für Teams transparent",
                   ].map((benefit) => (
                     <div
                       key={benefit}
@@ -508,17 +508,17 @@ export function LoginForm({
 
               <div className="relative">
                 <div className="absolute -right-6 top-10 hidden h-28 w-28 rounded-full bg-[#0e51a0]/10 blur-2xl sm:block" />
-                <div className="rounded-[2rem] border border-white/80 bg-white/82 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.14)] backdrop-blur sm:p-6">
-                  <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8">
+                <div className="rounded-[2rem] border border-[#0b478b] bg-[#0E51A0] p-5 shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:p-6">
+                  <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8">
                     <div className="text-center sm:text-left">
-                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0e51a0]">
-                        talkingHEADS Sales Trainer
+                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#dce8fb]">
+                        talkingHEADS Login
                       </p>
-                      <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[#707070]">
-                        Einloggen
+                      <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
+                        In dein Konto einloggen
                       </h2>
-                      <p className="mt-3 text-sm leading-7 text-slate-600">
-                        Melde dich mit deinem Konto an und arbeite direkt weiter in deinen Trainingssessions.
+                      <p className="mt-3 text-sm leading-7 text-[#dce8fb]">
+                        Nutze deine Zugangsdaten und setze eure Trainingssessions ohne Umwege fort.
                       </p>
                     </div>
 
@@ -570,7 +570,7 @@ export function LoginForm({
                       <div>
                         <label
                           htmlFor="email"
-                          className="mb-2 block text-sm font-medium text-[#707070]"
+                          className="mb-2 block text-sm font-medium text-white"
                         >
                           E-Mail
                         </label>
@@ -591,7 +591,7 @@ export function LoginForm({
                       <div>
                         <label
                           htmlFor="password"
-                          className="mb-2 block text-sm font-medium text-[#707070]"
+                          className="mb-2 block text-sm font-medium text-white"
                         >
                           Passwort
                         </label>
@@ -704,14 +704,14 @@ export function LoginForm({
                     </form>
 
                     <div className="mt-6 flex flex-col gap-3 border-t border-slate-100 pt-6 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
-                      <Link className="transition hover:text-[#0e51a0]" href="/">
+                      <Link className="text-[#dce8fb] transition hover:text-white" href="/">
                         Zur Startseite
                       </Link>
                       <Link
-                        className="font-medium text-[#707070] transition hover:text-[#0e51a0]"
+                        className="font-medium text-white transition hover:text-[#dce8fb]"
                         href="/register"
                       >
-                        Noch kein Konto? Jetzt registrieren
+                        Noch kein Konto? Hier registrieren
                       </Link>
                     </div>
                   </div>
