@@ -2,7 +2,7 @@
 
 import { FormEvent, Suspense, useState } from "react";
 import Link from "next/link";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Roboto, Rubik } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { SiteBrand } from "@/components/site-brand";
@@ -21,8 +21,14 @@ import {
 } from "@/lib/industries";
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const roboto = Roboto({
   subsets: ["latin"],
+  display: "swap",
+});
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  weight: ["500", "700"],
   display: "swap",
 });
 
@@ -160,19 +166,16 @@ function RegisterPageContent() {
 
   return (
     <main
-      className={`${plusJakartaSans.className} min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_45%,#f4f9ff_100%)] text-[#707070]`}
+      className={`${roboto.className} min-h-screen overflow-hidden bg-white text-[#1b2b45]`}
     >
       <div className="relative isolate min-h-screen">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[36rem] bg-[linear-gradient(135deg,rgba(14,81,160,0.18),rgba(14,81,160,0.03)_46%,rgba(255,255,255,0)_72%)]" />
-        <div className="absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-[#0e51a0]/12 blur-3xl" />
-
         <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 sm:px-6 lg:px-8">
           <header className="flex items-center justify-between rounded-[1.25rem] border border-[#dbe7f8] bg-white px-4 py-3 shadow-[0_12px_30px_rgba(14,81,160,0.10)] md:px-6">
             <SiteBrand href="/" />
             <div className="flex items-center gap-2 sm:gap-3">
               <Link
                 href="/"
-                className="inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-medium text-[#707070] transition hover:bg-slate-100 hover:text-[#707070]"
+                className="inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-medium text-[#707070] transition hover:bg-slate-100 hover:text-[#1b2b45]"
               >
                 Startseite
               </Link>
@@ -191,7 +194,7 @@ function RegisterPageContent() {
                 <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_10px_30px_rgba(14,81,160,0.08)] backdrop-blur">
                   Starte mit talkingHEADS Sales Trainer
                 </div>
-                <h1 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-balance text-[#707070] sm:text-4xl lg:text-5xl">
+                <h1 className={`${rubik.className} mt-4 text-3xl font-semibold tracking-[-0.03em] text-balance text-[#0E51A0] sm:text-4xl lg:text-5xl`}>
                   Baue dir den Trainingsvorsprung auf, der im Sales spürbar wird.
                 </h1>
                 <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
@@ -215,7 +218,7 @@ function RegisterPageContent() {
                 </div>
 
                 <div className="mt-6 rounded-[1.25rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_10px_24px_rgba(14,81,160,0.08)]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0e51a0]">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0E51A0]">
                     Für Teams mit Ambition
                   </p>
                   <p className="mt-4 text-sm leading-7 text-slate-600">
@@ -225,17 +228,16 @@ function RegisterPageContent() {
               </div>
 
               <div className="relative mx-auto w-full max-w-4xl">
-                <div className="absolute -right-6 top-10 hidden h-28 w-28 rounded-full bg-[#0e51a0]/10 blur-2xl sm:block" />
-                <div className="rounded-[2rem] border border-white/80 bg-white/82 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.14)] backdrop-blur sm:p-6">
-                  <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8">
+                <div className="rounded-[2rem] border border-[#0b478b] bg-[#0E51A0] p-5 shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:p-6">
+                  <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8">
                     <div className="text-center sm:text-left">
-                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0e51a0]">
+                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#dce8fb]">
                         talkingHEADS Sales Trainer
                       </p>
-                      <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[#707070]">
+                      <h2 className={`${rubik.className} mt-4 text-3xl font-semibold tracking-[-0.03em] text-white`}>
                         Organisation registrieren
                       </h2>
-                      <p className="mt-3 text-sm leading-7 text-slate-600">
+                      <p className="mt-3 text-sm leading-7 text-[#dce8fb]">
                         Richte dein Konto ein und starte mit einem Sales-Training, das Fortschritt sichtbar und Abschlussstärke trainierbar macht.
                       </p>
                     </div>
@@ -264,7 +266,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="organizationName"
-                          className="mb-2 block text-sm font-medium text-[#707070]"
+                          className="mb-2 block text-sm font-medium text-white"
                         >
                           Organisation
                         </label>
@@ -289,7 +291,7 @@ function RegisterPageContent() {
                         <div>
                           <label
                             htmlFor="firstName"
-                            className="mb-2 block text-sm font-medium text-[#707070]"
+                            className="mb-2 block text-sm font-medium text-white"
                           >
                             Vorname
                           </label>
@@ -313,7 +315,7 @@ function RegisterPageContent() {
                         <div>
                           <label
                             htmlFor="lastName"
-                            className="mb-2 block text-sm font-medium text-[#707070]"
+                            className="mb-2 block text-sm font-medium text-white"
                           >
                             Nachname
                           </label>
@@ -338,7 +340,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="username"
-                          className="mb-2 block text-sm font-medium text-[#707070]"
+                          className="mb-2 block text-sm font-medium text-white"
                         >
                           Username
                         </label>
@@ -362,7 +364,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="email"
-                          className="mb-2 block text-sm font-medium text-[#707070]"
+                          className="mb-2 block text-sm font-medium text-white"
                         >
                           E-Mail
                         </label>
@@ -386,7 +388,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="password"
-                          className="mb-2 block text-sm font-medium text-[#707070]"
+                          className="mb-2 block text-sm font-medium text-white"
                         >
                           Passwort
                         </label>
@@ -410,7 +412,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="industryKey"
-                          className="mb-2 block text-sm font-medium text-slate-700"
+                          className="mb-2 block text-sm font-medium text-white"
                         >
                           Branche
                         </label>
@@ -444,7 +446,7 @@ function RegisterPageContent() {
                         <div>
                           <label
                             htmlFor="franchiseVertical"
-                            className="mb-2 block text-sm font-medium text-slate-700"
+                            className="mb-2 block text-sm font-medium text-white"
                           >
                             Franchise-Segment
                           </label>
@@ -476,7 +478,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="licensePlan"
-                          className="mb-2 block text-sm font-medium text-slate-700"
+                          className="mb-2 block text-sm font-medium text-white"
                         >
                           Lizenzplan
                         </label>
@@ -511,12 +513,12 @@ function RegisterPageContent() {
                       </button>
                     </form>
 
-                    <div className="mt-6 flex flex-col gap-3 border-t border-slate-100 pt-6 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
-                      <Link className="transition hover:text-[#0e51a0]" href="/">
+                    <div className="mt-6 flex flex-col gap-3 border-t border-white/20 pt-6 text-sm text-[#dce8fb] sm:flex-row sm:items-center sm:justify-between">
+                      <Link className="transition hover:text-white" href="/">
                         Zur Startseite
                       </Link>
                       <Link
-                        className="font-medium text-[#707070] transition hover:text-[#0e51a0]"
+                        className="font-medium text-white transition hover:text-[#dce8fb]"
                         href="/login"
                       >
                         Du hast bereits ein Konto? Jetzt einloggen
