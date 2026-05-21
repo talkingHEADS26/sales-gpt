@@ -768,9 +768,12 @@ export async function resolveAppAccessStateForUser(params: {
     }
 
     return {
-      allowed: false,
-      code: "subscription_missing",
-      message: "Für diesen Account liegt noch kein aktiver Organisationszugang vor.",
+      // Ohne vorhandenes Subscription-Objekt erlauben wir vorerst den Zugang,
+      // damit neue Registrierungen auch ohne direkten CopeCart-Kauf starten können.
+      // Bestehende inaktive/abgelaufene Subscriptions werden weiterhin oben geblockt.
+      allowed: true,
+      code: null,
+      message: null,
       organizationId: firstMembership?.organization_id ?? null,
       subscription:
         firstMembership
@@ -833,9 +836,11 @@ export async function resolveAppAccessStateForUser(params: {
   }
 
   return {
-    allowed: false,
-    code: "subscription_missing",
-    message: "Für diesen Account liegt noch kein aktives CopeCart-Abo vor.",
+    // Gleiches Verhalten für User ohne Organisationskontext:
+    // fehlendes Abo ist nicht mehr automatisch ein Login-Blocker.
+    allowed: true,
+    code: null,
+    message: null,
     organizationId: null,
     subscription: null,
     usedLegacyFallback: false,
