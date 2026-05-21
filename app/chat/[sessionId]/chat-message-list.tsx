@@ -37,10 +37,10 @@ export function ChatMessageList({ messages }: ChatMessageListProps) {
                 isSystemMessage ? "max-w-xl" : "max-w-[90%] sm:max-w-[78%]"
               } rounded-[1.75rem] px-4 py-3.5 shadow-[0_16px_36px_rgba(15,23,42,0.06)] ${
                 isSystemMessage
-                  ? "border border-[#0e51a0]/12 bg-[linear-gradient(180deg,rgba(14,81,160,0.08),rgba(255,255,255,0.96)_34%)] text-[#707070]"
+                  ? "border border-[#0b478b] bg-[#0E51A0] text-[#dce8fb]"
                   : isUserMessage
-                    ? "rounded-br-md bg-[#0e51a0] text-white shadow-[0_20px_42px_rgba(14,81,160,0.24)]"
-                    : "rounded-bl-md border border-white/80 bg-white text-[#707070]"
+                    ? "rounded-br-md bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] text-white shadow-[0_20px_42px_rgba(14,81,160,0.24)]"
+                    : "rounded-bl-md border border-[#dbe7f8] bg-white text-[#1b2b45]"
               }`}
             >
               {!isSystemMessage ? (
@@ -49,7 +49,7 @@ export function ChatMessageList({ messages }: ChatMessageListProps) {
                     className={`inline-flex h-7 w-7 items-center justify-center rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] ${
                       isUserMessage
                         ? "bg-white/16 text-white"
-                        : "bg-[#0e51a0]/10 text-[#0e51a0]"
+                        : "bg-[#0e51a0]/10 text-[#dce8fb]"
                     }`}
                   >
                     {isUserMessage ? "Du" : "AI"}
@@ -63,7 +63,7 @@ export function ChatMessageList({ messages }: ChatMessageListProps) {
                   </span>
                 </div>
               ) : (
-                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#0e51a0]">
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#dce8fb]">
                   Trainingshinweis
                 </p>
               )}

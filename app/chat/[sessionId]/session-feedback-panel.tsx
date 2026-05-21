@@ -36,10 +36,10 @@ type FeedbackSectionProps = {
 
 function FeedbackSection({ bullets, summary, title }: FeedbackSectionProps) {
   return (
-    <section className="rounded-[1.4rem] border border-slate-200 bg-white px-4 py-4 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
-      <h3 className="text-sm font-semibold text-slate-900">{title}</h3>
+    <section className="rounded-[1.4rem] border border-white/20 bg-[#0b478b] px-4 py-4 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+      <h3 className="text-sm font-semibold text-white">{title}</h3>
       {bullets.length > 0 ? (
-        <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
+        <ul className="mt-3 space-y-2 text-sm leading-6 text-[#dce8fb]">
           {bullets.map((bullet) => (
             <li key={bullet} className="flex gap-2">
               <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[#0e51a0]" />
@@ -48,7 +48,7 @@ function FeedbackSection({ bullets, summary, title }: FeedbackSectionProps) {
           ))}
         </ul>
       ) : null}
-      {summary ? <p className="mt-3 text-sm leading-6 text-slate-600">{summary}</p> : null}
+      {summary ? <p className="mt-3 text-sm leading-6 text-[#dce8fb]">{summary}</p> : null}
     </section>
   );
 }
@@ -59,17 +59,17 @@ export function SessionFeedbackPanel({
 }: SessionFeedbackPanelProps) {
   return (
     <div className="px-4 pb-6 pt-2 sm:px-6 sm:pb-8">
-      <section className="rounded-[1.75rem] border border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f7faff_100%)] p-4 shadow-[0_20px_48px_rgba(15,23,42,0.08)] sm:p-5">
+      <section className="rounded-[1.75rem] border border-[#0b478b] bg-[#0E51A0] p-4 shadow-[0_20px_48px_rgba(15,23,42,0.08)] sm:p-5">
         <div className="flex flex-col gap-3 border-b border-slate-200 pb-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#dce8fb]">
               Session-Ergebnis
             </p>
-            <h2 className="mt-2 text-lg font-semibold text-slate-900">
+            <h2 className="mt-2 text-lg font-semibold text-white">
               {getOutcomeLabel(sessionType, feedback.outcome)}
             </h2>
           </div>
-          <span className="inline-flex items-center rounded-full bg-[#0e51a0]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#0e51a0]">
+          <span className="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#dce8fb]">
             Outcome: {feedback.outcome}
           </span>
         </div>
@@ -85,16 +85,16 @@ export function SessionFeedbackPanel({
             summary={feedback.negative.summary}
             title="Was ist nicht gut gelaufen"
           />
-          <section className="rounded-[1.4rem] border border-slate-200 bg-white px-4 py-4 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
-            <h3 className="text-sm font-semibold text-slate-900">
+          <section className="rounded-[1.4rem] border border-white/20 bg-[#0b478b] px-4 py-4 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+            <h3 className="text-sm font-semibold text-white">
               Konkrete Handlungsempfehlungen
             </h3>
             {feedback.recommendations.specific.length > 0 ? (
               <>
-                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#dce8fb]">
                   Gesprächsbezogen
                 </p>
-                <ul className="mt-2 space-y-2 text-sm leading-6 text-slate-700">
+                <ul className="mt-2 space-y-2 text-sm leading-6 text-[#dce8fb]">
                   {feedback.recommendations.specific.map((bullet) => (
                     <li key={bullet} className="flex gap-2">
                       <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[#0e51a0]" />
@@ -106,10 +106,10 @@ export function SessionFeedbackPanel({
             ) : null}
             {feedback.recommendations.general.length > 0 ? (
               <>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#dce8fb]">
                   Allgemein
                 </p>
-                <ul className="mt-2 space-y-2 text-sm leading-6 text-slate-700">
+                <ul className="mt-2 space-y-2 text-sm leading-6 text-[#dce8fb]">
                   {feedback.recommendations.general.map((bullet) => (
                     <li key={bullet} className="flex gap-2">
                       <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[#0e51a0]" />

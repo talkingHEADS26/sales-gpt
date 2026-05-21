@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Roboto, Rubik } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { InternalAppShell } from "@/components/internal-app-shell";
@@ -18,8 +18,14 @@ import { ChatInputForm } from "./chat-input-form";
 import { ChatMessageList } from "./chat-message-list";
 import { SessionFeedbackPanel } from "./session-feedback-panel";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const roboto = Roboto({
   subsets: ["latin"],
+  display: "swap",
+});
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  weight: ["500", "700"],
   display: "swap",
 });
 
@@ -456,9 +462,9 @@ export function ChatSessionView({ sessionId }: ChatSessionViewProps) {
 
   return (
     <InternalAppShell
-      containerClassName={`${plusJakartaSans.className} mx-auto flex min-h-screen w-full max-w-6xl flex-col px-0 py-0 sm:px-4 sm:py-5`}
+      containerClassName={`${roboto.className} mx-auto flex min-h-screen w-full max-w-6xl flex-col px-0 py-0 sm:px-4 sm:py-5`}
     >
-      <section className="flex min-h-screen w-full flex-col overflow-hidden border border-[#dbe7f8] bg-white shadow-[0_18px_45px_rgba(14,81,160,0.14)] sm:min-h-[calc(100vh-7.5rem)] sm:rounded-[1.75rem] sm:backdrop-blur">
+      <section className="flex min-h-screen w-full flex-col overflow-hidden border border-[#0b478b] bg-[#0E51A0] shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:min-h-[calc(100vh-7.5rem)] sm:rounded-[1.75rem]">
         {session ? (
           <ChatHeader
             sessionType={session.session_type}
@@ -484,20 +490,20 @@ export function ChatSessionView({ sessionId }: ChatSessionViewProps) {
         ) : null}
 
         {!isLoading && !error ? (
-          <div className="flex min-h-0 flex-1 flex-col bg-[linear-gradient(180deg,#f8fbff_0%,#f1f7ff_100%)]">
+          <div className="flex min-h-0 flex-1 flex-col bg-[linear-gradient(180deg,#ffffff_0%,#f7fbff_100%)]">
             <div className="min-h-0 flex-1 overflow-y-auto">
               <div className="px-4 pt-5 sm:px-6 sm:pt-6">
-                <div className="rounded-[1.25rem] border border-[#dbe7f8] bg-white px-4 py-3 text-sm text-slate-600 shadow-[0_10px_24px_rgba(14,81,160,0.08)]">
-                  <p className="font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
+                <div className="rounded-[1.25rem] border border-[#0b478b] bg-[#0E51A0] px-4 py-3 text-sm text-[#dce8fb] shadow-[0_10px_24px_rgba(14,81,160,0.22)]">
+                  <p className={`${rubik.className} font-semibold uppercase tracking-[0.18em] text-white`}>
                     Aktive Trainingseinheit
                   </p>
                   <p className="mt-2 leading-7">
                     Bleibe konkret, führe klar und nutze den Chat wie einen echten Trainingsraum für Verkaufsgespräche.
                   </p>
                   <div className="mt-3 flex flex-col gap-1 text-sm sm:flex-row sm:items-center sm:justify-between">
-                    <p className="font-medium text-slate-600">
+                    <p className="font-medium text-white">
                       Audio in dieser Session:{" "}
-                      <span className="text-[#0e51a0]">
+                      <span className="text-[#dce8fb]">
                         {formatDurationLabel(session!.audio_seconds_used)} /{" "}
                         {formatDurationLabel(MAX_AUDIO_SECONDS_PER_SESSION)}
                       </span>
@@ -533,7 +539,7 @@ export function ChatSessionView({ sessionId }: ChatSessionViewProps) {
                         <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-[#0e51a0] [animation-delay:-0.2s]" />
                         <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-[#0e51a0]/80 [animation-delay:-0.1s]" />
                         <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-[#0e51a0]/60" />
-                        <span className="ml-1">talkingHEADS Sales Trainer antwortet...</span>
+                        <span className="ml-1 text-[#707070]">talkingHEADS Sales Trainer antwortet...</span>
                       </div>
                     </div>
                   </div>

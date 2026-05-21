@@ -126,10 +126,10 @@ export function ChatInputForm({
 
   return (
     <form
-      className="border-t border-white/80 bg-white/88 px-4 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur sm:px-6"
+      className="border-t border-white/20 bg-[#0E51A0] px-4 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 sm:px-6"
       onSubmit={(event) => void handleSubmit(event)}
     >
-      <div className="rounded-[1.75rem] border border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f7faff_100%)] p-3 shadow-[0_18px_44px_rgba(15,23,42,0.08)]">
+      <div className="rounded-[1.75rem] border border-white/20 bg-[#0b478b] p-3 shadow-[0_18px_44px_rgba(15,23,42,0.08)]">
         <div className="flex items-end gap-3">
           <button
             type="button"
@@ -202,20 +202,20 @@ export function ChatInputForm({
           <button
             type="submit"
             disabled={disabled || isSending || !content.trim()}
-            className="inline-flex h-12 shrink-0 self-end items-center justify-center rounded-full bg-[#0e51a0] px-5 text-sm font-semibold text-white shadow-[0_16px_36px_rgba(14,81,160,0.28)] transition hover:bg-[#0b478b] disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex h-12 shrink-0 self-end items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSending ? "Sende..." : "Senden"}
           </button>
         </div>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:flex-nowrap">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#dce8fb]">
               FOKUSSIERTES SALES-TRAINING
             </p>
-            <p className="text-[0.7rem] font-medium text-slate-400 sm:text-xs">
+            <p className="text-[0.7rem] font-medium text-[#dce8fb] sm:text-xs">
               Du trainierst mit einer KI. Auch diese kann mal Fehler machen.
             </p>
-            <p className="text-[0.7rem] font-medium text-slate-500 sm:text-xs">
+            <p className="text-[0.7rem] font-medium text-white sm:text-xs">
               Audio in dieser Session: {audioUsageLabel}
             </p>
           </div>
@@ -224,7 +224,7 @@ export function ChatInputForm({
               className={`text-sm ${
                 voiceRecorder.status === "error"
                   ? "text-red-700"
-                  : "text-slate-600"
+                  : "text-[#dce8fb]"
               }`}
             >
               {voiceStatusText}
@@ -233,13 +233,12 @@ export function ChatInputForm({
 
           {isAudioLimitReached && !voiceStatusText ? (
             <p className="text-sm text-red-700">
-              Das Audio-Limit dieser Session wurde erreicht. Textnachrichten sind
-              weiterhin möglich.
+              Das Audio-Limit dieser Session wurde erreicht. Textnachrichten sind weiterhin moeglich.
             </p>
           ) : null}
 
           {!voiceRecorder.isSupported && voiceRecorder.status === "idle" ? (
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-[#dce8fb]">
               Sprachaufnahme wird von diesem Browser nicht unterstuetzt.
             </p>
           ) : null}
