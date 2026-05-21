@@ -530,7 +530,7 @@ export function LoginForm({
 
                       {registered ? (
                         <p className="rounded-2xl border border-emerald-200 bg-emerald-50/95 px-4 py-3 text-sm text-emerald-700">
-                          Registrierung erfolgreich. Du kannst dich jetzt einloggen.
+                          Registrierung erfolgreich. Bitte bestätige zuerst deine E-Mail-Adresse über den Link in deinem Postfach.
                         </p>
                       ) : null}
 

@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 
-import { createDirectSignupUser } from "@/lib/auth-signup";
+import {
+  createDirectSignupUser,
+  createSignupUserWithConfirmationEmail,
+} from "@/lib/auth-signup";
 
 type RequestBody = {
   email?: string;
@@ -30,7 +33,16 @@ export async function POST(request: Request) {
       );
     }
 
-    await createDirectSignupUser({ email, metadata, password });
+    const registrationMode =
+      typeof metadata.registration_mode === "string"
+        ? metadata.registration_mode
+        : "";
+
+    if (registrationMode === "invitation_accept") {
+      await createDirectSignupUser({ email, metadata, password });
+    } else {
+      await createSignupUserWithConfirmationEmail({ email, metadata, password });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

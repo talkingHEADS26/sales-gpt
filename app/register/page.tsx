@@ -19,7 +19,7 @@ import {
   type FranchiseVerticalKey,
   type IndustryKey,
 } from "@/lib/industries";
-import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
+import { hasSupabaseEnv } from "@/lib/supabase";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -135,21 +135,7 @@ function RegisterPageContent() {
         );
       }
 
-      const supabase = getSupabaseBrowserClient();
-
-      if (supabase) {
-        const { error: signInError } = await supabase.auth.signInWithPassword({
-          email: values.email.trim(),
-          password,
-        });
-
-        if (!signInError) {
-          router.push("/dashboard");
-          return;
-        }
-      }
-
-      setSuccess("Registrierung erfolgreich.");
+      setSuccess("Registrierung erfolgreich. Bitte bestätige jetzt deine E-Mail-Adresse.");
       router.push("/login?registered=1");
     } catch (err) {
       const message =
