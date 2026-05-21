@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Roboto, Rubik } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { InternalAppShell } from "@/components/internal-app-shell";
@@ -21,8 +21,14 @@ type OrganizationMembership = {
   } | null;
 };
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const roboto = Roboto({
   subsets: ["latin"],
+  display: "swap",
+});
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  weight: ["500", "700"],
   display: "swap",
 });
 
@@ -158,33 +164,33 @@ export default function DashboardPage() {
 
   return (
     <InternalAppShell>
-      <div className={plusJakartaSans.className}>
+      <div className={`${roboto.className} bg-white`}>
           <section className="flex flex-1 items-center py-8 sm:py-10 lg:py-12">
-            <div className="w-full rounded-[2rem] border border-white/80 bg-white/82 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.14)] backdrop-blur sm:p-6 lg:p-8">
-              <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8 lg:p-10">
+            <div className="w-full rounded-[2rem] border border-[#0b478b] bg-[#0E51A0] p-5 shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:p-6 lg:p-8">
+              <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8 lg:p-10">
                 <div className="flex flex-col gap-5">
                   <div className="max-w-3xl">
-                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0E51A0]">
+                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#dce8fb]">
                       talkingHEADS Sales Trainer Dashboard
                     </p>
-                    <h1 className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-[#707070] sm:text-4xl">
+                    <h1 className={`${rubik.className} mt-3 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl`}>
                       {displayName
                         ? `Willkommen zurück, ${displayName}`
                         : "Willkommen zurück"}
                     </h1>
                     {organizationName ? (
-                      <p className="mt-3 text-sm font-medium tracking-[0.08em] text-slate-500 uppercase">
+                      <p className="mt-3 text-sm font-medium tracking-[0.08em] text-[#dce8fb] uppercase">
                         {organizationName}
                       </p>
                     ) : null}
-                    <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+                    <p className="mt-4 max-w-2xl text-base leading-7 text-[#dce8fb] sm:text-lg sm:leading-8">
                       Starte direkt in dein nächstes Sales-Training und arbeite fokussiert an besseren Gesprächen, klarerer Wirkung und stärkeren Abschlüssen.
                     </p>
                   </div>
                 </div>
 
                 {isLoading ? (
-                  <p className="mt-8 text-base leading-7 text-slate-600">
+                  <p className="mt-8 text-base leading-7 text-[#dce8fb]">
                     Dashboard wird geladen...
                   </p>
                 ) : null}

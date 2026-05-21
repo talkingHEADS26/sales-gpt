@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -33,14 +32,6 @@ type StartSessionResponse = {
   resumedExisting?: boolean;
   sessionId?: string;
   usedSessions?: number;
-};
-
-type OpenSessionResponse = {
-  coreFlowSessionId?: string | null;
-  coreFlowUpdatedAt?: string | null;
-  error?: string;
-  fullChatSessionId?: string | null;
-  fullChatUpdatedAt?: string | null;
 };
 
 type UsageSummaryResponse = {
@@ -139,8 +130,8 @@ function getSessionBadge(sessionType: SessionType) {
 function getCardClasses(isPrimary: boolean) {
   return `flex min-h-56 flex-col rounded-[1.75rem] border p-6 text-left shadow-[0_18px_46px_rgba(15,23,42,0.08)] transition ${
     isPrimary
-      ? "border-[#0e51a0]/20 bg-[linear-gradient(180deg,rgba(14,81,160,0.08),rgba(255,255,255,0.98)_30%)]"
-      : "border-white/80 bg-white/88"
+      ? "border-[#0b478b] bg-[#0E51A0]"
+      : "border-[#0b478b] bg-[#0E51A0]"
   }`;
 }
 
@@ -151,8 +142,6 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
     useState(MONTHLY_SESSION_LIMIT);
   const [pendingSessionType, setPendingSessionType] =
     useState<SessionType | null>(null);
-  const [resumableCoreFlowSessionId, setResumableCoreFlowSessionId] =
-    useState<string | null>(null);
   const [isCheckingResumableSession, setIsCheckingResumableSession] =
     useState(true);
   const [remainingSessions, setRemainingSessions] = useState<number | null>(null);
@@ -161,7 +150,7 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
   useEffect(() => {
     let isMounted = true;
 
-    const loadOpenSessions = async () => {
+    const loadUsageSummary = async () => {
       if (!hasSupabaseEnv) {
         if (isMounted) {
           setIsCheckingResumableSession(false);
@@ -186,35 +175,18 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
 
         if (!accessToken) {
           if (isMounted) {
-            setResumableCoreFlowSessionId(null);
             setIsCheckingResumableSession(false);
           }
           return;
         }
 
-        const [openSessionResponse, usageSummaryResponse] = await Promise.all([
-          fetch("/api/sessions/open", {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }),
-          fetch("/api/usage/summary", {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }),
-        ]);
-
-        const openSessionBody =
-          (await openSessionResponse.json()) as OpenSessionResponse;
+        const usageSummaryResponse = await fetch("/api/usage/summary", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         const usageSummaryBody =
           (await usageSummaryResponse.json()) as UsageSummaryResponse;
-
-        if (!openSessionResponse.ok) {
-          throw new Error(
-            openSessionBody.error ?? "Die offene Session konnte nicht geladen werden."
-          );
-        }
 
         if (!usageSummaryResponse.ok) {
           throw new Error(
@@ -226,7 +198,6 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
           return;
         }
 
-        setResumableCoreFlowSessionId(openSessionBody.coreFlowSessionId ?? null);
         setMonthlySessionLimit(
           usageSummaryBody.monthlySessionLimit ?? MONTHLY_SESSION_LIMIT
         );
@@ -236,7 +207,6 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
         setUsedSessions(usageSummaryBody.usedSessions ?? 0);
       } catch (err) {
         if (isMounted) {
-          setResumableCoreFlowSessionId(null);
           setError((currentError) => currentError || getErrorMessage(err));
         }
       } finally {
@@ -246,7 +216,7 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
       }
     };
 
-    void loadOpenSessions();
+    void loadUsageSummary();
 
     return () => {
       isMounted = false;
@@ -334,23 +304,23 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
         <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0e51a0]">
           Trainingsstart
         </p>
-        <h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-[#707070] sm:text-3xl">
+        <h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl">
           Wähle, wie du heute trainieren willst.
         </h2>
-        <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+        <p className="mt-3 text-sm leading-7 text-[#dce8fb] sm:text-base">
           Starte direkt in das Format, das zu deinem aktuellen Gesprächsziel passt.
         </p>
       </div>
 
-      <div className="mt-6 rounded-[1.5rem] border border-white/80 bg-white/88 px-5 py-4 shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
+      <div className="mt-6 rounded-[1.5rem] border border-white/20 bg-[#0b478b] px-5 py-4 shadow-[0_16px_40px_rgba(15,23,42,0.12)]">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm font-semibold text-[#707070]">
+          <p className="text-sm font-semibold text-white">
             Genutzte Sessions in diesem Monat:{" "}
-            <span className="text-[#0e51a0]">
+            <span className="text-[#dce8fb]">
               {usedSessions ?? 0} / {monthlySessionLimit}
             </span>
           </p>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-[#dce8fb]">
             Verbleibend: {remainingSessions ?? monthlySessionLimit}
           </p>
         </div>
@@ -361,32 +331,6 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
           </p>
         ) : null}
       </div>
-
-      {resumableCoreFlowSessionId ? (
-        <div className="mt-6 rounded-[1.75rem] border border-[#0e51a0]/14 bg-[linear-gradient(180deg,rgba(14,81,160,0.05),rgba(255,255,255,0.96)_36%)] p-5 shadow-[0_18px_46px_rgba(15,23,42,0.08)] sm:p-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-2xl">
-              <span className="inline-flex rounded-full bg-[#0e51a0]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
-                Offene Session
-              </span>
-              <h3 className="mt-4 text-lg font-semibold tracking-[-0.03em] text-[#707070]">
-                Letztes Verkaufsgespräch weiterführen
-              </h3>
-              <p className="mt-2 text-sm leading-7 text-slate-600">
-                Deine letzte aktive Beratungs-Session ist noch offen und kann direkt an
-                der bestehenden Stelle fortgesetzt werden.
-              </p>
-            </div>
-
-            <Link
-              href={`/chat/${resumableCoreFlowSessionId}`}
-              className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#0e51a0] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_36px_rgba(14,81,160,0.28)] transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0e51a0] focus-visible:ring-offset-2"
-            >
-              Letztes Verkaufsgespräch fortsetzen
-            </Link>
-          </div>
-        </div>
-      ) : null}
 
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
         {([
@@ -402,13 +346,13 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
             <article key={sessionType} className={getCardClasses(isPrimary)}>
               <div className="flex h-full flex-col justify-between">
                 <div className="mb-6 min-h-[120px]">
-                  <span className="inline-flex rounded-full bg-[#0e51a0]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
+                  <span className="inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#dce8fb]">
                     {getSessionBadge(sessionType)}
                   </span>
-                  <h3 className="mt-4 text-lg font-semibold tracking-[-0.03em] text-[#707070]">
+                  <h3 className="mt-4 text-lg font-semibold tracking-[-0.03em] text-white">
                     {title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                  <p className="mt-3 text-sm leading-7 text-[#dce8fb]">
                     {description}
                   </p>
                 </div>
@@ -422,9 +366,7 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
                   }
                   disabled={isInteractionDisabled || isMonthlyLimitReached}
                   className={`inline-flex min-h-11 w-full max-w-[13rem] self-center items-center justify-center rounded-full px-5 py-2.5 text-center text-sm font-semibold leading-tight transition ${
-                    isPrimary
-                      ? "bg-[#0e51a0] text-white shadow-[0_16px_36px_rgba(14,81,160,0.28)]"
-                      : "border border-slate-200 bg-white text-[#707070]"
+                    "bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] text-white shadow-[0_10px_24px_rgba(234,148,19,0.35),inset_0_1px_0_rgba(255,255,255,0.35)]"
                   } hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60`}
                 >
                   {isPending ? loadingLabel : buttonLabel}
