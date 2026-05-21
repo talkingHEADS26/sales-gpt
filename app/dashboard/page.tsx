@@ -267,12 +267,12 @@ export default function DashboardPage() {
   return (
     <InternalAppShell>
       <div className={plusJakartaSans.className}>
-          <section className="flex flex-1 items-center py-10 sm:py-14 lg:py-18">
+          <section className="flex flex-1 items-center py-8 sm:py-10 lg:py-12">
             <div className="w-full rounded-[2rem] border border-white/80 bg-white/82 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.14)] backdrop-blur sm:p-6 lg:p-8">
               <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8 lg:p-10">
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                   <div className="max-w-3xl">
-                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0e51a0]">
+                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0E51A0]">
                       talkingHEADS Sales Trainer Dashboard
                     </p>
                     <h1 className="mt-4 text-4xl font-semibold tracking-[-0.06em] text-[#707070] sm:text-5xl">
@@ -300,7 +300,7 @@ export default function DashboardPage() {
                         key={benefit}
                         className="rounded-2xl border border-white/80 bg-white/85 px-4 py-4 text-sm font-medium text-[#707070] shadow-[0_16px_40px_rgba(15,23,42,0.06)]"
                       >
-                        <span className="mb-3 block h-2 w-12 rounded-full bg-[#0e51a0]" />
+                      <span className="mb-3 block h-2 w-12 rounded-full bg-[#0E51A0]" />
                         {benefit}
                       </div>
                     ))}
@@ -323,7 +323,7 @@ export default function DashboardPage() {
 
                 {!isLoading && !error ? (
                   <section className="mt-10 rounded-[1.75rem] border border-white/80 bg-white/88 p-5 shadow-[0_18px_46px_rgba(15,23,42,0.08)] sm:p-6">
-                    <div className="grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] lg:items-end">
+                    <div className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] lg:items-end">
                       <div className="max-w-2xl">
                         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
                           KPI Überblick

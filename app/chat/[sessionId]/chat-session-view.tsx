@@ -456,9 +456,9 @@ export function ChatSessionView({ sessionId }: ChatSessionViewProps) {
 
   return (
     <InternalAppShell
-      containerClassName={`${plusJakartaSans.className} mx-auto flex min-h-screen w-full max-w-5xl flex-col px-0 py-0 sm:px-4 sm:py-6`}
+      containerClassName={`${plusJakartaSans.className} mx-auto flex min-h-screen w-full max-w-6xl flex-col px-0 py-0 sm:px-4 sm:py-5`}
     >
-      <section className="flex min-h-screen w-full flex-col overflow-hidden bg-white/82 shadow-[0_24px_80px_rgba(15,23,42,0.12)] sm:min-h-[calc(100vh-7.5rem)] sm:rounded-[2rem] sm:border sm:border-white/80 sm:backdrop-blur">
+      <section className="flex min-h-screen w-full flex-col overflow-hidden border border-[#dbe7f8] bg-white shadow-[0_18px_45px_rgba(14,81,160,0.14)] sm:min-h-[calc(100vh-7.5rem)] sm:rounded-[1.75rem] sm:backdrop-blur">
         {session ? (
           <ChatHeader
             sessionType={session.session_type}
@@ -484,10 +484,10 @@ export function ChatSessionView({ sessionId }: ChatSessionViewProps) {
         ) : null}
 
         {!isLoading && !error ? (
-          <div className="flex min-h-0 flex-1 flex-col bg-[linear-gradient(180deg,#f8fbff_0%,#eef4fb_100%)]">
+          <div className="flex min-h-0 flex-1 flex-col bg-[linear-gradient(180deg,#f8fbff_0%,#f1f7ff_100%)]">
             <div className="min-h-0 flex-1 overflow-y-auto">
               <div className="px-4 pt-5 sm:px-6 sm:pt-6">
-                <div className="rounded-[1.5rem] border border-white/80 bg-white/76 px-4 py-3 text-sm text-slate-600 shadow-[0_14px_36px_rgba(15,23,42,0.05)]">
+                <div className="rounded-[1.25rem] border border-[#dbe7f8] bg-white px-4 py-3 text-sm text-slate-600 shadow-[0_10px_24px_rgba(14,81,160,0.08)]">
                   <p className="font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
                     Aktive Trainingseinheit
                   </p>

@@ -12,6 +12,16 @@ AbschlussIO ist eine Next.js- und Supabase-basierte Trainingsplattform für vert
 - OpenAI Node SDK (`openai`)
 - Remotion (Video-Assets/Rendering)
 
+## UI Design System (talkingHEADS)
+
+- Hauptfarbe: `#0E51A0`
+- CTA/Akzent: `#EA9413`
+- Sekundärtext: `#707070`
+- Headlines: `Rubik`
+- Fließtext/UI-Text: `Roboto`
+- Stil: heller Premium-Look (kein Dark-Only), klare Cards, kurze Conversion-Flows
+- CTA-Stil: orange Verlauf + dezenter plastischer Schatten statt flachem Standardbutton
+
 ## Kernfunktionen
 
 - KI-gestützte Chat-Sessions mit mehreren Trainingsmodi:

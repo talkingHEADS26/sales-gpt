@@ -457,7 +457,7 @@ export function LoginForm({
 
   return (
     <main
-      className={`${plusJakartaSans.className} min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,#dcecff_0%,#f7fbff_38%,#f6f8fc_72%,#eef3f9_100%)] text-[#707070]`}
+      className={`${plusJakartaSans.className} min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_45%,#f4f9ff_100%)] text-[#707070]`}
     >
       <div className="relative isolate min-h-screen">
         <div className="absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[linear-gradient(135deg,rgba(14,81,160,0.18),rgba(14,81,160,0.03)_46%,rgba(255,255,255,0)_72%)]" />
@@ -697,7 +697,7 @@ export function LoginForm({
                         disabled={
                           isLoading || isConfirmingEmail || isResendingConfirmation
                         }
-                        className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#0e51a0] px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_44px_rgba(14,81,160,0.32)] transition hover:bg-[#0b478b] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35),inset_0_1px_0_rgba(255,255,255,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(234,148,19,0.45),inset_0_1px_0_rgba(255,255,255,0.4)] disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {isLoading ? "Logge ein..." : "Einloggen"}
                       </button>
