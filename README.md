@@ -538,3 +538,28 @@ Verifikation:
 
 Offene Punkte:
 - Feinschliff der CTA-Interaktionen und optionales Ersetzen des Mockups durch finalen Produkt-Screenshot.
+
+### 2026-05-21 - Landing-Header mit TH_Logo.png ergänzt
+
+Bereich:
+- feature
+
+Änderung:
+- Auf `/landing` wurde im Sticky Header das bereitgestellte Logo `public/TH_Logo.png` eingebunden.
+- Branding-Text im Header wurde durch Logo + kompakten \"Sales Trainer\"-Zusatz ersetzt.
+
+Warum:
+- Visuelle Markenführung auf der Landingpage direkt konsistent abbilden.
+
+Auswirkung:
+- Hochwertigerer, markenklarer Ersteindruck im oberen Seitenbereich.
+
+Betroffene Pfade:
+- app/landing/page.tsx
+- README.md
+
+Verifikation:
+- `npx eslint app/landing/page.tsx` ohne Fehler.
+
+Offene Punkte:
+- Optional Logo-Größe je Breakpoint feinjustieren.

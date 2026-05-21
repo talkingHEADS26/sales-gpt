@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Rubik, Roboto } from "next/font/google";
 import { motion } from "framer-motion";
@@ -208,9 +209,19 @@ export default function LandingPage() {
     >
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
         <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className={`${rubik.className} text-lg font-bold text-white`}>
-            talking<span className="text-[#EA9413]">HEADS</span> Sales Trainer
-          </div>
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/TH_Logo.png"
+              alt="talkingHEADS Logo"
+              width={148}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
+            <span className={`${rubik.className} hidden text-sm font-semibold text-white/90 sm:inline`}>
+              Sales Trainer
+            </span>
+          </Link>
           <Link
             href="#final-cta"
             className="rounded-xl bg-[#EA9413] px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-[#f0a52f]"
