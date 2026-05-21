@@ -2,15 +2,20 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Roboto, Rubik } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { InternalAppShell } from "@/components/internal-app-shell";
-import type { DashboardKpiSummary } from "@/lib/dashboard-kpis";
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const roboto = Roboto({
   subsets: ["latin"],
+  display: "swap",
+});
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  weight: ["500", "700"],
   display: "swap",
 });
 
@@ -27,7 +32,6 @@ type OrganizationMember = {
   id: string;
   isActive: boolean;
   isSeatOccupied: boolean;
-  kpiSummary: DashboardKpiSummary;
   lastActivityAt: string | null;
   name: string | null;
   platformRole: string | null;
@@ -151,18 +155,6 @@ function getInviteDeliveryMessage(response: {
   return `Einladung für ${response.email} erstellt. Die Mail-Konfiguration fehlt aktuell, daher steht der Link unten zum manuellen Teilen bereit.`;
 }
 
-function formatPercent(value: number) {
-  return `${value} %`;
-}
-
-function formatDate(value: string) {
-  return new Date(value).toLocaleDateString("de-DE", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-}
-
 function formatDateTime(value: string | null) {
   if (!value) {
     return "Nicht hinterlegt";
@@ -175,81 +167,6 @@ function formatDateTime(value: string | null) {
     month: "2-digit",
     year: "numeric",
   });
-}
-
-function getLastActivityLabel(lastActivityAt: string | null) {
-  if (!lastActivityAt) {
-    return "Noch keine Aktivität";
-  }
-
-  const diffInDays = Math.floor(
-    (Date.now() - new Date(lastActivityAt).getTime()) / (1000 * 60 * 60 * 24)
-  );
-
-  if (diffInDays <= 0) {
-    return "Heute aktiv";
-  }
-
-  if (diffInDays === 1) {
-    return "Vor 1 Tag aktiv";
-  }
-
-  if (diffInDays < 7) {
-    return `Vor ${diffInDays} Tagen aktiv`;
-  }
-
-  return `Zuletzt aktiv am ${formatDate(lastActivityAt)}`;
-}
-
-function getActivityState(member: OrganizationMember) {
-  if (!member.isActive) {
-    return {
-      label: "Inaktiv",
-      tone: "bg-slate-100 text-slate-500",
-    };
-  }
-
-  if (!member.lastActivityAt) {
-    return {
-      label: "Wenig aktiv",
-      tone: "bg-amber-50 text-amber-700",
-    };
-  }
-
-  const diffInDays = Math.floor(
-    (Date.now() - new Date(member.lastActivityAt).getTime()) / (1000 * 60 * 60 * 24)
-  );
-
-  if (diffInDays <= 7) {
-    return {
-      label: "Aktiv",
-      tone: "bg-emerald-50 text-emerald-700",
-    };
-  }
-
-  if (diffInDays <= 21) {
-    return {
-      label: "Wenig aktiv",
-      tone: "bg-amber-50 text-amber-700",
-    };
-  }
-
-  return {
-    label: "Inaktiv",
-    tone: "bg-slate-100 text-slate-500",
-  };
-}
-
-function getKpiTone(value: number) {
-  if (value >= 70) {
-    return "text-emerald-700";
-  }
-
-  if (value >= 45) {
-    return "text-amber-700";
-  }
-
-  return "text-rose-700";
 }
 
 export function OrganizationPageView() {
@@ -744,19 +661,19 @@ export function OrganizationPageView() {
 
   return (
     <InternalAppShell>
-      <div className={plusJakartaSans.className}>
+      <div className={`${roboto.className} bg-white`}>
           <section className="flex flex-1 items-start py-10 sm:py-14">
-            <div className="w-full rounded-[2rem] border border-white/80 bg-white/82 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.14)] backdrop-blur sm:p-6 lg:p-8">
-              <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8 lg:p-10">
+            <div className="w-full rounded-[2rem] border border-[#0b478b] bg-[#0E51A0] p-5 shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:p-6 lg:p-8">
+              <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8 lg:p-10">
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                   <div className="max-w-3xl">
-                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0e51a0]">
+                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#dce8fb]">
                       Team-Verwaltung
                     </p>
-                    <h1 className="mt-4 text-4xl font-semibold tracking-[-0.06em] text-[#707070] sm:text-5xl">
+                    <h1 className={`${rubik.className} mt-4 text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl`}>
                       Verwalte dein Team und deine verfügbaren Seats.
                     </h1>
-                    <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+                    <p className="mt-5 max-w-2xl text-base leading-7 text-[#dce8fb] sm:text-lg sm:leading-8">
                       Behalte im Blick, wie viele Plätze belegt sind, welche Mitglieder aktiv sind und wie deine Organisation aktuell aufgestellt ist.
                     </p>
                   </div>
@@ -770,12 +687,12 @@ export function OrganizationPageView() {
                         ].map(([value, label]) => (
                           <div
                             key={label}
-                            className="rounded-2xl border border-white/80 bg-white/85 px-5 py-4 text-[#707070] shadow-[0_16px_40px_rgba(15,23,42,0.06)]"
+                            className="rounded-2xl border border-white/20 bg-[#0b478b] px-5 py-4 text-white shadow-[0_16px_40px_rgba(15,23,42,0.12)]"
                           >
                             <p className="text-2xl font-semibold tracking-[-0.04em]">
                               {value}
                             </p>
-                            <p className="mt-1 text-sm text-slate-500">{label}</p>
+                            <p className="mt-1 text-sm text-[#dce8fb]">{label}</p>
                           </div>
                         ))
                       : null}
@@ -783,7 +700,7 @@ export function OrganizationPageView() {
                 </div>
 
                 {isLoading ? (
-                  <p className="mt-8 text-base leading-7 text-slate-600">
+                  <p className="mt-8 text-base leading-7 text-[#dce8fb]">
                     Organisations-Verwaltung wird geladen...
                   </p>
                 ) : null}
@@ -799,7 +716,7 @@ export function OrganizationPageView() {
                     </p>
                     <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                       <Link
-                        className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#0e51a0] px-5 text-sm font-semibold text-white"
+                        className="inline-flex min-h-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35)]"
                         href="/dashboard"
                       >
                         Zurück zum Dashboard
@@ -965,7 +882,7 @@ export function OrganizationPageView() {
                                 !inviteEmail.trim() ||
                                 organization.freeSeats <= 0
                               }
-                              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#0e51a0] px-6 text-sm font-semibold text-white shadow-[0_16px_36px_rgba(14,81,160,0.28)] transition hover:bg-[#0b478b] disabled:cursor-not-allowed disabled:opacity-60"
+                              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-6 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
                             >
                               {isCreatingInvite
                                 ? "Erstelle Einladung..."
@@ -1054,119 +971,6 @@ export function OrganizationPageView() {
                           ))}
                         </div>
                       ) : null}
-                    </section>
-
-                    <section className="rounded-[1.75rem] border border-white/80 bg-white/88 p-5 shadow-[0_18px_46px_rgba(15,23,42,0.08)]">
-                      <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-                        <div className="max-w-2xl">
-                          <h3 className="text-xl font-semibold text-[#707070]">
-                            Team-Dashboard
-                          </h3>
-                          <p className="mt-2 text-sm leading-7 text-slate-600">
-                            Kompakte KPI-Übersicht pro Teammitglied auf Basis derselben
-                            Werte wie im individuellen Seat-Dashboard.
-                          </p>
-                        </div>
-                        <span className="rounded-full bg-[#0e51a0]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
-                          Overall + Module
-                        </span>
-                      </div>
-
-                      <div className="mt-6 grid gap-4 xl:grid-cols-2">
-                        {organization.members.map((member) => {
-                          const activityState = getActivityState(member);
-                          const moduleCards = [
-                            {
-                              label: "Full Sales",
-                              value: formatPercent(member.kpiSummary.closingRate.value),
-                            },
-                            {
-                              label: "Termin Setting",
-                              value: formatPercent(member.kpiSummary.appointmentRate.value),
-                            },
-                            {
-                              label: "Beschwerde\nmanagement",
-                              value: formatPercent(
-                                member.kpiSummary.complaintManagement.happyCustomerRate.value
-                              ),
-                            },
-                            {
-                              label: "Situations\ncoaching",
-                              value: formatPercent(member.kpiSummary.coaching.score),
-                            },
-                          ];
-
-                          return (
-                            <article
-                              key={`team-dashboard:${member.id}`}
-                              className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-5 shadow-[0_12px_28px_rgba(15,23,42,0.05)]"
-                            >
-                              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                                <div>
-                                  <div className="flex flex-wrap items-center gap-2">
-                                    <p className="text-lg font-semibold tracking-[-0.03em] text-[#707070]">
-                                      {member.name ?? "Ohne Namen"}
-                                    </p>
-                                    <span
-                                      className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ${activityState.tone}`}
-                                    >
-                                      {activityState.label}
-                                    </span>
-                                  </div>
-                                  <p className="mt-2 text-sm text-slate-600">
-                                    {member.email ?? "Keine E-Mail gefunden"}
-                                  </p>
-                                  <p className="mt-2 text-sm text-slate-500">
-                                    {getLastActivityLabel(member.lastActivityAt)}
-                                  </p>
-                                </div>
-
-                                <div className="rounded-[1.3rem] border border-[#0e51a0]/12 bg-[#0e51a0]/6 px-4 py-3 sm:min-w-34">
-                                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
-                                    Overall Score
-                                  </p>
-                                  <p
-                                    className={`mt-2 text-3xl font-semibold tracking-[-0.05em] ${getKpiTone(
-                                      member.kpiSummary.overallScore
-                                    )}`}
-                                  >
-                                    {formatPercent(member.kpiSummary.overallScore)}
-                                  </p>
-                                </div>
-                              </div>
-
-                              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                                {moduleCards.map((moduleCard) => (
-                                  <div
-                                    key={`${member.id}:${moduleCard.label}`}
-                                    className="flex min-h-28 flex-col justify-between rounded-2xl border border-slate-100 bg-white px-3 py-3"
-                                  >
-                                    <p className="min-h-10 text-xs font-semibold uppercase leading-5 tracking-[0.14em] whitespace-pre-line text-slate-500">
-                                      {moduleCard.label}
-                                    </p>
-                                    <p
-                                      className={`mt-2 text-lg font-semibold ${getKpiTone(
-                                        Number.parseFloat(moduleCard.value)
-                                      )}`}
-                                    >
-                                      {moduleCard.value}
-                                    </p>
-                                  </div>
-                                ))}
-                              </div>
-
-                              <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-500">
-                                <span className="rounded-full bg-slate-100 px-3 py-1">
-                                  Sessions: {member.completedSessionCount}
-                                </span>
-                                <span className="rounded-full bg-slate-100 px-3 py-1">
-                                  Rolle: {getRoleLabel(member.roleInOrg)}
-                                </span>
-                              </div>
-                            </article>
-                          );
-                        })}
-                      </div>
                     </section>
 
                     <section className="rounded-[1.75rem] border border-white/80 bg-white/88 p-5 shadow-[0_18px_46px_rgba(15,23,42,0.08)]">
