@@ -457,12 +457,9 @@ export function LoginForm({
 
   return (
     <main
-      className={`${plusJakartaSans.className} min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_45%,#f4f9ff_100%)] text-[#707070]`}
+      className={`${plusJakartaSans.className} min-h-screen overflow-hidden bg-white text-[#707070]`}
     >
       <div className="relative isolate min-h-screen">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[linear-gradient(135deg,rgba(14,81,160,0.18),rgba(14,81,160,0.03)_46%,rgba(255,255,255,0)_72%)]" />
-        <div className="absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-[#0e51a0]/12 blur-3xl" />
-
         <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 sm:px-6 lg:px-8">
           <header className="flex items-center justify-between gap-3 rounded-[1.25rem] border border-[#dbe7f8] bg-white px-4 py-3 shadow-[0_12px_30px_rgba(14,81,160,0.10)] md:px-6">
             <SiteBrand href="/" />
@@ -499,7 +496,7 @@ export function LoginForm({
                       key={benefit}
                       className="rounded-2xl border border-white/80 bg-white/75 px-4 py-4 text-sm font-medium text-[#707070] shadow-[0_16px_40px_rgba(15,23,42,0.06)] backdrop-blur"
                     >
-                      <span className="mb-3 block h-2 w-12 rounded-full bg-[#0e51a0]" />
+                      <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] shadow-[0_10px_20px_rgba(234,148,19,0.35)]" />
                       {benefit}
                     </div>
                   ))}
@@ -581,7 +578,7 @@ export function LoginForm({
                           onChange={(event) => setEmail(event.target.value)}
                           placeholder="name@example.com"
                           autoComplete="email"
-                          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10"
+                          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10 [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_#ffffff] [&:-webkit-autofill]:[-webkit-text-fill-color:#374151]"
                           disabled={
                             isLoading || isConfirmingEmail || isResendingConfirmation
                           }
@@ -603,7 +600,7 @@ export function LoginForm({
                             onChange={(event) => setPassword(event.target.value)}
                             placeholder="Dein Passwort"
                             autoComplete="current-password"
-                            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 pr-12 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10"
+                            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 pr-12 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10 [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_#ffffff] [&:-webkit-autofill]:[-webkit-text-fill-color:#374151]"
                             disabled={
                               isLoading || isConfirmingEmail || isResendingConfirmation
                             }
