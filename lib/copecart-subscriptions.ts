@@ -1381,21 +1381,54 @@ export async function upsertPendingCopeCartSubscriptionFromSignupMetadata(params
     return null;
   }
 
-  const { data: membership } = await params.serviceRoleClient
-    .from("organization_members")
-    .select("organization_id, role_in_org")
-    .eq("user_id", params.userId)
-    .eq("role_in_org", "admin")
-    .limit(1)
-    .maybeSingle<{ organization_id: string; role_in_org: string }>();
+  let profileExists = false;
+  let membership: { organization_id: string; role_in_org: string } | null = null;
+
+  // Signup creates auth user first; profile/membership can appear a moment later via trigger.
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    const [{ data: profile }, { data: resolvedMembership }] = await Promise.all([
+      params.serviceRoleClient
+        .from("profiles")
+        .select("id")
+        .eq("id", params.userId)
+        .maybeSingle<{ id: string }>(),
+      params.serviceRoleClient
+        .from("organization_members")
+        .select("organization_id, role_in_org")
+        .eq("user_id", params.userId)
+        .eq("role_in_org", "admin")
+        .limit(1)
+        .maybeSingle<{ organization_id: string; role_in_org: string }>(),
+    ]);
+
+    profileExists = Boolean(profile);
+    membership = resolvedMembership ?? null;
+
+    if (profileExists || membership) {
+      break;
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+
+  const resolvedUserId = profileExists ? params.userId : null;
+  const resolvedOrganizationId = membership?.organization_id ?? null;
+
+  if (!resolvedUserId && !resolvedOrganizationId) {
+    console.warn(
+      "[copecart-subscriptions] skipping pending subscription upsert during signup because profile/membership is not available yet",
+      { orderId, customerEmail, userId: params.userId }
+    );
+    return null;
+  }
 
   const payload = {
     copecart_customer_email: customerEmail,
     copecart_order_id: orderId,
     copecart_product_id: normalizeText(params.productId),
-    organization_id: membership?.organization_id ?? null,
+    organization_id: resolvedOrganizationId,
     subscription_status: "pending" as CopeCartSubscriptionStatus,
-    user_id: params.userId,
+    user_id: resolvedUserId,
   };
 
   if (orderId) {
