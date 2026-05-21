@@ -724,3 +724,28 @@ Verifikation:
 
 Offene Punkte:
 - Keine.
+
+### 2026-05-21 - Landing Navbar wiederhergestellt (inkl. th_icon)
+
+Bereich:
+- fix
+
+Änderung:
+- Navbar auf `/landing` wieder eingeführt (sticky, weiß, Navigation + CTA).
+- `public/th_icon.png` links in der Navbar als Markensignet eingebunden.
+
+Warum:
+- Vorherige Interpretation von "header nur der blaue kasten" war zu strikt und entfernte die Navbar vollständig.
+
+Auswirkung:
+- Header-Struktur wieder vollständig vorhanden und Branding im Navbar-Logo sichtbar.
+
+Betroffene Pfade:
+- app/landing/page.tsx
+- README.md
+
+Verifikation:
+- `npx eslint app/landing/page.tsx` ohne Fehler.
+
+Offene Punkte:
+- Keine.

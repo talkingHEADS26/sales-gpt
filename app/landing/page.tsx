@@ -1,11 +1,43 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Rubik, Roboto } from "next/font/google";
 import { motion } from "framer-motion";
 
 const rubik = Rubik({ subsets: ["latin"], weight: ["500", "700"] });
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
+
+function Header() {
+  return (
+    <header className="sticky top-0 z-50 border-b border-[#e6edf6] bg-white/95 backdrop-blur">
+      <div className="mx-auto flex h-20 w-full max-w-[1240px] items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-3">
+          <span className="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-[#d2e2f7] bg-white shadow-[0_6px_14px_rgba(14,81,160,0.15)]">
+            <Image src="/th_icon.png" alt="talkingHEADS Icon" width={40} height={40} className="h-10 w-10 object-cover" />
+          </span>
+          <span className={`${rubik.className} text-[16px] font-semibold tracking-[0.12em] text-[#0E51A0]`}>
+            TALKINGHEADS SALES TRAINER
+          </span>
+        </div>
+
+        <nav className="hidden items-center gap-10 lg:flex">
+          <a href="#vorteile" className="text-[16px] font-medium text-[#1b2b45] hover:text-[#0E51A0]">
+            Vorteile
+          </a>
+          <a href="#fuer-wen" className="text-[16px] font-medium text-[#1b2b45] hover:text-[#0E51A0]">
+            Für wen
+          </a>
+          <a href="#so-funktionierts" className="text-[16px] font-medium text-[#1b2b45] hover:text-[#0E51A0]">
+            So funktioniert&apos;s
+          </a>
+        </nav>
+
+        <OrangeButton href="/register">Jetzt starten</OrangeButton>
+      </div>
+    </header>
+  );
+}
 
 function OrangeButton({ href, children }: { href: string; children: React.ReactNode }) {
   return (
@@ -41,6 +73,7 @@ function AudienceCard({ title, text }: { title: string; text: string }) {
 export default function LandingPage() {
   return (
     <main className={`${roboto.className} bg-[#ffffff] text-[#1b2b45]`}>
+      <Header />
       <section className="mx-auto w-full max-w-[1240px] px-4 pb-12 pt-8 sm:px-6 lg:px-8 lg:pb-14 lg:pt-10">
         <div className="grid items-stretch gap-6 overflow-hidden">
           <motion.div
