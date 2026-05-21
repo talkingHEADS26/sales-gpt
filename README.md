@@ -509,3 +509,32 @@ Verifikation:
 
 Offene Punkte:
 - Bei Bedarf später auf Trial-Logik mit Laufzeitlimit umstellen.
+
+### 2026-05-21 - Erste Premium-Landingpage unter /landing erstellt
+
+Bereich:
+- feature
+
+Änderung:
+- Neue Route `app/landing/page.tsx` als erster hochwertiger Frontend-Entwurf für den "talkingHEADS Sales Trainer" umgesetzt.
+- Enthaltene Sektionen: Hero, Problem, Solution, Product Preview, KPI, Zielgruppen, Final CTA.
+- UI-Umsetzung mit Dark-Premium-Look, Brandfarben (`#0E51A0`, `#EA9413`, `#707070`), Glassmorphism, Blue Glows, Sticky Header und responsivem Layout.
+- Framer-Motion für dezente Entrance-/Hover-Animationen integriert.
+
+Warum:
+- Schneller visueller Startpunkt für Positionierung und Conversion-Testing der neuen Landingpage.
+
+Auswirkung:
+- Direkter Zugriff auf den neuen Entwurf unter `/landing` ohne Backend-Änderungen.
+
+Betroffene Pfade:
+- app/landing/page.tsx
+- package.json
+- package-lock.json
+- README.md
+
+Verifikation:
+- `npx eslint app/landing/page.tsx` ohne Fehler ausgeführt.
+
+Offene Punkte:
+- Feinschliff der CTA-Interaktionen und optionales Ersetzen des Mockups durch finalen Produkt-Screenshot.
