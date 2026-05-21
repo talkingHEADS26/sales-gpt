@@ -51,7 +51,7 @@ function Header() {
 
 function DashboardMockup() {
   return (
-    <div className="overflow-hidden rounded-[1.6rem] border border-[#d5e3f6] bg-white shadow-[0_20px_44px_rgba(14,81,160,0.20)]">
+    <div className="w-full max-w-full overflow-hidden rounded-[1.6rem] border border-[#d5e3f6] bg-white shadow-[0_20px_44px_rgba(14,81,160,0.20)]">
       <div className="grid min-h-[620px] lg:grid-cols-[0.72fr_1.35fr]">
         <aside className="bg-[linear-gradient(165deg,#0E51A0_0%,#0c4a94_100%)] p-4 text-white sm:p-5">
           <div className="mb-5 h-9 w-9 rounded-full border border-white/70" />
@@ -74,10 +74,10 @@ function DashboardMockup() {
           </div>
         </aside>
 
-        <div className="bg-[#f8fbff] p-4 sm:p-5">
+        <div className="min-w-0 bg-[#f8fbff] p-4 sm:p-5">
           <div className="mb-3 rounded-xl border border-[#dce7f7] bg-white px-4 py-3">
-            <div className="flex items-center justify-between gap-3">
-              <p className="text-sm font-semibold text-[#1b2b45]">Verkaufsgespräch - Preisdiskussion</p>
+            <div className="flex min-w-0 items-center justify-between gap-3">
+              <p className="truncate text-sm font-semibold text-[#1b2b45]">Verkaufsgespräch - Preisdiskussion</p>
               <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs text-emerald-700">Live</span>
             </div>
           </div>
@@ -151,16 +151,16 @@ function AudienceCard({ title, text }: { title: string; text: string }) {
 
 export default function LandingPage() {
   return (
-    <main className={`${roboto.className} bg-[#f5f7fa] text-[#1b2b45]`}>
+    <main className={`${roboto.className} bg-[#ffffff] text-[#1b2b45]`}>
       <Header />
 
       <section className="mx-auto w-full max-w-[1240px] px-4 pb-12 pt-8 sm:px-6 lg:px-8 lg:pb-14 lg:pt-10">
-        <div className="grid items-stretch gap-6 lg:grid-cols-[2fr_1fr]">
+        <div className="grid items-stretch gap-6 overflow-hidden lg:grid-cols-[2fr_1fr]">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="rounded-[1.8rem] bg-[linear-gradient(160deg,#0E51A0_0%,#0b4a94_65%,#0a448a_100%)] p-8 text-white shadow-[0_24px_50px_rgba(14,81,160,0.24)] sm:p-10"
+            className="min-w-0 rounded-[1.8rem] bg-[linear-gradient(160deg,#0E51A0_0%,#0b4a94_65%,#0a448a_100%)] p-8 text-white shadow-[0_24px_50px_rgba(14,81,160,0.24)] sm:p-10"
           >
             <h1 className={`${rubik.className} text-balance text-[52px] font-bold leading-[1.03] sm:text-[58px]`}>
               Mehr Sales.
@@ -182,7 +182,9 @@ export default function LandingPage() {
             </div>
           </motion.div>
 
-          <DashboardMockup />
+          <div className="min-w-0">
+            <DashboardMockup />
+          </div>
         </div>
       </section>
 
