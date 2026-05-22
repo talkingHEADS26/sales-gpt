@@ -10,6 +10,7 @@ import { resolveAppAccessStateForUser } from "@/lib/copecart-subscriptions";
 import { logSystemEvent } from "@/lib/system-monitoring";
 
 type MembershipRecord = {
+  created_at?: string;
   organization_id: string;
   role_in_org: string;
   organizations: {
@@ -165,9 +166,11 @@ export async function requireOrganizationAdmin(
   const membershipQuery = supabase
     .from("organization_members")
     .select(
-      "organization_id, role_in_org, organizations!inner(id, organization_name, seat_limit, is_active, industry_key, prompt_profile_key, industry_locked, franchise_vertical)"
+      "organization_id, role_in_org, created_at, organizations!inner(id, organization_name, seat_limit, is_active, industry_key, prompt_profile_key, industry_locked, franchise_vertical)"
     )
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .eq("role_in_org", "admin")
+    .order("created_at", { ascending: false });
 
   const membershipResult = await membershipQuery.limit(1).maybeSingle<MembershipRecord>();
   const membershipFallbackResult = membershipResult.error?.message?.includes(
@@ -176,9 +179,11 @@ export async function requireOrganizationAdmin(
     ? await supabase
         .from("organization_members")
         .select(
-          "organization_id, role_in_org, organizations!inner(id, organization_name, seat_limit, is_active, industry_key, prompt_profile_key, industry_locked)"
+          "organization_id, role_in_org, created_at, organizations!inner(id, organization_name, seat_limit, is_active, industry_key, prompt_profile_key, industry_locked)"
         )
         .eq("user_id", user.id)
+        .eq("role_in_org", "admin")
+        .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle<MembershipRecord>()
     : null;
