@@ -5,6 +5,7 @@ import {
   getSupabaseServiceRoleClient,
   type SupabaseServerClient,
 } from "@/lib/supabase-server";
+import { resolveOrganizationSeatLimit } from "@/lib/copecart-products";
 import { resolveAppAccessStateForUser } from "@/lib/copecart-subscriptions";
 import { logSystemEvent } from "@/lib/system-monitoring";
 
@@ -38,6 +39,29 @@ type ProfileRecord = {
   is_active: boolean;
   role: string | null;
 };
+
+type LatestSubscriptionRecord = {
+  plan_key: string | null;
+};
+
+async function resolveEffectiveSeatLimit(params: {
+  organizationId: string;
+  serviceRoleClient: SupabaseServerClient;
+  storedSeatLimit: number;
+}) {
+  const { data: latestSubscription } = await params.serviceRoleClient
+    .from("subscriptions")
+    .select("plan_key")
+    .eq("organization_id", params.organizationId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle<LatestSubscriptionRecord>();
+
+  return resolveOrganizationSeatLimit({
+    planKey: latestSubscription?.plan_key ?? null,
+    seatLimit: params.storedSeatLimit,
+  }).seatLimit;
+}
 
 type OrganizationAdminAuthSuccess = {
   membership: MembershipRecord;
@@ -254,7 +278,13 @@ export async function requireOrganizationAdmin(
     };
   }
 
-  if (!isMasterAdmin && membership.organizations.seat_limit <= 1) {
+  const effectiveSeatLimit = await resolveEffectiveSeatLimit({
+    organizationId: membership.organization_id,
+    serviceRoleClient,
+    storedSeatLimit: membership.organizations.seat_limit,
+  });
+
+  if (!isMasterAdmin && effectiveSeatLimit <= 1) {
     return {
       error: "Kein Zugriff auf diese Organisations-Verwaltung.",
       status: 403,
@@ -270,7 +300,7 @@ export async function requireOrganizationAdmin(
     // Team-Mitglieder mit aktiver Team-Organisation dürfen die Organisationsverwaltung
     // nutzen, auch wenn der zentrale App-Access-State aktuell keine aktive Subscription
     // zurückliefert (z. B. Übergangs-/Dateninkonsistenzen).
-    if (!accessState.allowed && membership.organizations.seat_limit > 1) {
+    if (!accessState.allowed && effectiveSeatLimit > 1) {
       return {
         membership,
         serviceRoleClient,
