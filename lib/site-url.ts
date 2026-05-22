@@ -4,20 +4,38 @@ function trimTrailingSlash(value: string) {
 
 const OFFICIAL_PRODUCTION_APP_URL = "https://sales.diebestenberatungsagenturen.de";
 
+function normalizeExternalUrl(value: string) {
+  const trimmed = value.trim();
+
+  if (!trimmed) {
+    return "";
+  }
+
+  const withProtocol = /^https?:\/\//i.test(trimmed)
+    ? trimmed
+    : `https://${trimmed}`;
+
+  try {
+    return trimTrailingSlash(new URL(withProtocol).toString());
+  } catch {
+    return "";
+  }
+}
+
 function isLocalhostOrigin(value: string) {
   return /\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(value);
 }
 
 export function getRequiredPublicAppUrl() {
   const envUrl =
-    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
-    process.env.NEXT_PUBLIC_APP_URL?.trim() ||
-    process.env.APP_BASE_URL?.trim() ||
+    normalizeExternalUrl(process.env.NEXT_PUBLIC_SITE_URL ?? "") ||
+    normalizeExternalUrl(process.env.NEXT_PUBLIC_APP_URL ?? "") ||
+    normalizeExternalUrl(process.env.APP_BASE_URL ?? "") ||
     "";
 
   if (!envUrl) {
     if (typeof window !== "undefined" && window.location.origin) {
-      const browserOrigin = trimTrailingSlash(window.location.origin);
+      const browserOrigin = normalizeExternalUrl(window.location.origin);
 
       if (!isLocalhostOrigin(browserOrigin)) {
         return browserOrigin;
@@ -39,14 +57,14 @@ export function getRequiredPublicAppUrl() {
     return OFFICIAL_PRODUCTION_APP_URL;
   }
 
-  return trimTrailingSlash(envUrl);
+  return envUrl;
 }
 
 function getAuthRedirectBaseUrl() {
   const envUrl =
-    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
-    process.env.NEXT_PUBLIC_APP_URL?.trim() ||
-    process.env.APP_BASE_URL?.trim() ||
+    normalizeExternalUrl(process.env.NEXT_PUBLIC_SITE_URL ?? "") ||
+    normalizeExternalUrl(process.env.NEXT_PUBLIC_APP_URL ?? "") ||
+    normalizeExternalUrl(process.env.APP_BASE_URL ?? "") ||
     "";
 
   if (!envUrl) {
