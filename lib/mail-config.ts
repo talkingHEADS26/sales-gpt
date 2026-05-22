@@ -75,10 +75,8 @@ function resolveOfficialEmail(
 
   if (configuredEmail !== fallback) {
     warnings.push(
-      `${envName} must be ${fallback}. Falling back to the official address.`
+      `${envName} is configured as ${configuredEmail} (official default: ${fallback}).`
     );
-
-    return fallback;
   }
 
   return configuredEmail;
@@ -116,10 +114,8 @@ function resolveOfficialMailbox(
 
   if (configuredMailbox !== fallback) {
     warnings.push(
-      `${envName} must be ${fallback}. Falling back to the official address.`
+      `${envName} is configured as ${configuredMailbox} (official default: ${fallback}).`
     );
-
-    return fallback;
   }
 
   return configuredMailbox;
