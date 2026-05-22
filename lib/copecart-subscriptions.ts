@@ -192,6 +192,10 @@ function normalizeEmail(value: string | null | undefined) {
   return normalizedValue ? normalizedValue.toLowerCase() : null;
 }
 
+function isTeamLicensePlan(planKey: string | null | undefined) {
+  return planKey === "team_3" || planKey === "team_5" || planKey === "enterprise";
+}
+
 function readMetadataText(
   metadata: Record<string, unknown>,
   ...keys: string[]
@@ -285,7 +289,6 @@ async function ensureOrgSignupAccessBootstrap(params: {
     .from("organization_members")
     .select("organization_id, role_in_org")
     .eq("user_id", params.userId)
-    .eq("role_in_org", "admin")
     .limit(1)
     .maybeSingle<{ organization_id: string; role_in_org: string }>();
 
@@ -327,6 +330,22 @@ async function ensureOrgSignupAccessBootstrap(params: {
 
   if (!organizationId) {
     return false;
+  }
+
+  if (
+    existingMembership &&
+    existingMembership.role_in_org !== "admin" &&
+    isTeamLicensePlan(licensePlan)
+  ) {
+    const { error: promoteMembershipError } = await params.serviceRoleClient
+      .from("organization_members")
+      .update({ role_in_org: "admin" })
+      .eq("organization_id", organizationId)
+      .eq("user_id", params.userId);
+
+    if (promoteMembershipError) {
+      return false;
+    }
   }
 
   const { data: existingSubscription } = await params.serviceRoleClient
@@ -748,6 +767,10 @@ export async function resolveAppAccessStateForUser(params: {
 }): Promise<AppAccessState> {
   const { serviceRoleClient, userId } = params;
   const allowAllSubscriptions = isAllowAllSubscriptionsEnabled();
+  await ensureOrgSignupAccessBootstrap({
+    serviceRoleClient,
+    userId,
+  });
   let { data: profile, error: profileError } = await serviceRoleClient
     .from("profiles")
     .select("id, role, is_active")

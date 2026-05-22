@@ -14,7 +14,7 @@ type InternalAppShellProps = {
 
 type OrganizationMembership = {
   organizations: {
-    seat_limit: number | null;
+    id: string;
   } | null;
   role_in_org: string;
 };
@@ -22,6 +22,14 @@ type OrganizationMembership = {
 type ProfileRecord = {
   role: string | null;
 };
+
+type SubscriptionRecord = {
+  plan_key: string | null;
+};
+
+function isTeamPlanKey(planKey: string | null | undefined) {
+  return planKey === "team_3" || planKey === "team_5" || planKey === "enterprise";
+}
 
 const defaultContainerClassName =
   "mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8";
@@ -93,7 +101,7 @@ export function InternalAppShell({
         ] = await Promise.all([
           supabase
             .from("organization_members")
-            .select("role_in_org, organizations(seat_limit)")
+            .select("role_in_org, organizations(id)")
             .eq("user_id", user.id)
             .limit(1)
             .maybeSingle<OrganizationMembership>(),
@@ -112,13 +120,33 @@ export function InternalAppShell({
           throw membershipError;
         }
 
+        let hasTeamPlanAccess = false;
+        const organizationId = membership?.organizations?.id ?? null;
+
+        if (organizationId) {
+          const { data: latestSubscription, error: subscriptionError } =
+            await supabase
+              .from("subscriptions")
+              .select("plan_key")
+              .eq("organization_id", organizationId)
+              .order("created_at", { ascending: false })
+              .limit(1)
+              .maybeSingle<SubscriptionRecord>();
+
+          if (subscriptionError) {
+            throw subscriptionError;
+          }
+
+          hasTeamPlanAccess = isTeamPlanKey(latestSubscription?.plan_key ?? null);
+        }
+
         if (isActive) {
           const hasMasterAdminAccess = profile?.role === "master_admin";
-          const hasTeamOrEnterpriseAccess =
-            (membership?.organizations?.seat_limit ?? 1) > 1;
+          const hasOrganizationAdminRole = membership?.role_in_org === "admin";
+
           setCanAccessAdmin(hasMasterAdminAccess);
           setCanManageOrganization(
-            hasMasterAdminAccess || hasTeamOrEnterpriseAccess
+            hasMasterAdminAccess || (hasOrganizationAdminRole && hasTeamPlanAccess)
           );
           setIsNavLoading(false);
         }
