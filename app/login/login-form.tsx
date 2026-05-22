@@ -375,6 +375,7 @@ export function LoginForm({
         data: { session },
       } = await supabase.auth.getSession();
 
+      await verifyAppAccess(session?.access_token);
       await triggerWelcomeEmail(session?.access_token);
       router.push("/dashboard");
     } catch (err) {
