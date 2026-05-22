@@ -108,7 +108,9 @@ async function sendConfirmationEmailForUser(email: string) {
     throw new Error(
       sendResult.reason === "not_configured"
         ? "Bestätigungs-E-Mail ist nicht vollständig konfiguriert."
-        : "Bestätigungs-E-Mail konnte nicht gesendet werden."
+        : sendResult.detail
+          ? `Bestätigungs-E-Mail konnte nicht gesendet werden: ${sendResult.detail}`
+          : "Bestätigungs-E-Mail konnte nicht gesendet werden."
     );
   }
 }

@@ -8,7 +8,11 @@ type SendConfirmationEmailParams = {
 
 export type ConfirmationEmailSendResult =
   | { mode: "sent" }
-  | { mode: "skipped"; reason: "not_configured" | "send_failed" };
+  | {
+      mode: "skipped";
+      reason: "not_configured" | "send_failed";
+      detail?: string;
+    };
 
 function escapeHtml(value: string) {
   return value
@@ -124,7 +128,11 @@ export async function sendConfirmationEmail({
         `Confirmation email could not be sent: ${result.errorMessage}.`
       );
 
-      return { mode: "skipped", reason: "send_failed" };
+      return {
+        mode: "skipped",
+        reason: "send_failed",
+        detail: result.errorMessage,
+      };
     }
 
     return { mode: "sent" };
@@ -132,6 +140,6 @@ export async function sendConfirmationEmail({
     const message = error instanceof Error ? error.message : "Unknown error";
     logConfirmationMailerWarning(`Confirmation email request failed: ${message}.`);
 
-    return { mode: "skipped", reason: "send_failed" };
+    return { mode: "skipped", reason: "send_failed", detail: message };
   }
 }
