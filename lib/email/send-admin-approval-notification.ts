@@ -18,7 +18,7 @@ function escapeHtml(value: string) {
     .replaceAll("'", "&#39;");
 }
 
-const FALLBACK_ADMIN_URL = "https://abschluss-io.de/admin";
+const FALLBACK_ADMIN_URL = "https://sales.diebestenberatungsagenturen.de/admin";
 
 export async function sendAdminApprovalNotificationEmail({
   email,

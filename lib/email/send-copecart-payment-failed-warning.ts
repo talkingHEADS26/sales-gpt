@@ -30,7 +30,7 @@ function logMailerWarning(message: string) {
 }
 
 function buildPaymentFailedEmail({ firstName }: { firstName: string | null }) {
-  const subject = "Zahlung für AbschlussIO fehlgeschlagen";
+  const subject = "Zahlung für talkingHEADS Sales Trainer fehlgeschlagen";
   const greetingName = firstName?.trim() || "du";
   const safeGreetingName = escapeHtml(greetingName);
 
@@ -39,7 +39,7 @@ function buildPaymentFailedEmail({ firstName }: { firstName: string | null }) {
     text: [
       `Hallo ${greetingName},`,
       "",
-      "die Abbuchung für deinen AbschlussIO-Zugang konnte leider nicht erfolgreich durchgeführt werden.",
+      "die Abbuchung für deinen talkingHEADS Sales Trainer-Zugang konnte leider nicht erfolgreich durchgeführt werden.",
       "",
       "Dein Zugang bleibt noch 72 Stunden aktiv. Bitte aktualisiere deine Zahlungsdaten bzw. stelle sicher, dass die nächste Abbuchung erfolgreich durchgeführt werden kann.",
       "",
@@ -48,7 +48,7 @@ function buildPaymentFailedEmail({ firstName }: { firstName: string | null }) {
       "Sobald die Zahlung erfolgreich nachgeholt wurde, bleibt dein Zugang automatisch aktiv.",
       "",
       "Viele Grüße",
-      "AbschlussIO",
+      "talkingHEADS Sales Trainer",
     ].join("\n"),
     html: `
       <!doctype html>
@@ -61,13 +61,13 @@ function buildPaymentFailedEmail({ firstName }: { firstName: string | null }) {
         <body style="margin:0;background:#f3f6fb;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
           <div style="margin:0 auto;max-width:640px;overflow:hidden;border:1px solid #dbe5f1;border-radius:24px;background:#ffffff;">
             <div style="background:linear-gradient(135deg,#0f4c81 0%,#153e75 100%);padding:32px 40px;color:#ffffff;">
-              <p style="margin:0 0 12px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.82;">AbschlussIO</p>
+              <p style="margin:0 0 12px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.82;">talkingHEADS Sales Trainer</p>
               <h1 style="margin:0;font-size:30px;line-height:1.2;font-weight:700;">Zahlung fehlgeschlagen</h1>
             </div>
             <div style="padding:40px;">
               <p style="margin:0 0 16px;font-size:16px;line-height:1.7;">Hallo ${safeGreetingName},</p>
               <p style="margin:0 0 14px;font-size:16px;line-height:1.7;color:#334155;">
-                die Abbuchung für deinen AbschlussIO-Zugang konnte leider nicht erfolgreich durchgeführt werden.
+                die Abbuchung für deinen talkingHEADS Sales Trainer-Zugang konnte leider nicht erfolgreich durchgeführt werden.
               </p>
               <p style="margin:0 0 14px;font-size:16px;line-height:1.7;color:#334155;">
                 Dein Zugang bleibt noch 72 Stunden aktiv. Bitte aktualisiere deine Zahlungsdaten bzw. stelle sicher, dass die nächste Abbuchung erfolgreich durchgeführt werden kann.
@@ -80,7 +80,7 @@ function buildPaymentFailedEmail({ firstName }: { firstName: string | null }) {
               </p>
               <p style="margin:0;font-size:15px;line-height:1.7;color:#334155;">
                 Viele Grüße<br />
-                AbschlussIO
+                talkingHEADS Sales Trainer
               </p>
             </div>
           </div>

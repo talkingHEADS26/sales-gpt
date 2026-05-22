@@ -2,7 +2,7 @@ function trimTrailingSlash(value: string) {
   return value.replace(/\/+$/, "");
 }
 
-const OFFICIAL_PRODUCTION_APP_URL = "https://abschluss-io.de";
+const OFFICIAL_PRODUCTION_APP_URL = "https://sales.diebestenberatungsagenturen.de";
 
 function isLocalhostOrigin(value: string) {
   return /\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(value);
@@ -72,8 +72,8 @@ function getAuthRedirectBaseUrl() {
 
 export function getPasswordResetRedirectUrl() {
   // Supabase Auth must allow these production URLs in site/redirect settings.
-  // Keep `https://abschluss-io.de/reset-password` and
-  // `https://abschluss-io.de/login?confirmed=1` allowed in production.
+  // Keep `https://sales.diebestenberatungsagenturen.de/reset-password` and
+  // `https://sales.diebestenberatungsagenturen.de/login?confirmed=1` allowed in production.
   return `${getAuthRedirectBaseUrl()}/reset-password`;
 }
 

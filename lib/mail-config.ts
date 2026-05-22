@@ -1,6 +1,6 @@
-const OFFICIAL_DOMAIN = "abschluss-io.de";
+const OFFICIAL_DOMAIN = "sales.diebestenberatungsagenturen.de";
 const OFFICIAL_CONTACT_EMAIL = `io@${OFFICIAL_DOMAIN}`;
-const OFFICIAL_MAIL_FROM = `AbschlussIO <${OFFICIAL_CONTACT_EMAIL}>`;
+const OFFICIAL_MAIL_FROM = `talkingHEADS Sales Trainer <${OFFICIAL_CONTACT_EMAIL}>`;
 const INTERNAL_SIGNUP_ALERT_EMAIL = `io@${OFFICIAL_DOMAIN}`;
 
 type MailEnvironmentConfig = {

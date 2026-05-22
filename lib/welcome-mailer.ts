@@ -50,16 +50,16 @@ function buildWelcomeEmail({
   firstName: string | null;
 }) {
   const greetingName = firstName?.trim();
-  const loginUrl = "https://abschluss-io.de/login";
+  const loginUrl = "https://sales.diebestenberatungsagenturen.de/login";
   const safeGreetingName = greetingName ? `${escapeHtml(greetingName)},` : "";
   const safeLoginUrl = escapeHtml(loginUrl);
 
   return {
-    subject: "Willkommen bei AbschlussIO",
+    subject: "Willkommen bei talkingHEADS Sales Trainer",
     text: [
       "Hallo,",
       "",
-      "dein Zugang zu AbschlussIO ist jetzt vollständig eingerichtet.",
+      "dein Zugang zu talkingHEADS Sales Trainer ist jetzt vollständig eingerichtet.",
       "",
       "Du kannst dich ab sofort einloggen und mit deinem Training starten.",
       "",
@@ -69,17 +69,17 @@ function buildWelcomeEmail({
       "Falls der Button nicht funktioniert, kopiere diesen Link in deinen Browser:",
       loginUrl,
       "",
-      "AbschlussIO",
+      "talkingHEADS Sales Trainer",
     ].join("\n"),
     html: `
       <div style="margin:0;background:#f3f6fb;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
         <div style="margin:0 auto;max-width:640px;overflow:hidden;border:1px solid #dbe5f1;border-radius:24px;background:#ffffff;">
           <div style="padding:40px;">
-            <p style="margin:0 0 12px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#0e51a0;">AbschlussIO</p>
-            <h1 style="margin:0 0 24px;font-size:28px;line-height:1.2;font-weight:700;color:#0f172a;">Willkommen bei AbschlussIO</h1>
+            <p style="margin:0 0 12px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#0e51a0;">talkingHEADS Sales Trainer</p>
+            <h1 style="margin:0 0 24px;font-size:28px;line-height:1.2;font-weight:700;color:#0f172a;">Willkommen bei talkingHEADS Sales Trainer</h1>
             <p style="margin:0 0 16px;font-size:16px;line-height:1.7;">Hallo${safeGreetingName ? ` ${safeGreetingName}` : ","}</p>
             <p style="margin:0 0 24px;font-size:16px;line-height:1.7;color:#334155;">
-              dein Zugang zu AbschlussIO ist jetzt vollständig eingerichtet.
+              dein Zugang zu talkingHEADS Sales Trainer ist jetzt vollständig eingerichtet.
             </p>
             <p style="margin:0 0 24px;font-size:16px;line-height:1.7;color:#334155;">
               Du kannst dich ab sofort einloggen und mit deinem Training starten.
@@ -95,7 +95,7 @@ function buildWelcomeEmail({
             <p style="margin:0 0 28px;word-break:break-word;font-size:14px;line-height:1.7;">
               <a href="${safeLoginUrl}" style="color:#0f4c81;text-decoration:underline;">${safeLoginUrl}</a>
             </p>
-            <p style="margin:0;font-size:15px;line-height:1.7;color:#334155;">AbschlussIO</p>
+            <p style="margin:0;font-size:15px;line-height:1.7;color:#334155;">talkingHEADS Sales Trainer</p>
           </div>
         </div>
       </div>

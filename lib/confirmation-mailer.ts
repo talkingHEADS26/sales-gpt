@@ -46,7 +46,7 @@ function buildConfirmationEmail(confirmationUrl: string) {
   const safeConfirmationUrl = escapeHtml(confirmationUrl);
 
   return {
-    subject: "Bestätige deine E-Mail-Adresse für AbschlussIO",
+    subject: "Bestätige deine E-Mail-Adresse für talkingHEADS Sales Trainer",
     text: [
       "Hallo,",
       "",
@@ -60,14 +60,14 @@ function buildConfirmationEmail(confirmationUrl: string) {
       "Falls der Button nicht funktioniert, kopiere diesen Link in deinen Browser:",
       confirmationUrl,
       "",
-      "AbschlussIO",
+      "talkingHEADS Sales Trainer",
     ].join("\n"),
     html: `
       <div style="margin:0;background:#f3f6fb;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
         <div style="margin:0 auto;max-width:640px;overflow:hidden;border:1px solid #dbe5f1;border-radius:24px;background:#ffffff;">
           <div style="background:linear-gradient(135deg,#0f4c81 0%,#153e75 100%);padding:28px 32px;color:#ffffff;">
-            <p style="margin:0;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.82;">AbschlussIO</p>
-            <h1 style="margin:12px 0 0;font-size:28px;line-height:1.2;">Bestätige deine E-Mail-Adresse für AbschlussIO</h1>
+            <p style="margin:0;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.82;">talkingHEADS Sales Trainer</p>
+            <h1 style="margin:12px 0 0;font-size:28px;line-height:1.2;">Bestätige deine E-Mail-Adresse für talkingHEADS Sales Trainer</h1>
           </div>
           <div style="padding:32px;">
             <p style="margin:0 0 16px;font-size:16px;line-height:1.7;">Hallo,</p>
@@ -86,7 +86,7 @@ function buildConfirmationEmail(confirmationUrl: string) {
             <p style="margin:0 0 24px;word-break:break-word;font-size:14px;line-height:1.7;">
               <a href="${safeConfirmationUrl}" style="color:#0f4c81;text-decoration:underline;">${safeConfirmationUrl}</a>
             </p>
-            <p style="margin:0;font-size:14px;line-height:1.7;color:#64748b;">AbschlussIO</p>
+            <p style="margin:0;font-size:14px;line-height:1.7;color:#64748b;">talkingHEADS Sales Trainer</p>
           </div>
         </div>
       </div>

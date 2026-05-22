@@ -86,16 +86,16 @@ function buildInviteEmail({
   const safeOrganizationName = escapeHtml(organizationName);
 
   return {
-    subject: "Du wurdest zu AbschlussIO eingeladen",
+    subject: "Du wurdest zu talkingHEADS Sales Trainer eingeladen",
     text: [
       "Hi,",
       "",
-      `du wurdest zu ${organizationName} in AbschlussIO eingeladen.`,
+      `du wurdest zu ${organizationName} in talkingHEADS Sales Trainer eingeladen.`,
       "",
-      "Dein Team nutzt AbschlussIO, um Verkaufsgespräche zu trainieren und messbar besser zu werden.",
+      "Dein Team nutzt talkingHEADS Sales Trainer, um Verkaufsgespräche zu trainieren und messbar besser zu werden.",
       inviteLink,
       "",
-      "Mit AbschlussIO kannst du:",
+      "Mit talkingHEADS Sales Trainer kannst du:",
       "- echte Verkaufssituationen simulieren",
       "- sofort Feedback erhalten",
       "- deine Abschlussquote steigern",
@@ -104,22 +104,22 @@ function buildInviteEmail({
       "",
       "Falls du Fragen hast, melde dich gerne.",
       "",
-      "dein AbschlussIO Team",
+      "dein talkingHEADS Sales Trainer Team",
     ].join("\n"),
     html: `
       <div style="margin:0;background:#f3f6fb;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
         <div style="margin:0 auto;max-width:640px;overflow:hidden;border:1px solid #dbe5f1;border-radius:24px;background:#ffffff;">
           <div style="background:linear-gradient(135deg,#0f4c81 0%,#153e75 100%);padding:32px 40px;color:#ffffff;">
-            <p style="margin:0 0 12px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.82;">AbschlussIO</p>
-            <h1 style="margin:0;font-size:30px;line-height:1.2;font-weight:700;">Du wurdest zu AbschlussIO eingeladen</h1>
+            <p style="margin:0 0 12px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.82;">talkingHEADS Sales Trainer</p>
+            <h1 style="margin:0;font-size:30px;line-height:1.2;font-weight:700;">Du wurdest zu talkingHEADS Sales Trainer eingeladen</h1>
           </div>
           <div style="padding:40px;">
             <p style="margin:0 0 16px;font-size:16px;line-height:1.7;">Hi,</p>
             <p style="margin:0 0 16px;font-size:16px;line-height:1.7;">
-              du wurdest zu ${safeOrganizationName} in AbschlussIO eingeladen.
+              du wurdest zu ${safeOrganizationName} in talkingHEADS Sales Trainer eingeladen.
             </p>
             <p style="margin:0 0 24px;font-size:16px;line-height:1.7;color:#334155;">
-              Dein Team nutzt AbschlussIO, um Verkaufsgespräche zu trainieren und messbar besser zu werden.
+              Dein Team nutzt talkingHEADS Sales Trainer, um Verkaufsgespräche zu trainieren und messbar besser zu werden.
             </p>
             <p style="margin:0 0 32px;">
               <a href="${safeInviteLink}" style="display:inline-block;border-radius:999px;background:#0f4c81;padding:14px 24px;font-size:15px;font-weight:700;color:#ffffff;text-decoration:none;">
@@ -127,7 +127,7 @@ function buildInviteEmail({
               </a>
             </p>
             <p style="margin:0 0 12px;font-size:15px;font-weight:700;color:#0f172a;">
-              Mit AbschlussIO kannst du:
+              Mit talkingHEADS Sales Trainer kannst du:
             </p>
             <ul style="margin:0 0 28px;padding-left:20px;font-size:15px;line-height:1.8;color:#334155;">
               <li>echte Verkaufssituationen simulieren</li>
@@ -144,7 +144,7 @@ function buildInviteEmail({
               Falls du Fragen hast, melde dich gerne.
             </p>
             <p style="margin:0;font-size:15px;line-height:1.7;color:#334155;">
-              dein AbschlussIO Team
+              dein talkingHEADS Sales Trainer Team
             </p>
           </div>
         </div>

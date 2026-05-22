@@ -43,10 +43,10 @@ function buildMonitoringAlertSubject({
   const compactMessage = message.trim().replace(/\s+/g, " ");
 
   if (compactMessage.toLowerCase().includes("healthcheck")) {
-    return "[AbschlussIO Alert] Healthcheck failed";
+    return "[talkingHEADS Sales Trainer Alert] Healthcheck failed";
   }
 
-  return `[AbschlussIO Alert] ${compactMessage || `Critical error in ${source}`}`.slice(
+  return `[talkingHEADS Sales Trainer Alert] ${compactMessage || `Critical error in ${source}`}`.slice(
     0,
     140
   );
@@ -73,7 +73,7 @@ export async function sendMonitoringAlertEmail({
   const adminUrl = mailConfig.appBaseUrl ? `${mailConfig.appBaseUrl}/admin` : null;
   const subject = buildMonitoringAlertSubject({ message, source });
   const text = [
-    "AbschlussIO Monitoring Alert",
+    "talkingHEADS Sales Trainer Monitoring Alert",
     "",
     `Severity: ${severity}`,
     `Source: ${source}`,
@@ -90,7 +90,7 @@ export async function sendMonitoringAlertEmail({
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;color:#111827;padding:24px;background:#f9fafb;">
       <div style="max-width:720px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:16px;padding:24px;">
-        <h1 style="margin:0 0 16px;font-size:20px;">AbschlussIO Monitoring Alert</h1>
+        <h1 style="margin:0 0 16px;font-size:20px;">talkingHEADS Sales Trainer Monitoring Alert</h1>
         <p style="margin:0 0 8px;"><strong>Severity:</strong> ${escapeHtml(severity)}</p>
         <p style="margin:0 0 8px;"><strong>Source:</strong> ${escapeHtml(source)}</p>
         <p style="margin:0 0 8px;"><strong>Message:</strong> ${escapeHtml(message)}</p>

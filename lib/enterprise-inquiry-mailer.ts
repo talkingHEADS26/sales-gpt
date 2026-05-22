@@ -29,7 +29,7 @@ export type EnterpriseInquirySendResult =
     };
 
 const ENTERPRISE_INQUIRY_RECIPIENT = OFFICIAL_CONTACT_EMAIL;
-const ENTERPRISE_INQUIRY_SUBJECT = "AbschlussIO Anfrage";
+const ENTERPRISE_INQUIRY_SUBJECT = "talkingHEADS Sales Trainer Anfrage";
 
 function escapeHtml(value: string) {
   return value
@@ -78,7 +78,7 @@ function buildEnterpriseInquiryEmail({
   return {
     subject: ENTERPRISE_INQUIRY_SUBJECT,
     text: [
-      "Neue Anfrage über AbschlussIO:",
+      "Neue Anfrage über talkingHEADS Sales Trainer:",
       "",
       `Formular-Typ: ${inquiryType === "demo" ? "Demo" : "Enterprise"}`,
       `Name: ${name}`,
@@ -90,11 +90,11 @@ function buildEnterpriseInquiryEmail({
       <div style="margin:0;background:#f3f6fb;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
         <div style="margin:0 auto;max-width:640px;overflow:hidden;border:1px solid #dbe5f1;border-radius:24px;background:#ffffff;">
           <div style="background:linear-gradient(135deg,#0f4c81 0%,#153e75 100%);padding:32px 40px;color:#ffffff;">
-            <p style="margin:0 0 12px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.82;">AbschlussIO</p>
-            <h1 style="margin:0;font-size:28px;line-height:1.2;font-weight:700;">AbschlussIO Anfrage</h1>
+            <p style="margin:0 0 12px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;opacity:0.82;">talkingHEADS Sales Trainer</p>
+            <h1 style="margin:0;font-size:28px;line-height:1.2;font-weight:700;">talkingHEADS Sales Trainer Anfrage</h1>
           </div>
           <div style="padding:40px;">
-            <p style="margin:0 0 20px;font-size:16px;line-height:1.7;">Neue Anfrage über AbschlussIO:</p>
+            <p style="margin:0 0 20px;font-size:16px;line-height:1.7;">Neue Anfrage über talkingHEADS Sales Trainer:</p>
             <p style="margin:0 0 10px;font-size:15px;line-height:1.7;"><strong>Formular-Typ:</strong> ${safeInquiryType}</p>
             <p style="margin:0 0 10px;font-size:15px;line-height:1.7;"><strong>Name:</strong> ${safeName}</p>
             <p style="margin:0 0 10px;font-size:15px;line-height:1.7;"><strong>Telefon:</strong> ${safePhone}</p>
