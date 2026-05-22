@@ -15,6 +15,10 @@ type CreateSignupUserParams = {
   password: string;
 };
 
+type CreateSignupUserWithConfirmationEmailResult = {
+  confirmationEmailSent: boolean;
+};
+
 type EmailLookupResult = {
   emailConfirmedAt: string | null;
   exists: boolean;
@@ -112,7 +116,7 @@ export async function createSignupUserWithConfirmationEmail({
   email,
   metadata,
   password,
-}: CreateSignupUserParams) {
+}: CreateSignupUserParams): Promise<CreateSignupUserWithConfirmationEmailResult> {
   const normalizedEmail = normalizeEmail(email);
   const resolvedMetadata = { ...metadata };
   const productPlanKey = getPlanKeyForCopeCartProduct(
@@ -163,10 +167,20 @@ export async function createSignupUserWithConfirmationEmail({
       serviceRoleClient,
       userId: createUserResult.data.user.id,
     });
-    await sendConfirmationEmailForUser(normalizedEmail);
   } catch (error) {
     await serviceRoleClient.auth.admin.deleteUser(createUserResult.data.user.id);
     throw error;
+  }
+
+  try {
+    await sendConfirmationEmailForUser(normalizedEmail);
+    return { confirmationEmailSent: true };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.warn(
+      `[auth-signup] Confirmation email send failed for ${normalizedEmail}: ${message}`
+    );
+    return { confirmationEmailSent: false };
   }
 }
 

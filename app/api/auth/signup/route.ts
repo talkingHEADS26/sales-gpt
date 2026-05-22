@@ -40,11 +40,19 @@ export async function POST(request: Request) {
 
     if (registrationMode === "invitation_accept") {
       await createDirectSignupUser({ email, metadata, password });
-    } else {
-      await createSignupUserWithConfirmationEmail({ email, metadata, password });
+      return NextResponse.json({ success: true, confirmationEmailSent: false });
     }
 
-    return NextResponse.json({ success: true });
+    const signupResult = await createSignupUserWithConfirmationEmail({
+      email,
+      metadata,
+      password,
+    });
+
+    return NextResponse.json({
+      confirmationEmailSent: signupResult.confirmationEmailSent,
+      success: true,
+    });
   } catch (error) {
     const message =
       error instanceof Error
