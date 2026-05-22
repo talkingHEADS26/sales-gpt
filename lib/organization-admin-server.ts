@@ -25,6 +25,13 @@ type MembershipRecord = {
   } | null;
 };
 
+type MembershipQueryRecord = {
+  created_at?: string;
+  organization_id: string;
+  role_in_org: string;
+  organizations: MembershipRecord["organizations"] | MembershipRecord["organizations"][];
+};
+
 type OrganizationFallbackRecord = {
   franchise_vertical?: string | null;
   id: string;
@@ -49,6 +56,19 @@ type LatestSubscriptionRecord = {
 
 function isTeamPlanKey(planKey: string | null | undefined) {
   return planKey === "team_3" || planKey === "team_5" || planKey === "enterprise";
+}
+
+function normalizeMembershipRecord(entry: MembershipQueryRecord): MembershipRecord {
+  const organization = Array.isArray(entry.organizations)
+    ? (entry.organizations[0] ?? null)
+    : entry.organizations;
+
+  return {
+    created_at: entry.created_at,
+    organization_id: entry.organization_id,
+    organizations: organization,
+    role_in_org: entry.role_in_org,
+  };
 }
 
 async function resolveEffectiveSeatLimit(params: {
@@ -213,9 +233,9 @@ export async function requireOrganizationAdmin(
     };
   }
 
-  const adminMemberships = ((memberships ?? []) as MembershipRecord[]).filter(
-    (entry) => Boolean(entry.organizations)
-  );
+  const adminMemberships = (memberships ?? [])
+    .map((entry) => normalizeMembershipRecord(entry as MembershipQueryRecord))
+    .filter((entry) => Boolean(entry.organizations));
 
   let membership: MembershipRecord | null = adminMemberships[0] ?? null;
 
