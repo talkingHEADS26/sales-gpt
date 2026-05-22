@@ -37,6 +37,8 @@ export default function DashboardPage() {
   const [userId, setUserId] = useState("");
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [organizationName, setOrganizationName] = useState<string | null>(null);
+  const [seatLimit, setSeatLimit] = useState<number | null>(null);
+  const [userRoleInOrg, setUserRoleInOrg] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -139,6 +141,8 @@ export default function DashboardPage() {
           setOrganizationName(
             membership?.organizations?.organization_name?.trim() || null
           );
+          setSeatLimit(membership?.organizations?.seat_limit ?? null);
+          setUserRoleInOrg(membership?.role_in_org ?? null);
           setError("");
           setIsLoading(false);
         }
@@ -182,6 +186,16 @@ export default function DashboardPage() {
                       <p className="mt-3 text-sm font-medium tracking-[0.08em] text-[#dce8fb] uppercase">
                         {organizationName}
                       </p>
+                    ) : null}
+                    {seatLimit !== null && seatLimit > 1 && userRoleInOrg === "admin" ? (
+                      <div className="mt-4">
+                        <a
+                          href="/organization"
+                          className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-white/25"
+                        >
+                          Team verwalten ({seatLimit} Plätze)
+                        </a>
+                      </div>
                     ) : null}
                     <p className="mt-4 max-w-2xl text-base leading-7 text-[#dce8fb] sm:text-lg sm:leading-8">
                       Starte direkt in dein nächstes Sales-Training und arbeite fokussiert an besseren Gesprächen, klarerer Wirkung und stärkeren Abschlüssen.
