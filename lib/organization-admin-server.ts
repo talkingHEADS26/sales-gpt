@@ -42,8 +42,14 @@ type ProfileRecord = {
 };
 
 type LatestSubscriptionRecord = {
+  created_at?: string;
+  organization_id?: string;
   plan_key: string | null;
 };
+
+function isTeamPlanKey(planKey: string | null | undefined) {
+  return planKey === "team_3" || planKey === "team_5" || planKey === "enterprise";
+}
 
 async function resolveEffectiveSeatLimit(params: {
   organizationId: string;
@@ -170,9 +176,10 @@ export async function requireOrganizationAdmin(
     )
     .eq("user_id", user.id)
     .eq("role_in_org", "admin")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .limit(25);
 
-  const membershipResult = await membershipQuery.limit(1).maybeSingle<MembershipRecord>();
+  const membershipResult = await membershipQuery;
   const membershipFallbackResult = membershipResult.error?.message?.includes(
     "franchise_vertical"
   )
@@ -184,10 +191,9 @@ export async function requireOrganizationAdmin(
         .eq("user_id", user.id)
         .eq("role_in_org", "admin")
         .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle<MembershipRecord>()
+        .limit(25)
     : null;
-  const { data: membership, error: membershipError } =
+  const { data: memberships, error: membershipError } =
     membershipFallbackResult ?? membershipResult;
 
   if (membershipError) {
@@ -205,6 +211,50 @@ export async function requireOrganizationAdmin(
       error: membershipError.message,
       status: 500,
     };
+  }
+
+  const adminMemberships = ((memberships ?? []) as MembershipRecord[]).filter(
+    (entry) => Boolean(entry.organizations)
+  );
+
+  let membership: MembershipRecord | null = adminMemberships[0] ?? null;
+
+  if (adminMemberships.length > 1) {
+    const organizationIds = adminMemberships.map((entry) => entry.organization_id);
+    const { data: subscriptionRows } = await serviceRoleClient
+      .from("subscriptions")
+      .select("organization_id, plan_key, created_at")
+      .in("organization_id", organizationIds)
+      .order("created_at", { ascending: false });
+    const latestPlanByOrganization = new Map<string, string | null>();
+    for (const row of (subscriptionRows ?? []) as LatestSubscriptionRecord[]) {
+      const organizationId = row.organization_id;
+      if (!organizationId || latestPlanByOrganization.has(organizationId)) {
+        continue;
+      }
+      latestPlanByOrganization.set(organizationId, row.plan_key ?? null);
+    }
+
+    const ranked = adminMemberships
+      .map((entry) => ({
+        createdAt: entry.created_at ? new Date(entry.created_at).getTime() : 0,
+        entry,
+        isTeamPlan: isTeamPlanKey(
+          latestPlanByOrganization.get(entry.organization_id) ?? null
+        ),
+        seatLimit: entry.organizations?.seat_limit ?? 1,
+      }))
+      .sort((a, b) => {
+        if (a.isTeamPlan !== b.isTeamPlan) {
+          return a.isTeamPlan ? -1 : 1;
+        }
+        if ((a.seatLimit > 1) !== (b.seatLimit > 1)) {
+          return a.seatLimit > 1 ? -1 : 1;
+        }
+        return b.createdAt - a.createdAt;
+      });
+
+    membership = ranked[0]?.entry ?? membership;
   }
 
   if (isMasterAdmin && !membership?.organizations) {
