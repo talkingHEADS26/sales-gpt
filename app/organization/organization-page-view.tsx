@@ -6,6 +6,7 @@ import { Roboto, Rubik } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { InternalAppShell } from "@/components/internal-app-shell";
+import type { DashboardKpiSummary } from "@/lib/dashboard-kpis";
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
 
 const roboto = Roboto({
@@ -32,6 +33,7 @@ type OrganizationMember = {
   id: string;
   isActive: boolean;
   isSeatOccupied: boolean;
+  kpiSummary: DashboardKpiSummary;
   lastActivityAt: string | null;
   name: string | null;
   platformRole: string | null;
@@ -167,6 +169,55 @@ function formatDateTime(value: string | null) {
     month: "2-digit",
     year: "numeric",
   });
+}
+
+function formatPercent(value: number) {
+  return `${Number(value.toFixed(1)).toLocaleString("de-DE")} %`;
+}
+
+function getLastActivityLabel(value: string | null) {
+  if (!value) {
+    return "Keine Aktivität erfasst";
+  }
+
+  return new Date(value).toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
+
+function getActivityState(value: string | null) {
+  if (!value) {
+    return { label: "Inaktiv", tone: "bg-slate-100 text-slate-500" };
+  }
+
+  const activityDate = new Date(value);
+  const now = new Date();
+  const msDiff = now.getTime() - activityDate.getTime();
+  const dayDiff = msDiff / (1000 * 60 * 60 * 24);
+
+  if (dayDiff <= 7) {
+    return { label: "Aktiv", tone: "bg-emerald-50 text-emerald-700" };
+  }
+
+  if (dayDiff <= 30) {
+    return { label: "Weniger aktiv", tone: "bg-amber-50 text-amber-700" };
+  }
+
+  return { label: "Inaktiv", tone: "bg-slate-100 text-slate-500" };
+}
+
+function getKpiTone(score: number) {
+  if (score >= 75) {
+    return "text-emerald-700";
+  }
+
+  if (score >= 50) {
+    return "text-amber-700";
+  }
+
+  return "text-rose-700";
 }
 
 export function OrganizationPageView() {
@@ -843,6 +894,89 @@ export function OrganizationPageView() {
                         </div>
                       </div>
                     </section>
+
+                    {organization.seatLimit > 1 ? (
+                      <section className="rounded-[1.75rem] border border-white/80 bg-white/88 p-5 shadow-[0_18px_46px_rgba(15,23,42,0.08)]">
+                        <div className="flex items-center justify-between gap-3">
+                          <div>
+                            <h3 className="text-xl font-semibold text-[#707070]">
+                              Team-Dashboard
+                            </h3>
+                            <p className="mt-1 text-sm text-slate-500">
+                              KPI-Überblick pro Mitglied mit Aktivitätsstatus und Trainingsfortschritt.
+                            </p>
+                          </div>
+                          <span className="rounded-full bg-[#0e51a0]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
+                            Nur Team
+                          </span>
+                        </div>
+
+                        <div className="mt-5 grid gap-3 lg:grid-cols-2">
+                          {organization.members.map((member) => {
+                            const activity = getActivityState(member.lastActivityAt);
+                            const overallScore = member.kpiSummary.overallScore ?? 0;
+
+                            return (
+                              <article
+                                key={`kpi-${member.id}`}
+                                className="rounded-2xl border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-4 py-4 shadow-[0_12px_28px_rgba(15,23,42,0.04)]"
+                              >
+                                <div className="flex items-start justify-between gap-3">
+                                  <div className="min-w-0">
+                                    <p className="truncate text-base font-semibold text-[#707070]">
+                                      {member.name ?? member.email ?? "Unbekanntes Mitglied"}
+                                    </p>
+                                    <p className="mt-1 truncate text-sm text-slate-500">
+                                      {member.email ?? "Keine E-Mail gefunden"}
+                                    </p>
+                                  </div>
+                                  <span
+                                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ${activity.tone}`}
+                                  >
+                                    {activity.label}
+                                  </span>
+                                </div>
+
+                                <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                                  <div className="rounded-xl border border-slate-100 bg-white px-3 py-2">
+                                    <p className="text-[11px] uppercase tracking-[0.16em] text-slate-500">
+                                      Score
+                                    </p>
+                                    <p className={`mt-1 text-lg font-semibold ${getKpiTone(overallScore)}`}>
+                                      {overallScore}
+                                    </p>
+                                  </div>
+                                  <div className="rounded-xl border border-slate-100 bg-white px-3 py-2">
+                                    <p className="text-[11px] uppercase tracking-[0.16em] text-slate-500">
+                                      Abschlussrate
+                                    </p>
+                                    <p className="mt-1 text-lg font-semibold text-[#707070]">
+                                      {formatPercent(member.kpiSummary.closingRate.value)}
+                                    </p>
+                                  </div>
+                                  <div className="rounded-xl border border-slate-100 bg-white px-3 py-2">
+                                    <p className="text-[11px] uppercase tracking-[0.16em] text-slate-500">
+                                      Termine
+                                    </p>
+                                    <p className="mt-1 text-lg font-semibold text-[#707070]">
+                                      {formatPercent(member.kpiSummary.appointmentRate.value)}
+                                    </p>
+                                  </div>
+                                  <div className="rounded-xl border border-slate-100 bg-white px-3 py-2">
+                                    <p className="text-[11px] uppercase tracking-[0.16em] text-slate-500">
+                                      Letzte Aktivität
+                                    </p>
+                                    <p className="mt-1 text-sm font-semibold text-[#707070]">
+                                      {getLastActivityLabel(member.lastActivityAt)}
+                                    </p>
+                                  </div>
+                                </div>
+                              </article>
+                            );
+                          })}
+                        </div>
+                      </section>
+                    ) : null}
 
                     <section className="rounded-[1.75rem] border border-white/80 bg-white/88 p-5 shadow-[0_18px_46px_rgba(15,23,42,0.08)]">
                       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
