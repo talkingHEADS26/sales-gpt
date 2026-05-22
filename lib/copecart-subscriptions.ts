@@ -3,6 +3,7 @@ import crypto from "node:crypto";
 import {
   getPackageLabel,
   getSeatLimitForCopeCartProduct,
+  getSeatLimitForPlanKey,
   resolveOrganizationSeatLimit,
 } from "@/lib/copecart-products";
 import { sendCopeCartPaymentFailedWarningEmail } from "@/lib/email/send-copecart-payment-failed-warning";
@@ -62,6 +63,12 @@ type ProfileAccessRecord = {
   id: string;
   is_active: boolean;
   role: string | null;
+};
+
+type AuthUserWithMetadata = {
+  email: string | null;
+  id: string;
+  user_metadata?: Record<string, unknown>;
 };
 
 type MembershipRecord = {
@@ -183,6 +190,173 @@ function normalizeEmail(value: string | null | undefined) {
   const normalizedValue = normalizeText(value);
 
   return normalizedValue ? normalizedValue.toLowerCase() : null;
+}
+
+function readMetadataText(
+  metadata: Record<string, unknown>,
+  ...keys: string[]
+) {
+  for (const key of keys) {
+    const value = metadata[key];
+
+    if (typeof value === "string") {
+      const normalizedValue = normalizeText(value);
+
+      if (normalizedValue) {
+        return normalizedValue;
+      }
+    }
+  }
+
+  return null;
+}
+
+async function ensureOrgSignupAccessBootstrap(params: {
+  serviceRoleClient: SupabaseServerClient;
+  userId: string;
+}) {
+  const { data: userData, error: userError } =
+    await params.serviceRoleClient.auth.admin.getUserById(params.userId);
+
+  if (userError || !userData.user) {
+    return false;
+  }
+
+  const authUser = userData.user as AuthUserWithMetadata;
+  const metadata = (authUser.user_metadata ?? {}) as Record<string, unknown>;
+  const registrationMode = readMetadataText(metadata, "registration_mode");
+
+  if (registrationMode !== "organization_signup") {
+    return false;
+  }
+
+  const firstName = readMetadataText(metadata, "first_name");
+  const lastName = readMetadataText(metadata, "last_name");
+  const username =
+    readMetadataText(metadata, "username") ??
+    normalizeEmail(authUser.email) ??
+    params.userId;
+  const licensePlan = readMetadataText(metadata, "license_plan") ?? "solo";
+  const organizationName =
+    readMetadataText(metadata, "organization_name") ?? "Neue Organisation";
+  const industryKey = readMetadataText(metadata, "industry_key") ?? "fitness";
+  const franchiseVertical =
+    industryKey === "franchise"
+      ? readMetadataText(metadata, "franchise_vertical") ?? "other"
+      : null;
+  const seatLimit = getSeatLimitForPlanKey(licensePlan) ?? 1;
+
+  const fullName = [firstName, lastName].filter(Boolean).join(" ").trim() || null;
+
+  const { data: currentProfile } = await params.serviceRoleClient
+    .from("profiles")
+    .select("id, is_active")
+    .eq("id", params.userId)
+    .maybeSingle<{ id: string; is_active: boolean }>();
+
+  if (!currentProfile) {
+    const { error: createProfileError } = await params.serviceRoleClient
+      .from("profiles")
+      .insert({
+        first_name: firstName,
+        full_name: fullName,
+        id: params.userId,
+        is_active: true,
+        last_name: lastName,
+        role: "user",
+        username,
+      });
+
+    if (createProfileError) {
+      return false;
+    }
+  } else if (!currentProfile.is_active) {
+    const { error: activateProfileError } = await params.serviceRoleClient
+      .from("profiles")
+      .update({ is_active: true })
+      .eq("id", params.userId);
+
+    if (activateProfileError) {
+      return false;
+    }
+  }
+
+  const { data: existingMembership } = await params.serviceRoleClient
+    .from("organization_members")
+    .select("organization_id, role_in_org")
+    .eq("user_id", params.userId)
+    .eq("role_in_org", "admin")
+    .limit(1)
+    .maybeSingle<{ organization_id: string; role_in_org: string }>();
+
+  let organizationId = existingMembership?.organization_id ?? null;
+
+  if (!organizationId) {
+    const { data: createdOrganization, error: createOrganizationError } =
+      await params.serviceRoleClient
+        .from("organizations")
+        .insert({
+          franchise_vertical: franchiseVertical,
+          industry_key: industryKey,
+          is_active: true,
+          organization_name: organizationName,
+          prompt_profile_key: industryKey,
+          seat_limit: seatLimit,
+        })
+        .select("id")
+        .single<{ id: string }>();
+
+    if (createOrganizationError || !createdOrganization) {
+      return false;
+    }
+
+    organizationId = createdOrganization.id;
+
+    const { error: createMembershipError } = await params.serviceRoleClient
+      .from("organization_members")
+      .insert({
+        organization_id: organizationId,
+        role_in_org: "admin",
+        user_id: params.userId,
+      });
+
+    if (createMembershipError) {
+      return false;
+    }
+  }
+
+  if (!organizationId) {
+    return false;
+  }
+
+  const { data: existingSubscription } = await params.serviceRoleClient
+    .from("subscriptions")
+    .select("id")
+    .eq("organization_id", organizationId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle<{ id: string }>();
+
+  if (!existingSubscription) {
+    const { error: createSubscriptionError } = await params.serviceRoleClient
+      .from("subscriptions")
+      .insert({
+        organization_id: organizationId,
+        plan_key: licensePlan,
+        status: "active",
+      });
+
+    if (createSubscriptionError) {
+      return false;
+    }
+  }
+
+  await params.serviceRoleClient
+    .from("organizations")
+    .update({ is_active: true })
+    .eq("id", organizationId);
+
+  return true;
 }
 
 function normalizeStatusKeyword(value: string | null | undefined) {
@@ -574,11 +748,29 @@ export async function resolveAppAccessStateForUser(params: {
 }): Promise<AppAccessState> {
   const { serviceRoleClient, userId } = params;
   const allowAllSubscriptions = isAllowAllSubscriptionsEnabled();
-  const { data: profile, error: profileError } = await serviceRoleClient
+  let { data: profile, error: profileError } = await serviceRoleClient
     .from("profiles")
     .select("id, role, is_active")
     .eq("id", userId)
     .maybeSingle<ProfileAccessRecord>();
+
+  if (profileError || !profile || !profile.is_active) {
+    const repaired = await ensureOrgSignupAccessBootstrap({
+      serviceRoleClient,
+      userId,
+    });
+
+    if (repaired) {
+      const refreshResult = await serviceRoleClient
+        .from("profiles")
+        .select("id, role, is_active")
+        .eq("id", userId)
+        .maybeSingle<ProfileAccessRecord>();
+
+      profile = refreshResult.data ?? null;
+      profileError = refreshResult.error ?? null;
+    }
+  }
 
   if (profileError || !profile) {
     return {
