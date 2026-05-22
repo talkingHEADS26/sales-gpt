@@ -125,28 +125,33 @@ export function resolveOrganizationSeatLimit(params: {
   planKey?: string | null;
   seatLimit?: number | null;
 }) {
-  if (typeof params.seatLimit === "number" && Number.isFinite(params.seatLimit) && params.seatLimit >= 1) {
-    return {
-      seatLimit: params.seatLimit,
-      source: "stored" as const,
-    };
-  }
-
   const productSeatLimit = getSeatLimitForCopeCartProduct(params.copecartProductId);
-
-  if (productSeatLimit) {
-    return {
-      seatLimit: productSeatLimit,
-      source: "copecart_product" as const,
-    };
-  }
-
   const planSeatLimit = getSeatLimitForPlanKey(params.planKey);
+  const storedSeatLimit =
+    typeof params.seatLimit === "number" &&
+    Number.isFinite(params.seatLimit) &&
+    params.seatLimit >= 1
+      ? params.seatLimit
+      : null;
+  const candidates = [
+    { seatLimit: storedSeatLimit, source: "stored" as const },
+    { seatLimit: productSeatLimit, source: "copecart_product" as const },
+    { seatLimit: planSeatLimit, source: "plan_key" as const },
+  ].filter(
+    (candidate): candidate is { seatLimit: number; source: "stored" | "copecart_product" | "plan_key" } =>
+      typeof candidate.seatLimit === "number" &&
+      Number.isFinite(candidate.seatLimit) &&
+      candidate.seatLimit >= 1
+  );
 
-  if (planSeatLimit) {
+  if (candidates.length > 0) {
+    const selected = candidates.reduce((currentMax, candidate) =>
+      candidate.seatLimit > currentMax.seatLimit ? candidate : currentMax
+    );
+
     return {
-      seatLimit: planSeatLimit,
-      source: "plan_key" as const,
+      seatLimit: selected.seatLimit,
+      source: selected.source,
     };
   }
 
