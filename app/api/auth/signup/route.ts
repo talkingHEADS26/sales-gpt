@@ -50,6 +50,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({
+      confirmationEmailError: signupResult.confirmationEmailError,
       confirmationEmailSent: signupResult.confirmationEmailSent,
       success: true,
     });

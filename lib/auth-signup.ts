@@ -16,6 +16,7 @@ type CreateSignupUserParams = {
 };
 
 type CreateSignupUserWithConfirmationEmailResult = {
+  confirmationEmailError: string | null;
   confirmationEmailSent: boolean;
 };
 
@@ -174,13 +175,13 @@ export async function createSignupUserWithConfirmationEmail({
 
   try {
     await sendConfirmationEmailForUser(normalizedEmail);
-    return { confirmationEmailSent: true };
+    return { confirmationEmailError: null, confirmationEmailSent: true };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
     console.warn(
       `[auth-signup] Confirmation email send failed for ${normalizedEmail}: ${message}`
     );
-    return { confirmationEmailSent: false };
+    return { confirmationEmailError: message, confirmationEmailSent: false };
   }
 }
 

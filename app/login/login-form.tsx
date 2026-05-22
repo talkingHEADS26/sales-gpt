@@ -22,6 +22,7 @@ type LoginFormProps = {
   confirmationCode?: string;
   confirmationErrorDescription?: string;
   confirmed: boolean;
+  confirmationMailError?: string;
   confirmationMailSent: boolean;
   defaultEmail?: string;
   invited: boolean;
@@ -191,6 +192,7 @@ export function LoginForm({
   confirmationCode,
   confirmationErrorDescription,
   confirmed,
+  confirmationMailError,
   confirmationMailSent,
   defaultEmail,
   invited,
@@ -542,6 +544,11 @@ export function LoginForm({
                             <p>
                               Registrierung erfolgreich, aber der Bestätigungslink konnte nicht automatisch gesendet werden.
                             </p>
+                            {confirmationMailError ? (
+                              <p className="mt-2 text-xs leading-6 text-amber-900">
+                                Technischer Hinweis: {confirmationMailError}
+                              </p>
+                            ) : null}
                             <button
                               type="button"
                               onClick={() => void handleResendConfirmation()}

@@ -107,6 +107,7 @@ function RegisterPageContent() {
         }),
       });
       const responseBody = (await response.json()) as {
+        confirmationEmailError?: string | null;
         confirmationEmailSent?: boolean;
         error?: string;
       };
@@ -139,6 +140,9 @@ function RegisterPageContent() {
       }
 
       const encodedEmail = encodeURIComponent(values.email.trim());
+      const encodedConfirmationMailError = encodeURIComponent(
+        responseBody.confirmationEmailError ?? ""
+      );
       const confirmationMailStatus =
         responseBody.confirmationEmailSent === false ? "0" : "1";
 
@@ -148,7 +152,7 @@ function RegisterPageContent() {
           : "Registrierung erfolgreich. Bitte bestätige jetzt deine E-Mail-Adresse."
       );
       router.push(
-        `/login?registered=1&confirm_mail=${confirmationMailStatus}&email=${encodedEmail}`
+        `/login?registered=1&confirm_mail=${confirmationMailStatus}&confirm_mail_error=${encodedConfirmationMailError}&email=${encodedEmail}`
       );
     } catch (err) {
       const message =
