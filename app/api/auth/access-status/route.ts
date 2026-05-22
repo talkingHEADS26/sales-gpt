@@ -1,41 +1,30 @@
 import { NextResponse } from "next/server";
 
 import {
-  getSupabaseServerClient,
-  getSupabaseServerClientInitError,
-} from "@/lib/supabase-server";
+  isFailure,
+  requirePaidAppUser,
+  resolveAppAccessStateForUser,
+} from "@/lib/copecart-subscriptions";
 
 export async function GET(request: Request) {
-  const authorizationHeader = request.headers.get("authorization");
-  const accessToken = authorizationHeader?.startsWith("Bearer ")
-    ? authorizationHeader.slice("Bearer ".length)
-    : undefined;
+  const authResult = await requirePaidAppUser(
+    request.headers.get("authorization")
+  );
 
-  if (!accessToken) {
-    return NextResponse.json({ error: "Nicht autorisiert." }, { status: 401 });
-  }
-
-  const supabase = getSupabaseServerClient(accessToken);
-
-  if (!supabase) {
+  if (isFailure(authResult)) {
     return NextResponse.json(
       {
-        error:
-          getSupabaseServerClientInitError() ??
-          "Supabase konnte nicht initialisiert werden.",
+        code: authResult.code ?? null,
+        error: authResult.error,
       },
-      { status: 500 }
+      { status: authResult.status }
     );
   }
 
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+  const accessState = await resolveAppAccessStateForUser({
+    serviceRoleClient: authResult.serviceRoleClient,
+    userId: authResult.userId,
+  });
 
-  if (error || !user) {
-    return NextResponse.json({ error: "Nicht autorisiert." }, { status: 401 });
-  }
-
-  return NextResponse.json({ allowed: true, organizationId: null });
+  return NextResponse.json(accessState, { status: 200 });
 }
