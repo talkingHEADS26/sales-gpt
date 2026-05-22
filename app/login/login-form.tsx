@@ -22,6 +22,8 @@ type LoginFormProps = {
   confirmationCode?: string;
   confirmationErrorDescription?: string;
   confirmed: boolean;
+  confirmationMailSent: boolean;
+  defaultEmail?: string;
   invited: boolean;
   reset: boolean;
   registered: boolean;
@@ -189,6 +191,8 @@ export function LoginForm({
   confirmationCode,
   confirmationErrorDescription,
   confirmed,
+  confirmationMailSent,
+  defaultEmail,
   invited,
   reset,
   registered,
@@ -196,7 +200,7 @@ export function LoginForm({
   tokenType,
 }: LoginFormProps) {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(defaultEmail?.trim() ?? "");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<LoginUiError | null>(null);
@@ -529,9 +533,27 @@ export function LoginForm({
                       ) : null}
 
                       {registered ? (
-                        <p className="rounded-2xl border border-emerald-200 bg-emerald-50/95 px-4 py-3 text-sm text-emerald-700">
-                          Registrierung erfolgreich. Bitte bestätige zuerst deine E-Mail-Adresse über den Link in deinem Postfach.
-                        </p>
+                        confirmationMailSent ? (
+                          <p className="rounded-2xl border border-emerald-200 bg-emerald-50/95 px-4 py-3 text-sm text-emerald-700">
+                            Registrierung erfolgreich. Bitte bestätige zuerst deine E-Mail-Adresse über den Link in deinem Postfach.
+                          </p>
+                        ) : (
+                          <div className="rounded-2xl border border-amber-200 bg-amber-50/95 px-4 py-3 text-sm text-amber-800">
+                            <p>
+                              Registrierung erfolgreich, aber der Bestätigungslink konnte nicht automatisch gesendet werden.
+                            </p>
+                            <button
+                              type="button"
+                              onClick={() => void handleResendConfirmation()}
+                              disabled={isResendingConfirmation || !email.trim()}
+                              className="mt-3 inline-flex min-h-10 items-center justify-center rounded-full border border-amber-300 bg-white px-4 py-2 text-sm font-medium text-amber-800 transition hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-60"
+                            >
+                              {isResendingConfirmation
+                                ? "Sende erneut..."
+                                : "Bestätigungslink jetzt senden"}
+                            </button>
+                          </div>
+                        )
                       ) : null}
 
                       {confirmed ? (

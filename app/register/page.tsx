@@ -106,7 +106,10 @@ function RegisterPageContent() {
           password,
         }),
       });
-      const responseBody = (await response.json()) as { error?: string };
+      const responseBody = (await response.json()) as {
+        confirmationEmailSent?: boolean;
+        error?: string;
+      };
 
       if (!response.ok) {
         throw new Error(
@@ -135,8 +138,18 @@ function RegisterPageContent() {
         );
       }
 
-      setSuccess("Registrierung erfolgreich. Bitte bestätige jetzt deine E-Mail-Adresse.");
-      router.push("/login?registered=1");
+      const encodedEmail = encodeURIComponent(values.email.trim());
+      const confirmationMailStatus =
+        responseBody.confirmationEmailSent === false ? "0" : "1";
+
+      setSuccess(
+        responseBody.confirmationEmailSent === false
+          ? "Registrierung erfolgreich. Der Bestätigungslink konnte nicht automatisch gesendet werden."
+          : "Registrierung erfolgreich. Bitte bestätige jetzt deine E-Mail-Adresse."
+      );
+      router.push(
+        `/login?registered=1&confirm_mail=${confirmationMailStatus}&email=${encodedEmail}`
+      );
     } catch (err) {
       const message =
         err instanceof Error

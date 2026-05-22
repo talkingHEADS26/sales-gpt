@@ -10,6 +10,8 @@ type LoginPageProps = {
   searchParams: Promise<{
     code?: string;
     confirmed?: string;
+    confirm_mail?: string;
+    email?: string;
     error_description?: string;
     invited?: string;
     registered?: string;
@@ -26,7 +28,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
     <LoginForm
       confirmationCode={resolvedSearchParams.code}
       confirmed={resolvedSearchParams.confirmed === "1"}
+      confirmationMailSent={resolvedSearchParams.confirm_mail !== "0"}
       confirmationErrorDescription={resolvedSearchParams.error_description}
+      defaultEmail={resolvedSearchParams.email}
       invited={resolvedSearchParams.invited === "1"}
       reset={resolvedSearchParams.reset === "1"}
       registered={resolvedSearchParams.registered === "1"}
