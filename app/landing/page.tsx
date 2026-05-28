@@ -98,6 +98,43 @@ const testimonials = [
   },
 ];
 
+const pricingCards = [
+  {
+    eyebrow: "SOLO-LIZENZ",
+    name: "Solo-Lizenz",
+    price: "29,70 € / Monat",
+    seats: "1 Seat",
+    text: "Für einzelne Verkäufer, Coaches oder Inhaber, die ihre Abschlussgespräche gezielt verbessern wollen.",
+    note: "zzgl. USt. · monatlich kündbar",
+    button: "Solo starten",
+    href: "/register",
+    featured: false,
+  },
+  {
+    eyebrow: "TEAM-LIZENZ",
+    name: "Team-Lizenz",
+    badge: "Beliebt",
+    price: "97 € / Monat",
+    seats: "10 Seats",
+    text: "Für kleine Vertriebsteams, Studios oder Agenturen, die Sales-Gespräche regelmäßig trainieren und einheitlich verbessern wollen.",
+    note: "zzgl. USt. · monatlich kündbar",
+    button: "Team starten",
+    href: "/register",
+    featured: true,
+  },
+  {
+    eyebrow: "COMPANY-LIZENZ",
+    name: "Company-Lizenz",
+    price: "297 € / Monat",
+    seats: "50 Seats",
+    text: "Für größere Teams, die Sales-Training skalieren, Gesprächsqualität messbar verbessern und Abschlussquoten systematisch steigern wollen.",
+    note: "zzgl. USt. · monatlich kündbar",
+    button: "Company starten",
+    href: "/register",
+    featured: false,
+  },
+];
+
 export const metadata: Metadata = {
   title: "Landing",
   description: "talkingHEADS Landing Page für KI-gestütztes Sales Training.",
@@ -123,6 +160,14 @@ function PrimaryButton({ href, children }: { href: string; children: ReactNode }
 function GhostButton({ href, children }: { href: string; children: ReactNode }) {
   return (
     <Link className="btn btn-ghost" href={href}>
+      {children}
+    </Link>
+  );
+}
+
+function PricingButton({ href, children, featured = false }: { href: string; children: ReactNode; featured?: boolean }) {
+  return (
+    <Link className={`btn btn-pricing ${featured ? "btn-pricing--featured" : ""}`} href={href}>
       {children}
     </Link>
   );
@@ -292,6 +337,34 @@ export default function LandingPage() {
             <h2 className="cta-heading">READY FOR TAKE OFF?</h2>
             <p className="cta-subline">STARTE JETZT DEIN KOSTENLOSES STRATEGIEGESPRÄCH</p>
             <GhostButton href="#top">JETZT KOSTENLOS BEWERBEN!</GhostButton>
+          </div>
+        </div>
+      </section>
+
+      <section className="pricing-section landing-section">
+        <div className="landing-container">
+          <SectionHeading title="Wähle die Lizenz, die zu deinem Vertrieb passt." />
+          <p className="pricing-subheading">
+            Starte schlank oder trainiere dein Team mit einem klaren KI-System für bessere Sales-Gespräche, stärkere
+            Abschlüsse und mehr Umsatz.
+          </p>
+          <div className="grid-3 pricing-grid">
+            {pricingCards.map((card) => (
+              <article key={card.name} className={`pricing-card ${card.featured ? "pricing-card--featured" : ""}`}>
+                <p className="pricing-card__eyebrow">{card.eyebrow}</p>
+                <div className="pricing-card__header">
+                  <h3 className="pricing-card__name">{card.name}</h3>
+                  {card.badge ? <span className="pricing-card__badge">{card.badge}</span> : null}
+                </div>
+                <div className="pricing-card__price">{card.price}</div>
+                <div className="pricing-card__seats">{card.seats}</div>
+                <p className="pricing-card__text">{card.text}</p>
+                <p className="pricing-card__note">{card.note}</p>
+                <PricingButton href={card.href} featured={card.featured}>
+                  {card.button}
+                </PricingButton>
+              </article>
+            ))}
           </div>
         </div>
       </section>
