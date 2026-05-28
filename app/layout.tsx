@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "../styles/main.css";
 import { ConsentIntegrations } from "@/components/consent-integrations";
 import { ConsentProvider } from "@/components/consent-provider";
 
