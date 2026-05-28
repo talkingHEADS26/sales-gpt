@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import LandingPage from "./landing/page";
+import HomePageContent from "./homepage";
 
 export const metadata: Metadata = {
   description:
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <LandingPage />;
+  return <HomePageContent />;
 }
