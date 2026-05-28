@@ -39,18 +39,18 @@ const featureCards = [
 const problemCards = [
   {
     icon: "📉",
-    title: "ZU WENIG LEADS",
-    text: "Ohne planbare Nachfrage bleibt Dein Vertrieb permanent im Reaktionsmodus statt im Wachstum.",
+    title: "SCHWACHE ABSCHLUSSQUOTEN",
+    text: "Wenn Verkaufsgespräche nicht sauber geführt werden, bleibt zu viel Umsatz auf der Strecke. Genau hier entscheidet sich, ob Interesse zu Abschluss wird.",
   },
   {
     icon: "💸",
-    title: "SCHWACHE ABSCHLUSSQUOTEN",
-    text: "Wenn Gespräche nicht sauber geführt werden, bleibt zu viel Umsatz auf der Strecke.",
+    title: "ZU WENIG TRAINING",
+    text: "Sales-Gespräche werden selten regelmäßig trainiert. Ohne Wiederholung, Routine und echte Gesprächssimulation verbessert sich auch die Abschlussstärke nicht.",
   },
   {
     icon: "🔄",
-    title: "KEIN SKALIERBARES TRAINING",
-    text: "Ohne System hängt Entwicklung am Kalender einzelner Trainer und skaliert nicht sauber.",
+    title: "KEIN FEEDBACK",
+    text: "Vergangene Verkaufsgespräche werden kaum analysiert. Mit Situationscoaching erkennt die KI, wo Abschlüsse verloren gehen - und was beim nächsten Gespräch besser laufen muss.",
   },
 ];
 
@@ -80,21 +80,21 @@ const steps = [
 const testimonials = [
   {
     quote:
-      "Das Sales Master Seminar hat mich durch seine unverblümte Ansprache und das direkte, ehrliche Feedback beeindruckt. Die strukturierte Systematik, die aufeinander aufbaut, ermöglichte mir, den Verkaufsprozess in all seinen einzelnen Schritten zu verstehen und direkt umzusetzen.",
-    name: "MATTHIAS RICHTER",
-    role: "ANLAGEBERATER",
+      "Unsere Trainer waren fachlich stark, aber im Abschluss oft zu unsicher. Durch das regelmäßige Training mit dem talkingHEADS Sales Trainer wurden Einwände sauberer behandelt - und die Abschlussquote ist innerhalb weniger Wochen deutlich gestiegen.",
+    name: "Martin K.",
+    role: "Studioinhaber",
   },
   {
     quote:
-      "Tolles Seminar, vollgepackt mit sehr viel wertvollem Wissen. Die Verkaufstechniken bieten mir nochmal einen roten Faden und mehrere Ansätze für den Alltag, die mir die Sicherheit geben.",
-    name: "RALF HEILMANN",
-    role: "HANDWERKSBETRIEB INHABER",
+      "Wir konnten endlich nachvollziehen, warum Gespräche verloren gehen. Das Situationscoaching zeigt konkret, welche Fragen fehlen und wo der Abschluss kippt. Das hat sich direkt im Umsatz bemerkbar gemacht.",
+    name: "Sandra M.",
+    role: "Geschäftsführerin",
   },
   {
     quote:
-      "Schonungslose Ehrlichkeit und hochprofessionelle Arbeitsweise. Genau das, was einen voran bringt.",
-    name: "DENNIS HERRMANN",
-    role: "IT BERATUNG",
+      "Für unser Vertriebsteam ist der Sales Trainer wie ein Sparringspartner, der immer verfügbar ist. Neue Mitarbeiter kommen schneller ins Gespräch, bestehende Verkäufer schließen sicherer ab.",
+    name: "Daniel R.",
+    role: "Vertriebsleiter",
   },
 ];
 
@@ -133,8 +133,14 @@ function Header() {
     <header className="site-header">
       <div className="landing-container site-header__inner">
         <Link href="#top" className="brand" aria-label="talkingHEADS Startseite">
-          <span className="brand__talking">talking</span>
-          <span className="brand__heads">HEADS</span>
+          <Image
+            src="/TH_Logo.png"
+            alt="talkingHEADS Logo"
+            width={320}
+            height={152}
+            priority
+            className="brand__logo"
+          />
         </Link>
 
         <nav className="site-nav" aria-label="Hauptnavigation">
@@ -208,17 +214,6 @@ export default function LandingPage() {
               />
               <div className="hero-badge">88% ERFOLGSQUOTE</div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="social-proof-section landing-section">
-        <div className="landing-container">
-          <p className="social-proof__text">BEREITS VERTRAUT VON ÜBER 300 UNTERNEHMEN</p>
-          <div className="logo-band" aria-label="Logoplatzhalter">
-            {Array.from({ length: 6 }, (_, index) => (
-              <div key={`logo-${index}`} className="logo-placeholder" />
-            ))}
           </div>
         </div>
       </section>

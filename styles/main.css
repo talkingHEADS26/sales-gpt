@@ -6,7 +6,7 @@
   --th-dark-blue: #072f6b;
   --th-black: #0d0d0d;
   --th-dark-gray: #1a1a2e;
-  --th-mid-gray: #4a4a6a;
+  --th-mid-gray: #707070;
   --th-light-gray: #f5f5f5;
   --th-white: #ffffff;
   --th-text: #0d0d0d;
@@ -78,20 +78,13 @@ img {
   display: inline-flex;
   align-items: baseline;
   gap: 0;
-  font-family: "Rubik", sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   line-height: 1;
-  font-size: 1.1rem;
 }
 
-.brand__talking {
-  color: var(--th-white);
-}
-
-.brand__heads {
-  color: var(--th-orange);
+.brand__logo {
+  width: auto;
+  height: 42px;
+  max-width: min(250px, 52vw);
 }
 
 .site-nav {
@@ -228,13 +221,16 @@ img {
 .hero-grid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 420px);
+  gap: 72px;
   align-items: center;
 }
 
 .hero-copy {
   color: var(--th-white);
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
 }
 
 .hero-label,
@@ -352,12 +348,14 @@ img {
 .hero-imageWrap {
   display: flex;
   justify-content: center;
+  justify-self: end;
+  width: 100%;
 }
 
 .hero-image__frame {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 420px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 24px 56px rgba(7, 47, 107, 0.42);
@@ -389,38 +387,6 @@ img {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-}
-
-.social-proof-section {
-  background: var(--th-light-gray);
-}
-
-.social-proof__text {
-  margin: 0 0 24px;
-  text-align: center;
-  font-family: "Rubik", sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--th-blue);
-}
-
-.logo-band {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(170px, 1fr);
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: thin;
-}
-
-.logo-placeholder {
-  height: 72px;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #ececec 0%, #e1e1e1 100%);
-  border: 1px solid rgba(14, 81, 160, 0.08);
 }
 
 .problem-section,
@@ -769,7 +735,7 @@ img {
   }
 
   .hero-imageWrap {
-    order: -1;
+    justify-self: start;
   }
 
   .grid-4,
@@ -822,22 +788,18 @@ img {
     flex-direction: column;
   }
 
-  .logo-band {
-    grid-auto-columns: minmax(140px, 1fr);
+  .brand__logo {
+    height: 34px;
   }
 }
 
 @media (max-width: 480px) {
-  .brand {
-    font-size: 0.95rem;
-  }
-
   .heading {
     font-size: 1.8rem;
   }
 
   .hero-headline {
-    font-size: 2.1rem;
+    font-size: 2.05rem;
   }
 
   .hero-badge {
