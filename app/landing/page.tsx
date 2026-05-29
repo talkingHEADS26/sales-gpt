@@ -57,23 +57,23 @@ const problemCards = [
 const steps = [
   {
     number: "01",
-    title: "ANFRAGE STARTEN",
-    text: "Du startest mit dem kostenlosen Erstgespräch und definierst Deine Ziele klar und präzise.",
+    title: "PASSENDES SEAT PAKET AUSWÄHLEN",
+    text: "Wähle das Seat-Paket, das zu Deinem Team, Deinem Trainingsbedarf und Deinem Wachstum passt.",
   },
   {
     number: "02",
-    title: "SYSTEM KENNENLERNEN",
-    text: "Du lernst die Struktur des KI-Trainings kennen und siehst sofort, wo Dein Potenzial liegt.",
+    title: "ABO BEI COPECART EINRICHTEN",
+    text: "Richte Dein Abo über unseren Kooperationspartner CopeCart sauber und unkompliziert ein.",
   },
   {
     number: "03",
-    title: "TRAINING AUFSETZEN",
-    text: "Du richtest Deine Szenarien ein und trainierst mit realistischen Dialogen jederzeit weiter.",
+    title: "FIRMA IM TALKINGHEADS SALES TRAINER REGISTRIEREN",
+    text: "Lege Dein Unternehmen im System an, damit Dein Team direkt mit dem passenden Setup starten kann.",
   },
   {
     number: "04",
-    title: "ERFOLG MESSEN",
-    text: "Du verfolgst Fortschritte, verbesserst gezielt und machst Entwicklung sichtbar.",
+    title: "KI SALES TRAINING STARTEN",
+    text: "Starte mit realistischen Gesprächssimulationen und mache erste Fortschritte sofort messbar.",
   },
 ];
 
