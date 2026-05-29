@@ -83,8 +83,8 @@ img {
 
 .brand__logo {
   width: auto;
-  height: 42px;
-  max-width: min(250px, 52vw);
+  height: 56px;
+  max-width: min(330px, 62vw);
 }
 
 .site-nav {
@@ -951,7 +951,7 @@ img {
   }
 
   .brand__logo {
-    height: 34px;
+    height: 45px;
   }
 
   .pricing-subheading {
