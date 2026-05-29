@@ -176,7 +176,7 @@ img {
   max-width: 980px;
   font-family: "Rubik", sans-serif;
   font-size: clamp(2rem, 3.2vw, 3rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.1;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -276,7 +276,7 @@ img {
   margin: 0 0 16px;
   font-family: "Rubik", sans-serif;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--th-orange);
@@ -286,19 +286,19 @@ img {
   margin: 0;
   font-family: "Rubik", sans-serif;
   font-size: clamp(1.95rem, 4vw, 3.7rem);
-  font-weight: 900;
+  font-weight: 600;
   line-height: 1.03;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 
 .hero-subline {
   margin: 18px 0 0;
   font-family: "Rubik", sans-serif;
   font-size: clamp(1.05rem, 2vw, 1.4rem);
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--th-orange);
 }
 
@@ -323,7 +323,7 @@ img {
   padding-left: 30px;
   font-family: "Rubik", sans-serif;
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.94);
@@ -460,7 +460,7 @@ img {
 .step-card__title {
   margin: 0;
   font-family: "Rubik", sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   line-height: 1.15;
@@ -537,7 +537,7 @@ img {
 .step-card__number {
   font-family: "Rubik", sans-serif;
   font-size: clamp(3rem, 5vw, 4.5rem);
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
   color: rgba(14, 81, 160, 0.12);
   margin-bottom: 12px;
@@ -598,7 +598,7 @@ img {
   margin: 0;
   font-family: "Rubik", sans-serif;
   font-size: clamp(2rem, 3vw, 3rem);
-  font-weight: 900;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--th-white);
@@ -699,7 +699,7 @@ img {
   margin: 0;
   font-family: "Rubik", sans-serif;
   font-size: 1.35rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--th-blue);
@@ -722,7 +722,7 @@ img {
   margin-top: 22px;
   font-family: "Rubik", sans-serif;
   font-size: clamp(2rem, 3vw, 2.55rem);
-  font-weight: 900;
+  font-weight: 600;
   line-height: 1;
   color: var(--th-blue);
 }
@@ -806,7 +806,7 @@ img {
   margin: 0 0 16px;
   font-family: "Rubik", sans-serif;
   font-size: 0.875rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--th-white);
