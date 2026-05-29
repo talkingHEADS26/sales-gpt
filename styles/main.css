@@ -60,10 +60,10 @@ img {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(7, 47, 107, 0.92);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(14, 81, 160, 0.08);
 }
 
 .site-header__inner {
@@ -99,7 +99,7 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--th-blue);
   transition: color 0.2s ease;
 }
 
@@ -634,6 +634,7 @@ img {
 
 .pricing-grid {
   align-items: stretch;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .pricing-card {
