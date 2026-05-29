@@ -778,7 +778,7 @@ img {
 }
 
 .site-footer {
-  background: var(--th-black);
+  background: linear-gradient(135deg, #072f6b 0%, #0e51a0 100%);
   color: var(--th-white);
   padding: var(--section-pad-desktop);
 }
@@ -791,10 +791,15 @@ img {
   margin-bottom: 18px;
 }
 
+.brand__logo--footer {
+  height: 52px;
+  max-width: min(300px, 58vw);
+}
+
 .footer-description {
   margin: 0;
   max-width: 320px;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .footer-heading {
@@ -817,7 +822,7 @@ img {
 
 .footer-links a,
 .footer-contact a {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.82);
   transition: color 0.2s ease;
 }
 
@@ -828,7 +833,7 @@ img {
 
 .footer-contact {
   font-style: normal;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.82);
   margin: 0;
 }
 

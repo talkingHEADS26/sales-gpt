@@ -203,7 +203,7 @@ function Header() {
           </a>
         </nav>
 
-        <PrimaryButton href="#erfolge">JETZT BEWERBEN</PrimaryButton>
+        <PrimaryButton href="#preise">Jetzt Sales boosten!</PrimaryButton>
       </div>
     </header>
   );
@@ -242,8 +242,8 @@ export default function LandingPage() {
             </ul>
 
             <div className="hero-buttons">
-              <PrimaryButton href="#erfolge">JETZT KOSTENLOS STARTEN!</PrimaryButton>
-              <GhostButton href="#loesungen">ERFAHRE MEHR</GhostButton>
+              <PrimaryButton href="#preise">Jetzt durchstarten</PrimaryButton>
+              <GhostButton href="#loesungen">Erfahre mehr</GhostButton>
             </div>
           </div>
 
@@ -341,7 +341,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="pricing-section landing-section">
+      <section id="preise" className="pricing-section landing-section">
         <div className="landing-container">
           <SectionHeading title="Wähle die Lizenz, die zu deinem Vertrieb passt." />
           <p className="pricing-subheading">
@@ -373,8 +373,13 @@ export default function LandingPage() {
         <div className="landing-container footer-grid">
           <div>
             <Link href="#top" className="brand brand--footer" aria-label="talkingHEADS Startseite">
-              <span className="brand__talking">talking</span>
-              <span className="brand__heads">HEADS</span>
+              <Image
+                src="/TH_Logo_white.png"
+                alt="talkingHEADS Logo"
+                width={320}
+                height={152}
+                className="brand__logo brand__logo--footer"
+              />
             </Link>
             <p className="footer-description">
               KI-gestütztes Sales Training für Teams, die schneller lernen, sauberer abschließen und messbar wachsen
