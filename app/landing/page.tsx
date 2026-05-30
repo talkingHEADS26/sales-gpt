@@ -247,19 +247,6 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="hero-image hero-imageWrap">
-            <div className="hero-image__frame">
-              <Image
-                src="/ki-training.png"
-                alt="KI Sales Training"
-                width={1024}
-                height={1024}
-                priority
-                className="hero-image__img"
-              />
-              <div className="hero-badge">88% ERFOLGSQUOTE</div>
-            </div>
-          </div>
         </div>
       </section>
 

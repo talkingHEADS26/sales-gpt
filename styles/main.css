@@ -191,9 +191,7 @@ img {
   min-height: 90vh;
   display: flex;
   align-items: center;
-  background-image:
-    linear-gradient(135deg, rgba(7, 47, 107, 0.86) 0%, rgba(14, 81, 160, 0.82) 60%, rgba(26, 107, 199, 0.88) 100%),
-    url("/rocket-bg.png");
+  background-image: url("/rocket-bg.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -226,8 +224,8 @@ img {
 .hero-grid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(380px, 460px);
-  gap: 84px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
   align-items: center;
 }
 
@@ -235,14 +233,15 @@ img {
   color: var(--th-white);
   position: relative;
   z-index: 1;
-  max-width: 580px;
-  padding: 34px 36px;
+  width: min(100%, 760px);
+  max-width: 760px;
+  padding: 38px 40px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 18px 44px rgba(7, 47, 107, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 18px 44px rgba(7, 47, 107, 0.18);
 }
 
 .hero-label,
@@ -250,8 +249,7 @@ img {
 .hero-subline,
 .hero-body,
 .hero-checklist,
-.hero-buttons,
-.hero-image {
+.hero-buttons {
   opacity: 0;
   animation: fadeInUp 0.6s ease both;
 }
@@ -278,10 +276,6 @@ img {
 
 .hero-buttons {
   animation-delay: 0.75s;
-}
-
-.hero-image {
-  animation-delay: 0.3s;
 }
 
 .hero-label {
@@ -316,7 +310,7 @@ img {
 
 .hero-body {
   margin: 20px 0 0;
-  max-width: 640px;
+  max-width: 700px;
   font-size: 1.125rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
@@ -355,50 +349,6 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-}
-
-.hero-imageWrap {
-  display: flex;
-  justify-content: center;
-  justify-self: end;
-  width: 100%;
-}
-
-.hero-image__frame {
-  position: relative;
-  width: 100%;
-  max-width: 460px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 24px 56px rgba(7, 47, 107, 0.42);
-}
-
-.hero-image__img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.hero-badge {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(234, 148, 19, 0.4);
-  color: var(--th-orange);
-  font-family: "Rubik", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
 }
 
 .problem-section,
@@ -909,10 +859,6 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .hero-imageWrap {
-    justify-self: start;
-  }
-
   .grid-4,
   .footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1004,13 +950,6 @@ img {
 
   .pricing-card__badge {
     align-self: flex-start;
-  }
-
-  .hero-badge {
-    left: 12px;
-    bottom: 12px;
-    font-size: 0.7rem;
-    padding: 10px 12px;
   }
 
   .card-feature,
