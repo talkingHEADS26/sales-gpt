@@ -191,7 +191,12 @@ img {
   min-height: 90vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #072f6b 0%, #0e51a0 60%, #1a6bc7 100%);
+  background-image:
+    linear-gradient(135deg, rgba(7, 47, 107, 0.86) 0%, rgba(14, 81, 160, 0.82) 60%, rgba(26, 107, 199, 0.88) 100%),
+    url("/rocket-bg.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
 }
@@ -231,6 +236,13 @@ img {
   position: relative;
   z-index: 1;
   max-width: 580px;
+  padding: 34px 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 44px rgba(7, 47, 107, 0.22);
 }
 
 .hero-label,
@@ -955,6 +967,10 @@ img {
     flex-direction: column;
   }
 
+  .hero-copy {
+    padding: 24px 20px;
+  }
+
   .brand__logo {
     height: 45px;
   }
@@ -976,6 +992,10 @@ img {
 
   .hero-headline {
     font-size: 1.95rem;
+  }
+
+  .hero-copy {
+    border-radius: 8px;
   }
 
   .pricing-card__header {
