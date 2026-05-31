@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -343,6 +344,18 @@ export default function LandingPage() {
             </div>
           </div>
 
+          <div className="hero-visual" aria-hidden="true">
+            <div className="hero-dashboard">
+              <Image
+                src="/ki-training.png"
+                alt=""
+                width={1024}
+                height={1024}
+                priority
+                className="hero-dashboard__image"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

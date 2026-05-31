@@ -287,10 +287,13 @@ img {
 }
 
 .hero-section {
-  min-height: 90vh;
+  min-height: calc(100vh - 76px);
   display: flex;
   align-items: center;
-  background-image: url("/rocket-bg.png");
+  background:
+    radial-gradient(circle at 82% 28%, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0) 34%),
+    linear-gradient(135deg, rgba(7, 47, 107, 0.94) 0%, rgba(14, 81, 160, 0.9) 56%, rgba(7, 47, 107, 0.96) 100%),
+    url("/rocket-bg.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -323,24 +326,24 @@ img {
 .hero-grid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0;
+  grid-template-columns: minmax(0, 0.94fr) minmax(420px, 1.06fr);
+  gap: clamp(44px, 6vw, 88px);
   align-items: center;
 }
 
 .hero-copy {
-  color: var(--th-white);
+  color: var(--th-mid-gray);
   position: relative;
   z-index: 1;
-  width: min(100%, 760px);
-  max-width: 760px;
-  padding: 38px 40px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 18px 44px rgba(7, 47, 107, 0.18);
+  width: 100%;
+  max-width: 620px;
+  padding: clamp(28px, 3.2vw, 40px);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 14px 34px rgba(7, 47, 107, 0.16);
 }
 
 .hero-label,
@@ -349,6 +352,11 @@ img {
 .hero-body,
 .hero-checklist,
 .hero-buttons {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease both;
+}
+
+.hero-visual {
   opacity: 0;
   animation: fadeInUp 0.6s ease both;
 }
@@ -377,8 +385,12 @@ img {
   animation-delay: 0.75s;
 }
 
+.hero-visual {
+  animation-delay: 0.35s;
+}
+
 .hero-label {
-  margin: 0 0 16px;
+  margin: 0 0 14px;
   font-family: var(--th-font-heading);
   font-size: 0.875rem;
   font-weight: 500;
@@ -390,17 +402,18 @@ img {
 .hero-headline {
   margin: 0;
   font-family: var(--th-font-heading);
-  font-size: clamp(1.95rem, 4vw, 3.7rem);
+  font-size: clamp(1.9rem, 3.2vw, 3rem);
   font-weight: 800;
-  line-height: 1.03;
+  line-height: 1.08;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  color: var(--th-blue);
 }
 
 .hero-subline {
-  margin: 18px 0 0;
+  margin: 20px 0 0;
   font-family: var(--th-font-heading);
-  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-size: clamp(1rem, 1.45vw, 1.25rem);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -408,15 +421,15 @@ img {
 }
 
 .hero-body {
-  margin: 20px 0 0;
-  max-width: 700px;
-  font-size: 1.125rem;
+  margin: 18px 0 0;
+  max-width: 560px;
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--th-mid-gray);
 }
 
 .hero-checklist {
-  margin: 28px 0 0;
+  margin: 26px 0 0;
   padding: 0;
   list-style: none;
   display: grid;
@@ -431,7 +444,7 @@ img {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.94);
+  color: var(--th-mid-gray);
 }
 
 .hero-checklist li::before {
@@ -444,10 +457,55 @@ img {
 }
 
 .hero-buttons {
-  margin-top: 34px;
+  margin-top: 32px;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+}
+
+.hero-buttons .btn-primary {
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.14);
+}
+
+.hero-buttons .btn-primary:hover {
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
+}
+
+.hero-buttons .btn-ghost {
+  color: var(--th-blue);
+  border-color: rgba(14, 81, 160, 0.24);
+  background: rgba(14, 81, 160, 0.04);
+}
+
+.hero-buttons .btn-ghost:hover {
+  border-color: rgba(14, 81, 160, 0.38);
+  background: rgba(14, 81, 160, 0.08);
+}
+
+.hero-visual {
+  position: relative;
+  z-index: 1;
+  justify-self: end;
+  width: min(100%, 620px);
+}
+
+.hero-dashboard {
+  position: relative;
+  border-radius: 28px;
+  padding: clamp(14px, 1.8vw, 22px);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 22px 52px rgba(7, 47, 107, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-dashboard__image {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 26px rgba(7, 47, 107, 0.2));
 }
 
 .problem-section,
@@ -947,8 +1005,22 @@ img {
 }
 
 @media (max-width: 1024px) {
+  .hero-section {
+    min-height: auto;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-copy,
+  .hero-visual {
+    justify-self: center;
+  }
+
+  .hero-visual {
+    width: min(100%, 560px);
   }
 
   .grid-4,
@@ -1019,6 +1091,19 @@ img {
     padding: 24px 20px;
   }
 
+  .hero-visual {
+    width: min(100%, 500px);
+  }
+
+  .hero-dashboard {
+    border-radius: 22px;
+    padding: 12px;
+  }
+
+  .hero-dashboard__image {
+    border-radius: 16px;
+  }
+
   .site-header .brand__logo {
     height: 42px;
   }
@@ -1038,11 +1123,15 @@ img {
   }
 
   .hero-headline {
-    font-size: 1.95rem;
+    font-size: 1.72rem;
   }
 
   .hero-copy {
-    border-radius: 8px;
+    border-radius: 16px;
+  }
+
+  .hero-checklist li {
+    font-size: 0.86rem;
   }
 
   .pricing-card__header {
