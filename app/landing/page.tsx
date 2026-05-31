@@ -258,21 +258,48 @@ function Header() {
         </Link>
 
         <nav className="site-nav" aria-label="Hauptnavigation">
-          <a href="#system" className="site-nav__link">
-            System
+          <a href="#top" className="site-nav__link">
+            Startseite
           </a>
           <a href="#loesungen" className="site-nav__link">
-            Lösungen
+            Vorteile
           </a>
           <a href="#branchen" className="site-nav__link">
-            Branchen
+            Für wen
           </a>
-          <a href="#erfolge" className="site-nav__link">
-            Erfolge
+          <a href="#preise" className="site-nav__link">
+            Preise
           </a>
         </nav>
 
-        <PrimaryButton href="#preise">Jetzt Sales boosten!</PrimaryButton>
+        <Link className="btn btn-primary site-header__cta" href="#preise">
+          Jetzt starten
+        </Link>
+
+        <details className="mobile-nav">
+          <summary className="mobile-nav__toggle" aria-label="Navigation öffnen">
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </summary>
+          <nav className="mobile-nav__panel" aria-label="Mobile Hauptnavigation">
+            <a href="#top" className="mobile-nav__link">
+              Startseite
+            </a>
+            <a href="#loesungen" className="mobile-nav__link">
+              Vorteile
+            </a>
+            <a href="#branchen" className="mobile-nav__link">
+              Für wen
+            </a>
+            <a href="#preise" className="mobile-nav__link">
+              Preise
+            </a>
+            <a href="#preise" className="btn btn-primary mobile-nav__cta">
+              Jetzt starten
+            </a>
+          </nav>
+        </details>
       </div>
     </header>
   );
