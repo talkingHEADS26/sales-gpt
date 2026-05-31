@@ -1,36 +1,37 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { SiteLogo } from "@/components/site-brand";
+
 const featureCards = [
   {
-    icon: "🗣️",
+    icon: "dialog",
     title: "EINWANDBEHANDLUNG",
     text: "Trainiere Antworten auf echte Einwände und sichere Dir mehr Abschlüsse in kritischen Momenten.",
   },
   {
-    icon: "⚡",
+    icon: "feedback",
     title: "LIVE-FEEDBACK",
     text: "Erhalte direkt im Gespräch klare Hinweise zu Wirkung, Struktur und Gesprächsführung.",
   },
   {
-    icon: "🎯",
+    icon: "target",
     title: "PITCH-OPTIMIERUNG",
     text: "Schärfe Deine Argumentation und bring Dein Angebot präzise auf den Punkt.",
   },
   {
-    icon: "🎙️",
+    icon: "voice",
     title: "TONANALYSE",
     text: "Verstehe, wie Stimme, Tempo und Tonfall auf Deine Gesprächspartner wirken.",
   },
   {
-    icon: "📈",
+    icon: "chart",
     title: "FORTSCHRITTS-TRACKING",
     text: "Sieh messbar, wie sich Deine Performance von Session zu Session entwickelt.",
   },
   {
-    icon: "🧩",
+    icon: "system",
     title: "INDIVIDUELLE SZENARIEN",
     text: "Trainiere auf Deine Branche, Dein Team und Deine Zielgruppe zugeschnittene Fälle.",
   },
@@ -38,17 +39,17 @@ const featureCards = [
 
 const problemCards = [
   {
-    icon: "📉",
+    icon: "trend",
     title: "SCHWACHE ABSCHLUSSQUOTEN",
     text: "Wenn Verkaufsgespräche nicht sauber geführt werden, bleibt zu viel Umsatz auf der Strecke. Genau hier entscheidet sich, ob Interesse zu Abschluss wird.",
   },
   {
-    icon: "💸",
+    icon: "training",
     title: "ZU WENIG TRAINING",
     text: "Sales-Gespräche werden selten regelmäßig trainiert. Ohne Wiederholung, Routine und echte Gesprächssimulation verbessert sich auch die Abschlussstärke nicht.",
   },
   {
-    icon: "🔄",
+    icon: "loop",
     title: "KEIN FEEDBACK",
     text: "Vergangene Verkaufsgespräche werden kaum analysiert. Mit Situationscoaching erkennt die KI, wo Abschlüsse verloren gehen - und was beim nächsten Gespräch besser laufen muss.",
   },
@@ -165,6 +166,81 @@ function GhostButton({ href, children }: { href: string; children: ReactNode }) 
   );
 }
 
+function LandingIcon({ name }: { name: string }) {
+  const paths: Record<string, ReactNode> = {
+    dialog: (
+      <>
+        <path d="M5 6.5h14v8H9l-4 3v-11Z" />
+        <path d="M8 10h8" />
+        <path d="M8 12.5h5" />
+      </>
+    ),
+    feedback: (
+      <>
+        <path d="M12 3.5v7h5L10.5 20v-7h-5L12 3.5Z" />
+      </>
+    ),
+    target: (
+      <>
+        <circle cx="12" cy="12" r="7.5" />
+        <circle cx="12" cy="12" r="3.5" />
+        <path d="M12 2.5v3" />
+        <path d="M21.5 12h-3" />
+      </>
+    ),
+    voice: (
+      <>
+        <path d="M12 4.5a3 3 0 0 0-3 3v4a3 3 0 0 0 6 0v-4a3 3 0 0 0-3-3Z" />
+        <path d="M6.5 11.5a5.5 5.5 0 0 0 11 0" />
+        <path d="M12 17v3" />
+      </>
+    ),
+    chart: (
+      <>
+        <path d="M4.5 18.5h15" />
+        <path d="M6.5 15l3.5-3.5 3 2 4.5-6" />
+        <path d="M15.5 7.5h2v2" />
+      </>
+    ),
+    system: (
+      <>
+        <path d="M8 4.5h8v5H8z" />
+        <path d="M5 14.5h6v5H5z" />
+        <path d="M13 14.5h6v5h-6z" />
+        <path d="M12 9.5v2.5" />
+        <path d="M8 12h8" />
+      </>
+    ),
+    trend: (
+      <>
+        <path d="M4.5 6.5 10 12l3-3 6.5 6.5" />
+        <path d="M15.5 15.5h4v-4" />
+      </>
+    ),
+    training: (
+      <>
+        <path d="M5 6.5h14v11H5z" />
+        <path d="M8 10h8" />
+        <path d="M8 13h5" />
+      </>
+    ),
+    loop: (
+      <>
+        <path d="M17.5 8.5A6.5 6.5 0 0 0 6 7" />
+        <path d="M17.5 4.5v4h-4" />
+        <path d="M6.5 15.5A6.5 6.5 0 0 0 18 17" />
+        <path d="M6.5 19.5v-4h4" />
+      </>
+    ),
+  };
+
+  return (
+    <svg className="landing-icon" viewBox="0 0 24 24" aria-hidden="true">
+      {paths[name]}
+    </svg>
+  );
+}
+
 function PricingButton({ href, children, featured = false }: { href: string; children: ReactNode; featured?: boolean }) {
   return (
     <Link className={`btn btn-pricing ${featured ? "btn-pricing--featured" : ""}`} href={href}>
@@ -178,14 +254,7 @@ function Header() {
     <header className="site-header">
       <div className="landing-container site-header__inner">
         <Link href="#top" className="brand" aria-label="talkingHEADS Startseite">
-          <Image
-            src="/TH_Logo.png"
-            alt="talkingHEADS Logo"
-            width={320}
-            height={152}
-            priority
-            className="brand__logo"
-          />
+          <SiteLogo priority className="brand__logo" />
         </Link>
 
         <nav className="site-nav" aria-label="Hauptnavigation">
@@ -257,7 +326,7 @@ export default function LandingPage() {
             {problemCards.map((card) => (
               <article key={card.title} className="card card-feature problem-card">
                 <div className="card-icon" aria-hidden="true">
-                  {card.icon}
+                  <LandingIcon name={card.icon} />
                 </div>
                 <h3 className="card-title">{card.title}</h3>
                 <p className="card-text">{card.text}</p>
@@ -274,7 +343,7 @@ export default function LandingPage() {
             {featureCards.map((card) => (
               <article key={card.title} className="card-glass feature-card">
                 <div className="feature-card__icon" aria-hidden="true">
-                  {card.icon}
+                  <LandingIcon name={card.icon} />
                 </div>
                 <h3 className="feature-card__title">{card.title}</h3>
                 <p className="feature-card__text">{card.text}</p>
@@ -360,13 +429,7 @@ export default function LandingPage() {
         <div className="landing-container footer-grid">
           <div>
             <Link href="#top" className="brand brand--footer" aria-label="talkingHEADS Startseite">
-              <Image
-                src="/TH_Logo_white.png"
-                alt="talkingHEADS Logo"
-                width={320}
-                height={152}
-                className="brand__logo brand__logo--footer"
-              />
+              <SiteLogo className="brand__logo brand__logo--footer" />
             </Link>
             <p className="footer-description">
               KI-gestütztes Sales Training für Teams, die schneller lernen, sauberer abschließen und messbar wachsen
