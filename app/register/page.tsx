@@ -2,10 +2,10 @@
 
 import { FormEvent, Suspense, useState } from "react";
 import Link from "next/link";
-import { Roboto, Rubik } from "next/font/google";
 import { useRouter } from "next/navigation";
 
-import { SiteBrand } from "@/components/site-brand";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteLogo } from "@/components/site-brand";
 import {
   LICENSE_PLANS,
   type FormErrors,
@@ -20,17 +20,6 @@ import {
   type IndustryKey,
 } from "@/lib/industries";
 import { hasSupabaseEnv } from "@/lib/supabase";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const rubik = Rubik({
-  subsets: ["latin"],
-  weight: ["500", "700"],
-  display: "swap",
-});
 
 function RegisterPageContent() {
   const router = useRouter();
@@ -168,39 +157,70 @@ function RegisterPageContent() {
   };
 
   return (
-    <main
-      className={`${roboto.className} min-h-screen overflow-hidden bg-white text-[#1b2b45]`}
-    >
-      <div className="relative isolate min-h-screen">
-        <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 sm:px-6 lg:px-8">
-          <header className="flex items-center justify-between rounded-[1.25rem] border border-[#dbe7f8] bg-white px-4 py-3 shadow-[0_12px_30px_rgba(14,81,160,0.10)] md:px-6">
-            <SiteBrand href="/" />
-            <div className="flex items-center gap-2 sm:gap-3">
-              <Link
-                href="/"
-                className="inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-medium text-[#707070] transition hover:bg-slate-100 hover:text-[#1b2b45]"
-              >
+    <main className="min-h-screen bg-white text-[#707070]">
+      <header className="site-header">
+        <div className="landing-container site-header__inner">
+          <Link href="/landing" className="brand" aria-label="talkingHEADS Startseite">
+            <SiteLogo priority className="brand__logo" />
+          </Link>
+
+          <nav className="site-nav" aria-label="Hauptnavigation">
+            <Link href="/landing#top" className="site-nav__link">
+              Startseite
+            </Link>
+            <Link href="/landing#loesungen" className="site-nav__link">
+              Vorteile
+            </Link>
+            <Link href="/landing#branchen" className="site-nav__link">
+              Für wen
+            </Link>
+            <Link href="/landing#preise" className="site-nav__link">
+              Preise
+            </Link>
+          </nav>
+
+          <Link className="btn btn-primary site-header__cta" href="/login">
+            Einloggen
+          </Link>
+
+          <details className="mobile-nav">
+            <summary className="mobile-nav__toggle" aria-label="Navigation öffnen">
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+            </summary>
+            <nav className="mobile-nav__panel" aria-label="Mobile Hauptnavigation">
+              <Link href="/landing#top" className="mobile-nav__link">
                 Startseite
               </Link>
-              <Link
-                href="/login"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35),inset_0_1px_0_rgba(255,255,255,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(234,148,19,0.45),inset_0_1px_0_rgba(255,255,255,0.4)]"
-              >
-                Jetzt einloggen
+              <Link href="/landing#loesungen" className="mobile-nav__link">
+                Vorteile
               </Link>
-            </div>
-          </header>
+              <Link href="/landing#branchen" className="mobile-nav__link">
+                Für wen
+              </Link>
+              <Link href="/landing#preise" className="mobile-nav__link">
+                Preise
+              </Link>
+              <Link href="/login" className="btn btn-primary mobile-nav__cta">
+                Einloggen
+              </Link>
+            </nav>
+          </details>
+        </div>
+      </header>
 
-          <section className="flex flex-1 items-center py-8 sm:py-10 lg:py-12">
-            <div className="grid w-full gap-6 lg:grid-cols-1">
-              <div className="max-w-3xl">
-                <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_10px_30px_rgba(14,81,160,0.08)] backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+        <section className="w-full">
+          <div className="mx-auto grid w-full max-w-4xl gap-8">
+            <div className="mx-auto max-w-3xl text-center">
+              <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_8px_20px_rgba(15,23,42,0.04)]">
                   Sales-Training für planbare Abschlüsse
                 </div>
-                <h1 className={`${rubik.className} mt-4 text-3xl font-semibold tracking-[-0.03em] text-balance text-[#0E51A0] sm:text-4xl lg:text-5xl`}>
+                <h1 className="mt-5 text-balance font-heading text-3xl font-normal tracking-[-0.03em] text-[#0E51A0] sm:text-4xl lg:text-5xl">
                   Mach dein Team im Verkauf sicher, strukturiert und überzeugend.
                 </h1>
-                <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#707070] sm:text-lg sm:leading-8">
                   Erstelle in wenigen Minuten eure Organisation und starte mit KI-gestützten Gesprächssimulationen, klarem Feedback und messbarer Entwicklung im Vertrieb.
                 </p>
 
@@ -212,35 +232,35 @@ function RegisterPageContent() {
                   ].map((benefit) => (
                     <div
                       key={benefit}
-                      className="rounded-2xl border border-white/80 bg-white/75 px-4 py-4 text-sm font-medium text-[#707070] shadow-[0_16px_40px_rgba(15,23,42,0.06)] backdrop-blur"
+                      className="rounded-2xl border border-[#0e51a0]/10 bg-white px-4 py-4 text-sm font-medium text-[#707070] shadow-[0_10px_26px_rgba(14,81,160,0.06)]"
                     >
-                      <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] shadow-[0_10px_20px_rgba(234,148,19,0.35)]" />
+                      <span className="mx-auto mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#EA9413]" />
                       {benefit}
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-6 rounded-[1.25rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_10px_24px_rgba(14,81,160,0.08)]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0E51A0]">
+                <div className="mx-auto mt-6 max-w-2xl rounded-[1.25rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_10px_24px_rgba(14,81,160,0.06)]">
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0E51A0]">
                     Für ambitionierte Vertriebsteams
                   </p>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">
+                  <p className="mt-4 text-sm leading-7 text-[#707070]">
                     Lege die Organisation an, wähle den passenden Lizenzplan und schaffe einen einheitlichen Trainingsstandard für bessere Beratung und mehr Abschlüsse.
                   </p>
                 </div>
               </div>
 
-              <div className="relative mx-auto w-full max-w-4xl">
-                <div className="rounded-[2rem] border border-[#0b478b] bg-[#0E51A0] p-5 shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:p-6">
-                  <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8">
-                    <div className="text-center sm:text-left">
-                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#dce8fb]">
+              <div className="relative mx-auto w-full max-w-3xl">
+                <div className="rounded-[2rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_18px_44px_rgba(14,81,160,0.08)] sm:p-6">
+                  <div className="rounded-[1.6rem] border border-[#eef3f9] bg-white p-6 sm:p-8">
+                    <div className="text-center">
+                      <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0E51A0]">
                         talkingHEADS Registration
                       </p>
-                      <h2 className={`${rubik.className} mt-4 text-3xl font-semibold tracking-[-0.03em] text-white`}>
+                      <h2 className="mt-4 font-heading text-3xl font-normal tracking-[-0.03em] text-[#0E51A0]">
                         Konto für deine Organisation erstellen
                       </h2>
-                      <p className="mt-3 text-sm leading-7 text-[#dce8fb]">
+                      <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-[#707070]">
                         Fülle die Angaben aus und starte direkt mit einem Trainingssystem, das Verkaufsgespräche verbessert und Abschlusssicherheit aufbaut.
                       </p>
                     </div>
@@ -269,7 +289,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="organizationName"
-                          className="mb-2 block text-sm font-medium text-white"
+                          className="mb-2 block text-sm font-medium text-[#707070]"
                         >
                           Organisation
                         </label>
@@ -294,7 +314,7 @@ function RegisterPageContent() {
                         <div>
                           <label
                             htmlFor="firstName"
-                            className="mb-2 block text-sm font-medium text-white"
+                            className="mb-2 block text-sm font-medium text-[#707070]"
                           >
                             Vorname
                           </label>
@@ -318,7 +338,7 @@ function RegisterPageContent() {
                         <div>
                           <label
                             htmlFor="lastName"
-                            className="mb-2 block text-sm font-medium text-white"
+                            className="mb-2 block text-sm font-medium text-[#707070]"
                           >
                             Nachname
                           </label>
@@ -343,7 +363,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="username"
-                          className="mb-2 block text-sm font-medium text-white"
+                          className="mb-2 block text-sm font-medium text-[#707070]"
                         >
                           Username
                         </label>
@@ -367,7 +387,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="email"
-                          className="mb-2 block text-sm font-medium text-white"
+                          className="mb-2 block text-sm font-medium text-[#707070]"
                         >
                           E-Mail
                         </label>
@@ -391,7 +411,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="password"
-                          className="mb-2 block text-sm font-medium text-white"
+                          className="mb-2 block text-sm font-medium text-[#707070]"
                         >
                           Passwort
                         </label>
@@ -415,7 +435,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="industryKey"
-                          className="mb-2 block text-sm font-medium text-white"
+                          className="mb-2 block text-sm font-medium text-[#707070]"
                         >
                           Branche
                         </label>
@@ -449,7 +469,7 @@ function RegisterPageContent() {
                         <div>
                           <label
                             htmlFor="franchiseVertical"
-                            className="mb-2 block text-sm font-medium text-white"
+                            className="mb-2 block text-sm font-medium text-[#707070]"
                           >
                             Franchise-Segment
                           </label>
@@ -481,7 +501,7 @@ function RegisterPageContent() {
                       <div>
                         <label
                           htmlFor="licensePlan"
-                          className="mb-2 block text-sm font-medium text-white"
+                          className="mb-2 block text-sm font-medium text-[#707070]"
                         >
                           Lizenzplan
                         </label>
@@ -510,18 +530,18 @@ function RegisterPageContent() {
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35),inset_0_1px_0_rgba(255,255,255,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(234,148,19,0.45),inset_0_1px_0_rgba(255,255,255,0.4)] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[#EA9413] px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_22px_rgba(15,23,42,0.10)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(15,23,42,0.14)] disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {isLoading ? "Konto wird erstellt..." : "Jetzt Organisation anlegen"}
                       </button>
                     </form>
 
-                    <div className="mt-6 flex flex-col gap-3 border-t border-white/20 pt-6 text-sm text-[#dce8fb] sm:flex-row sm:items-center sm:justify-between">
-                      <Link className="transition hover:text-white" href="/">
+                    <div className="mt-6 flex flex-col gap-3 border-t border-[#eef3f9] pt-6 text-sm text-[#707070] sm:flex-row sm:items-center sm:justify-between">
+                      <Link className="transition hover:text-[#0e51a0]" href="/landing">
                         Zur Startseite
                       </Link>
                       <Link
-                        className="font-medium text-white transition hover:text-[#dce8fb]"
+                        className="font-medium text-[#0e51a0] transition hover:text-[#EA9413]"
                         href="/login"
                       >
                         Bereits registriert? Hier einloggen
@@ -533,7 +553,7 @@ function RegisterPageContent() {
             </div>
           </section>
         </div>
-      </div>
+      <SiteFooter />
     </main>
   );
 }
