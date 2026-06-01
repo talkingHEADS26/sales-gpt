@@ -456,7 +456,7 @@ export default function LandingPage() {
         <div className="landing-container footer-grid">
           <div>
             <Link href="#top" className="brand brand--footer" aria-label="talkingHEADS Startseite">
-              <SiteLogo className="brand__logo brand__logo--footer" />
+              <SiteLogo variant="white" className="brand__logo brand__logo--footer" />
             </Link>
             <p className="footer-description">
               KI-gestütztes Sales Training für Teams, die schneller lernen, sauberer abschließen und messbar wachsen

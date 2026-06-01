@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const LOGO_SRC = "/TH_Logo.png";
+const LOGO_WHITE_SRC = "/TH_Logo_white.png";
 
 type SiteBrandProps = {
   href: string;
@@ -13,12 +14,13 @@ type SiteBrandProps = {
 type SiteLogoProps = {
   className?: string;
   priority?: boolean;
+  variant?: "default" | "white";
 };
 
-export function SiteLogo({ className, priority = false }: SiteLogoProps) {
+export function SiteLogo({ className, priority = false, variant = "default" }: SiteLogoProps) {
   return (
     <Image
-      src={LOGO_SRC}
+      src={variant === "white" ? LOGO_WHITE_SRC : LOGO_SRC}
       alt="talkingHEADS Logo"
       width={320}
       height={152}
