@@ -238,7 +238,7 @@ function RegisterPageContent() {
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <section className="w-full">
           <div className="mx-auto grid w-full gap-10">
-            <div className="relative mx-auto w-full max-w-3xl">
+            <div className="register-form-card relative mx-auto w-full max-w-3xl">
                 <div className="rounded-[2rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_18px_44px_rgba(14,81,160,0.08)] sm:p-6">
                   <div className="rounded-[1.6rem] border border-[#eef3f9] bg-white p-6 sm:p-8">
                     <div className="text-center">

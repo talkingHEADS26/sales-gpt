@@ -513,6 +513,11 @@ img {
   -webkit-backdrop-filter: blur(12px);
 }
 
+.register-hero h1,
+.register-form-card h2 {
+  font-weight: 400;
+}
+
 .problem-section,
 .testimonial-section {
   background: var(--th-white);
