@@ -52,7 +52,36 @@ img {
 }
 
 .landingPage {
+  --landing-heading-weight: 400;
   overflow-x: clip;
+}
+
+.landingPage :is(
+  h1,
+  h2,
+  h3,
+  .heading,
+  .eyebrow,
+  .hero-label,
+  .hero-headline,
+  .hero-subline,
+  .hero-checklist li,
+  .card-title,
+  .feature-card__title,
+  .step-card__number,
+  .step-card__title,
+  .testimonial-name,
+  .cta-heading,
+  .cta-subline,
+  .pricing-card__eyebrow,
+  .pricing-card__name,
+  .pricing-card__badge,
+  .pricing-card__price,
+  .pricing-card__seats,
+  .footer-heading,
+  .footer-social
+) {
+  font-weight: var(--landing-heading-weight);
 }
 
 .landing-container {

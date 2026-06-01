@@ -7,7 +7,7 @@ import { ConsentProvider } from "@/components/consent-provider";
 
 const rubik = Rubik({
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-rubik",
 });
 
