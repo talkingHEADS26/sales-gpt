@@ -3,15 +3,10 @@
 import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Plus_Jakarta_Sans } from "next/font/google";
 
-import { SiteBrand } from "@/components/site-brand";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteLogo } from "@/components/site-brand";
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  display: "swap",
-});
 
 type LoginUiError = {
   title: string;
@@ -463,67 +458,84 @@ export function LoginForm({
   };
 
   return (
-    <main
-      className={`${plusJakartaSans.className} min-h-screen overflow-hidden bg-white text-[#707070]`}
-    >
-      <div className="relative isolate min-h-screen">
-        <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-5 sm:px-6 lg:px-8">
-          <header className="flex items-center justify-between gap-3 rounded-[1.25rem] border border-[#dbe7f8] bg-white px-4 py-3 shadow-[0_12px_30px_rgba(14,81,160,0.10)] md:px-6">
-            <SiteBrand href="/" />
-            <div className="flex min-w-0 items-center justify-end gap-2 sm:gap-3">
-              <Link
-                href="/"
-                className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full px-3 text-sm font-medium text-[#707070] transition hover:bg-slate-100 hover:text-[#707070] sm:min-h-11 sm:px-4"
-              >
+    <main className="min-h-screen bg-white text-[#707070]">
+      <header className="site-header">
+        <div className="landing-container site-header__inner">
+          <Link href="/landing" className="brand" aria-label="talkingHEADS Startseite">
+            <SiteLogo priority className="brand__logo" />
+          </Link>
+
+          <nav className="site-nav" aria-label="Hauptnavigation">
+            <Link href="/landing#top" className="site-nav__link">
+              Startseite
+            </Link>
+            <Link href="/landing#loesungen" className="site-nav__link">
+              Vorteile
+            </Link>
+            <Link href="/landing#branchen" className="site-nav__link">
+              Für wen
+            </Link>
+            <Link href="/landing#preise" className="site-nav__link">
+              Preise
+            </Link>
+          </nav>
+
+          <Link className="btn btn-primary site-header__cta" href="/register">
+            Registrieren
+          </Link>
+
+          <details className="mobile-nav">
+            <summary className="mobile-nav__toggle" aria-label="Navigation öffnen">
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+            </summary>
+            <nav className="mobile-nav__panel" aria-label="Mobile Hauptnavigation">
+              <Link href="/landing#top" className="mobile-nav__link">
                 Startseite
               </Link>
+              <Link href="/landing#loesungen" className="mobile-nav__link">
+                Vorteile
+              </Link>
+              <Link href="/landing#branchen" className="mobile-nav__link">
+                Für wen
+              </Link>
+              <Link href="/landing#preise" className="mobile-nav__link">
+                Preise
+              </Link>
+              <Link href="/register" className="btn btn-primary mobile-nav__cta">
+                Registrieren
+              </Link>
+            </nav>
+          </details>
+        </div>
+      </header>
+
+      <section className="login-hero">
+        <div className="landing-container login-hero__inner">
+          <div className="login-hero__copy">
+            <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_8px_20px_rgba(15,23,42,0.04)]">
+              Dein Zugang zum Sales-Training
             </div>
-          </header>
+            <h1 className="mt-5 text-balance font-heading text-3xl font-normal tracking-[-0.03em] text-[#0E51A0] sm:text-4xl lg:text-5xl">
+              Willkommen zurück im Training.
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#707070] sm:text-lg sm:leading-8">
+              Melde dich an und knüpfe genau dort an, wo dein Team zuletzt trainiert hat: mit klaren Gesprächen, besserer Struktur und mehr Abschlusssicherheit.
+            </p>
+          </div>
 
-          <section className="flex flex-1 items-center py-8 sm:py-10 lg:py-12">
-            <div className="grid w-full gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.95fr)] lg:items-center">
-              <div className="max-w-2xl">
-                <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_10px_30px_rgba(14,81,160,0.08)] backdrop-blur">
-                  Dein Zugang zum Sales-Training
-                </div>
-                <h1 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-balance text-[#707070] sm:text-4xl lg:text-5xl">
-                  Willkommen zurück im Training.
-                </h1>
-                <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-                  Melde dich an und knüpfe genau dort an, wo dein Team zuletzt trainiert hat: mit klaren Gesprächen, besserer Struktur und mehr Abschlusssicherheit.
-                </p>
-
-                <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                  {[
-                    "Praxisnahe Verkaufssituationen",
-                    "Direkte Lernimpulse pro Session",
-                    "Fortschritt für Teams transparent",
-                  ].map((benefit) => (
-                    <div
-                      key={benefit}
-                      className="rounded-2xl border border-[#dce7f7] bg-white px-4 py-4 text-sm font-medium text-[#4b5565] shadow-[0_10px_24px_rgba(14,81,160,0.08)]"
-                    >
-                      <div className="mb-3 flex items-center gap-3">
-                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] shadow-[0_8px_18px_rgba(234,148,19,0.32)]" />
-                        <span className="h-1.5 w-9 rounded-full bg-[#0e51a0]/85" />
-                      </div>
-                      <p className="leading-6">{benefit}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="rounded-[2rem] border border-[#0b478b] bg-[#0E51A0] p-5 shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:p-6">
-                  <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8">
-                    <div className="text-center sm:text-left">
-                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#dce8fb]">
+          <div className="login-form-card relative">
+            <div className="rounded-[2rem] border border-white/50 bg-white/80 p-5 shadow-[0_18px_44px_rgba(14,81,160,0.12)] backdrop-blur-md sm:p-6">
+              <div className="rounded-[1.6rem] border border-white/70 bg-white/70 p-6 sm:p-8">
+                <div className="text-center sm:text-left">
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0E51A0]">
                         talkingHEADS Login
                       </p>
-                      <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white">
+                      <h2 className="mt-4 font-heading text-3xl font-normal tracking-[-0.03em] text-[#0E51A0]">
                         In dein Konto einloggen
                       </h2>
-                      <p className="mt-3 text-sm leading-7 text-[#dce8fb]">
+                      <p className="mt-3 text-sm leading-7 text-[#707070]">
                         Nutze deine Zugangsdaten und setze eure Trainingssessions ohne Umwege fort.
                       </p>
                     </div>
@@ -599,7 +611,7 @@ export function LoginForm({
                       <div>
                         <label
                           htmlFor="email"
-                          className="mb-2 block text-sm font-medium text-white"
+                          className="mb-2 block text-sm font-medium text-[#707070]"
                         >
                           E-Mail
                         </label>
@@ -620,7 +632,7 @@ export function LoginForm({
                       <div>
                         <label
                           htmlFor="password"
-                          className="mb-2 block text-sm font-medium text-white"
+                          className="mb-2 block text-sm font-medium text-[#707070]"
                         >
                           Passwort
                         </label>
@@ -726,18 +738,18 @@ export function LoginForm({
                         disabled={
                           isLoading || isConfirmingEmail || isResendingConfirmation
                         }
-                        className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35),inset_0_1px_0_rgba(255,255,255,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(234,148,19,0.45),inset_0_1px_0_rgba(255,255,255,0.4)] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[#EA9413] px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_22px_rgba(15,23,42,0.10)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(15,23,42,0.14)] disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {isLoading ? "Logge ein..." : "Einloggen"}
                       </button>
                     </form>
 
-                    <div className="mt-6 flex flex-col gap-3 border-t border-slate-100 pt-6 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
-                      <Link className="text-[#dce8fb] transition hover:text-white" href="/">
+                    <div className="mt-6 flex flex-col gap-3 border-t border-[#eef3f9] pt-6 text-sm text-[#707070] sm:flex-row sm:items-center sm:justify-between">
+                      <Link className="transition hover:text-[#0e51a0]" href="/landing">
                         Zur Startseite
                       </Link>
                       <Link
-                        className="font-medium text-white transition hover:text-[#dce8fb]"
+                        className="font-medium text-[#0e51a0] transition hover:text-[#EA9413]"
                         href="/register"
                       >
                         Noch kein Konto? Hier registrieren
@@ -746,10 +758,9 @@ export function LoginForm({
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
         </div>
-      </div>
+      </section>
+      <SiteFooter />
     </main>
   );
 }
