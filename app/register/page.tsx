@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, Suspense, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -212,35 +213,20 @@ function RegisterPageContent() {
 
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <section className="w-full">
-          <div className="mx-auto grid w-full max-w-4xl gap-8">
-            <div className="mx-auto max-w-3xl text-center">
-              <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_8px_20px_rgba(15,23,42,0.04)]">
+          <div className="mx-auto grid w-full gap-10">
+            <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
+              <div className="max-w-2xl text-center lg:text-left">
+                <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_8px_20px_rgba(15,23,42,0.04)]">
                   Sales-Training für planbare Abschlüsse
                 </div>
                 <h1 className="mt-5 text-balance font-heading text-3xl font-normal tracking-[-0.03em] text-[#0E51A0] sm:text-4xl lg:text-5xl">
                   Mach dein Team im Verkauf sicher, strukturiert und überzeugend.
                 </h1>
-                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#707070] sm:text-lg sm:leading-8">
+                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#707070] sm:text-lg sm:leading-8 lg:mx-0">
                   Erstelle in wenigen Minuten eure Organisation und starte mit KI-gestützten Gesprächssimulationen, klarem Feedback und messbarer Entwicklung im Vertrieb.
                 </p>
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                  {[
-                    "Trainieren wie im echten Kundentermin",
-                    "Feedback sofort nach jedem Gespräch",
-                    "Fortschritt im Team sichtbar machen",
-                  ].map((benefit) => (
-                    <div
-                      key={benefit}
-                      className="rounded-2xl border border-[#0e51a0]/10 bg-white px-4 py-4 text-sm font-medium text-[#707070] shadow-[0_10px_26px_rgba(14,81,160,0.06)]"
-                    >
-                      <span className="mx-auto mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#EA9413]" />
-                      {benefit}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mx-auto mt-6 max-w-2xl rounded-[1.25rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_10px_24px_rgba(14,81,160,0.06)]">
+                <div className="mx-auto mt-6 max-w-2xl rounded-[1.25rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_10px_24px_rgba(14,81,160,0.06)] lg:mx-0">
                   <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0E51A0]">
                     Für ambitionierte Vertriebsteams
                   </p>
@@ -250,7 +236,19 @@ function RegisterPageContent() {
                 </div>
               </div>
 
-              <div className="relative mx-auto w-full max-w-3xl">
+              <div className="mx-auto w-full max-w-2xl overflow-hidden rounded-[2rem] border border-[#dbe7f8] bg-white p-3 shadow-[0_18px_44px_rgba(14,81,160,0.08)]">
+                <Image
+                  src="/rocket-table.png"
+                  alt="talkingHEADS Sales Training am Tisch"
+                  width={4000}
+                  height={2250}
+                  priority
+                  className="h-auto w-full rounded-[1.5rem] object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="relative mx-auto w-full max-w-3xl">
                 <div className="rounded-[2rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_18px_44px_rgba(14,81,160,0.08)] sm:p-6">
                   <div className="rounded-[1.6rem] border border-[#eef3f9] bg-white p-6 sm:p-8">
                     <div className="text-center">
