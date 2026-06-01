@@ -526,7 +526,7 @@ img {
   overflow: hidden;
   background:
     linear-gradient(90deg, rgba(7, 47, 107, 0.84) 0%, rgba(14, 81, 160, 0.58) 42%, rgba(7, 47, 107, 0.12) 100%),
-    url("/boarding-pass.png");
+    url("/TH_Login.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -544,13 +544,6 @@ img {
 
 .login-hero__copy {
   width: min(100%, 640px);
-  padding: clamp(28px, 3.2vw, 40px);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 18px 44px rgba(7, 47, 107, 0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .login-hero h1,
@@ -1105,7 +1098,7 @@ img {
     padding: var(--section-pad-mobile);
     background:
       linear-gradient(180deg, rgba(7, 47, 107, 0.78) 0%, rgba(14, 81, 160, 0.44) 100%),
-      url("/boarding-pass.png");
+      url("/TH_Login.png");
     background-position: center;
     background-size: cover;
   }

@@ -514,20 +514,20 @@ export function LoginForm({
       <section className="login-hero">
         <div className="landing-container login-hero__inner">
           <div className="login-hero__copy">
-            <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_8px_20px_rgba(15,23,42,0.04)]">
+            <div className="inline-flex items-center rounded-full border border-white/40 bg-white/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-white">
               Dein Zugang zum Sales-Training
             </div>
-            <h1 className="mt-5 text-balance font-heading text-3xl font-normal tracking-[-0.03em] text-[#0E51A0] sm:text-4xl lg:text-5xl">
+            <h1 className="mt-5 text-balance font-heading text-3xl font-normal tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
               Willkommen zurück im Training.
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-7 text-[#707070] sm:text-lg sm:leading-8">
+            <p className="mt-5 max-w-xl text-base leading-7 text-white/90 sm:text-lg sm:leading-8">
               Melde dich an und knüpfe genau dort an, wo dein Team zuletzt trainiert hat: mit klaren Gesprächen, besserer Struktur und mehr Abschlusssicherheit.
             </p>
           </div>
 
           <div className="login-form-card relative">
             <div className="rounded-[2rem] border border-white/50 bg-white/80 p-5 shadow-[0_18px_44px_rgba(14,81,160,0.12)] backdrop-blur-md sm:p-6">
-              <div className="rounded-[1.6rem] border border-white/70 bg-white/70 p-6 sm:p-8">
+              <div className="p-6 sm:p-8">
                 <div className="text-center sm:text-left">
                   <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0E51A0]">
                         talkingHEADS Login
