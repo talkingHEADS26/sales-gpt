@@ -14,10 +14,8 @@ type Profile = {
 };
 
 type OrganizationMembership = {
-  role_in_org: string;
   organizations: {
     organization_name: string | null;
-    seat_limit: number | null;
   } | null;
 };
 
@@ -37,8 +35,6 @@ export default function DashboardPage() {
   const [userId, setUserId] = useState("");
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [organizationName, setOrganizationName] = useState<string | null>(null);
-  const [seatLimit, setSeatLimit] = useState<number | null>(null);
-  const [userRoleInOrg, setUserRoleInOrg] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -121,7 +117,7 @@ export default function DashboardPage() {
 
         const { data: membership, error: membershipError } = await supabase
           .from("organization_members")
-          .select("role_in_org, organizations!inner(organization_name, seat_limit)")
+          .select("organizations!inner(organization_name)")
           .eq("user_id", user.id)
           .limit(1)
           .maybeSingle<OrganizationMembership>();
@@ -141,8 +137,6 @@ export default function DashboardPage() {
           setOrganizationName(
             membership?.organizations?.organization_name?.trim() || null
           );
-          setSeatLimit(membership?.organizations?.seat_limit ?? null);
-          setUserRoleInOrg(membership?.role_in_org ?? null);
           setError("");
           setIsLoading(false);
         }
@@ -168,57 +162,41 @@ export default function DashboardPage() {
 
   return (
     <InternalAppShell>
-      <div className={`${roboto.className} bg-white`}>
-          <section className="flex flex-1 items-center py-8 sm:py-10 lg:py-12">
-            <div className="w-full rounded-[2rem] border border-[#0b478b] bg-[#0E51A0] p-5 shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:p-6 lg:p-8">
-              <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8 lg:p-10">
-                <div className="flex flex-col gap-5">
-                  <div className="max-w-3xl">
-                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#dce8fb]">
-                      talkingHEADS Sales Trainer Dashboard
-                    </p>
-                    <h1 className={`${rubik.className} mt-3 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl`}>
-                      {displayName
-                        ? `Willkommen zurück, ${displayName}`
-                        : "Willkommen zurück"}
-                    </h1>
-                    {organizationName ? (
-                      <p className="mt-3 text-sm font-medium tracking-[0.08em] text-[#dce8fb] uppercase">
-                        {organizationName}
-                      </p>
-                    ) : null}
-                    {seatLimit !== null && seatLimit > 1 && userRoleInOrg === "admin" ? (
-                      <div className="mt-4">
-                        <a
-                          href="/organization"
-                          className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-white/25"
-                        >
-                          Team verwalten ({seatLimit} Plätze)
-                        </a>
-                      </div>
-                    ) : null}
-                    <p className="mt-4 max-w-2xl text-base leading-7 text-[#dce8fb] sm:text-lg sm:leading-8">
-                      Starte direkt in dein nächstes Sales-Training und arbeite fokussiert an besseren Gesprächen, klarerer Wirkung und stärkeren Abschlüssen.
-                    </p>
-                  </div>
-                </div>
-
-                {isLoading ? (
-                  <p className="mt-8 text-base leading-7 text-[#dce8fb]">
-                    Dashboard wird geladen...
-                  </p>
-                ) : null}
-
-                {!isLoading && error ? (
-                  <p className="mt-8 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                    {error}
-                  </p>
-                ) : null}
-
-                {!isLoading && !error ? <StartSessionActions userId={userId} /> : null}
-              </div>
+      <div className={roboto.className}>
+        <section className="py-8 sm:py-10 lg:py-12">
+          <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)] sm:p-6 lg:p-8">
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0e51a0]">
+                talkingHEADS Sales Trainer Dashboard
+              </p>
+              <h1 className={`${rubik.className} mt-3 text-3xl font-semibold tracking-[-0.03em] text-[#0E51A0] sm:text-4xl`}>
+                {displayName ? `Willkommen zurück, ${displayName}` : "Willkommen zurück"}
+              </h1>
+              {organizationName ? (
+                <p className="mt-3 text-sm font-medium uppercase tracking-[0.08em] text-[#707070]">
+                  {organizationName}
+                </p>
+              ) : null}
+              <p className="mt-4 max-w-2xl text-base leading-7 text-[#707070] sm:text-lg sm:leading-8">
+                Starte direkt in dein nächstes Sales-Training und arbeite fokussiert an besseren Gesprächen, klarerer Wirkung und stärkeren Abschlüssen.
+              </p>
             </div>
-          </section>
+
+            {isLoading ? (
+              <p className="mt-8 text-base leading-7 text-[#707070]">
+                Dashboard wird geladen...
+              </p>
+            ) : null}
+
+            {!isLoading && error ? (
+              <p className="mt-8 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                {error}
+              </p>
+            ) : null}
+
+            {!isLoading && !error ? <StartSessionActions userId={userId} /> : null}
+          </div>
+        </section>
       </div>
     </InternalAppShell>
   );

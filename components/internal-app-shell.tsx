@@ -5,6 +5,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { SiteBrand } from "@/components/site-brand";
+import { SiteFooter } from "@/components/site-footer";
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
 
 type InternalAppShellProps = {
@@ -198,77 +199,83 @@ export function InternalAppShell({
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7fbff_0%,#ffffff_45%,#f4f9ff_100%)] text-[#707070]">
-      <div className="relative isolate min-h-screen">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[34rem] bg-[linear-gradient(135deg,rgba(14,81,160,0.18),rgba(14,81,160,0.03)_46%,rgba(255,255,255,0)_72%)]" />
-        <div className="absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-[#0e51a0]/12 blur-3xl" />
+    <main className="min-h-screen bg-white text-[#707070]">
+      <div className={getContainerClassName(containerClassName)}>
+        <header className="site-header">
+          <div className="landing-container site-header__inner">
+            <SiteBrand href="/dashboard" />
 
-        <div className={getContainerClassName(containerClassName)}>
-          <header className="flex flex-col gap-4 rounded-[1.5rem] border border-[#dbe7f8] bg-white px-4 py-4 shadow-[0_12px_30px_rgba(14,81,160,0.10)] sm:px-5 lg:flex-row lg:items-center lg:justify-between lg:px-6">
-            <div className="flex items-center justify-between gap-4">
-              <SiteBrand href="/dashboard" />
-              <button
-                type="button"
-                onClick={handleLogout}
-                disabled={isSigningOut}
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-200 bg-white/90 px-4 text-sm font-medium text-[#707070] shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition hover:border-[#0e51a0]/30 hover:text-[#0e51a0] disabled:cursor-not-allowed disabled:opacity-60 lg:hidden"
+            <nav className="site-nav" aria-label="Hauptnavigation">
+              <Link
+                href="/dashboard"
+                className={`site-nav__link ${isActivePath(pathname, "/dashboard") ? "text-[#0e51a0]" : ""}`}
               >
-                {isSigningOut ? "Logge aus..." : "Logout"}
-              </button>
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between lg:flex-1 lg:justify-end">
-              <nav className="flex flex-wrap gap-2">
+                Dashboard
+              </Link>
+              {!isNavLoading && canAccessAdmin ? (
                 <Link
-                  href="/dashboard"
-                  className={`inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-medium transition ${
-                    isActivePath(pathname, "/dashboard")
-                      ? "bg-[#0e51a0] text-white shadow-[0_16px_36px_rgba(14,81,160,0.22)]"
-                      : "border border-slate-200 bg-white/90 text-[#707070] shadow-[0_12px_30px_rgba(15,23,42,0.06)] hover:border-[#0e51a0]/30 hover:text-[#0e51a0]"
-                  }`}
+                  href="/admin"
+                  className={`site-nav__link ${isActivePath(pathname, "/admin") ? "text-[#0e51a0]" : ""}`}
                 >
+                  Admin
+                </Link>
+              ) : null}
+              {!isNavLoading && canManageOrganization ? (
+                <Link
+                  href="/organization"
+                  className={`site-nav__link ${isActivePath(pathname, "/organization") ? "text-[#0e51a0]" : ""}`}
+                >
+                  Team verwalten
+                </Link>
+              ) : null}
+            </nav>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              disabled={isSigningOut}
+              className="site-header__cta inline-flex items-center justify-center border border-slate-200 bg-white px-5 text-sm font-medium text-[#707070] shadow-[0_8px_18px_rgba(15,23,42,0.08)] transition hover:border-[#0e51a0]/25 hover:text-[#0e51a0] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isSigningOut ? "Logge aus..." : "Logout"}
+            </button>
+
+            <details className="mobile-nav">
+              <summary className="mobile-nav__toggle" aria-label="Navigation öffnen">
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+              </summary>
+              <nav className="mobile-nav__panel" aria-label="Mobile Hauptnavigation">
+                <Link href="/dashboard" className="mobile-nav__link">
                   Dashboard
                 </Link>
                 {!isNavLoading && canAccessAdmin ? (
-                  <Link
-                    href="/admin"
-                    className={`inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-medium transition ${
-                      isActivePath(pathname, "/admin")
-                        ? "bg-[#0e51a0] text-white shadow-[0_16px_36px_rgba(14,81,160,0.22)]"
-                        : "border border-slate-200 bg-white/90 text-[#707070] shadow-[0_12px_30px_rgba(15,23,42,0.06)] hover:border-[#0e51a0]/30 hover:text-[#0e51a0]"
-                    }`}
-                  >
+                  <Link href="/admin" className="mobile-nav__link">
                     Admin
                   </Link>
                 ) : null}
                 {!isNavLoading && canManageOrganization ? (
-                  <Link
-                    href="/organization"
-                    className={`inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-medium transition ${
-                      isActivePath(pathname, "/organization")
-                        ? "bg-[#0e51a0] text-white shadow-[0_16px_36px_rgba(14,81,160,0.22)]"
-                        : "border border-slate-200 bg-white/90 text-[#707070] shadow-[0_12px_30px_rgba(15,23,42,0.06)] hover:border-[#0e51a0]/30 hover:text-[#0e51a0]"
-                    }`}
-                  >
+                  <Link href="/organization" className="mobile-nav__link">
                     Team verwalten
                   </Link>
                 ) : null}
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  disabled={isSigningOut}
+                  className="btn btn-primary mobile-nav__cta"
+                >
+                  {isSigningOut ? "Logge aus..." : "Logout"}
+                </button>
               </nav>
+            </details>
+          </div>
+        </header>
 
-              <button
-                type="button"
-                onClick={handleLogout}
-                disabled={isSigningOut}
-                className="hidden min-h-11 items-center justify-center rounded-full border border-slate-200 bg-white/90 px-5 text-sm font-medium text-[#707070] shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition hover:border-[#0e51a0]/30 hover:text-[#0e51a0] disabled:cursor-not-allowed disabled:opacity-60 lg:inline-flex"
-              >
-                {isSigningOut ? "Logge aus..." : "Logout"}
-              </button>
-            </div>
-          </header>
-
-          {children}
-        </div>
+        {children}
       </div>
+
+      <SiteFooter />
     </main>
   );
 }
