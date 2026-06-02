@@ -41,7 +41,7 @@ export function SiteBrand({
       className={`inline-flex items-center transition ${className ?? ""}`}
       aria-label="talkingHEADS Sales Trainer"
     >
-      <SiteLogo className={`h-10 w-auto max-w-[220px] object-contain ${markClassName ?? ""}`} />
+      <SiteLogo className={`h-12 w-auto max-w-[280px] object-contain ${markClassName ?? ""}`} />
     </Link>
   );
 }
