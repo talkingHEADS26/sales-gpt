@@ -137,8 +137,8 @@ img {
 }
 
 .site-header .brand__logo {
-  height: clamp(50px, 5.4vw, 65px);
-  max-width: min(360px, 62vw);
+  height: clamp(64px, 7vw, 84px);
+  max-width: min(468px, 68vw);
 }
 
 .site-nav {
@@ -1163,7 +1163,7 @@ img {
   }
 
   .site-header .brand__logo {
-    height: 50px;
+    height: 64px;
   }
 
   .pricing-subheading {
