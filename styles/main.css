@@ -104,8 +104,14 @@ img {
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
 }
 
+.site-header .landing-container {
+  width: 100%;
+  max-width: none;
+  padding-inline: clamp(16px, 2.5vw, 32px);
+}
+
 .site-header__inner {
-  min-height: 76px;
+  min-height: 84px;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -131,8 +137,8 @@ img {
 }
 
 .site-header .brand__logo {
-  height: clamp(42px, 4.5vw, 54px);
-  max-width: min(300px, 54vw);
+  height: clamp(50px, 5.4vw, 65px);
+  max-width: min(360px, 62vw);
 }
 
 .site-nav {
@@ -1157,7 +1163,7 @@ img {
   }
 
   .site-header .brand__logo {
-    height: 42px;
+    height: 50px;
   }
 
   .pricing-subheading {
