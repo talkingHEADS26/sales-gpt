@@ -307,9 +307,6 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
         <h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl">
           Wähle, wie du heute trainieren willst.
         </h2>
-        <p className="mt-3 text-sm leading-7 text-[#dce8fb] sm:text-base">
-          Starte direkt in das Format, das zu deinem aktuellen Gesprächsziel passt.
-        </p>
       </div>
 
       <div className="mt-6 rounded-[1.5rem] border border-white/20 bg-[#0b478b] px-5 py-4 shadow-[0_16px_40px_rgba(15,23,42,0.12)]">
