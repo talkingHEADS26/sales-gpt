@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 type CookieBannerProps = {
   onAcceptAll: () => void;
   onAcceptNecessary: () => void;
@@ -28,14 +26,6 @@ export function CookieBanner({
               <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
                 Notwendige Cookies sichern den Betrieb von talkingHEADS Sales Trainer. Statistik-
                 und Marketing-Cookies aktivieren wir erst nach Ihrer Auswahl.
-                Weitere Informationen finden Sie im{" "}
-                <Link
-                  className="font-medium text-[#0e51a0] transition hover:text-[#0b478b] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0e51a0]/12"
-                  href="/datenschutz"
-                >
-                  Datenschutz
-                </Link>
-                .
               </p>
             </div>
 

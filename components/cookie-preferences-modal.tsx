@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import type {
   ConsentPreferences,
   ConsentCategory,
@@ -104,14 +102,6 @@ export function CookiePreferencesModal({
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">
                 Optionale Kategorien bleiben deaktiviert, bis Sie aktiv zustimmen.
-                Details finden Sie in unserem{" "}
-                <Link
-                  className="font-medium text-[#0e51a0] transition hover:text-[#0b478b] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0e51a0]/12"
-                  href="/datenschutz"
-                >
-                  Datenschutz
-                </Link>
-                .
               </p>
             </div>
             {isEditable ? (

@@ -92,7 +92,7 @@ const faqSections: readonly FaqSectionData[] = [
       {
         question: "Werden meine Gespräche gespeichert?",
         answer:
-          "Ja, Gespräche werden gespeichert, soweit das für Session-Fortsetzung, Auswertung und Trainingshistorie erforderlich ist. Dadurch kannst du Fortschritt nachvollziehen und Sessions später wieder öffnen. Die Speicherung dient dem Produktbetrieb und der Trainingsauswertung. Details zur Datenverarbeitung findest du zusätzlich in der Datenschutzerklärung.",
+          "Ja, Gespräche werden gespeichert, soweit das für Session-Fortsetzung, Auswertung und Trainingshistorie erforderlich ist. Dadurch kannst du Fortschritt nachvollziehen und Sessions später wieder öffnen. Die Speicherung dient dem Produktbetrieb und der Trainingsauswertung.",
       },
       {
         question: "Wie werden meine Fortschritte gemessen?",
@@ -166,7 +166,7 @@ const faqSections: readonly FaqSectionData[] = [
       {
         question: "Wo werden die Daten gespeichert?",
         answer:
-          "Die Daten werden in der technischen Infrastruktur der Plattform gespeichert, damit Sessions, Organisationen und Auswertungen funktionieren. Welche Daten genau verarbeitet werden, richtet sich nach der Nutzung der Plattformfunktionen. Für rechtliche und organisatorische Details ist die Datenschutzerklärung die verbindliche Referenz. Die FAQ erklärt hier nur die Produktperspektive.",
+          "Die Daten werden in der technischen Infrastruktur der Plattform gespeichert, damit Sessions, Organisationen und Auswertungen funktionieren. Welche Daten genau verarbeitet werden, richtet sich nach der Nutzung der Plattformfunktionen. Die FAQ erklärt hier nur die Produktperspektive.",
       },
       {
         question: "Funktioniert das auch auf dem Handy?",
@@ -189,7 +189,7 @@ const faqSections: readonly FaqSectionData[] = [
       {
         question: "Kann ich jederzeit kündigen?",
         answer:
-          "Das hängt vom gewählten Tarif ab. Im Produkt sind unterschiedliche Vertragsmodelle vorgesehen, zum Beispiel monatliche Lösungen oder Tarife mit längerer Laufzeit. Maßgeblich sind die Bedingungen des gebuchten Plans. Für die verbindlichen Details gelten die AGB und Vertragsunterlagen.",
+          "Das hängt vom gewählten Tarif ab. Im Produkt sind unterschiedliche Vertragsmodelle vorgesehen, zum Beispiel monatliche Lösungen oder Tarife mit längerer Laufzeit. Maßgeblich sind die Bedingungen des gebuchten Plans und die jeweiligen Vertragsunterlagen.",
       },
       {
         question: "Gibt es Testzugang oder Demo?",

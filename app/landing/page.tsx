@@ -483,21 +483,6 @@ export default function LandingPage() {
           </div>
 
           <div>
-            <p className="footer-heading">INFORMATION</p>
-            <ul className="footer-links">
-              <li>
-                <Link href="/">DATENSCHUTZ</Link>
-              </li>
-              <li>
-                <Link href="/">IMPRESSUM</Link>
-              </li>
-              <li>
-                <Link href="/">AGB</Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
             <p className="footer-heading">KONTAKT</p>
             <address className="footer-contact">
               Geppert Consulting Group GmbH

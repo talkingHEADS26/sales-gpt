@@ -3,7 +3,6 @@
 import Link from "next/link";
 
 import { openCookiePreferences } from "@/lib/consent";
-import { legalNavigationLinks } from "@/lib/legal";
 
 export function SiteFooter() {
   return (
@@ -15,15 +14,6 @@ export function SiteFooter() {
             <Link href="/faq" className="transition hover:text-[#0e51a0]">
               FAQ
             </Link>
-            {legalNavigationLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="transition hover:text-[#0e51a0]"
-              >
-                {link.label}
-              </Link>
-            ))}
             <button
               type="button"
               onClick={openCookiePreferences}
