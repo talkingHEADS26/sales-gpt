@@ -255,7 +255,7 @@ function RegisterPageContent() {
 
                     <div className="mt-6 space-y-3">
                       {!hasSupabaseEnv ? (
-                        <p className="rounded-2xl border border-amber-200 bg-amber-50/95 px-4 py-3 text-sm text-amber-800">
+                        <p className="rounded-2xl border border-amber-200 bg-amber-50/95 px-4 py-3 text-sm text-[#707070]">
                           Die lokale Supabase-Konfiguration fehlt oder ist unvollständig.
                         </p>
                       ) : null}
@@ -529,7 +529,7 @@ function RegisterPageContent() {
                         Zur Startseite
                       </Link>
                       <Link
-                        className="font-medium text-[#0e51a0] transition hover:text-[#EA9413]"
+                        className="font-medium text-[#0e51a0] transition hover:text-[#707070]"
                         href="/login"
                       >
                         Bereits registriert? Hier einloggen
