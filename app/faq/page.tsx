@@ -228,7 +228,7 @@ export default function FaqPage() {
                   href="/register"
                   className="th-reference-cta"
                 >
-                  Jetzt starten
+                  Jetzt starten!
                 </Link>
                 <Link
                   href="/login"

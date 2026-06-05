@@ -33,7 +33,7 @@ function Header() {
           </a>
         </nav>
 
-        <OrangeButton href="/register">Jetzt starten</OrangeButton>
+        <OrangeButton href="/register">Jetzt starten!</OrangeButton>
       </div>
     </header>
   );
@@ -95,9 +95,9 @@ export default function LandingPage() {
               erfolgreicher abzuschließen.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <OrangeButton href="/register">Jetzt kostenlos testen</OrangeButton>
+              <OrangeButton href="/register">Jetzt kostenlos testen!</OrangeButton>
               <button className="th-reference-cta">
-                Demo ansehen
+                Demo ansehen!
               </button>
             </div>
           </motion.div>
@@ -150,7 +150,7 @@ export default function LandingPage() {
             Starte jetzt dein KI-Training und mach jeden Gesprächsabschluss zu deinem Vorteil.
           </p>
           <div className="mt-8">
-            <OrangeButton href="/register">Sales Trainer starten</OrangeButton>
+            <OrangeButton href="/register">Sales Trainer starten!</OrangeButton>
           </div>
         </div>
       </section>

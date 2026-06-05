@@ -273,7 +273,7 @@ function Header() {
         </nav>
 
         <Link className="btn btn-primary site-header__cta" href="#preise">
-          Jetzt starten
+          Jetzt starten!
         </Link>
 
         <details className="mobile-nav">
@@ -296,7 +296,7 @@ function Header() {
               Preise
             </a>
             <a href="#preise" className="btn btn-primary mobile-nav__cta">
-              Jetzt starten
+              Jetzt starten!
             </a>
           </nav>
         </details>
@@ -338,8 +338,8 @@ export default function LandingPage() {
             </ul>
 
             <div className="hero-buttons">
-              <PrimaryButton href="#preise">Jetzt durchstarten</PrimaryButton>
-              <GhostButton href="#loesungen">Erfahre mehr</GhostButton>
+              <PrimaryButton href="#preise">Jetzt durchstarten!</PrimaryButton>
+              <GhostButton href="#loesungen">Erfahre mehr!</GhostButton>
             </div>
           </div>
 
@@ -444,7 +444,7 @@ export default function LandingPage() {
                 <p className="pricing-card__text">{card.text}</p>
                 <p className="pricing-card__note">{card.note}</p>
                 <PricingButton href={card.href} featured={card.featured}>
-                  {card.button}
+                  {card.button}!
                 </PricingButton>
               </article>
             ))}

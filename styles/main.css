@@ -166,11 +166,11 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 29px;
-  padding: 8px 21px;
+  min-height: 32px;
+  padding: 9px 24px;
   border-radius: 999px;
   font-family: var(--th-font-heading);
-  font-size: 0.43rem;
+  font-size: 0.48rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -202,7 +202,7 @@ img {
 .btn-pricing--featured::before {
   content: "";
   position: absolute;
-  inset: 2px 11px auto 11px;
+  inset: 2px 12px auto 12px;
   height: 38%;
   border-radius: 999px;
   background: linear-gradient(180deg, rgba(255, 232, 157, 0.78) 0%, rgba(255, 205, 87, 0.42) 100%);
@@ -228,8 +228,8 @@ img {
 }
 
 .site-header__cta {
-  min-height: 29px;
-  padding: 8px 21px;
+  min-height: 32px;
+  padding: 9px 24px;
 }
 
 .site-header__cta:hover {
@@ -305,7 +305,7 @@ img {
 
 .mobile-nav__cta {
   margin-top: 6px;
-  min-height: 29px;
+  min-height: 32px;
 }
 
 .section-heading {

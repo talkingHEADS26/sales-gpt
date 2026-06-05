@@ -193,7 +193,7 @@ export function InviteAcceptForm({ token }: InviteAcceptFormProps) {
               href="/login"
               className="th-reference-cta min-h-14 px-7 py-3 text-sm"
             >
-              Zum Login
+              Zum Login!
             </Link>
           </header>
 
@@ -377,7 +377,7 @@ export function InviteAcceptForm({ token }: InviteAcceptFormProps) {
                 disabled={isSubmitting}
                 className="th-reference-cta w-full"
               >
-                {isSubmitting ? "Lege Konto an..." : "Einladung annehmen"}
+                {isSubmitting ? "Lege Konto an...!" : "Einladung annehmen!"}
               </button>
             </form>
                     </>

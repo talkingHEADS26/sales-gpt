@@ -364,7 +364,7 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
                   disabled={isInteractionDisabled || isMonthlyLimitReached}
                   className="th-reference-cta w-full max-w-[16rem] self-center px-6 py-3 text-sm leading-tight"
                 >
-                  {isPending ? loadingLabel : buttonLabel}
+                  {isPending ? `${loadingLabel}!` : `${buttonLabel}!`}
                 </button>
               </div>
             </article>

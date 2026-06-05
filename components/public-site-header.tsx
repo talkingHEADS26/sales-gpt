@@ -91,7 +91,7 @@ function MobileMenuOverlay({
               onClick={onClose}
               className="th-reference-cta mt-2 w-full px-5 py-3 text-sm"
             >
-              Kaufen
+              Kaufen!
             </a>
           </nav>
         </div>
@@ -166,7 +166,7 @@ export function PublicSiteHeader({
               href="#pricing"
               className="th-reference-cta min-h-14 px-7 py-3 text-sm"
             >
-              Kaufen
+              Kaufen!
             </a>
           </nav>
         </div>

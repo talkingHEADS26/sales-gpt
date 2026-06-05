@@ -264,7 +264,7 @@ export function InternalAppShell({
                 disabled={isSigningOut}
                 className="btn btn-primary mobile-nav__cta"
               >
-                {isSigningOut ? "Logge aus..." : "Logout"}
+                {isSigningOut ? "Logge aus...!" : "Logout!"}
               </button>
             </nav>
           </details>

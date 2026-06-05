@@ -230,7 +230,7 @@ export default function ResetPasswordPage() {
                 href="/login"
                 className="th-reference-cta min-h-14 px-7 py-3 text-sm"
               >
-                Zum Login
+                Zum Login!
               </Link>
             </div>
           </header>
@@ -330,7 +330,7 @@ export default function ResetPasswordPage() {
                           disabled={isLoading}
                           className="th-reference-cta w-full"
                         >
-                          {isLoading ? "Aktualisiere Passwort..." : "Passwort aktualisieren"}
+                          {isLoading ? "Aktualisiere Passwort...!" : "Passwort aktualisieren!"}
                         </button>
                       </form>
                     ) : null}

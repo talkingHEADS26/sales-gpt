@@ -481,7 +481,7 @@ export function LoginForm({
           </nav>
 
           <Link className="btn btn-primary site-header__cta" href="/register">
-            Registrieren
+            Registrieren!
           </Link>
 
           <details className="mobile-nav">
@@ -504,7 +504,7 @@ export function LoginForm({
                 Preise
               </Link>
               <Link href="/register" className="btn btn-primary mobile-nav__cta">
-                Registrieren
+                Registrieren!
               </Link>
             </nav>
           </details>
@@ -740,7 +740,7 @@ export function LoginForm({
                         }
                         className="th-reference-cta w-full"
                       >
-                        {isLoading ? "Logge ein..." : "Einloggen"}
+                        {isLoading ? "Logge ein...!" : "Einloggen!"}
                       </button>
                     </form>
 

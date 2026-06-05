@@ -770,7 +770,7 @@ export function OrganizationPageView() {
                         className="th-reference-cta min-h-14 px-7 py-3 text-sm"
                         href="/dashboard"
                       >
-                        Zurück zum Dashboard
+                        Zurück zum Dashboard!
                       </Link>
                     </div>
                   </div>
@@ -938,8 +938,8 @@ export function OrganizationPageView() {
                               className="th-reference-cta min-h-14 px-7 py-3 text-sm"
                             >
                               {isCreatingInvite
-                                ? "Erstelle Einladung..."
-                                : "Einladungslink senden"}
+                                ? "Erstelle Einladung...!"
+                                : "Einladungslink senden!"}
                             </button>
                           </div>
 

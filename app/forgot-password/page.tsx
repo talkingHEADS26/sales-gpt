@@ -108,7 +108,7 @@ export default function ForgotPasswordPage() {
                 href="/login"
                 className="th-reference-cta min-h-14 px-7 py-3 text-sm"
               >
-                Zurück zum Login
+                Zurück zum Login!
               </Link>
             </div>
           </header>
@@ -180,7 +180,7 @@ export default function ForgotPasswordPage() {
                         disabled={isLoading}
                         className="th-reference-cta w-full"
                       >
-                        {isLoading ? "Sende Link..." : "Reset-Link senden"}
+                        {isLoading ? "Sende Link...!" : "Reset-Link senden!"}
                       </button>
                     </form>
 

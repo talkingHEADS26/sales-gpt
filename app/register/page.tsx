@@ -180,7 +180,7 @@ function RegisterPageContent() {
           </nav>
 
           <Link className="btn btn-primary site-header__cta" href="/login">
-            Einloggen
+            Einloggen!
           </Link>
 
           <details className="mobile-nav">
@@ -203,7 +203,7 @@ function RegisterPageContent() {
                 Preise
               </Link>
               <Link href="/login" className="btn btn-primary mobile-nav__cta">
-                Einloggen
+                Einloggen!
               </Link>
             </nav>
           </details>
@@ -520,7 +520,7 @@ function RegisterPageContent() {
                         disabled={isLoading}
                         className="th-reference-cta w-full"
                       >
-                        {isLoading ? "Konto wird erstellt..." : "Jetzt Organisation anlegen"}
+                        {isLoading ? "Konto wird erstellt...!" : "Jetzt Organisation anlegen!"}
                       </button>
                     </form>
 

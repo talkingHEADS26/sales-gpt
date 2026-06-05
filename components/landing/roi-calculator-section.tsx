@@ -54,7 +54,7 @@ const ResultCard = memo(function ResultCard({
 const RoiDemoButton = memo(function RoiDemoButton() {
   return (
     <EnterpriseInquiryForm
-      buttonLabel="Demo buchen"
+      buttonLabel="Demo buchen!"
       inquiryType="demo"
       className="th-reference-cta"
     />

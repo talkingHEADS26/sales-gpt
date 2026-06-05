@@ -292,7 +292,7 @@ export function EnterpriseInquiryForm({
                       disabled={isSubmitting}
                       className="th-reference-cta w-full"
                     >
-                      {isSubmitting ? "Sende Anfrage..." : "Anfrage senden"}
+                      {isSubmitting ? "Sende Anfrage...!" : "Anfrage senden!"}
                     </button>
                   </form>
                 </div>
