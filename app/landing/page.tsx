@@ -137,7 +137,9 @@ const pricingCards = [
 ];
 
 export const metadata: Metadata = {
-  title: "Landing",
+  title: {
+    absolute: "talkingHEADS Sales Trainer",
+  },
   description: "talkingHEADS Landing Page für KI-gestütztes Sales Training.",
 };
 
@@ -419,7 +421,7 @@ export default function LandingPage() {
           <div className="cta-banner">
             <h2 className="cta-heading">READY FOR TAKE OFF?</h2>
             <p className="cta-subline">STARTE JETZT DEIN KOSTENLOSES STRATEGIEGESPRÄCH</p>
-            <GhostButton href="#top">JETZT KOSTENLOS BEWERBEN!</GhostButton>
+            <GhostButton href="#top">JETZT SALES PROFI WERDEN!</GhostButton>
           </div>
         </div>
       </section>
