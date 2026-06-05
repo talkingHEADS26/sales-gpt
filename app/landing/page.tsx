@@ -243,7 +243,7 @@ function LandingIcon({ name }: { name: string }) {
 
 function PricingButton({ href, children, featured = false }: { href: string; children: ReactNode; featured?: boolean }) {
   return (
-    <Link className={`btn btn-pricing ${featured ? "btn-pricing--featured" : ""}`} href={href}>
+    <Link className={`btn btn-pricing pricing-card__cta ${featured ? "btn-pricing--featured" : ""}`} href={href}>
       {children}
     </Link>
   );
@@ -431,7 +431,7 @@ export default function LandingPage() {
             Starte schlank oder trainiere dein Team mit einem klaren KI-System für bessere Sales-Gespräche, stärkere
             Abschlüsse und mehr Umsatz.
           </p>
-          <div className="grid-3 pricing-grid">
+          <div className="pricing-grid">
             {pricingCards.map((card) => (
               <article key={card.name} className={`pricing-card ${card.featured ? "pricing-card--featured" : ""}`}>
                 <p className="pricing-card__eyebrow">{card.eyebrow}</p>

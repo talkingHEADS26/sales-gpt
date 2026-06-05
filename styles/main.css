@@ -836,8 +836,10 @@ img {
 }
 
 .pricing-grid {
+  display: grid;
   align-items: stretch;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .pricing-card {
@@ -945,6 +947,12 @@ img {
 .pricing-card .btn {
   width: 100%;
   margin-top: auto;
+}
+
+.pricing-card__cta {
+  min-height: 48px;
+  padding-inline: 18px;
+  font-size: 0.82rem;
 }
 
 .site-footer {
@@ -1075,7 +1083,7 @@ img {
   }
 
   .pricing-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .site-nav {
@@ -1171,6 +1179,10 @@ img {
 
   .pricing-card {
     padding: 26px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
   }
 }
 
