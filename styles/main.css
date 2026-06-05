@@ -166,11 +166,11 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 32px;
-  padding: 9px 24px;
+  min-height: 44px;
+  padding: 12px 28px;
   border-radius: 999px;
   font-family: var(--th-font-heading);
-  font-size: 0.48rem;
+  font-size: 0.9rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -228,8 +228,8 @@ img {
 }
 
 .site-header__cta {
-  min-height: 32px;
-  padding: 9px 24px;
+  min-height: 40px;
+  padding: 10px 22px;
 }
 
 .site-header__cta:hover {
@@ -305,7 +305,8 @@ img {
 
 .mobile-nav__cta {
   margin-top: 6px;
-  min-height: 32px;
+  min-height: 44px;
+  padding: 12px 24px;
 }
 
 .section-heading {

@@ -42,7 +42,7 @@ h6 {
   position: relative;
   isolation: isolate;
   display: inline-flex;
-  min-height: 32px;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -50,10 +50,10 @@ h6 {
   border-radius: 999px;
   background:
     linear-gradient(180deg, rgba(255, 217, 113, 0.9) 0%, rgba(245, 169, 39, 0.98) 48%, #b97006 100%);
-  padding: 9px 24px;
+  padding: 12px 28px;
   color: #ffffff;
   font-family: var(--th-font-heading);
-  font-size: 0.48rem;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.02em;
   line-height: 1;
