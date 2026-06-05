@@ -1213,7 +1213,7 @@ export function AdminPageView() {
                     <h2 className="text-xl font-semibold text-[#707070]">
                       Kein Zugriff auf die Plattform-Verwaltung
                     </h2>
-                    <p className="mt-3 text-sm leading-7 text-[#707070]">
+                    <p className="mt-3 text-sm leading-7 text-amber-900/80">
                       {error || "Dieser Account ist nicht als globaler Admin freigeschaltet."}
                     </p>
                     <div className="mt-5 flex flex-col gap-3 sm:flex-row">
@@ -1269,7 +1269,7 @@ export function AdminPageView() {
                     <section className="rounded-[1.75rem] border border-[#f3d6cf] bg-[linear-gradient(180deg,rgba(255,248,246,0.98)_0%,rgba(255,243,240,0.95)_100%)] p-5 shadow-[0_18px_46px_rgba(194,83,58,0.08)]">
                       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                         <div className="max-w-3xl">
-                          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#707070]">
+                          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#c2533a]">
                             Master-Admin
                           </p>
                           <h2 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-[#707070]">
@@ -1291,7 +1291,7 @@ export function AdminPageView() {
                             isCleanupRunning ||
                             updatingKey !== null
                           }
-                          className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#e8b8ad] bg-white px-5 py-3 text-sm font-semibold text-[#707070] shadow-[0_14px_34px_rgba(194,83,58,0.1)] transition hover:bg-[#fff7f4] disabled:cursor-not-allowed disabled:opacity-60"
+                          className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#e8b8ad] bg-white px-5 py-3 text-sm font-semibold text-[#9a4333] shadow-[0_14px_34px_rgba(194,83,58,0.1)] transition hover:bg-[#fff7f4] disabled:cursor-not-allowed disabled:opacity-60"
                         >
                           {isCleanupPreviewLoading
                             ? "Prüfe Cleanup..."
@@ -1325,7 +1325,7 @@ export function AdminPageView() {
                                 className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${
                                   organization.isActive
                                     ? "bg-emerald-50 text-emerald-700"
-                                  : "bg-amber-50 text-[#707070]"
+                                    : "bg-amber-50 text-amber-700"
                                 }`}
                               >
                                 {getOrganizationStatusLabel(organization.isActive)}
@@ -1373,7 +1373,7 @@ export function AdminPageView() {
                               }
                               className={`inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-semibold transition ${
                                 organization.isActive
-                                  ? "border border-amber-200 bg-amber-50 text-[#707070] hover:bg-amber-100"
+                                  ? "border border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100"
                                   : "bg-[#0e51a0] text-white hover:bg-[#0b478b]"
                               } disabled:cursor-not-allowed disabled:opacity-60`}
                             >
@@ -1465,7 +1465,7 @@ export function AdminPageView() {
                               </div>
                             ) : null}
                             {organization.seatLimitSource !== "stored" ? (
-                              <p className="mt-4 text-sm leading-7 text-[#707070]">
+                              <p className="mt-4 text-sm leading-7 text-amber-700">
                                 Seat-Limit wird aktuell aus den verfügbaren Paketdaten abgeleitet.
                               </p>
                             ) : null}
@@ -1664,7 +1664,7 @@ export function AdminPageView() {
                                         className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ${
                                           member.isActive
                                             ? "bg-emerald-50 text-emerald-700"
-                                            : "bg-amber-50 text-[#707070]"
+                                            : "bg-amber-50 text-amber-700"
                                         }`}
                                       >
                                         {getUserStatusLabel(member.isActive)}
@@ -1726,7 +1726,7 @@ export function AdminPageView() {
                                       }
                                       className={`inline-flex min-h-11 items-center justify-center rounded-full px-5 text-sm font-semibold transition ${
                                         member.isActive
-                                          ? "border border-amber-200 bg-amber-50 text-[#707070] hover:bg-amber-100"
+                                          ? "border border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100"
                                           : "bg-[#0e51a0] text-white hover:bg-[#0b478b]"
                                       } disabled:cursor-not-allowed disabled:opacity-60`}
                                     >
@@ -1777,7 +1777,7 @@ export function AdminPageView() {
                       <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-7">
                         <div className="flex items-start justify-between gap-4">
                           <div>
-                            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#707070]">
+                            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#c2533a]">
                               Sicherheitsabfrage
                             </p>
                             <h2
@@ -1797,7 +1797,7 @@ export function AdminPageView() {
                             type="button"
                             onClick={handleCloseCleanupModal}
                             disabled={isCleanupPreviewLoading || isCleanupRunning}
-                            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-lg text-slate-500 shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition hover:border-[#c2533a]/25 hover:text-[#707070] disabled:cursor-not-allowed disabled:opacity-60"
+                            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white/90 text-lg text-slate-500 shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition hover:border-[#c2533a]/25 hover:text-[#c2533a] disabled:cursor-not-allowed disabled:opacity-60"
                             aria-label="Cleanup-Dialog schließen"
                           >
                             ×
@@ -1805,7 +1805,7 @@ export function AdminPageView() {
                         </div>
 
                         <div className="mt-6 rounded-[1.5rem] border border-[#f3d6cf] bg-[#fff8f6] p-4">
-                          <p className="text-sm font-medium text-[#707070]">
+                          <p className="text-sm font-medium text-[#8e3d31]">
                             Vorschau auf Basis des aktuellen Datenbestands
                           </p>
 

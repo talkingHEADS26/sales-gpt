@@ -542,7 +542,7 @@ export function LoginForm({
 
                     <div className="mt-6 space-y-3">
                       {!hasSupabaseEnv ? (
-                        <p className="rounded-2xl border border-amber-200 bg-amber-50/95 px-4 py-3 text-sm text-[#707070]">
+                        <p className="rounded-2xl border border-amber-200 bg-amber-50/95 px-4 py-3 text-sm text-amber-800">
                           Die lokale Supabase-Konfiguration fehlt oder ist unvollständig.
                         </p>
                       ) : null}
@@ -553,12 +553,12 @@ export function LoginForm({
                             Registrierung erfolgreich. Bitte bestätige zuerst deine E-Mail-Adresse über den Link in deinem Postfach.
                           </p>
                         ) : (
-                          <div className="rounded-2xl border border-amber-200 bg-amber-50/95 px-4 py-3 text-sm text-[#707070]">
+                          <div className="rounded-2xl border border-amber-200 bg-amber-50/95 px-4 py-3 text-sm text-amber-800">
                             <p>
                               Registrierung erfolgreich, aber der Bestätigungslink konnte nicht automatisch gesendet werden.
                             </p>
                             {confirmationMailError ? (
-                              <p className="mt-2 text-xs leading-6 text-[#707070]">
+                              <p className="mt-2 text-xs leading-6 text-amber-900">
                                 Technischer Hinweis: {confirmationMailError}
                               </p>
                             ) : null}
@@ -566,7 +566,7 @@ export function LoginForm({
                               type="button"
                               onClick={() => void handleResendConfirmation()}
                               disabled={isResendingConfirmation || !email.trim()}
-                              className="mt-3 inline-flex min-h-10 items-center justify-center rounded-full border border-amber-300 bg-white px-4 py-2 text-sm font-medium text-[#707070] transition hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-60"
+                              className="mt-3 inline-flex min-h-10 items-center justify-center rounded-full border border-amber-300 bg-white px-4 py-2 text-sm font-medium text-amber-800 transition hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-60"
                             >
                               {isResendingConfirmation
                                 ? "Sende erneut..."
@@ -680,9 +680,9 @@ export function LoginForm({
                         <div
                           role="alert"
                           aria-live="polite"
-                        className="flex items-start gap-3 rounded-[1.35rem] border border-[#efc7c1] bg-[linear-gradient(180deg,rgba(255,247,245,0.98)_0%,rgba(255,241,238,0.95)_100%)] px-4 py-3.5 text-[#707070] shadow-[0_18px_40px_rgba(194,83,58,0.08)]"
-                      >
-                          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#f2d4cf] bg-white/75 text-[#707070] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+                          className="flex items-start gap-3 rounded-[1.35rem] border border-[#efc7c1] bg-[linear-gradient(180deg,rgba(255,247,245,0.98)_0%,rgba(255,241,238,0.95)_100%)] px-4 py-3.5 text-[#8e3d31] shadow-[0_18px_40px_rgba(194,83,58,0.08)]"
+                        >
+                          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#f2d4cf] bg-white/75 text-[#c2533a] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
                             <svg
                               aria-hidden="true"
                               viewBox="0 0 20 20"
@@ -704,11 +704,11 @@ export function LoginForm({
                             </svg>
                           </span>
                           <div className="min-w-0">
-                            <p className="text-sm font-semibold leading-6 text-[#707070]">
+                            <p className="text-sm font-semibold leading-6 text-[#8e3d31]">
                               {error.title}
                             </p>
                             {error.detail ? (
-                              <p className="mt-0.5 text-sm leading-6 text-[#707070]">
+                              <p className="mt-0.5 text-sm leading-6 text-[#a25747]">
                                 {error.detail}
                               </p>
                             ) : null}
@@ -722,7 +722,7 @@ export function LoginForm({
                                   isConfirmingEmail ||
                                   isResendingConfirmation
                                 }
-                                className="mt-3 inline-flex min-h-11 items-center justify-center rounded-full border border-[#f2d4cf] bg-white/90 px-4 py-2 text-sm font-medium text-[#707070] transition hover:border-[#c2533a]/35 hover:text-[#707070] disabled:cursor-not-allowed disabled:opacity-60"
+                                className="mt-3 inline-flex min-h-11 items-center justify-center rounded-full border border-[#f2d4cf] bg-white/90 px-4 py-2 text-sm font-medium text-[#8e3d31] transition hover:border-[#c2533a]/35 hover:text-[#c2533a] disabled:cursor-not-allowed disabled:opacity-60"
                               >
                                 {isResendingConfirmation
                                   ? "Sende erneut..."
@@ -749,7 +749,7 @@ export function LoginForm({
                         Zur Startseite
                       </Link>
                       <Link
-                        className="font-medium text-[#0e51a0] transition hover:text-[#707070]"
+                        className="font-medium text-[#0e51a0] transition hover:text-[#EA9413]"
                         href="/register"
                       >
                         Noch kein Konto? Hier registrieren

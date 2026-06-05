@@ -202,7 +202,7 @@ function getActivityState(value: string | null) {
   }
 
   if (dayDiff <= 30) {
-    return { label: "Weniger aktiv", tone: "bg-amber-50 text-[#707070]" };
+    return { label: "Weniger aktiv", tone: "bg-amber-50 text-amber-700" };
   }
 
   return { label: "Inaktiv", tone: "bg-slate-100 text-slate-500" };
@@ -214,7 +214,7 @@ function getKpiTone(score: number) {
   }
 
   if (score >= 50) {
-    return "text-[#707070]";
+    return "text-amber-700";
   }
 
   return "text-rose-700";
@@ -761,7 +761,7 @@ export function OrganizationPageView() {
                     <h2 className="text-xl font-semibold text-[#707070]">
                       Kein Zugriff auf diese Verwaltung
                     </h2>
-                    <p className="mt-3 text-sm leading-7 text-[#707070]">
+                    <p className="mt-3 text-sm leading-7 text-amber-900/80">
                       {error ||
                         "Dieser Account hat keine Owner-/Admin-Berechtigung innerhalb einer Organisation."}
                     </p>
@@ -795,7 +795,7 @@ export function OrganizationPageView() {
                               className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${
                                 organization.isActive
                                   ? "bg-emerald-50 text-emerald-700"
-                                  : "bg-amber-50 text-[#707070]"
+                                  : "bg-amber-50 text-amber-700"
                               }`}
                             >
                               {organization.isActive ? "Organisation aktiv" : "Organisation gesperrt"}
@@ -867,7 +867,7 @@ export function OrganizationPageView() {
                             </div>
                           ) : null}
                           {organization.seatLimitSource !== "stored" ? (
-                            <p className="mt-4 text-sm leading-7 text-[#707070]">
+                            <p className="mt-4 text-sm leading-7 text-amber-700">
                               Seat-Limit wird aktuell aus den verfügbaren Paketdaten abgeleitet.
                             </p>
                           ) : null}
@@ -985,7 +985,7 @@ export function OrganizationPageView() {
                                   </p>
                                 </div>
                                 <div className="flex flex-col items-start gap-3 sm:items-end">
-                                  <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#707070]">
+                                  <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-amber-700">
                                     Pending
                                   </span>
                                   <div className="flex flex-wrap gap-2">
@@ -1071,7 +1071,7 @@ export function OrganizationPageView() {
                                       className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] ${
                                         member.isActive
                                           ? "bg-emerald-50 text-emerald-700"
-                                          : "bg-amber-50 text-[#707070]"
+                                          : "bg-amber-50 text-amber-700"
                                       }`}
                                     >
                                       {member.isActive ? "Aktiv" : "Gesperrt"}
@@ -1110,7 +1110,7 @@ export function OrganizationPageView() {
                                     disabled={isActionDisabled}
                                     className={`inline-flex min-h-11 items-center justify-center rounded-full px-5 text-sm font-semibold transition ${
                                       member.isActive
-                                        ? "border border-amber-200 bg-amber-50 text-[#707070] hover:bg-amber-100"
+                                        ? "border border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100"
                                         : "bg-[#0e51a0] text-white hover:bg-[#0b478b]"
                                     } disabled:cursor-not-allowed disabled:opacity-60`}
                                   >
