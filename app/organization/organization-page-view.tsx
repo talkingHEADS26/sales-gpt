@@ -767,7 +767,7 @@ export function OrganizationPageView() {
                     </p>
                     <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                       <Link
-                        className="inline-flex min-h-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35)]"
+                        className="th-reference-cta min-h-14 px-7 py-3 text-sm"
                         href="/dashboard"
                       >
                         Zurück zum Dashboard
@@ -935,7 +935,7 @@ export function OrganizationPageView() {
                                 !inviteEmail.trim() ||
                                 organization.freeSeats <= 0
                               }
-                              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] px-6 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(234,148,19,0.35)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                              className="th-reference-cta min-h-14 px-7 py-3 text-sm"
                             >
                               {isCreatingInvite
                                 ? "Erstelle Einladung..."

@@ -228,7 +228,7 @@ export default function ResetPasswordPage() {
               </Link>
               <Link
                 href="/login"
-                className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#0e51a0] px-5 text-sm font-semibold text-white shadow-[0_16px_36px_rgba(14,81,160,0.32)] transition hover:bg-[#0b478b]"
+                className="th-reference-cta min-h-14 px-7 py-3 text-sm"
               >
                 Zum Login
               </Link>
@@ -328,7 +328,7 @@ export default function ResetPasswordPage() {
                         <button
                           type="submit"
                           disabled={isLoading}
-                          className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#0e51a0] px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_44px_rgba(14,81,160,0.32)] transition hover:bg-[#0b478b] disabled:cursor-not-allowed disabled:opacity-60"
+                          className="th-reference-cta w-full"
                         >
                           {isLoading ? "Aktualisiere Passwort..." : "Passwort aktualisieren"}
                         </button>

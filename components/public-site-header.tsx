@@ -89,7 +89,7 @@ function MobileMenuOverlay({
             <a
               href="#pricing"
               onClick={onClose}
-              className="rounded-[0.95rem] px-3 py-3 text-sm font-semibold text-[#0e51a0] transition hover:bg-[#0e51a0]/6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0e51a0]/12"
+              className="th-reference-cta mt-2 w-full px-5 py-3 text-sm"
             >
               Kaufen
             </a>
@@ -164,7 +164,7 @@ export function PublicSiteHeader({
             </Link>
             <a
               href="#pricing"
-              className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#0e51a0] px-5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(14,81,160,0.22)] transition-colors hover:bg-[#0b478b]"
+              className="th-reference-cta min-h-14 px-7 py-3 text-sm"
             >
               Kaufen
             </a>

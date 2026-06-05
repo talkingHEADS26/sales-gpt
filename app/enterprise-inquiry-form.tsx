@@ -290,7 +290,7 @@ export function EnterpriseInquiryForm({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#0e51a0] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#0b478b] disabled:cursor-not-allowed disabled:opacity-60"
+                      className="th-reference-cta w-full"
                     >
                       {isSubmitting ? "Sende Anfrage..." : "Anfrage senden"}
                     </button>

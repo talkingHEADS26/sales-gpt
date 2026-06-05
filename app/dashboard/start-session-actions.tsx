@@ -362,9 +362,7 @@ export function StartSessionActions({ userId }: StartSessionActionsProps) {
                     })
                   }
                   disabled={isInteractionDisabled || isMonthlyLimitReached}
-                  className={`inline-flex min-h-11 w-full max-w-[13rem] self-center items-center justify-center rounded-full px-5 py-2.5 text-center text-sm font-semibold leading-tight transition ${
-                    "bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_52%,#db8302_100%)] text-white shadow-[0_10px_24px_rgba(234,148,19,0.35),inset_0_1px_0_rgba(255,255,255,0.35)]"
-                  } hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60`}
+                  className="th-reference-cta w-full max-w-[16rem] self-center px-6 py-3 text-sm leading-tight"
                 >
                   {isPending ? loadingLabel : buttonLabel}
                 </button>

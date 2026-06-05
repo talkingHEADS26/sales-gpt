@@ -56,7 +56,7 @@ const RoiDemoButton = memo(function RoiDemoButton() {
     <EnterpriseInquiryForm
       buttonLabel="Demo buchen"
       inquiryType="demo"
-      className="inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#0e51a0] shadow-[0_8px_18px_rgba(15,23,42,0.10)] transition-colors hover:bg-slate-100"
+      className="th-reference-cta"
     />
   );
 });

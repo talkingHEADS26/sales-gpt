@@ -43,7 +43,7 @@ function OrangeButton({ href, children }: { href: string; children: React.ReactN
   return (
     <Link
       href={href}
-      className="inline-flex min-h-14 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f6ab2c_0%,#EA9413_50%,#d78207_100%)] px-7 py-3 text-base font-semibold text-white shadow-[0_14px_30px_rgba(234,148,19,0.42),inset_0_1px_0_rgba(255,255,255,0.34)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_34px_rgba(234,148,19,0.5),inset_0_1px_0_rgba(255,255,255,0.4)]"
+      className="th-reference-cta"
     >
       {children}
     </Link>
@@ -96,7 +96,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <OrangeButton href="/register">Jetzt kostenlos testen</OrangeButton>
-              <button className="inline-flex min-h-14 items-center justify-center rounded-xl border border-white/55 bg-white/8 px-7 py-3 text-base font-semibold text-white shadow-[0_10px_20px_rgba(7,35,71,0.25)] transition hover:bg-white/15">
+              <button className="th-reference-cta">
                 Demo ansehen
               </button>
             </div>

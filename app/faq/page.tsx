@@ -226,7 +226,7 @@ export default function FaqPage() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/register"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#0e51a0] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(14,81,160,0.18)] transition-colors hover:bg-[#0b478b]"
+                  className="th-reference-cta"
                 >
                   Jetzt starten
                 </Link>

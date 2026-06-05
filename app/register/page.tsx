@@ -518,7 +518,7 @@ function RegisterPageContent() {
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[#EA9413] px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_22px_rgba(15,23,42,0.10)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(15,23,42,0.14)] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="th-reference-cta w-full"
                       >
                         {isLoading ? "Konto wird erstellt..." : "Jetzt Organisation anlegen"}
                       </button>
