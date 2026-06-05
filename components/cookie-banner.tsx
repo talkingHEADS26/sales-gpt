@@ -16,7 +16,7 @@ export function CookieBanner({
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 px-4 pb-5 sm:px-7">
       <section
-        className="pointer-events-auto mx-auto w-full rounded-[16px] bg-white px-6 py-7 shadow-[0_24px_52px_rgba(15,23,42,0.22)] sm:px-10 sm:py-8"
+        className="pointer-events-auto mx-auto w-full origin-bottom scale-[0.4] rounded-[16px] bg-white px-6 py-7 shadow-[0_24px_52px_rgba(15,23,42,0.22)] sm:px-10 sm:py-8"
         role="dialog"
         aria-labelledby="cookie-banner-title"
       >
