@@ -12,49 +12,64 @@ export function CookieBanner({
   onOpenPreferences,
 }: CookieBannerProps) {
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 px-4 pb-16 sm:px-6 sm:pb-18 lg:pb-20">
-      <div className="pointer-events-auto mx-auto max-w-5xl rounded-[2rem] border border-white/80 bg-white/90 shadow-[0_28px_90px_rgba(15,23,42,0.18)] backdrop-blur">
-        <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-6">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0e51a0]">
-                Datenschutz
-              </p>
-              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-[#707070] sm:text-[2rem]">
-                Wir verwenden Cookies nur für klar definierte Zwecke.
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 px-4 pb-6 sm:px-6 sm:pb-8 lg:px-10 lg:pb-10">
+      <section
+        className="pointer-events-auto mx-auto w-full max-w-[1700px] rounded-[24px] border border-slate-200 bg-white p-6 shadow-[0_18px_56px_rgba(15,23,42,0.14)] sm:p-8 lg:p-10"
+        role="dialog"
+        aria-labelledby="cookie-banner-title"
+        aria-describedby="cookie-banner-description"
+      >
+        <div className="grid items-center gap-8 md:grid-cols-[minmax(0,4fr)_minmax(220px,1fr)] lg:gap-10">
+          <div className="max-w-5xl">
+            <h2
+              id="cookie-banner-title"
+              className="font-heading text-2xl font-normal text-[#2f3337] sm:text-3xl lg:text-[2.35rem] lg:leading-tight"
+            >
+              Wir verwenden Cookies für klar definierte Zwecke.
+            </h2>
+            <div
+              id="cookie-banner-description"
+              className="mt-5 max-w-4xl space-y-4 font-sans text-sm leading-7 text-[#555b61] sm:text-base"
+            >
+              <p>
                 Notwendige Cookies sichern den Betrieb von talkingHEADS Sales Trainer. Statistik-
                 und Marketing-Cookies aktivieren wir erst nach Ihrer Auswahl.
               </p>
-            </div>
-
-            <div className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto lg:min-w-[28rem]">
-              <button
-                type="button"
-                onClick={onAcceptNecessary}
-                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-[#707070] shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition hover:border-[#0e51a0]/25 hover:text-[#0e51a0] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0e51a0]/12"
-              >
-                Nur notwendige
-              </button>
               <button
                 type="button"
                 onClick={onOpenPreferences}
-                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-[#0e51a0]/20 bg-[#0e51a0]/6 px-5 py-3 text-sm font-semibold text-[#0e51a0] transition hover:bg-[#0e51a0]/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0e51a0]/12"
+                className="font-medium text-[#2f3337] underline decoration-slate-300 underline-offset-4 transition hover:text-[#EA9413] hover:decoration-[#EA9413] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EA9413]/30"
               >
-                Einstellungen
-              </button>
-              <button
-                type="button"
-                onClick={onAcceptAll}
-                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-[#0e51a0] px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_44px_rgba(14,81,160,0.32)] transition hover:bg-[#0b478b] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0e51a0]/18"
-              >
-                Alle akzeptieren
+                Cookie-Richtlinie
               </button>
             </div>
           </div>
+
+          <div className="flex w-full flex-col gap-3 md:ml-auto md:max-w-[260px]">
+            <button
+              type="button"
+              onClick={onAcceptAll}
+              className="inline-flex h-12 w-full items-center justify-center rounded-[14px] bg-[linear-gradient(180deg,#F2A32A_0%,#EA9413_100%)] px-5 font-sans text-sm font-medium text-white shadow-[0_8px_18px_rgba(234,148,19,0.22)] transition hover:bg-[#d8840f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EA9413]/35 sm:h-13"
+            >
+              Alle akzeptieren
+            </button>
+            <button
+              type="button"
+              onClick={onAcceptNecessary}
+              className="inline-flex h-12 w-full items-center justify-center rounded-[14px] border border-slate-200 bg-[#f7f8fa] px-5 font-sans text-sm font-medium text-[#2f3337] transition hover:border-slate-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 sm:h-13"
+            >
+              Ablehnen
+            </button>
+            <button
+              type="button"
+              onClick={onOpenPreferences}
+              className="inline-flex h-12 w-full items-center justify-center rounded-[14px] border border-slate-200 bg-[#f7f8fa] px-5 font-sans text-sm font-medium text-[#2f3337] transition hover:border-slate-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 sm:h-13"
+            >
+              Einstellungen
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
