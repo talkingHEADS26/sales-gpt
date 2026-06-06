@@ -110,9 +110,9 @@ function getPlanLabel(planKey: string | null) {
     case "solo":
       return "Solo-Lizenz";
     case "team_3":
-      return "Team Seat 3";
+      return "Team Seat 10";
     case "team_5":
-      return "Team Seat 5";
+      return "Team Seat 50";
     case "enterprise":
       return "Enterprise";
     case "manual":

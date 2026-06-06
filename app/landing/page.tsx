@@ -275,8 +275,8 @@ function Header() {
           </a>
         </nav>
 
-        <Link className="btn btn-primary site-header__cta" href="#preise">
-          Jetzt starten!
+        <Link className="btn btn-primary site-header__cta" href="/login">
+          Login
         </Link>
 
         <details className="mobile-nav">
@@ -298,8 +298,8 @@ function Header() {
             <a href="#preise" className="mobile-nav__link">
               Preise
             </a>
-            <a href="#preise" className="btn btn-primary mobile-nav__cta">
-              Jetzt starten!
+            <a href="/login" className="btn btn-primary mobile-nav__cta">
+              Login
             </a>
           </nav>
         </details>

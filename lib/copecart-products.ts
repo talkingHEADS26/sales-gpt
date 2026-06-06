@@ -20,17 +20,17 @@ const COPECART_PRODUCT_CONFIGS: CopeCartProductConfig[] = [
   },
   {
     checkoutUrl: "https://copecart.com/products/404a9a6a/checkout",
-    packageLabel: "Team Seat 3",
+    packageLabel: "Team Seat 10",
     planKey: "team_3",
     productId: "404a9a6a",
-    seatLimit: 3,
+    seatLimit: 10,
   },
   {
     checkoutUrl: "https://copecart.com/products/c206afca/checkout",
-    packageLabel: "Team Seat 5",
+    packageLabel: "Team Seat 50",
     planKey: "team_5",
     productId: "c206afca",
-    seatLimit: 5,
+    seatLimit: 50,
   },
 ];
 
@@ -91,9 +91,9 @@ export function getSeatLimitForPlanKey(planKey: string | null | undefined) {
     case "solo":
       return 1;
     case "team_3":
-      return 3;
+      return 10;
     case "team_5":
-      return 5;
+      return 50;
     case "manual":
       return null;
     default:
@@ -106,9 +106,9 @@ export function getPlanLabel(planKey: string | null | undefined) {
     case "solo":
       return "Solo-Lizenz";
     case "team_3":
-      return "Team Seat 3";
+      return "Team Seat 10";
     case "team_5":
-      return "Team Seat 5";
+      return "Team Seat 50";
     case "manual":
       return "Manuell";
     default:
