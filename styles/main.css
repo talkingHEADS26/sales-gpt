@@ -822,6 +822,92 @@ img {
   border-color: #d58a0a;
 }
 
+.insights-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+}
+
+.insights-subheading {
+  margin: -12px auto 28px;
+  max-width: 920px;
+  text-align: center;
+  color: var(--th-mid-gray);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.insight-card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid rgba(14, 81, 160, 0.12);
+  border-radius: var(--card-radius);
+  background: var(--th-white);
+  box-shadow: var(--th-shadow-card);
+}
+
+.insight-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  border: 1px solid rgba(14, 81, 160, 0.08);
+}
+
+.insight-card--dashboard .insight-card__image-wrap {
+  aspect-ratio: 16 / 10;
+}
+
+.insight-card--chat .insight-card__image-wrap {
+  aspect-ratio: 3 / 4;
+}
+
+.insight-card__image {
+  object-fit: contain;
+  object-position: center top;
+}
+
+.insight-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.insight-card__eyebrow {
+  margin: 0;
+  font-family: var(--th-font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--th-neutral);
+}
+
+.insight-card__title {
+  margin: 0;
+  font-family: var(--th-font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.18;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--th-blue);
+}
+
+.insight-card__text {
+  margin: 0;
+  color: var(--th-mid-gray);
+  line-height: 1.7;
+}
+
 .pricing-section {
   background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
 }
@@ -1086,6 +1172,10 @@ img {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+
   .site-nav {
     display: flex;
   }
@@ -1183,6 +1273,18 @@ img {
 
   .pricing-grid {
     grid-template-columns: 1fr;
+  }
+
+  .insights-subheading {
+    font-size: 1rem;
+  }
+
+  .insight-card {
+    padding: 14px;
+  }
+
+  .insight-card__title {
+    font-size: 1.2rem;
   }
 }
 

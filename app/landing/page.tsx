@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -416,12 +417,56 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="erfolge" className="cta-section landing-section">
+      <section id="erfolge" className="insights-section landing-section">
         <div className="landing-container">
-          <div className="cta-banner">
-            <h2 className="cta-heading">READY FOR TAKE OFF?</h2>
-            <p className="cta-subline">STARTE JETZT DEIN KOSTENLOSES STRATEGIEGESPRÄCH</p>
-            <GhostButton href="#top">JETZT SALES PROFI WERDEN!</GhostButton>
+          <SectionHeading
+            eyebrow="Einblicke"
+            title="So sieht der Sales Trainer im Alltag aus."
+          />
+          <p className="insights-subheading">
+            Dashboard und Chat zeigen, wie Teams Sessions starten, Training strukturieren und Gespräche im Detail
+            verbessern.
+          </p>
+          <div className="insights-grid">
+            <figure className="insight-card insight-card--dashboard">
+              <div className="insight-card__image-wrap">
+                <Image
+                  src="/dashboard.png"
+                  alt="Dashboard des talkingHEADS Sales Trainer mit Trainingsstart und zwei Aktionskarten"
+                  fill
+                  className="insight-card__image"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                />
+              </div>
+              <figcaption className="insight-card__body">
+                <p className="insight-card__eyebrow">Dashboard</p>
+                <h3 className="insight-card__title">Training schnell starten und Überblick behalten.</h3>
+                <p className="insight-card__text">
+                  Von der Startseite aus kommen Nutzer direkt in passende Trainingsmodule und sehen sofort den
+                  aktuellen Status ihres Setups.
+                </p>
+              </figcaption>
+            </figure>
+
+            <figure className="insight-card insight-card--chat">
+              <div className="insight-card__image-wrap">
+                <Image
+                  src="/chat.png"
+                  alt="Chatfenster des talkingHEADS Sales Trainer mit laufender Trainingssession und Nachrichteneingabe"
+                  fill
+                  className="insight-card__image"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                />
+              </div>
+              <figcaption className="insight-card__body">
+                <p className="insight-card__eyebrow">Sales Training</p>
+                <h3 className="insight-card__title">Gespräche realistisch trainieren und präzise führen.</h3>
+                <p className="insight-card__text">
+                  Im Chat läuft das eigentliche Training: klare Inputs, strukturierte Reaktionen und ein Umfeld, das
+                  auf echte Gesprächssituationen vorbereitet.
+                </p>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
