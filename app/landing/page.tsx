@@ -109,7 +109,7 @@ const pricingCards = [
     text: "Für einzelne Verkäufer, Coaches oder Inhaber, die ihre Abschlussgespräche gezielt verbessern wollen.",
     note: "zzgl. USt. · monatlich kündbar",
     button: "Solo starten",
-    href: "/register",
+    href: "/copecart/checkout/solo",
     featured: false,
   },
   {
@@ -121,7 +121,7 @@ const pricingCards = [
     text: "Für kleine Vertriebsteams, Studios oder Agenturen, die Sales-Gespräche regelmäßig trainieren und einheitlich verbessern wollen.",
     note: "zzgl. USt. · monatlich kündbar",
     button: "Team starten",
-    href: "/register",
+    href: "/copecart/checkout/team_3",
     featured: true,
   },
   {
@@ -132,7 +132,7 @@ const pricingCards = [
     text: "Für größere Teams, die Sales-Training skalieren, Gesprächsqualität messbar verbessern und Abschlussquoten systematisch steigern wollen.",
     note: "zzgl. USt. · monatlich kündbar",
     button: "Company starten",
-    href: "/register",
+    href: "/copecart/checkout/team_5",
     featured: false,
   },
 ];

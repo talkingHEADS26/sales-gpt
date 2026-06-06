@@ -2,7 +2,7 @@
 
 import { FormEvent, Suspense, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteLogo } from "@/components/site-brand";
@@ -21,8 +21,60 @@ import {
 } from "@/lib/industries";
 import { hasSupabaseEnv } from "@/lib/supabase";
 
+type SearchParamsLike = Pick<URLSearchParams, "get">;
+
+function readSearchParam(searchParams: SearchParamsLike, ...keys: string[]) {
+  for (const key of keys) {
+    const value = searchParams.get(key)?.trim();
+
+    if (value) {
+      return value;
+    }
+  }
+
+  return null;
+}
+
+function resolveLicensePlan(value: string | null) {
+  return value && LICENSE_PLANS.includes(value as LicensePlan)
+    ? (value as LicensePlan)
+    : "solo";
+}
+
 function RegisterPageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialLicensePlan = resolveLicensePlan(
+    readSearchParam(searchParams, "licensePlan", "license_plan", "plan")
+  );
+  const copecartProductId = readSearchParam(
+    searchParams,
+    "copecart_product_id",
+    "cope_cart_product_id",
+    "product_id",
+    "productId"
+  );
+  const copecartOrderId = readSearchParam(
+    searchParams,
+    "copecart_order_id",
+    "cope_cart_order_id",
+    "order_id",
+    "orderId",
+    "transaction_id",
+    "transactionId"
+  );
+  const copecartCustomerEmail = readSearchParam(
+    searchParams,
+    "copecart_customer_email",
+    "cope_cart_customer_email",
+    "customer_email",
+    "customerEmail",
+    "email"
+  );
+  const cameFromCopeCart =
+    Boolean(copecartProductId) ||
+    Boolean(copecartOrderId) ||
+    Boolean(copecartCustomerEmail);
   const [organizationName, setOrganizationName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -30,9 +82,9 @@ function RegisterPageContent() {
   const [industryKey, setIndustryKey] = useState<IndustryKey>("fitness");
   const [franchiseVertical, setFranchiseVertical] =
     useState<FranchiseVerticalKey>("other");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(copecartCustomerEmail ?? "");
   const [password, setPassword] = useState("");
-  const [licensePlan, setLicensePlan] = useState<LicensePlan>("solo");
+  const [licensePlan, setLicensePlan] = useState<LicensePlan>(initialLicensePlan);
   const [fieldErrors, setFieldErrors] = useState<FormErrors>({});
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -91,6 +143,10 @@ function RegisterPageContent() {
                 ? values.franchiseVertical
                 : null,
             license_plan: values.licensePlan,
+            cope_cart_product_id: copecartProductId,
+            cope_cart_order_id: copecartOrderId,
+            cope_cart_customer_email: values.email.trim(),
+            customer_email: values.email.trim(),
           },
           password,
         }),
@@ -251,6 +307,11 @@ function RegisterPageContent() {
                       <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-[#707070]">
                         Fülle die Angaben aus und starte direkt mit einem Trainingssystem, das Verkaufsgespräche verbessert und Abschlusssicherheit aufbaut.
                       </p>
+                      {cameFromCopeCart ? (
+                        <p className="mx-auto mt-4 inline-flex rounded-full border border-[#dbe7f8] bg-[#f7fbff] px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[#0E51A0]">
+                          CopeCart-Kauf erkannt, Plan ist vorausgewählt.
+                        </p>
+                      ) : null}
                     </div>
 
                     <div className="mt-6 space-y-3">

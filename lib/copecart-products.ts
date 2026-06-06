@@ -38,6 +38,10 @@ const COPECART_PRODUCT_CONFIG_BY_ID = new Map(
   COPECART_PRODUCT_CONFIGS.map((config) => [config.productId, config])
 );
 
+const COPECART_PRODUCT_CONFIG_BY_PLAN_KEY = new Map(
+  COPECART_PRODUCT_CONFIGS.map((config) => [config.planKey, config])
+);
+
 function normalizeText(value: string | null | undefined) {
   const trimmedValue = value?.trim();
 
@@ -56,8 +60,26 @@ export function getCopeCartProductConfig(productId: string | null | undefined) {
     : null;
 }
 
+export function getCopeCartProductConfigForPlanKey(
+  planKey: string | null | undefined
+) {
+  const normalizedPlanKey = normalizeText(planKey);
+
+  return normalizedPlanKey
+    ? COPECART_PRODUCT_CONFIG_BY_PLAN_KEY.get(normalizedPlanKey as CopeCartPlanKey) ?? null
+    : null;
+}
+
 export function getSeatLimitForCopeCartProduct(productId: string | null | undefined) {
   return getCopeCartProductConfig(productId)?.seatLimit ?? null;
+}
+
+export function getCopeCartProductIdForPlanKey(planKey: string | null | undefined) {
+  return getCopeCartProductConfigForPlanKey(planKey)?.productId ?? null;
+}
+
+export function getCopeCartCheckoutUrlForPlanKey(planKey: string | null | undefined) {
+  return getCopeCartProductConfigForPlanKey(planKey)?.checkoutUrl ?? null;
 }
 
 export function getPlanKeyForCopeCartProduct(productId: string | null | undefined) {
