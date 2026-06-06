@@ -839,11 +839,12 @@ img {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .insight-card {
   margin: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -860,18 +861,11 @@ img {
   border-radius: 14px;
   background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
   border: 1px solid rgba(14, 81, 160, 0.08);
-}
-
-.insight-card--dashboard .insight-card__image-wrap {
   aspect-ratio: 16 / 10;
 }
 
-.insight-card--chat .insight-card__image-wrap {
-  aspect-ratio: 3 / 4;
-}
-
 .insight-card__image {
-  object-fit: contain;
+  object-fit: cover;
   object-position: center top;
 }
 
