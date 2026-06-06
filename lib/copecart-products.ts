@@ -12,24 +12,24 @@ type CopeCartProductConfig = {
 
 const COPECART_PRODUCT_CONFIGS: CopeCartProductConfig[] = [
   {
-    checkoutUrl: "https://copecart.com/products/f69450a5/checkout",
+    checkoutUrl: "https://copecart.com/products/66e245b1/checkout",
     packageLabel: "Solo-Lizenz",
     planKey: "solo",
-    productId: "f69450a5",
+    productId: "66e245b1",
     seatLimit: 1,
   },
   {
-    checkoutUrl: "https://copecart.com/products/22c68511/checkout",
+    checkoutUrl: "https://copecart.com/products/404a9a6a/checkout",
     packageLabel: "Team Seat 3",
     planKey: "team_3",
-    productId: "22c68511",
+    productId: "404a9a6a",
     seatLimit: 3,
   },
   {
-    checkoutUrl: "https://copecart.com/products/2a10ffec/checkout",
+    checkoutUrl: "https://copecart.com/products/c206afca/checkout",
     packageLabel: "Team Seat 5",
     planKey: "team_5",
-    productId: "2a10ffec",
+    productId: "c206afca",
     seatLimit: 5,
   },
 ];
