@@ -534,11 +534,11 @@ img {
   width: min(100%, 640px);
   padding: clamp(28px, 3.2vw, 40px);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 18px 44px rgba(7, 47, 107, 0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(240, 246, 255, 0.62) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  box-shadow: 0 18px 44px rgba(7, 47, 107, 0.14);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
 }
 
 .register-hero h1,
@@ -572,6 +572,13 @@ img {
 
 .login-hero__copy {
   width: min(100%, 640px);
+  padding: clamp(28px, 3.2vw, 40px);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(7, 47, 107, 0.34) 0%, rgba(14, 81, 160, 0.22) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 18px 44px rgba(7, 47, 107, 0.18);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
 }
 
 .login-hero h1,
