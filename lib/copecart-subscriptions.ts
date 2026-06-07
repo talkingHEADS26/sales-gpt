@@ -45,6 +45,13 @@ type CopeCartSubscriptionRecord = {
   user_id: string | null;
 };
 
+type CopeCartIpnEventRecord = {
+  copecart_customer_email: string | null;
+  event_type: string | null;
+  payload: Record<string, unknown> | null;
+  processing_status: string;
+};
+
 type CopeCartIpnEventInsert = {
   amount: string | null;
   copecart_customer_email: string | null;
@@ -759,6 +766,88 @@ export async function getLatestCopeCartSubscriptionsForUsers(
   userIds: string[]
 ) {
   return getLatestSubscriptionsForTargets(serviceRoleClient, "user_id", userIds);
+}
+
+function hasPositiveCopeCartPurchaseSignal(event: CopeCartIpnEventRecord) {
+  const eventType = (event.event_type ?? "").toLowerCase();
+  const payload = event.payload ?? {};
+  const payloadStatus =
+    typeof payload.status === "string" ? payload.status.toLowerCase() : "";
+  const combinedText = `${eventType} ${payloadStatus}`.trim();
+
+  if (
+    /(refund|refunded|chargeback|cancel|cancelled|failed|unpaid|reversed|void|expired)/.test(
+      combinedText
+    )
+  ) {
+    return false;
+  }
+
+  return /(success|paid|purchase|completed|active|renewed)/.test(combinedText);
+}
+
+export async function hasPriorCopeCartPurchaseForEmail(
+  serviceRoleClient: SupabaseServerClient,
+  email: string
+) {
+  const normalizedEmail = normalizeEmail(email);
+
+  if (!normalizedEmail) {
+    return false;
+  }
+
+  const { data: subscriptions, error: subscriptionError } =
+    await serviceRoleClient
+      .from("copecart_subscriptions")
+      .select(
+        "copecart_customer_email, copecart_order_id, current_period_paid_until, last_ipn_event_at, last_payment_at, subscription_status"
+      )
+      .eq("copecart_customer_email", normalizedEmail)
+      .order("updated_at", { ascending: false })
+      .limit(10);
+
+  if (subscriptionError) {
+    throw new Error(subscriptionError.message);
+  }
+
+  const subscriptionRecords = (subscriptions ?? []) as Array<{
+    copecart_customer_email: string | null;
+    copecart_order_id: string | null;
+    current_period_paid_until: string | null;
+    last_ipn_event_at: string | null;
+    last_payment_at: string | null;
+    subscription_status: CopeCartSubscriptionStatus;
+  }>;
+
+  if (
+    subscriptionRecords.some((subscription) =>
+      Boolean(
+        subscription.subscription_status !== "pending" ||
+          subscription.last_ipn_event_at ||
+          subscription.last_payment_at ||
+          subscription.current_period_paid_until
+      )
+    )
+  ) {
+    return true;
+  }
+
+  const { data: ipnEvents, error: ipnError } = await serviceRoleClient
+    .from("copecart_ipn_events")
+    .select("copecart_customer_email, event_type, payload, processing_status")
+    .eq("copecart_customer_email", normalizedEmail)
+    .order("received_at", { ascending: false })
+    .limit(25);
+
+  if (ipnError) {
+    throw new Error(ipnError.message);
+  }
+
+  const ipnEventRecords = (ipnEvents ?? []) as CopeCartIpnEventRecord[];
+
+  return Boolean(
+    ipnEventRecords.find((event) => hasPositiveCopeCartPurchaseSignal(event))
+  );
 }
 
 export async function resolveAppAccessStateForUser(params: {

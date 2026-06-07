@@ -1,6 +1,9 @@
 import { sendConfirmationEmail } from "@/lib/confirmation-mailer";
 import { getPlanKeyForCopeCartProduct } from "@/lib/copecart-products";
-import { upsertPendingCopeCartSubscriptionFromSignupMetadata } from "@/lib/copecart-subscriptions";
+import {
+  hasPriorCopeCartPurchaseForEmail,
+  upsertPendingCopeCartSubscriptionFromSignupMetadata,
+} from "@/lib/copecart-subscriptions";
 import { getSignupConfirmationRedirectUrl } from "@/lib/site-url";
 import {
   getServiceRoleClientInitError,
@@ -148,6 +151,9 @@ export async function createSignupUserWithConfirmationEmail({
     "cope_cart_customer_email",
     "customer_email"
   );
+  const hasCopeCartPurchaseContext = Boolean(
+    resolvedCopeCartProductId || resolvedCopeCartOrderId
+  );
   const productPlanKey = getPlanKeyForCopeCartProduct(
     resolvedCopeCartProductId
   );
@@ -176,6 +182,19 @@ export async function createSignupUserWithConfirmationEmail({
 
   if (existingUser.exists) {
     throw new Error("Für diese E-Mail-Adresse existiert bereits ein Konto.");
+  }
+
+  if (!hasCopeCartPurchaseContext) {
+    const hasPriorPurchase = await hasPriorCopeCartPurchaseForEmail(
+      serviceRoleClient,
+      normalizedEmail
+    );
+
+    if (!hasPriorPurchase) {
+      throw new Error(
+        "Für diese E-Mail-Adresse wurde kein CopeCart-Kauf gefunden. Bitte prüfe die E-Mail oder starte den Kauf über die Startseite."
+      );
+    }
   }
 
   const createUserResult = await serviceRoleClient.auth.admin.createUser({

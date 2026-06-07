@@ -480,8 +480,8 @@ export function LoginForm({
             </Link>
           </nav>
 
-          <Link className="btn btn-primary site-header__cta" href="/register">
-            Registrieren!
+          <Link className="btn btn-primary site-header__cta" href="/landing#preise">
+            Jetzt starten
           </Link>
 
           <details className="mobile-nav">
@@ -503,8 +503,8 @@ export function LoginForm({
               <Link href="/landing#preise" className="mobile-nav__link">
                 Preise
               </Link>
-              <Link href="/register" className="btn btn-primary mobile-nav__cta">
-                Registrieren!
+              <Link href="/landing#preise" className="btn btn-primary mobile-nav__cta">
+                Jetzt starten
               </Link>
             </nav>
           </details>
@@ -750,9 +750,9 @@ export function LoginForm({
                       </Link>
                       <Link
                         className="font-medium text-[#124E9D] transition hover:text-[#5F6F84]"
-                        href="/register"
+                        href="/landing#preise"
                       >
-                        Noch kein Konto? Hier registrieren
+                        Noch kein Konto? Jetzt starten
                       </Link>
                     </div>
                   </div>
