@@ -585,7 +585,31 @@ img {
 }
 
 .feature-section {
-  background: linear-gradient(135deg, #072f6b 0%, #0e51a0 100%);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(7, 47, 107, 0.88) 0%, rgba(14, 81, 160, 0.72) 100%),
+    url("/sales-laptop.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.feature-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 38%),
+    linear-gradient(180deg, rgba(7, 47, 107, 0.1) 0%, rgba(7, 47, 107, 0.32) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.feature-section .landing-container {
+  position: relative;
+  z-index: 1;
 }
 
 .process-section,
