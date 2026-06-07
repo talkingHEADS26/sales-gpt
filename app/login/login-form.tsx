@@ -526,39 +526,39 @@ export function LoginForm({
           </div>
 
           <div className="login-form-card relative">
-            <div className="rounded-[2rem] border border-white/50 bg-white/80 p-5 shadow-[0_18px_44px_rgba(14,81,160,0.12)] backdrop-blur-md sm:p-6">
+            <div className="rounded-[2rem] border border-white/35 bg-[linear-gradient(180deg,rgba(247,251,255,0.72)_0%,rgba(232,240,250,0.56)_100%)] p-5 shadow-[0_18px_44px_rgba(14,81,160,0.14)] backdrop-blur-xl sm:p-6">
               <div className="p-6 sm:p-8">
                 <div className="text-center sm:text-left">
-                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0E51A0]">
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#124E9D]">
                         talkingHEADS Login
                       </p>
-                      <h2 className="mt-4 font-heading text-3xl font-normal tracking-[-0.03em] text-[#0E51A0]">
+                      <h2 className="mt-4 font-heading text-3xl font-normal tracking-[-0.03em] text-[#124E9D]">
                         In dein Konto einloggen
                       </h2>
-                      <p className="mt-3 text-sm leading-7 text-[#707070]">
+                      <p className="mt-3 text-sm leading-7 text-[#5F6F84]">
                         Nutze deine Zugangsdaten und setze eure Trainingssessions ohne Umwege fort.
                       </p>
                     </div>
 
                     <div className="mt-6 space-y-3">
                       {!hasSupabaseEnv ? (
-                        <p className="rounded-2xl border border-amber-200 bg-amber-50/95 px-4 py-3 text-sm text-[#707070]">
+                        <p className="rounded-2xl border border-sky-200/80 bg-sky-50/80 px-4 py-3 text-sm text-[#5F6F84]">
                           Die lokale Supabase-Konfiguration fehlt oder ist unvollständig.
                         </p>
                       ) : null}
 
                       {registered ? (
                         confirmationMailSent ? (
-                          <p className="rounded-2xl border border-emerald-200 bg-emerald-50/95 px-4 py-3 text-sm text-emerald-700">
+                          <p className="rounded-2xl border border-emerald-200/70 bg-emerald-50/75 px-4 py-3 text-sm text-emerald-700">
                             Registrierung erfolgreich. Bitte bestätige zuerst deine E-Mail-Adresse über den Link in deinem Postfach.
                           </p>
                         ) : (
-                          <div className="rounded-2xl border border-amber-200 bg-amber-50/95 px-4 py-3 text-sm text-[#707070]">
+                          <div className="rounded-2xl border border-sky-200/80 bg-sky-50/80 px-4 py-3 text-sm text-[#5F6F84]">
                             <p>
                               Registrierung erfolgreich, aber der Bestätigungslink konnte nicht automatisch gesendet werden.
                             </p>
                             {confirmationMailError ? (
-                              <p className="mt-2 text-xs leading-6 text-[#707070]">
+                              <p className="mt-2 text-xs leading-6 text-[#5F6F84]">
                                 Technischer Hinweis: {confirmationMailError}
                               </p>
                             ) : null}
@@ -566,7 +566,7 @@ export function LoginForm({
                               type="button"
                               onClick={() => void handleResendConfirmation()}
                               disabled={isResendingConfirmation || !email.trim()}
-                              className="mt-3 inline-flex min-h-10 items-center justify-center rounded-full border border-amber-300 bg-white px-4 py-2 text-sm font-medium text-[#707070] transition hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-60"
+                              className="mt-3 inline-flex min-h-10 items-center justify-center rounded-full border border-sky-300/80 bg-white/75 px-4 py-2 text-sm font-medium text-[#124E9D] transition hover:bg-sky-100/80 disabled:cursor-not-allowed disabled:opacity-60"
                             >
                               {isResendingConfirmation
                                 ? "Sende erneut..."
@@ -577,31 +577,31 @@ export function LoginForm({
                       ) : null}
 
                       {confirmed ? (
-                        <p className="rounded-2xl border border-emerald-200 bg-emerald-50/95 px-4 py-3 text-sm text-emerald-700">
+                        <p className="rounded-2xl border border-emerald-200/70 bg-emerald-50/75 px-4 py-3 text-sm text-emerald-700">
                           Deine E-Mail-Adresse wurde bestätigt. Dein Zugang wird nach Prüfung freigeschaltet.
                         </p>
                       ) : null}
 
                       {isConfirmingEmail ? (
-                        <p className="rounded-2xl border border-[#0e51a0]/15 bg-[#0e51a0]/5 px-4 py-3 text-sm text-[#0e51a0]">
+                        <p className="rounded-2xl border border-[#0e51a0]/15 bg-[rgba(14,81,160,0.08)] px-4 py-3 text-sm text-[#124E9D]">
                           Deine E-Mail-Adresse wird gerade bestätigt...
                         </p>
                       ) : null}
 
                       {resendSuccessMessage ? (
-                        <p className="rounded-2xl border border-emerald-200 bg-emerald-50/95 px-4 py-3 text-sm text-emerald-700">
+                        <p className="rounded-2xl border border-emerald-200/70 bg-emerald-50/75 px-4 py-3 text-sm text-emerald-700">
                           {resendSuccessMessage}
                         </p>
                       ) : null}
 
                       {invited ? (
-                        <p className="rounded-2xl border border-emerald-200 bg-emerald-50/95 px-4 py-3 text-sm text-emerald-700">
+                        <p className="rounded-2xl border border-emerald-200/70 bg-emerald-50/75 px-4 py-3 text-sm text-emerald-700">
                           Einladung erfolgreich angenommen. Du kannst dich jetzt einloggen.
                         </p>
                       ) : null}
 
                       {reset ? (
-                        <p className="rounded-2xl border border-emerald-200 bg-emerald-50/95 px-4 py-3 text-sm text-emerald-700">
+                        <p className="rounded-2xl border border-emerald-200/70 bg-emerald-50/75 px-4 py-3 text-sm text-emerald-700">
                           Dein Passwort wurde erfolgreich geändert. Du kannst dich jetzt mit deinem neuen Passwort einloggen.
                         </p>
                       ) : null}
@@ -611,7 +611,7 @@ export function LoginForm({
                       <div>
                         <label
                           htmlFor="email"
-                          className="mb-2 block text-sm font-medium text-[#707070]"
+                          className="mb-2 block text-sm font-medium text-[#5F6F84]"
                         >
                           E-Mail
                         </label>
@@ -622,7 +622,7 @@ export function LoginForm({
                           onChange={(event) => setEmail(event.target.value)}
                           placeholder="name@example.com"
                           autoComplete="email"
-                          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10 [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_#ffffff] [&:-webkit-autofill]:[-webkit-text-fill-color:#374151]"
+                          className="w-full rounded-2xl border border-white/55 bg-[rgba(255,255,255,0.72)] px-4 py-3.5 text-[#23446F] shadow-[0_10px_24px_rgba(15,23,42,0.05)] outline-none transition placeholder:text-slate-500 focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/12 [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_rgba(255,255,255,0.82)] [&:-webkit-autofill]:[-webkit-text-fill-color:#23446F]"
                           disabled={
                             isLoading || isConfirmingEmail || isResendingConfirmation
                           }
@@ -632,7 +632,7 @@ export function LoginForm({
                       <div>
                         <label
                           htmlFor="password"
-                          className="mb-2 block text-sm font-medium text-[#707070]"
+                          className="mb-2 block text-sm font-medium text-[#5F6F84]"
                         >
                           Passwort
                         </label>
@@ -644,7 +644,7 @@ export function LoginForm({
                             onChange={(event) => setPassword(event.target.value)}
                             placeholder="Dein Passwort"
                             autoComplete="current-password"
-                            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 pr-12 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10 [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_#ffffff] [&:-webkit-autofill]:[-webkit-text-fill-color:#374151]"
+                            className="w-full rounded-2xl border border-white/55 bg-[rgba(255,255,255,0.72)] px-4 py-3.5 pr-12 text-[#23446F] shadow-[0_10px_24px_rgba(15,23,42,0.05)] outline-none transition placeholder:text-slate-500 focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/12 [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_rgba(255,255,255,0.82)] [&:-webkit-autofill]:[-webkit-text-fill-color:#23446F]"
                             disabled={
                               isLoading || isConfirmingEmail || isResendingConfirmation
                             }
@@ -657,7 +657,7 @@ export function LoginForm({
                                 ? "Passwort verbergen"
                                 : "Passwort anzeigen"
                             }
-                            className="absolute inset-y-0 right-3 inline-flex items-center justify-center text-slate-400 transition hover:text-[#0e51a0] focus:outline-none focus-visible:text-[#0e51a0]"
+                            className="absolute inset-y-0 right-3 inline-flex items-center justify-center text-slate-400 transition hover:text-[#124E9D] focus:outline-none focus-visible:text-[#124E9D]"
                             disabled={
                               isLoading || isConfirmingEmail || isResendingConfirmation
                             }
@@ -670,7 +670,7 @@ export function LoginForm({
                       <div className="flex justify-end">
                         <Link
                           href="/forgot-password"
-                          className="text-sm font-medium text-[#0e51a0] transition hover:text-[#0b478b]"
+                          className="text-sm font-medium text-[#124E9D] transition hover:text-[#0b478b]"
                         >
                           Passwort vergessen?
                         </Link>
@@ -680,9 +680,9 @@ export function LoginForm({
                         <div
                           role="alert"
                           aria-live="polite"
-                          className="flex items-start gap-3 rounded-[1.35rem] border border-[#efc7c1] bg-[linear-gradient(180deg,rgba(255,247,245,0.98)_0%,rgba(255,241,238,0.95)_100%)] px-4 py-3.5 text-[#707070] shadow-[0_18px_40px_rgba(194,83,58,0.08)]"
+                          className="flex items-start gap-3 rounded-[1.35rem] border border-sky-200/80 bg-[linear-gradient(180deg,rgba(240,246,255,0.96)_0%,rgba(232,242,255,0.9)_100%)] px-4 py-3.5 text-[#5F6F84] shadow-[0_18px_40px_rgba(14,81,160,0.08)]"
                         >
-                          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#f2d4cf] bg-white/75 text-[#707070] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+                          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-sky-200/80 bg-white/75 text-[#124E9D] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
                             <svg
                               aria-hidden="true"
                               viewBox="0 0 20 20"
@@ -704,11 +704,11 @@ export function LoginForm({
                             </svg>
                           </span>
                           <div className="min-w-0">
-                            <p className="text-sm font-semibold leading-6 text-[#707070]">
+                            <p className="text-sm font-semibold leading-6 text-[#23446F]">
                               {error.title}
                             </p>
                             {error.detail ? (
-                              <p className="mt-0.5 text-sm leading-6 text-[#707070]">
+                              <p className="mt-0.5 text-sm leading-6 text-[#5F6F84]">
                                 {error.detail}
                               </p>
                             ) : null}
@@ -722,7 +722,7 @@ export function LoginForm({
                                   isConfirmingEmail ||
                                   isResendingConfirmation
                                 }
-                                className="mt-3 inline-flex min-h-11 items-center justify-center rounded-full border border-[#f2d4cf] bg-white/90 px-4 py-2 text-sm font-medium text-[#707070] transition hover:border-[#c2533a]/35 hover:text-[#707070] disabled:cursor-not-allowed disabled:opacity-60"
+                                className="mt-3 inline-flex min-h-11 items-center justify-center rounded-full border border-sky-200/80 bg-white/80 px-4 py-2 text-sm font-medium text-[#124E9D] transition hover:border-[#124E9D]/35 hover:text-[#124E9D] disabled:cursor-not-allowed disabled:opacity-60"
                               >
                                 {isResendingConfirmation
                                   ? "Sende erneut..."
@@ -744,12 +744,12 @@ export function LoginForm({
                       </button>
                     </form>
 
-                    <div className="mt-6 flex flex-col gap-3 border-t border-[#eef3f9] pt-6 text-sm text-[#707070] sm:flex-row sm:items-center sm:justify-between">
-                      <Link className="transition hover:text-[#0e51a0]" href="/landing">
+                    <div className="mt-6 flex flex-col gap-3 border-t border-white/50 pt-6 text-sm text-[#5F6F84] sm:flex-row sm:items-center sm:justify-between">
+                      <Link className="transition hover:text-[#124E9D]" href="/landing">
                         Zur Startseite
                       </Link>
                       <Link
-                        className="font-medium text-[#0e51a0] transition hover:text-[#707070]"
+                        className="font-medium text-[#124E9D] transition hover:text-[#5F6F84]"
                         href="/register"
                       >
                         Noch kein Konto? Hier registrieren
