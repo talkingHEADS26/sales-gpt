@@ -269,21 +269,21 @@ function RegisterPageContent() {
       <section className="register-hero">
         <div className="landing-container register-hero__inner">
           <div className="register-hero__copy">
-            <div className="inline-flex items-center rounded-full border border-[#0e51a0]/15 bg-white px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-[#0e51a0] shadow-[0_8px_20px_rgba(15,23,42,0.04)]">
+            <div className="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-white shadow-[0_8px_20px_rgba(7,47,107,0.12)]">
                   Sales-Training für planbare Abschlüsse
                 </div>
-                <h1 className="mt-5 text-balance font-heading text-3xl font-normal tracking-[-0.03em] text-[#0E51A0] sm:text-4xl lg:text-5xl">
+                <h1 className="mt-5 text-balance font-heading text-3xl font-normal tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
                   Mach dein Team im Verkauf sicher, strukturiert und überzeugend.
                 </h1>
-                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#707070] sm:text-lg sm:leading-8 lg:mx-0">
+                <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/88 sm:text-lg sm:leading-8 lg:mx-0">
                   Erstelle in wenigen Minuten eure Organisation und starte mit KI-gestützten Gesprächssimulationen, klarem Feedback und messbarer Entwicklung im Vertrieb.
                 </p>
 
-                <div className="mx-auto mt-6 max-w-2xl rounded-[1.25rem] border border-[#dbe7f8] bg-white p-5 shadow-[0_10px_24px_rgba(14,81,160,0.06)] lg:mx-0">
-                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0E51A0]">
+                <div className="mx-auto mt-6 max-w-2xl rounded-[1.25rem] border border-white/18 bg-white/10 p-5 shadow-[0_10px_24px_rgba(7,47,107,0.12)] backdrop-blur-md lg:mx-0">
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-white">
                     Für ambitionierte Vertriebsteams
                   </p>
-                  <p className="mt-4 text-sm leading-7 text-[#707070]">
+                  <p className="mt-4 text-sm leading-7 text-white/80">
                     Lege die Organisation an, wähle den passenden Lizenzplan und schaffe einen einheitlichen Trainingsstandard für bessere Beratung und mehr Abschlüsse.
                   </p>
                 </div>
