@@ -515,7 +515,7 @@ img {
   overflow: hidden;
   background:
     linear-gradient(90deg, rgba(7, 47, 107, 0.88) 0%, rgba(14, 81, 160, 0.62) 42%, rgba(7, 47, 107, 0.12) 100%),
-    url("/rocket-table.png");
+    url("/ki-register.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1209,7 +1209,7 @@ img {
     padding: var(--section-pad-mobile);
     background:
       linear-gradient(180deg, rgba(7, 47, 107, 0.78) 0%, rgba(14, 81, 160, 0.44) 100%),
-      url("/rocket-table.png");
+      url("/ki-register.png");
     background-position: center;
     background-size: cover;
   }
