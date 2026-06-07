@@ -29,24 +29,24 @@ URL-Muster: `https://<project>.supabase.co/auth/v1/verify?token=...&redirect_to=
 ### Root Cause
 Zwei Ursachen gleichzeitig:
 
-**A) `NEXT_PUBLIC_SITE_URL` fehlt in Vercel** → `getAuthRedirectBaseUrl()` in `lib/site-url.ts` fällt auf `OFFICIAL_PRODUCTION_APP_URL` zurück = `https://sales.diebestenberatungsagenturen.de`. Vercel nutzt aber die Preview-URL `sales-gpt-eta.vercel.app` als Default ohne Protokoll.
+**A) `NEXT_PUBLIC_SITE_URL` fehlt in Vercel** → `getAuthRedirectBaseUrl()` in `lib/site-url.ts` fällt auf `OFFICIAL_PRODUCTION_APP_URL` zurück = `https://sales.talkingheads.education`. Vercel nutzt aber die Preview-URL `sales-gpt-eta.vercel.app` als Default ohne Protokoll.
 
-**B) Supabase hosted Projekt** (Authentication → URL Configuration) hat `https://sales.diebestenberatungsagenturen.de` nicht in der Redirect-Allowlist → Supabase lehnt den `redirect_to` Parameter ab.
+**B) Supabase hosted Projekt** (Authentication → URL Configuration) hat `https://sales.talkingheads.education` nicht in der Redirect-Allowlist → Supabase lehnt den `redirect_to` Parameter ab.
 
 ### Fix
 
 **Vercel** → Settings → Environment Variables:
 ```
-NEXT_PUBLIC_SITE_URL=https://sales.diebestenberatungsagenturen.de
-NEXT_PUBLIC_APP_URL=https://sales.diebestenberatungsagenturen.de
-APP_BASE_URL=https://sales.diebestenberatungsagenturen.de
+NEXT_PUBLIC_SITE_URL=https://sales.talkingheads.education
+NEXT_PUBLIC_APP_URL=https://sales.talkingheads.education
+APP_BASE_URL=https://sales.talkingheads.education
 ```
 
 **Supabase Dashboard** → Authentication → URL Configuration:
-- Site URL: `https://sales.diebestenberatungsagenturen.de`
+- Site URL: `https://sales.talkingheads.education`
 - Redirect URLs hinzufügen:
-  - `https://sales.diebestenberatungsagenturen.de/login?confirmed=1`
-  - `https://sales.diebestenberatungsagenturen.de/reset-password`
+  - `https://sales.talkingheads.education/login?confirmed=1`
+  - `https://sales.talkingheads.education/reset-password`
 
 ### Code-Fix (bereits committed)
 `lib/site-url.ts` — localhost nur in production blocken:
@@ -204,7 +204,7 @@ Login → /api/auth/access-status → requirePaidAppUser()
 
 ## Schnell-Checkliste für neue Instanz / frisches Deployment
 
-1. **Vercel Env Vars** setzen: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_APP_URL`, `APP_BASE_URL` → alle auf `https://sales.diebestenberatungsagenturen.de`
+1. **Vercel Env Vars** setzen: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_APP_URL`, `APP_BASE_URL` → alle auf `https://sales.talkingheads.education`
 2. **Supabase Dashboard** → Authentication → URL Configuration → Redirect URLs eintragen
 3. **Trigger prüfen** (SQL Editor):
    ```sql

@@ -46,11 +46,13 @@ function getWelcomeMailerConfig() {
 
 function buildWelcomeEmail({
   firstName,
+  appBaseUrl,
 }: {
   firstName: string | null;
+  appBaseUrl: string;
 }) {
   const greetingName = firstName?.trim();
-  const loginUrl = "https://sales.diebestenberatungsagenturen.de/login";
+  const loginUrl = `${appBaseUrl}/login`;
   const safeGreetingName = greetingName ? `${escapeHtml(greetingName)},` : "";
   const safeLoginUrl = escapeHtml(loginUrl);
 
@@ -122,7 +124,10 @@ export async function sendWelcomeEmail({
     };
   }
 
-  const email = buildWelcomeEmail({ firstName });
+  const email = buildWelcomeEmail({
+    appBaseUrl: config.appBaseUrl ?? "https://sales.talkingheads.education",
+    firstName,
+  });
 
   try {
     const result = await sendResendEmail({

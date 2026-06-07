@@ -2,7 +2,7 @@ function trimTrailingSlash(value: string) {
   return value.replace(/\/+$/, "");
 }
 
-const OFFICIAL_PRODUCTION_APP_URL = "https://sales.diebestenberatungsagenturen.de";
+const OFFICIAL_PRODUCTION_APP_URL = "https://sales.talkingheads.education";
 
 function normalizeExternalUrl(value: string) {
   const trimmed = value.trim();
@@ -90,8 +90,8 @@ function getAuthRedirectBaseUrl() {
 
 export function getPasswordResetRedirectUrl() {
   // Supabase Auth must allow these production URLs in site/redirect settings.
-  // Keep `https://sales.diebestenberatungsagenturen.de/reset-password` and
-  // `https://sales.diebestenberatungsagenturen.de/login?confirmed=1` allowed in production.
+  // Keep `https://sales.talkingheads.education/reset-password` and
+  // `https://sales.talkingheads.education/login?confirmed=1` allowed in production.
   return `${getAuthRedirectBaseUrl()}/reset-password`;
 }
 

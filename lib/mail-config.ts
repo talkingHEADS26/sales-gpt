@@ -1,4 +1,4 @@
-const OFFICIAL_DOMAIN = "sales.diebestenberatungsagenturen.de";
+const OFFICIAL_DOMAIN = "sales.talkingheads.education";
 const OFFICIAL_CONTACT_EMAIL = `io@${OFFICIAL_DOMAIN}`;
 const OFFICIAL_MAIL_FROM = `talkingHEADS Sales Trainer <${OFFICIAL_CONTACT_EMAIL}>`;
 const INTERNAL_SIGNUP_ALERT_EMAIL = `io@${OFFICIAL_DOMAIN}`;
