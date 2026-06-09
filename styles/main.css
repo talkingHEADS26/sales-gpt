@@ -1131,9 +1131,10 @@ img {
 
 .footer-socials {
   margin-top: 18px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
   gap: 10px;
+  justify-content: start;
 }
 
 .footer-social {

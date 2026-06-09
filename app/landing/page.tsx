@@ -596,10 +596,6 @@ export default function LandingPage() {
             <Link href="#top" className="brand brand--footer" aria-label="talkingHEADS Startseite">
               <SiteLogo variant="white" className="brand__logo brand__logo--footer" />
             </Link>
-            <p className="footer-description">
-              KI-gestütztes Sales Training für Teams, die schneller lernen, sauberer abschließen und messbar wachsen
-              wollen.
-            </p>
             <address className="footer-contact">
               Geppert Consulting Group GmbH
               <br />
