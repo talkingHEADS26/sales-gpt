@@ -1344,12 +1344,17 @@ export function AdminPageView() {
                                 <h2 className="text-xl font-semibold tracking-[-0.03em] text-[#707070] sm:text-2xl">
                                   {organization.organizationName}
                                 </h2>
-                                <p className="mt-1 text-sm leading-6 text-slate-600">
-                                  Owner:{" "}
-                                  {organization.owner.name ??
-                                    organization.owner.email ??
-                                    "Nicht hinterlegt"}
-                                </p>
+                                <div className="mt-1 text-sm leading-6 text-slate-600">
+                                  <p>
+                                    Owner:{" "}
+                                    {organization.owner.name ??
+                                      organization.owner.email ??
+                                      "Nicht hinterlegt"}
+                                  </p>
+                                  <p className="text-slate-500">
+                                    {organization.owner.email ?? "Keine E-Mail gefunden"}
+                                  </p>
+                                </div>
                               </div>
                               <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
                                 {isExpanded ? "Details ausblenden" : "Details anzeigen"}
@@ -1437,8 +1442,21 @@ export function AdminPageView() {
                             className="mt-5 border-t border-slate-100 pt-5"
                           >
                             <div className="max-w-3xl">
-                            {hasSignupOrderData(organization.owner.signupOrder) ? (
-                              <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-4">
+                              <div className="rounded-2xl border border-slate-100 bg-white/90 px-4 py-4">
+                              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                                Owner
+                              </p>
+                              <p className="mt-2 text-base font-semibold text-[#707070]">
+                                {organization.owner.name ??
+                                  organization.owner.email ??
+                                  "Nicht hinterlegt"}
+                              </p>
+                              <p className="mt-1 text-sm text-slate-600">
+                                {organization.owner.email ?? "Keine E-Mail gefunden"}
+                              </p>
+                            </div>
+                              {hasSignupOrderData(organization.owner.signupOrder) ? (
+                                <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-4">
                                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
                                   Kaufdaten zur Prüfung
                                 </p>
@@ -1463,14 +1481,14 @@ export function AdminPageView() {
                                   </p>
                                 </div>
                               </div>
-                            ) : null}
-                            {organization.seatLimitSource !== "stored" ? (
-                              <p className="mt-4 text-sm leading-7 text-[#707070]">
+                              ) : null}
+                              {organization.seatLimitSource !== "stored" ? (
+                                <p className="mt-4 text-sm leading-7 text-[#707070]">
                                 Seat-Limit wird aktuell aus den verfügbaren Paketdaten abgeleitet.
                               </p>
-                            ) : null}
-                            {organization.planKey === "manual" ? (
-                              <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-4">
+                              ) : null}
+                              {organization.planKey === "manual" ? (
+                                <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-4">
                                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
                                   Manuell
                                 </p>
@@ -1483,9 +1501,9 @@ export function AdminPageView() {
                                   </p>
                                 </div>
                               </div>
-                            ) : null}
-                            {organization.copecart ? (
-                              <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-4">
+                              ) : null}
+                              {organization.copecart ? (
+                                <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-4">
                                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
                                   CopeCart Abo-Status
                                 </p>
@@ -1519,8 +1537,8 @@ export function AdminPageView() {
                                   </p>
                                 </div>
                               </div>
-                            ) : null}
-                            <div className="mt-4 flex flex-col gap-2 sm:max-w-xs">
+                              ) : null}
+                              <div className="mt-4 flex flex-col gap-2 sm:max-w-xs">
                               <label
                                 htmlFor={`industry-${organization.id}`}
                                 className="text-sm font-medium text-[#707070]"

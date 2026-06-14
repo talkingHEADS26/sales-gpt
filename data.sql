@@ -414,7 +414,7 @@ ALTER TABLE public.profiles DISABLE TRIGGER ALL;
 COPY public.profiles (id, full_name, role, created_at, updated_at, first_name, last_name, username, is_active, welcome_email_sent_at) FROM stdin;
 af19c735-24f4-456d-b155-9bde3b3eb7b9	Christian Guzien	master_admin	2026-03-23 20:37:58.743876+00	2026-03-23 20:44:57.621275+00	Christian	Guzien	christian	t	\N
 127953e0-3853-4ae4-8720-70149094b2a2	\N	master_admin	2026-05-15 14:30:09.932439+00	2026-05-18 15:49:45.268282+00	\N	\N	\N	t	2026-05-18 14:21:02.561+00
-6808e05c-1714-425b-a6a1-1d43564917a8	\N	user	2026-03-22 14:43:59.816338+00	2026-05-20 17:27:39.752304+00	Bernd	Bizeps	bernd	t	2026-05-09 12:24:21.64+00
+6808e05c-1714-425b-a6a1-1d43564917a8	\N	master_admin	2026-03-22 14:43:59.816338+00	2026-06-14 14:07:19.087069+00	Bernd	Bizeps	bernd	t	2026-05-09 12:24:21.64+00
 \.
 
 
@@ -1157,4 +1157,3 @@ SELECT pg_catalog.setval('realtime.subscription_id_seq', 1, false);
 --
 
 \unrestrict vDZSe4t9nZorghrhcuS1EoNmEPi6msKh7dRqQLodgPAtEkaONeBZviM1JheTtbz
-
