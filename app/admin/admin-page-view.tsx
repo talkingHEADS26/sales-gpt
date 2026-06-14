@@ -310,6 +310,7 @@ export function AdminPageView() {
   const [isForbidden, setIsForbidden] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [systemEvents, setSystemEvents] = useState<AdminSystemEvent[]>([]);
+  const [isSystemEventsExpanded, setIsSystemEventsExpanded] = useState(false);
   const [updatingKey, setUpdatingKey] = useState<string | null>(null);
   const [expandedOrganizationIds, setExpandedOrganizationIds] = useState<Set<string>>(
     () => new Set()
@@ -1155,50 +1156,83 @@ export function AdminPageView() {
 
                 {!isLoading && !isForbidden ? (
                   <div className="mt-8 rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
-                      System-Events
-                    </p>
-                    <p className="mt-1 text-sm text-slate-500">
-                      Letzte 10 Monitoring-Einträge aus dem Systembetrieb.
-                    </p>
-
-                    <div className="mt-4 space-y-3">
-                      {systemEvents.length === 0 ? (
-                        <p className="text-sm text-slate-500">
-                          Keine System-Events vorhanden.
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setIsSystemEventsExpanded((current) => !current)
+                      }
+                      aria-expanded={isSystemEventsExpanded}
+                      aria-controls="system-events-panel"
+                      className="flex w-full items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white px-4 py-4 text-left transition hover:border-[#0e51a0]/20 hover:bg-slate-50"
+                    >
+                      <div>
+                        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0e51a0]">
+                          System-Events
                         </p>
-                      ) : (
-                        systemEvents.map((event) => (
-                          <div
-                            key={event.id}
-                            className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700"
-                          >
-                            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                              <div className="flex flex-wrap items-center gap-2">
-                                <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
-                                  {event.severity}
-                                </span>
-                                <span className="text-xs uppercase tracking-[0.12em] text-slate-500">
-                                  {event.source}
-                                </span>
-                                {event.alertSentAt ? (
-                                  <span className="text-xs text-rose-600">
-                                    Alert gesendet
+                        <p className="mt-1 text-sm text-slate-500">
+                          Letzte 10 Monitoring-Einträge aus dem Systembetrieb.
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
+                          {systemEvents.length}
+                        </span>
+                        <svg
+                          aria-hidden="true"
+                          className={`h-5 w-5 shrink-0 text-slate-500 transition-transform ${
+                            isSystemEventsExpanded ? "rotate-180" : ""
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
+                      </div>
+                    </button>
+
+                    {isSystemEventsExpanded ? (
+                      <div id="system-events-panel" className="mt-4 space-y-3">
+                        {systemEvents.length === 0 ? (
+                          <p className="text-sm text-slate-500">
+                            Keine System-Events vorhanden.
+                          </p>
+                        ) : (
+                          systemEvents.map((event) => (
+                            <div
+                              key={event.id}
+                              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700"
+                            >
+                              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">
+                                    {event.severity}
                                   </span>
-                                ) : null}
+                                  <span className="text-xs uppercase tracking-[0.12em] text-slate-500">
+                                    {event.source}
+                                  </span>
+                                  {event.alertSentAt ? (
+                                    <span className="text-xs text-rose-600">
+                                      Alert gesendet
+                                    </span>
+                                  ) : null}
+                                </div>
+                                <span className="text-xs text-slate-500">
+                                  {new Date(event.createdAt).toLocaleString("de-DE")}
+                                </span>
                               </div>
-                              <span className="text-xs text-slate-500">
-                                {new Date(event.createdAt).toLocaleString("de-DE")}
-                              </span>
+                              <p className="mt-2 text-sm text-slate-700">{event.message}</p>
+                              <p className="mt-1 text-xs text-slate-500">
+                                Env: {event.environment ?? "unknown"}
+                              </p>
                             </div>
-                            <p className="mt-2 text-sm text-slate-700">{event.message}</p>
-                            <p className="mt-1 text-xs text-slate-500">
-                              Env: {event.environment ?? "unknown"}
-                            </p>
-                          </div>
-                        ))
-                      )}
-                    </div>
+                          ))
+                        )}
+                      </div>
+                    ) : null}
                   </div>
                 ) : null}
 
