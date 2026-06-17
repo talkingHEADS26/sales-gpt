@@ -1,9 +1,9 @@
 import crypto from "node:crypto";
 
-import { sendManualOrganizationActivationEmail } from "@/lib/email/send-manual-organization-activation";
+import { sendConfirmationEmail } from "@/lib/confirmation-mailer";
 import type { FranchiseVerticalKey, IndustryKey } from "@/lib/industries";
 import { normalizeIndustryKey } from "@/lib/industries";
-import { getPasswordResetRedirectUrl } from "@/lib/site-url";
+import { getSignupConfirmationRedirectUrl } from "@/lib/site-url";
 import type { SupabaseServerClient } from "@/lib/supabase-server";
 
 type ManualOrganizationOwnerInput = {
@@ -378,7 +378,7 @@ async function createOrResolveOwnerUser(params: {
   const randomPassword = crypto.randomBytes(24).toString("hex");
   const createUserResult = await params.serviceRoleClient.auth.admin.createUser({
     email: normalizeEmail(params.owner.email),
-    email_confirm: true,
+    email_confirm: false,
     password: randomPassword,
     user_metadata: {
       first_name: params.owner.firstName,
@@ -408,22 +408,22 @@ async function createOrResolveOwnerUser(params: {
   };
 }
 
-async function generateActivationLink(params: {
+async function generateConfirmationLink(params: {
   email: string;
   serviceRoleClient: SupabaseServerClient;
 }) {
   const generateLinkResult = await params.serviceRoleClient.auth.admin.generateLink({
-    type: "recovery",
+    type: "magiclink",
     email: params.email,
     options: {
-      redirectTo: getPasswordResetRedirectUrl(),
+      redirectTo: getSignupConfirmationRedirectUrl(),
     },
   });
 
   if (generateLinkResult.error || !generateLinkResult.data.properties?.action_link) {
     throw new Error(
       generateLinkResult.error?.message ??
-        "Aktivierungslink konnte nicht erstellt werden."
+        "Bestätigungslink konnte nicht erstellt werden."
     );
   }
 
@@ -467,23 +467,22 @@ export async function createManualOrganizationWithOwner({
       userId: resolvedOwner.userId,
     });
 
-    const activationUrl = await generateActivationLink({
+    const confirmationUrl = await generateConfirmationLink({
       email: resolvedOwner.email,
       serviceRoleClient,
     });
-    const emailResult = await sendManualOrganizationActivationEmail({
-      activationUrl,
-      firstName: normalizedOwner.firstName,
+    const emailResult = await sendConfirmationEmail({
+      confirmationUrl,
       recipientEmail: resolvedOwner.email,
-      usageDurationDays,
-      validUntil: organization.validUntil,
     });
 
     if (emailResult.mode !== "sent") {
       throw new Error(
         emailResult.reason === "not_configured"
-          ? "Die Aktivierungs-E-Mail ist nicht vollständig konfiguriert."
-          : "Die Aktivierungs-E-Mail konnte nicht gesendet werden."
+          ? "Die Bestätigungs-E-Mail ist nicht vollständig konfiguriert."
+          : emailResult.detail
+            ? `Die Bestätigungs-E-Mail konnte nicht gesendet werden: ${emailResult.detail}`
+            : "Die Bestätigungs-E-Mail konnte nicht gesendet werden."
       );
     }
 
