@@ -78,11 +78,12 @@ function RegisterPageContent() {
     "customerEmail",
     "email"
   );
+  const isInvitationSignup = Boolean(invitationToken);
   const cameFromCopeCart =
     Boolean(copecartProductId) ||
     Boolean(copecartOrderId) ||
     Boolean(copecartCustomerEmail);
-  const isInvitationSignup = Boolean(invitationToken);
+  const isCopeCartBoundSignup = cameFromCopeCart && !isInvitationSignup;
   const [invitationOrganizationName, setInvitationOrganizationName] = useState("");
   const [invitation, setInvitation] = useState<{
     email: string | null;
@@ -687,21 +688,30 @@ function RegisterPageContent() {
                             >
                               Lizenzplan
                             </label>
-                            <select
-                              id="licensePlan"
-                              value={licensePlan}
-                              onChange={(event) =>
-                                setLicensePlan(event.target.value as LicensePlan)
-                              }
-                              className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10"
-                              disabled={isLoading}
-                            >
-                              {LICENSE_PLANS.map((plan) => (
-                                <option key={plan} value={plan}>
-                                  {getPlanLabel(plan)}
-                                </option>
-                              ))}
-                            </select>
+                            {isCopeCartBoundSignup ? (
+                              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)]">
+                                {getPlanLabel(licensePlan)}
+                                <p className="mt-1 text-xs text-slate-500">
+                                  Dieser Plan ist an deinen CopeCart-Kauf gebunden.
+                                </p>
+                              </div>
+                            ) : (
+                              <select
+                                id="licensePlan"
+                                value={licensePlan}
+                                onChange={(event) =>
+                                  setLicensePlan(event.target.value as LicensePlan)
+                                }
+                                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10"
+                                disabled={isLoading}
+                              >
+                                {LICENSE_PLANS.map((plan) => (
+                                  <option key={plan} value={plan}>
+                                    {getPlanLabel(plan)}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
                             {fieldErrors.licensePlan ? (
                               <p className="mt-2 text-sm text-red-700">
                                 {fieldErrors.licensePlan}
