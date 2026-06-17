@@ -1,4 +1,4 @@
-import { InviteAcceptForm } from "./invite-accept-form";
+import { redirect } from "next/navigation";
 
 type InvitePageProps = {
   params: Promise<{ token: string }>;
@@ -7,5 +7,5 @@ type InvitePageProps = {
 export default async function InvitePage({ params }: InvitePageProps) {
   const { token } = await params;
 
-  return <InviteAcceptForm token={token} />;
+  redirect(`/register?invitation_token=${encodeURIComponent(token)}`);
 }

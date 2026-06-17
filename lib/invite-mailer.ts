@@ -43,10 +43,10 @@ function escapeHtml(value: string) {
 
 function buildInviteLink(baseUrl: string | null, inviteToken: string) {
   if (!baseUrl) {
-    return `/invite/${inviteToken}`;
+    return `/register?invitation_token=${encodeURIComponent(inviteToken)}`;
   }
 
-  return `${baseUrl}/invite/${inviteToken}`;
+  return `${baseUrl}/register?invitation_token=${encodeURIComponent(inviteToken)}`;
 }
 
 function logInviteMailerWarning(message: string) {
