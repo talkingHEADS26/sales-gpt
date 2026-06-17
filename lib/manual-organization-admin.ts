@@ -1,6 +1,8 @@
 import crypto from "node:crypto";
 
 import { sendManualOrganizationActivationEmail } from "@/lib/email/send-manual-organization-activation";
+import type { FranchiseVerticalKey, IndustryKey } from "@/lib/industries";
+import { normalizeIndustryKey } from "@/lib/industries";
 import { getPasswordResetRedirectUrl } from "@/lib/site-url";
 import type { SupabaseServerClient } from "@/lib/supabase-server";
 
@@ -11,6 +13,8 @@ type ManualOrganizationOwnerInput = {
 };
 
 type CreateManualOrganizationParams = {
+  franchiseVertical: FranchiseVerticalKey | null;
+  industryKey: IndustryKey;
   organizationName: string;
   owner: ManualOrganizationOwnerInput;
   seatLimit: number;
@@ -33,6 +37,22 @@ type ProfileRow = {
   role: string | null;
 };
 
+type ManualOrganizationInsertPayload = {
+  franchise_vertical?: FranchiseVerticalKey | null;
+  industry_key: IndustryKey | string;
+  is_active: boolean;
+  organization_name: string;
+  seat_limit: number;
+};
+
+type ManualOrganizationRow = {
+  franchise_vertical: string | null;
+  id: string;
+  industry_key: string | null;
+  organization_name: string;
+  seat_limit: number;
+};
+
 function normalizeText(value: string) {
   return value.trim();
 }
@@ -43,6 +63,19 @@ function normalizeEmail(value: string) {
 
 function composeFullName(firstName: string, lastName: string) {
   return [firstName.trim(), lastName.trim()].filter(Boolean).join(" ").trim() || null;
+}
+
+function toLegacyIndustryKey(industryKey: IndustryKey) {
+  if (industryKey === "franchise") {
+    return "automotive";
+  }
+  if (industryKey === "finance") {
+    return "insurance";
+  }
+  if (industryKey === "fitness") {
+    return "physio";
+  }
+  return industryKey;
 }
 
 async function lookupAuthUserByEmail(params: {
@@ -155,6 +188,8 @@ async function ensureProfileRecord(params: {
 }
 
 async function createOrganizationAndSubscription(params: {
+  franchiseVertical: FranchiseVerticalKey | null;
+  industryKey: IndustryKey;
   organizationName: string;
   seatLimit: number;
   serviceRoleClient: SupabaseServerClient;
@@ -163,16 +198,88 @@ async function createOrganizationAndSubscription(params: {
   const validUntil = new Date(
     Date.now() + params.usageDurationDays * 24 * 60 * 60 * 1000
   );
+  const organizationPayload = {
+    franchise_vertical:
+      params.industryKey === "franchise" ? params.franchiseVertical : null,
+    industry_key: params.industryKey,
+    is_active: true,
+    organization_name: params.organizationName,
+    seat_limit: params.seatLimit,
+  };
+  let hasFranchiseVerticalColumn = true;
+  let payloadUsedForLastInsert: ManualOrganizationInsertPayload = {
+    ...organizationPayload,
+  };
 
-  const { data: organization, error: organizationError } = await params.serviceRoleClient
+  let { data: organization, error: organizationError } = await params.serviceRoleClient
     .from("organizations")
-    .insert({
-      is_active: true,
-      organization_name: params.organizationName,
-      seat_limit: params.seatLimit,
-    })
-    .select("id, organization_name, seat_limit")
-    .single<{ id: string; organization_name: string; seat_limit: number }>();
+    .insert(payloadUsedForLastInsert)
+    .select("id, organization_name, seat_limit, industry_key, franchise_vertical")
+    .single<ManualOrganizationRow>();
+
+  if (organizationError?.message?.includes("franchise_vertical")) {
+    hasFranchiseVerticalColumn = false;
+    const fallbackPayload: ManualOrganizationInsertPayload = {
+      ...organizationPayload,
+    };
+    delete fallbackPayload.franchise_vertical;
+    payloadUsedForLastInsert = fallbackPayload;
+    const fallbackResult = await params.serviceRoleClient
+      .from("organizations")
+      .insert(payloadUsedForLastInsert)
+      .select("id, organization_name, seat_limit, industry_key")
+      .single<{
+        id: string;
+        industry_key: string | null;
+        organization_name: string;
+        seat_limit: number;
+      }>();
+
+    organizationError = fallbackResult.error;
+    organization = fallbackResult.data
+      ? {
+          ...fallbackResult.data,
+          franchise_vertical: null,
+        }
+      : null;
+  }
+
+  if (organizationError?.message?.includes("organizations_industry_key_check")) {
+    const legacyPayload = {
+      ...payloadUsedForLastInsert,
+      industry_key: toLegacyIndustryKey(params.industryKey),
+    };
+
+    if (hasFranchiseVerticalColumn) {
+      const legacyResult = await params.serviceRoleClient
+        .from("organizations")
+        .insert(legacyPayload)
+        .select("id, organization_name, seat_limit, industry_key, franchise_vertical")
+        .single<ManualOrganizationRow>();
+
+      organizationError = legacyResult.error;
+      organization = legacyResult.data;
+    } else {
+      const legacyResult = await params.serviceRoleClient
+        .from("organizations")
+        .insert(legacyPayload)
+        .select("id, organization_name, seat_limit, industry_key")
+        .single<{
+          id: string;
+          industry_key: string | null;
+          organization_name: string;
+          seat_limit: number;
+        }>();
+
+      organizationError = legacyResult.error;
+      organization = legacyResult.data
+        ? {
+            ...legacyResult.data,
+            franchise_vertical: null,
+          }
+        : null;
+    }
+  }
 
   if (organizationError || !organization) {
     throw new Error(
@@ -324,6 +431,8 @@ async function generateActivationLink(params: {
 }
 
 export async function createManualOrganizationWithOwner({
+  franchiseVertical,
+  industryKey,
   organizationName,
   owner,
   seatLimit,
@@ -331,6 +440,7 @@ export async function createManualOrganizationWithOwner({
   usageDurationDays,
 }: CreateManualOrganizationParams) {
   const normalizedOrganizationName = normalizeText(organizationName);
+  const normalizedIndustryKey = normalizeIndustryKey(industryKey);
   const normalizedOwner = {
     email: normalizeEmail(owner.email),
     firstName: normalizeText(owner.firstName),
@@ -342,6 +452,8 @@ export async function createManualOrganizationWithOwner({
     serviceRoleClient,
   });
   const organization = await createOrganizationAndSubscription({
+    franchiseVertical,
+    industryKey: normalizedIndustryKey,
     organizationName: normalizedOrganizationName,
     seatLimit,
     serviceRoleClient,
@@ -378,6 +490,11 @@ export async function createManualOrganizationWithOwner({
     return {
       organization: {
         id: organization.id,
+        franchiseVertical:
+          normalizeIndustryKey(organization.industry_key) === "franchise"
+            ? organization.franchise_vertical
+            : null,
+        industryKey: normalizeIndustryKey(organization.industry_key),
         name: organization.organization_name,
         seatLimit: organization.seat_limit,
         usageDurationDays,

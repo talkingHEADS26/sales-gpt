@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 
 import { InternalAppShell } from "@/components/internal-app-shell";
 import {
+  DEFAULT_FRANCHISE_VERTICAL_KEY,
+  DEFAULT_INDUSTRY_KEY,
   FRANCHISE_VERTICAL_OPTIONS,
   type FranchiseVerticalKey,
   INDUSTRY_OPTIONS,
@@ -302,6 +304,10 @@ export function AdminPageView() {
   const [manualOwnerEmail, setManualOwnerEmail] = useState("");
   const [manualOwnerFirstName, setManualOwnerFirstName] = useState("");
   const [manualOwnerLastName, setManualOwnerLastName] = useState("");
+  const [manualIndustryKey, setManualIndustryKey] =
+    useState<IndustryKey>(DEFAULT_INDUSTRY_KEY);
+  const [manualFranchiseVertical, setManualFranchiseVertical] =
+    useState<FranchiseVerticalKey>(DEFAULT_FRANCHISE_VERTICAL_KEY);
   const [manualSeatLimit, setManualSeatLimit] = useState("1");
   const [manualUsageDurationDays, setManualUsageDurationDays] = useState("14");
   const [error, setError] = useState("");
@@ -588,6 +594,8 @@ export function AdminPageView() {
     setManualOwnerEmail("");
     setManualOwnerFirstName("");
     setManualOwnerLastName("");
+    setManualIndustryKey(DEFAULT_INDUSTRY_KEY);
+    setManualFranchiseVertical(DEFAULT_FRANCHISE_VERTICAL_KEY);
     setManualSeatLimit("1");
     setManualUsageDurationDays("14");
     setIsManualOrgModalOpen(true);
@@ -681,6 +689,9 @@ export function AdminPageView() {
         },
         body: JSON.stringify({
           organizationName: manualOrganizationName.trim(),
+          franchiseVertical:
+            manualIndustryKey === "franchise" ? manualFranchiseVertical : null,
+          industryKey: manualIndustryKey,
           ownerEmail: manualOwnerEmail.trim(),
           ownerFirstName: manualOwnerFirstName.trim(),
           ownerLastName: manualOwnerLastName.trim(),
@@ -2020,6 +2031,50 @@ export function AdminPageView() {
                               className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10 disabled:cursor-not-allowed disabled:bg-slate-100"
                             />
                           </div>
+
+                          <div>
+                            <label className="mb-2 block text-sm font-medium text-[#707070]">
+                              Branche
+                            </label>
+                            <select
+                              value={manualIndustryKey}
+                              onChange={(event) =>
+                                setManualIndustryKey(event.target.value as IndustryKey)
+                              }
+                              disabled={isManualOrgSubmitting}
+                              className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10 disabled:cursor-not-allowed disabled:bg-slate-100"
+                            >
+                              {INDUSTRY_OPTIONS.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          {manualIndustryKey === "franchise" ? (
+                            <div>
+                              <label className="mb-2 block text-sm font-medium text-[#707070]">
+                                Franchise-Subbranche
+                              </label>
+                              <select
+                                value={manualFranchiseVertical}
+                                onChange={(event) =>
+                                  setManualFranchiseVertical(
+                                    event.target.value as FranchiseVerticalKey
+                                  )
+                                }
+                                disabled={isManualOrgSubmitting}
+                                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10 disabled:cursor-not-allowed disabled:bg-slate-100"
+                              >
+                                {FRANCHISE_VERTICAL_OPTIONS.map((option) => (
+                                  <option key={option.value} value={option.value}>
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          ) : null}
 
                           <div>
                             <label className="mb-2 block text-sm font-medium text-[#707070]">

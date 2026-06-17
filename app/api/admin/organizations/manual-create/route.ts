@@ -1,10 +1,18 @@
 import { NextResponse } from "next/server";
 
 import { isAdminAuthFailure, requireMasterAdmin } from "@/lib/admin-server";
+import {
+  FRANCHISE_VERTICAL_KEYS,
+  INDUSTRY_KEYS,
+  normalizeFranchiseVerticalKey,
+  normalizeIndustryKey,
+} from "@/lib/industries";
 import { createManualOrganizationWithOwner } from "@/lib/manual-organization-admin";
 import { logSystemEvent } from "@/lib/system-monitoring";
 
 type RequestBody = {
+  franchiseVertical?: string | null;
+  industryKey?: string;
   organizationName?: string;
   ownerEmail?: string;
   ownerFirstName?: string;
@@ -32,6 +40,11 @@ export async function POST(request: Request) {
     }
 
     const body = (await request.json()) as RequestBody;
+    const industryKey = body.industryKey?.trim() || "";
+    const franchiseVertical =
+      typeof body.franchiseVertical === "string"
+        ? body.franchiseVertical.trim()
+        : body.franchiseVertical;
     const organizationName = body.organizationName?.trim() || "";
     const ownerFirstName = body.ownerFirstName?.trim() || "";
     const ownerLastName = body.ownerLastName?.trim() || "";
@@ -43,6 +56,24 @@ export async function POST(request: Request) {
     if (!organizationName) {
       return NextResponse.json(
         { error: "Organisationsname ist erforderlich." },
+        { status: 400 }
+      );
+    }
+
+    if (!industryKey || !(INDUSTRY_KEYS as readonly string[]).includes(industryKey)) {
+      return NextResponse.json(
+        { error: "Branche ist ungültig." },
+        { status: 400 }
+      );
+    }
+
+    if (
+      franchiseVertical !== undefined &&
+      franchiseVertical !== null &&
+      !(FRANCHISE_VERTICAL_KEYS as readonly string[]).includes(franchiseVertical)
+    ) {
+      return NextResponse.json(
+        { error: "Franchise-Subbranche ist ungültig." },
         { status: 400 }
       );
     }
@@ -84,8 +115,15 @@ export async function POST(request: Request) {
 
     const validatedSeatLimit = seatLimit as number;
     const validatedUsageDurationDays = usageDurationDays as number;
+    const normalizedIndustryKey = normalizeIndustryKey(industryKey);
+    const normalizedFranchiseVertical =
+      normalizedIndustryKey === "franchise"
+        ? normalizeFranchiseVerticalKey(franchiseVertical)
+        : null;
 
     const result = await createManualOrganizationWithOwner({
+      franchiseVertical: normalizedFranchiseVertical,
+      industryKey: normalizedIndustryKey,
       organizationName,
       owner: {
         email: ownerEmail,
@@ -102,6 +140,8 @@ export async function POST(request: Request) {
       activationMailReason: null,
       organizationId: result.organization.id,
       organizationName: result.organization.name,
+      franchiseVertical: result.organization.franchiseVertical,
+      industryKey: result.organization.industryKey,
       ownerEmail: result.owner.email,
       ownerUserCreated: result.owner.created,
       ownerUserId: result.owner.userId,
