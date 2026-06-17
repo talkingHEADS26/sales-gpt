@@ -150,10 +150,10 @@ enabled = true
 site_url = "env(APP_BASE_URL)"
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
 additional_redirect_urls = [
-  "https://abschluss-io.de",
-  "https://abschluss-io.de/login",
-  "https://abschluss-io.de/login?confirmed=1",
-  "https://abschluss-io.de/reset-password",
+  "https://sales.talkingheads.education",
+  "https://sales.talkingheads.education/login",
+  "https://sales.talkingheads.education/login?confirmed=1",
+  "https://sales.talkingheads.education/reset-password",
   "http://localhost:3000/login?confirmed=1",
   "http://localhost:3000/reset-password"
 ]
