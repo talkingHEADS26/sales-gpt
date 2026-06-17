@@ -23,6 +23,10 @@ type PatchRequestBody = {
   promptProfileKey?: string | null;
 };
 
+type OrganizationMemberRecord = {
+  user_id: string;
+};
+
 function toLegacyIndustryKey(industryKey: string) {
   if (industryKey === "franchise") {
     return "automotive";
@@ -72,6 +76,55 @@ export async function DELETE(
       return NextResponse.json(
         { error: "Organisation nicht gefunden." },
         { status: 404 }
+      );
+    }
+
+    const { data: organizationMembers, error: organizationMembersError } =
+      await adminAuth.serviceRoleClient
+        .from("organization_members")
+        .select("user_id")
+        .eq("organization_id", organizationId);
+
+    if (organizationMembersError) {
+      return NextResponse.json(
+        { error: organizationMembersError.message },
+        { status: 500 }
+      );
+    }
+
+    const uniqueUserIds = [
+      ...new Set(
+        ((organizationMembers ?? []) as OrganizationMemberRecord[]).map(
+          (member) => member.user_id
+        )
+      ),
+    ];
+
+    const authDeletionResults = await Promise.allSettled(
+      uniqueUserIds.map((userId) =>
+        adminAuth.serviceRoleClient.auth.admin.deleteUser(userId, false)
+      )
+    );
+
+    const authDeletionErrors = authDeletionResults
+      .map((result, index) =>
+        result.status === "rejected"
+          ? `User ${uniqueUserIds[index]}: ${result.reason instanceof Error ? result.reason.message : String(result.reason)}`
+          : result.value.error
+            ? `User ${uniqueUserIds[index]}: ${result.value.error.message}`
+            : null
+      )
+      .filter((value): value is string => Boolean(value));
+
+    if (authDeletionErrors.length > 0) {
+      return NextResponse.json(
+        {
+          error:
+            `Ein oder mehrere Benutzer konnten nicht aus Supabase Auth gelöscht werden: ${authDeletionErrors.join(
+              "; "
+            )}`,
+        },
+        { status: 500 }
       );
     }
 
