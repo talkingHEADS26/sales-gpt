@@ -16,6 +16,7 @@ export type ManualOrganizationActivationEmailSendResult =
   | {
       mode: "skipped";
       reason: "not_configured" | "send_failed";
+      detail?: string;
     };
 
 function escapeHtml(value: string) {
@@ -147,6 +148,7 @@ export async function sendManualOrganizationActivationEmail({
     return {
       mode: "skipped",
       reason: "not_configured",
+      detail: config.missingEnvVars.join(", "),
     };
   }
 
@@ -176,6 +178,7 @@ export async function sendManualOrganizationActivationEmail({
       return {
         mode: "skipped",
         reason: "send_failed",
+        detail: result.errorMessage,
       };
     }
 
@@ -192,6 +195,7 @@ export async function sendManualOrganizationActivationEmail({
     return {
       mode: "skipped",
       reason: "send_failed",
+      detail: message,
     };
   }
 }

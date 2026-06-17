@@ -77,6 +77,10 @@ function resolveOfficialEmail(
     warnings.push(
       `${envName} is configured as ${configuredEmail} (official default: ${fallback}).`
     );
+
+    // The mailers are wired to the official sender identity. A mismatched
+    // override can break Resend delivery if that domain is not verified.
+    return fallback;
   }
 
   return configuredEmail;
@@ -116,6 +120,10 @@ function resolveOfficialMailbox(
     warnings.push(
       `${envName} is configured as ${configuredMailbox} (official default: ${fallback}).`
     );
+
+    // Keep the verified sender identity stable instead of honoring a potentially
+    // unverified override.
+    return fallback;
   }
 
   return configuredMailbox;
