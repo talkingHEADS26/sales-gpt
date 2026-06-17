@@ -31,8 +31,21 @@ type EmailLookupResult = {
   exists: boolean;
 };
 
+type InvitationRecord = {
+  accepted_at: string | null;
+  email: string | null;
+  expires_at: string | null;
+  id: string;
+  organization_id: string;
+  role_to_assign: string;
+};
+
 function normalizeEmail(email: string) {
   return email.trim().toLowerCase();
+}
+
+function normalizeText(value: string | null | undefined) {
+  return value?.trim() ?? "";
 }
 
 function getRequiredServiceRoleClient() {
@@ -120,6 +133,99 @@ async function sendConfirmationEmailForUser(email: string) {
           ? `Bestätigungs-E-Mail konnte nicht gesendet werden: ${sendResult.detail}`
           : "Bestätigungs-E-Mail konnte nicht gesendet werden."
     );
+  }
+}
+
+async function ensureInvitationAcceptance(params: {
+  email: string;
+  metadata: SignupMetadata;
+  serviceRoleClient: ReturnType<typeof getSupabaseServiceRoleClient> extends infer T
+    ? NonNullable<T>
+    : never;
+  userId: string;
+}) {
+  const invitationToken = readMetadataValue(
+    params.metadata,
+    "invitation_token",
+    "invitationToken",
+    "invite_token"
+  );
+
+  if (!invitationToken) {
+    return;
+  }
+
+  const { data: invitation, error: invitationError } = await params.serviceRoleClient
+    .from("invitations")
+    .select("id, organization_id, email, role_to_assign, expires_at, accepted_at")
+    .eq("token", invitationToken)
+    .maybeSingle<InvitationRecord>();
+
+  if (invitationError) {
+    throw new Error(invitationError.message);
+  }
+
+  if (!invitation) {
+    throw new Error("Einladung nicht gefunden.");
+  }
+
+  if (invitation.accepted_at) {
+    return;
+  }
+
+  if (invitation.expires_at && new Date(invitation.expires_at) <= new Date()) {
+    throw new Error("Diese Einladung ist abgelaufen.");
+  }
+
+  if (invitation.email && normalizeEmail(invitation.email) !== normalizeEmail(params.email)) {
+    throw new Error("Die Einladung passt nicht zur registrierten E-Mail-Adresse.");
+  }
+
+  const firstName = normalizeText(params.metadata.first_name);
+  const lastName = normalizeText(params.metadata.last_name);
+  const username = normalizeText(params.metadata.username);
+  const fullName = [firstName, lastName].filter(Boolean).join(" ").trim() || null;
+
+  const { error: profileError } = await params.serviceRoleClient.from("profiles").upsert(
+    {
+      id: params.userId,
+      first_name: firstName || null,
+      full_name: fullName,
+      is_active: true,
+      last_name: lastName || null,
+      role: "org_admin",
+      username: username || null,
+    },
+    { onConflict: "id" }
+  );
+
+  if (profileError) {
+    throw new Error(profileError.message);
+  }
+
+  const { error: membershipError } = await params.serviceRoleClient
+    .from("organization_members")
+    .upsert(
+      {
+        organization_id: invitation.organization_id,
+        role_in_org: invitation.role_to_assign,
+        user_id: params.userId,
+      },
+      { onConflict: "organization_id,user_id" }
+    );
+
+  if (membershipError) {
+    throw new Error(membershipError.message);
+  }
+
+  const { error: acceptanceError } = await params.serviceRoleClient
+    .from("invitations")
+    .update({ accepted_at: new Date().toISOString() })
+    .eq("id", invitation.id)
+    .is("accepted_at", null);
+
+  if (acceptanceError) {
+    throw new Error(acceptanceError.message);
   }
 }
 function readMetadataValue(metadata: SignupMetadata, ...keys: string[]) {
@@ -286,6 +392,13 @@ export async function createInvitationSignupUser({
       );
     }
 
+    await ensureInvitationAcceptance({
+      email: normalizedEmail,
+      metadata,
+      serviceRoleClient,
+      userId: existingUser.id,
+    });
+
     return;
   }
 
@@ -302,6 +415,13 @@ export async function createInvitationSignupUser({
         "Einladung konnte nicht abgeschlossen werden."
     );
   }
+
+  await ensureInvitationAcceptance({
+    email: normalizedEmail,
+    metadata,
+    serviceRoleClient,
+    userId: createUserResult.data.user.id,
+  });
 }
 
 export async function resendSignupConfirmationEmail(email: string) {

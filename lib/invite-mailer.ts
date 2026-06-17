@@ -7,6 +7,7 @@ import { sendResendEmail } from "@/lib/resend-mail";
 type SendInviteEmailParams = {
   inviteToken: string;
   organizationName: string;
+  recipientName?: string | null;
   recipientEmail: string;
   requestOrigin?: string;
 };
@@ -78,17 +79,23 @@ function getInviteMailerConfig(
 function buildInviteEmail({
   inviteLink,
   organizationName,
+  recipientName,
 }: {
   inviteLink: string;
   organizationName: string;
+  recipientName?: string | null;
 }) {
   const safeInviteLink = escapeHtml(inviteLink);
   const safeOrganizationName = escapeHtml(organizationName);
+  const safeRecipientName = recipientName?.trim()
+    ? escapeHtml(recipientName.trim())
+    : "";
+  const greeting = safeRecipientName ? `Hallo ${safeRecipientName},` : "Hallo,";
 
   return {
     subject: "Du wurdest zu talkingHEADS Sales Trainer eingeladen",
     text: [
-      "Hi,",
+      greeting,
       "",
       `du wurdest zu ${organizationName} in talkingHEADS Sales Trainer eingeladen.`,
       "",
@@ -114,7 +121,7 @@ function buildInviteEmail({
             <h1 style="margin:0;font-size:30px;line-height:1.2;font-weight:700;">Du wurdest zu talkingHEADS Sales Trainer eingeladen</h1>
           </div>
           <div style="padding:40px;">
-            <p style="margin:0 0 16px;font-size:16px;line-height:1.7;">Hi,</p>
+            <p style="margin:0 0 16px;font-size:16px;line-height:1.7;">${greeting}</p>
             <p style="margin:0 0 16px;font-size:16px;line-height:1.7;">
               du wurdest zu ${safeOrganizationName} in talkingHEADS Sales Trainer eingeladen.
             </p>
@@ -156,6 +163,7 @@ function buildInviteEmail({
 export async function sendInviteEmail({
   inviteToken,
   organizationName,
+  recipientName,
   recipientEmail,
   requestOrigin,
 }: SendInviteEmailParams): Promise<InviteEmailSendResult> {
@@ -178,6 +186,7 @@ export async function sendInviteEmail({
   const email = buildInviteEmail({
     inviteLink: config.inviteLink,
     organizationName,
+    recipientName,
   });
 
   try {

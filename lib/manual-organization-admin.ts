@@ -241,6 +241,7 @@ export async function createManualOrganizationWithOwner({
     const emailResult = await sendInviteEmail({
       inviteToken: ownerInvitation.token,
       organizationName: organization.organization_name,
+      recipientName: normalizedOwner.firstName,
       recipientEmail: normalizedOwner.email,
     });
 
