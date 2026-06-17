@@ -77,6 +77,14 @@ function getAuthRedirectBaseUrl() {
 
   const normalizedUrl = trimTrailingSlash(envUrl);
 
+  if (normalizedUrl.includes("diebestenberatungsagenturen.de")) {
+    console.warn(
+      "[site-url] Legacy app URL detected for auth redirects. Using the official production URL instead."
+    );
+
+    return OFFICIAL_PRODUCTION_APP_URL;
+  }
+
   if (isLocalhostOrigin(normalizedUrl) && process.env.NODE_ENV === "production") {
     console.error(
       "[site-url] Localhost app URL detected in production for auth redirects. Falling back to official production URL."
