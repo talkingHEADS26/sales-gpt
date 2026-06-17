@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import {
-  createDirectSignupUser,
+  createInvitationSignupUser,
   createSignupUserWithConfirmationEmail,
 } from "@/lib/auth-signup";
 
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
         : "";
 
     if (registrationMode === "invitation_accept") {
-      await createDirectSignupUser({ email, metadata, password });
+      await createInvitationSignupUser({ email, metadata, password });
       return NextResponse.json({ success: true, confirmationEmailSent: false });
     }
 

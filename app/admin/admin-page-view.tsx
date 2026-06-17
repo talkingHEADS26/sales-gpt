@@ -711,8 +711,8 @@ export function AdminPageView() {
 
       setFeedback(
         responseBody.activationMail === "sent"
-          ? `Organisation ${responseBody.organizationName} wurde angelegt. Aktivierungs-Mail wurde an ${responseBody.ownerEmail} gesendet. Gültig bis ${formatDateTime(responseBody.validUntil ?? null)}.`
-          : `Organisation ${responseBody.organizationName} wurde angelegt. Die Aktivierungs-Mail konnte nicht automatisch versendet werden. Gültig bis ${formatDateTime(responseBody.validUntil ?? null)}.`
+          ? `Organisation ${responseBody.organizationName} wurde angelegt. Einladungs-Mail wurde an ${responseBody.ownerEmail} gesendet. Gültig bis ${formatDateTime(responseBody.validUntil ?? null)}.`
+          : `Organisation ${responseBody.organizationName} wurde angelegt. Die Einladungs-Mail konnte nicht automatisch versendet werden. Gültig bis ${formatDateTime(responseBody.validUntil ?? null)}.`
       );
       setIsManualOrgModalOpen(false);
       window.setTimeout(() => {

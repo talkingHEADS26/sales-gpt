@@ -144,7 +144,7 @@ export async function POST(request: Request) {
       industryKey: result.organization.industryKey,
       ownerEmail: result.owner.email,
       ownerUserCreated: result.owner.created,
-      ownerUserId: result.owner.userId,
+      ownerInvitationId: result.owner.inviteId,
       seatLimit: result.organization.seatLimit,
       usageDurationDays: result.organization.usageDurationDays,
       validUntil: result.organization.validUntil,

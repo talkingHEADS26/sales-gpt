@@ -1,9 +1,8 @@
 import crypto from "node:crypto";
 
-import { sendConfirmationEmail } from "@/lib/confirmation-mailer";
 import type { FranchiseVerticalKey, IndustryKey } from "@/lib/industries";
 import { normalizeIndustryKey } from "@/lib/industries";
-import { getSignupConfirmationRedirectUrl } from "@/lib/site-url";
+import { sendInviteEmail } from "@/lib/invite-mailer";
 import type { SupabaseServerClient } from "@/lib/supabase-server";
 
 type ManualOrganizationOwnerInput = {
@@ -20,21 +19,6 @@ type CreateManualOrganizationParams = {
   seatLimit: number;
   serviceRoleClient: SupabaseServerClient;
   usageDurationDays: number;
-};
-
-type ExistingAuthUser = {
-  email: string | null;
-  email_confirmed_at?: string | null;
-  id: string;
-};
-
-type ProfileRow = {
-  first_name: string | null;
-  full_name: string | null;
-  id: string;
-  is_active: boolean;
-  last_name: string | null;
-  role: string | null;
 };
 
 type ManualOrganizationInsertPayload = {
@@ -57,14 +41,6 @@ function normalizeText(value: string) {
   return value.trim();
 }
 
-function normalizeEmail(value: string) {
-  return normalizeText(value).toLowerCase();
-}
-
-function composeFullName(firstName: string, lastName: string) {
-  return [firstName.trim(), lastName.trim()].filter(Boolean).join(" ").trim() || null;
-}
-
 function toLegacyIndustryKey(industryKey: IndustryKey) {
   if (industryKey === "franchise") {
     return "automotive";
@@ -76,115 +52,6 @@ function toLegacyIndustryKey(industryKey: IndustryKey) {
     return "physio";
   }
   return industryKey;
-}
-
-async function lookupAuthUserByEmail(params: {
-  email: string;
-  serviceRoleClient: SupabaseServerClient;
-}) {
-  let page = 1;
-  const perPage = 200;
-  const normalizedEmail = normalizeEmail(params.email);
-
-  while (true) {
-    const { data, error } = await params.serviceRoleClient.auth.admin.listUsers({
-      page,
-      perPage,
-    });
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    const user = (data.users as ExistingAuthUser[]).find(
-      (candidate) => normalizeEmail(candidate.email ?? "") === normalizedEmail
-    );
-
-    if (user) {
-      return user;
-    }
-
-    if (data.users.length < perPage) {
-      break;
-    }
-
-    page += 1;
-  }
-
-  return null;
-}
-
-async function ensureProfileRecord(params: {
-  firstName: string;
-  lastName: string;
-  serviceRoleClient: SupabaseServerClient;
-  userId: string;
-}) {
-  const fullName = composeFullName(params.firstName, params.lastName);
-  const { data: profile, error: profileError } = await params.serviceRoleClient
-    .from("profiles")
-    .select("id, first_name, last_name, full_name, role, is_active")
-    .eq("id", params.userId)
-    .maybeSingle<ProfileRow>();
-
-  if (profileError) {
-    throw new Error(profileError.message);
-  }
-
-  if (!profile) {
-    const { error: insertError } = await params.serviceRoleClient.from("profiles").insert({
-      id: params.userId,
-      first_name: params.firstName,
-      full_name: fullName,
-      is_active: true,
-      last_name: params.lastName,
-      role: "user",
-    });
-
-    if (insertError) {
-      throw new Error(insertError.message);
-    }
-
-    return;
-  }
-
-  if (!profile.is_active) {
-    throw new Error(
-      "Der vorhandene Inhaber-Account ist derzeit deaktiviert und kann nicht automatisch zugeordnet werden."
-    );
-  }
-
-  const nextFirstName = profile.first_name?.trim() || params.firstName;
-  const nextLastName = profile.last_name?.trim() || params.lastName;
-  const nextFullName = profile.full_name?.trim() || composeFullName(nextFirstName, nextLastName);
-  const nextIsActive = profile.is_active;
-  const nextRole = profile.role === "master_admin" ? profile.role : profile.role ?? "user";
-
-  const shouldUpdate =
-    profile.first_name !== nextFirstName ||
-    profile.last_name !== nextLastName ||
-    profile.full_name !== nextFullName ||
-    profile.is_active !== nextIsActive ||
-    profile.role !== nextRole;
-
-  if (!shouldUpdate) {
-    return;
-  }
-
-  const { error: updateError } = await params.serviceRoleClient
-    .from("profiles")
-    .update({
-      first_name: nextFirstName,
-      full_name: nextFullName,
-      is_active: nextIsActive,
-      last_name: nextLastName,
-      role: nextRole,
-    })
-    .eq("id", params.userId);
-
-  if (updateError) {
-    throw new Error(updateError.message);
-  }
 }
 
 async function createOrganizationAndSubscription(params: {
@@ -306,128 +173,37 @@ async function createOrganizationAndSubscription(params: {
   };
 }
 
-async function ensureOrganizationMembership(params: {
+async function createOwnerInvitation(params: {
+  email: string;
   organizationId: string;
   serviceRoleClient: SupabaseServerClient;
-  userId: string;
 }) {
-  const { data: membership, error: membershipError } = await params.serviceRoleClient
-    .from("organization_members")
-    .select("id, role_in_org")
-    .eq("organization_id", params.organizationId)
-    .eq("user_id", params.userId)
-    .maybeSingle<{ id: string; role_in_org: string }>();
+  const token = crypto.randomBytes(32).toString("hex");
+  const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7).toISOString();
 
-  if (membershipError) {
-    throw new Error(membershipError.message);
-  }
+  const { data: invitation, error: invitationError } = await params.serviceRoleClient
+    .from("invitations")
+    .insert({
+      email: params.email,
+      expires_at: expiresAt,
+      organization_id: params.organizationId,
+      role_to_assign: "admin",
+      token,
+    })
+    .select("id, token")
+    .single<{ id: string; token: string }>();
 
-  if (!membership) {
-    const { error: insertError } = await params.serviceRoleClient
-      .from("organization_members")
-      .insert({
-        organization_id: params.organizationId,
-        role_in_org: "admin",
-        user_id: params.userId,
-      });
-
-    if (insertError) {
-      throw new Error(insertError.message);
-    }
-
-    return;
-  }
-
-  if (membership.role_in_org !== "admin") {
-    const { error: updateError } = await params.serviceRoleClient
-      .from("organization_members")
-      .update({ role_in_org: "admin" })
-      .eq("id", membership.id);
-
-    if (updateError) {
-      throw new Error(updateError.message);
-    }
-  }
-}
-
-async function createOrResolveOwnerUser(params: {
-  owner: ManualOrganizationOwnerInput;
-  serviceRoleClient: SupabaseServerClient;
-}) {
-  const existingUser = await lookupAuthUserByEmail({
-    email: params.owner.email,
-    serviceRoleClient: params.serviceRoleClient,
-  });
-
-  if (existingUser) {
-    await ensureProfileRecord({
-      firstName: params.owner.firstName,
-      lastName: params.owner.lastName,
-      serviceRoleClient: params.serviceRoleClient,
-      userId: existingUser.id,
-    });
-
-    return {
-      created: false,
-      email: normalizeEmail(params.owner.email),
-      firstName: params.owner.firstName,
-      userId: existingUser.id,
-    };
-  }
-
-  const randomPassword = crypto.randomBytes(24).toString("hex");
-  const createUserResult = await params.serviceRoleClient.auth.admin.createUser({
-    email: normalizeEmail(params.owner.email),
-    email_confirm: false,
-    password: randomPassword,
-    user_metadata: {
-      first_name: params.owner.firstName,
-      last_name: params.owner.lastName,
-      registration_mode: "basic",
-    },
-  });
-
-  if (createUserResult.error || !createUserResult.data.user) {
+  if (invitationError || !invitation) {
     throw new Error(
-      createUserResult.error?.message ?? "Owner-User konnte nicht erstellt werden."
+      invitationError?.message ?? "Owner-Einladung konnte nicht erstellt werden."
     );
   }
-
-  await ensureProfileRecord({
-    firstName: params.owner.firstName,
-    lastName: params.owner.lastName,
-    serviceRoleClient: params.serviceRoleClient,
-    userId: createUserResult.data.user.id,
-  });
 
   return {
-    created: true,
-    email: normalizeEmail(params.owner.email),
-    firstName: params.owner.firstName,
-    userId: createUserResult.data.user.id,
+    expiresAt,
+    inviteId: invitation.id,
+    token: invitation.token,
   };
-}
-
-async function generateConfirmationLink(params: {
-  email: string;
-  serviceRoleClient: SupabaseServerClient;
-}) {
-  const generateLinkResult = await params.serviceRoleClient.auth.admin.generateLink({
-    type: "magiclink",
-    email: params.email,
-    options: {
-      redirectTo: getSignupConfirmationRedirectUrl(),
-    },
-  });
-
-  if (generateLinkResult.error || !generateLinkResult.data.properties?.action_link) {
-    throw new Error(
-      generateLinkResult.error?.message ??
-        "Bestätigungslink konnte nicht erstellt werden."
-    );
-  }
-
-  return generateLinkResult.data.properties.action_link;
 }
 
 export async function createManualOrganizationWithOwner({
@@ -442,15 +218,10 @@ export async function createManualOrganizationWithOwner({
   const normalizedOrganizationName = normalizeText(organizationName);
   const normalizedIndustryKey = normalizeIndustryKey(industryKey);
   const normalizedOwner = {
-    email: normalizeEmail(owner.email),
-    firstName: normalizeText(owner.firstName),
-    lastName: normalizeText(owner.lastName),
+    email: owner.email.trim().toLowerCase(),
+    firstName: owner.firstName.trim(),
+    lastName: owner.lastName.trim(),
   };
-
-  const resolvedOwner = await createOrResolveOwnerUser({
-    owner: normalizedOwner,
-    serviceRoleClient,
-  });
   const organization = await createOrganizationAndSubscription({
     franchiseVertical,
     industryKey: normalizedIndustryKey,
@@ -461,28 +232,23 @@ export async function createManualOrganizationWithOwner({
   });
 
   try {
-    await ensureOrganizationMembership({
+    const ownerInvitation = await createOwnerInvitation({
+      email: normalizedOwner.email,
       organizationId: organization.id,
       serviceRoleClient,
-      userId: resolvedOwner.userId,
     });
 
-    const confirmationUrl = await generateConfirmationLink({
-      email: resolvedOwner.email,
-      serviceRoleClient,
-    });
-    const emailResult = await sendConfirmationEmail({
-      confirmationUrl,
-      recipientEmail: resolvedOwner.email,
+    const emailResult = await sendInviteEmail({
+      inviteToken: ownerInvitation.token,
+      organizationName: organization.organization_name,
+      recipientEmail: normalizedOwner.email,
     });
 
     if (emailResult.mode !== "sent") {
       throw new Error(
         emailResult.reason === "not_configured"
-          ? "Die Bestätigungs-E-Mail ist nicht vollständig konfiguriert."
-          : emailResult.detail
-            ? `Die Bestätigungs-E-Mail konnte nicht gesendet werden: ${emailResult.detail}`
-            : "Die Bestätigungs-E-Mail konnte nicht gesendet werden."
+          ? "Die Einladungs-E-Mail ist nicht vollständig konfiguriert."
+          : "Die Einladungs-E-Mail konnte nicht gesendet werden."
       );
     }
 
@@ -500,9 +266,9 @@ export async function createManualOrganizationWithOwner({
         validUntil: organization.validUntil,
       },
       owner: {
-        created: resolvedOwner.created,
-        email: resolvedOwner.email,
-        userId: resolvedOwner.userId,
+        created: false,
+        email: normalizedOwner.email,
+        inviteId: ownerInvitation.inviteId,
       },
     };
   } catch (error) {
@@ -510,10 +276,6 @@ export async function createManualOrganizationWithOwner({
       .from("organizations")
       .delete()
       .eq("id", organization.id);
-
-    if (resolvedOwner.created) {
-      await serviceRoleClient.auth.admin.deleteUser(resolvedOwner.userId);
-    }
 
     throw error;
   }

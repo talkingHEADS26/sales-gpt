@@ -23,8 +23,11 @@ type CreateSignupUserWithConfirmationEmailResult = {
   confirmationEmailSent: boolean;
 };
 
+type CreateInvitationSignupUserParams = CreateSignupUserParams;
+
 type EmailLookupResult = {
   emailConfirmedAt: string | null;
+  id: string | null;
   exists: boolean;
 };
 
@@ -68,6 +71,7 @@ async function lookupAuthUserByEmail(email: string): Promise<EmailLookupResult> 
     if (matchingUser) {
       return {
         emailConfirmedAt: matchingUser.email_confirmed_at ?? null,
+        id: matchingUser.id,
         exists: true,
       };
     }
@@ -81,6 +85,7 @@ async function lookupAuthUserByEmail(email: string): Promise<EmailLookupResult> 
 
   return {
     emailConfirmedAt: null,
+    id: null,
     exists: false,
   };
 }
@@ -251,6 +256,50 @@ export async function createDirectSignupUser({
     throw new Error(
       createUserResult.error?.message ??
         "Registrierung konnte nicht abgeschlossen werden."
+    );
+  }
+}
+
+export async function createInvitationSignupUser({
+  email,
+  metadata,
+  password,
+}: CreateInvitationSignupUserParams) {
+  const normalizedEmail = normalizeEmail(email);
+  const serviceRoleClient = getRequiredServiceRoleClient();
+  const existingUser = await lookupAuthUserByEmail(normalizedEmail);
+
+  if (existingUser.exists && existingUser.id) {
+    const updateUserResult = await serviceRoleClient.auth.admin.updateUserById(
+      existingUser.id,
+      {
+        email_confirm: true,
+        password,
+        user_metadata: metadata,
+      }
+    );
+
+    if (updateUserResult.error || !updateUserResult.data.user) {
+      throw new Error(
+        updateUserResult.error?.message ??
+          "Einladung konnte nicht abgeschlossen werden."
+      );
+    }
+
+    return;
+  }
+
+  const createUserResult = await serviceRoleClient.auth.admin.createUser({
+    email: normalizedEmail,
+    email_confirm: true,
+    password,
+    user_metadata: metadata,
+  });
+
+  if (createUserResult.error || !createUserResult.data.user) {
+    throw new Error(
+      createUserResult.error?.message ??
+        "Einladung konnte nicht abgeschlossen werden."
     );
   }
 }
