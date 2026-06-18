@@ -8,7 +8,6 @@ import {
   useSyncExternalStore,
   type ReactNode,
 } from "react";
-import { Plus_Jakarta_Sans } from "next/font/google";
 
 import { CookieBanner } from "@/components/cookie-banner";
 import { CookiePreferencesModal } from "@/components/cookie-preferences-modal";
@@ -28,11 +27,6 @@ import {
   type ConsentState,
   type OptionalConsentCategory,
 } from "@/lib/consent";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  display: "swap",
-});
 
 type ConsentContextValue = {
   consent: ConsentState | null;
@@ -172,7 +166,7 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
   return (
     <ConsentContext.Provider value={contextValue}>
       {children}
-      <div className={plusJakartaSans.className}>
+      <div>
         {hasHydrated && !consent ? (
           <CookieBanner
             onAcceptAll={handleAcceptAll}

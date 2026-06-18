@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "Dashboard",
-  },
+  title: "Dashboard",
 };
 
 type DashboardLayoutProps = {

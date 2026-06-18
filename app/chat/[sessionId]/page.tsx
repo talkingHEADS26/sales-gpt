@@ -3,9 +3,7 @@ import type { Metadata } from "next";
 import { ChatSessionView } from "./chat-session-view";
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "Sales Training",
-  },
+  title: "Chat",
 };
 
 type ChatPageProps = {

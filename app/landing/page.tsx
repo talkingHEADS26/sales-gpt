@@ -139,9 +139,7 @@ const pricingCards = [
 ];
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "talkingHEADS Sales Trainer",
-  },
+  title: "Willkommen",
   description: "talkingHEADS Landing Page für KI-gestütztes Sales Training.",
 };
 

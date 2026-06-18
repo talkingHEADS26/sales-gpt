@@ -2,23 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Roboto, Rubik } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { InternalAppShell } from "@/components/internal-app-shell";
 import type { DashboardKpiSummary } from "@/lib/dashboard-kpis";
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const rubik = Rubik({
-  subsets: ["latin"],
-  weight: ["500", "700"],
-  display: "swap",
-});
 
 type OrganizationMember = {
   completedSessionCount: number;
@@ -712,7 +700,7 @@ export function OrganizationPageView() {
 
   return (
     <InternalAppShell>
-      <div className={`${roboto.className} bg-white`}>
+      <div className="bg-white">
           <section className="flex flex-1 items-start py-10 sm:py-14">
             <div className="w-full rounded-[2rem] border border-[#0b478b] bg-[#0E51A0] p-5 shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:p-6 lg:p-8">
               <div className="rounded-[1.6rem] border border-white/20 bg-transparent p-6 sm:p-8 lg:p-10">
@@ -721,7 +709,7 @@ export function OrganizationPageView() {
                     <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#dce8fb]">
                       Team-Verwaltung
                     </p>
-                    <h1 className={`${rubik.className} mt-4 text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl`}>
+                    <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl">
                       Verwalte dein Team und deine verfügbaren Seats.
                     </h1>
                     <p className="mt-5 max-w-2xl text-base leading-7 text-[#dce8fb] sm:text-lg sm:leading-8">

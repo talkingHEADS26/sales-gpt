@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Roboto, Rubik } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { InternalAppShell } from "@/components/internal-app-shell";
@@ -18,17 +17,6 @@ type OrganizationMembership = {
     organization_name: string | null;
   } | null;
 };
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const rubik = Rubik({
-  subsets: ["latin"],
-  weight: ["500", "700"],
-  display: "swap",
-});
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -162,14 +150,14 @@ export default function DashboardPage() {
 
   return (
     <InternalAppShell>
-      <div className={roboto.className}>
+      <div>
         <section className="py-8 sm:py-10 lg:py-12">
           <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)] sm:p-6 lg:p-8">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#0e51a0]">
                 talkingHEADS Sales Trainer Dashboard
               </p>
-              <h1 className={`${rubik.className} mt-3 text-3xl font-semibold tracking-[-0.03em] text-[#0E51A0] sm:text-4xl`}>
+              <h1 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-[#0E51A0] sm:text-4xl">
                 {displayName ? `Willkommen zurück, ${displayName}` : "Willkommen zurück"}
               </h1>
               {organizationName ? (

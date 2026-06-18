@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Plus_Jakarta_Sans } from "next/font/google";
 
 import { FaqSection, type FaqSectionData } from "@/components/faq/faq-section";
 import { PublicSiteHeader } from "@/components/public-site-header";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "FAQ",
+  title: "Häufige Fragen",
   description:
     "Antworten auf häufige Fragen zu talkingHEADS Sales Trainer, Training, KI, Sicherheit und Nutzung im Team.",
 };
@@ -203,7 +197,7 @@ const faqSections: readonly FaqSectionData[] = [
 export default function FaqPage() {
   return (
     <main
-      className={`${plusJakartaSans.className} min-h-screen bg-[#f4f8fd] text-[#707070]`}
+      className="min-h-screen bg-[#f4f8fd] text-[#707070]"
     >
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pb-16 pt-5 sm:px-6 sm:pb-20 lg:px-8">
         <PublicSiteHeader reducedEffects />

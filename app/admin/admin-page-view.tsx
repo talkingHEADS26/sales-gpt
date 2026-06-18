@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { InternalAppShell } from "@/components/internal-app-shell";
@@ -15,11 +14,6 @@ import {
   type IndustryKey,
 } from "@/lib/industries";
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  display: "swap",
-});
 
 type AdminMember = {
   completedSessionCount: number;
@@ -1129,7 +1123,7 @@ export function AdminPageView() {
 
   return (
     <InternalAppShell>
-      <div className={plusJakartaSans.className}>
+      <div>
           <section className="flex flex-1 items-start py-10 sm:py-14">
             <div className="w-full rounded-[2rem] border border-white/80 bg-white/82 p-5 shadow-[0_24px_80px_rgba(15,23,42,0.14)] backdrop-blur sm:p-6 lg:p-8">
               <div className="rounded-[1.6rem] border border-slate-100 bg-[linear-gradient(180deg,#ffffff_0%,#f6f9fd_100%)] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] sm:p-8 lg:p-10">

@@ -2,7 +2,6 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { SiteBrand } from "@/components/site-brand";
@@ -12,11 +11,6 @@ import {
   validateInviteAcceptForm,
 } from "@/lib/auth-flows";
 import { getSupabaseBrowserClient, hasSupabaseEnv } from "@/lib/supabase";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  display: "swap",
-});
 
 type InviteAcceptFormProps = {
   token: string;
@@ -180,7 +174,7 @@ export function InviteAcceptForm({ token }: InviteAcceptFormProps) {
 
   return (
     <main
-      className={`${plusJakartaSans.className} min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,#dcecff_0%,#f7fbff_38%,#f6f8fc_72%,#eef3f9_100%)] text-[#707070]`}
+      className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,#dcecff_0%,#f7fbff_38%,#f6f8fc_72%,#eef3f9_100%)] text-[#707070]"
     >
       <div className="relative isolate min-h-screen">
         <div className="absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[linear-gradient(135deg,rgba(14,81,160,0.18),rgba(14,81,160,0.03)_46%,rgba(255,255,255,0)_72%)]" />

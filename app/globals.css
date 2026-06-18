@@ -6,8 +6,8 @@
   --th-blue: #0e51a0;
   --th-orange: #ea9413;
   --th-neutral: #707070;
-  --th-font-heading: var(--font-rubik), sans-serif;
-  --th-font-body: var(--font-roboto), sans-serif;
+  --th-font-heading: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --th-font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 @theme inline {

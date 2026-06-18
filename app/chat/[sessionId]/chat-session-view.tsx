@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Roboto, Rubik } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { InternalAppShell } from "@/components/internal-app-shell";
@@ -17,17 +16,6 @@ import { ChatHeader } from "./chat-header";
 import { ChatInputForm } from "./chat-input-form";
 import { ChatMessageList } from "./chat-message-list";
 import { SessionFeedbackPanel } from "./session-feedback-panel";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const rubik = Rubik({
-  subsets: ["latin"],
-  weight: ["500", "700"],
-  display: "swap",
-});
 
 type ChatSession = {
   audio_seconds_used: number;
@@ -462,7 +450,7 @@ export function ChatSessionView({ sessionId }: ChatSessionViewProps) {
 
   return (
     <InternalAppShell
-      containerClassName={`${roboto.className} mx-auto flex min-h-screen w-full max-w-6xl flex-col px-0 py-0 sm:px-4 sm:py-5`}
+      containerClassName="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-0 py-0 sm:px-4 sm:py-5"
     >
       <section className="flex min-h-screen w-full flex-col overflow-hidden border border-[#0b478b] bg-[#0E51A0] shadow-[0_24px_60px_rgba(14,81,160,0.28)] sm:min-h-[calc(100vh-7.5rem)] sm:rounded-[1.75rem]">
         {session ? (
@@ -494,7 +482,7 @@ export function ChatSessionView({ sessionId }: ChatSessionViewProps) {
             <div className="min-h-0 flex-1 overflow-y-auto">
               <div className="px-4 pt-5 sm:px-6 sm:pt-6">
                 <div className="rounded-[1.25rem] border border-[#0b478b] bg-[#0E51A0] px-4 py-3 text-sm text-[#dce8fb] shadow-[0_10px_24px_rgba(14,81,160,0.22)]">
-                  <p className={`${rubik.className} font-semibold uppercase tracking-[0.18em] text-white`}>
+                  <p className="font-semibold uppercase tracking-[0.18em] text-white">
                     Aktive Trainingseinheit
                   </p>
                   <p className="mt-2 leading-7">
