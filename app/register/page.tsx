@@ -15,10 +15,10 @@ import {
 } from "@/lib/auth-flows";
 import { getPlanLabel } from "@/lib/copecart-products";
 import {
-  FRANCHISE_VERTICAL_OPTIONS,
-  INDUSTRY_OPTIONS,
+  STUDIO_TYPE_OPTIONS,
   type FranchiseVerticalKey,
   type IndustryKey,
+  type StudioTypeKey,
 } from "@/lib/industries";
 import { hasSupabaseEnv } from "@/lib/supabase";
 
@@ -96,8 +96,9 @@ function RegisterPageContent() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
-  const [industryKey, setIndustryKey] = useState<IndustryKey>("fitness");
-  const [franchiseVertical, setFranchiseVertical] =
+  const industryKey: IndustryKey = "fitness";
+  const [studioType, setStudioType] = useState<StudioTypeKey>("gym");
+  const [franchiseVertical] =
     useState<FranchiseVerticalKey>("other");
   const [email, setEmail] = useState(copecartCustomerEmail ?? "");
   const [password, setPassword] = useState("");
@@ -189,6 +190,7 @@ function RegisterPageContent() {
       lastName,
       username,
       industryKey,
+      studioType,
       franchiseVertical,
       email,
       password,
@@ -234,6 +236,7 @@ function RegisterPageContent() {
                 last_name: values.lastName.trim(),
                 username: values.username.trim(),
                 industry_key: values.industryKey,
+                studio_type: values.studioType,
                 franchise_vertical:
                   values.industryKey === "franchise"
                     ? values.franchiseVertical
@@ -617,69 +620,32 @@ function RegisterPageContent() {
                         <>
                           <div>
                             <label
-                              htmlFor="industryKey"
+                              htmlFor="studioType"
                               className="mb-2 block text-sm font-medium text-[#707070]"
                             >
-                              Branche
+                              Schwerpunkt / Studioform
                             </label>
                             <select
-                              id="industryKey"
-                              value={industryKey}
-                              onChange={(event) => {
-                                const nextIndustryKey = event.target.value as IndustryKey;
-                                setIndustryKey(nextIndustryKey);
-                                if (nextIndustryKey !== "franchise") {
-                                  setFranchiseVertical("other");
-                                }
-                              }}
+                              id="studioType"
+                              value={studioType}
+                              onChange={(event) =>
+                                setStudioType(event.target.value as StudioTypeKey)
+                              }
                               className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10"
                               disabled={isLoading}
                             >
-                              {INDUSTRY_OPTIONS.map((industry) => (
-                                <option key={industry.value} value={industry.value}>
-                                  {industry.label}
+                              {STUDIO_TYPE_OPTIONS.map((studio) => (
+                                <option key={studio.value} value={studio.value}>
+                                  {studio.label}
                                 </option>
                               ))}
                             </select>
-                            {fieldErrors.industryKey ? (
+                            {fieldErrors.studioType ? (
                               <p className="mt-2 text-sm text-red-700">
-                                {fieldErrors.industryKey}
+                                {fieldErrors.studioType}
                               </p>
                             ) : null}
                           </div>
-
-                          {industryKey === "franchise" ? (
-                            <div>
-                              <label
-                                htmlFor="franchiseVertical"
-                                className="mb-2 block text-sm font-medium text-[#707070]"
-                              >
-                                Franchise-Segment
-                              </label>
-                              <select
-                                id="franchiseVertical"
-                                value={franchiseVertical}
-                                onChange={(event) =>
-                                  setFranchiseVertical(
-                                    event.target.value as FranchiseVerticalKey
-                                  )
-                                }
-                                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[#707070] shadow-[0_10px_24px_rgba(15,23,42,0.04)] outline-none transition focus:border-[#0e51a0] focus:ring-4 focus:ring-[#0e51a0]/10"
-                                disabled={isLoading}
-                              >
-                                {FRANCHISE_VERTICAL_OPTIONS.map((segment) => (
-                                  <option key={segment.value} value={segment.value}>
-                                    {segment.label}
-                                  </option>
-                                ))}
-                              </select>
-                              {fieldErrors.franchiseVertical ? (
-                                <p className="mt-2 text-sm text-red-700">
-                                  {fieldErrors.franchiseVertical}
-                                </p>
-                              ) : null}
-                            </div>
-                          ) : null}
 
                           <div>
                             <label

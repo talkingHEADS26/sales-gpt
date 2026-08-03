@@ -54,12 +54,48 @@ export const INDUSTRY_OPTIONS = INDUSTRY_KEYS.map((industryKey) => ({
   value: IndustryKey;
 }>;
 
+export const ACTIVE_INDUSTRY_OPTIONS = [
+  { label: "Fitness", value: "fitness" },
+] as const satisfies ReadonlyArray<{ label: string; value: IndustryKey }>;
+
+export const STUDIO_TYPE_KEYS = [
+  "gym",
+  "yoga",
+  "pilates",
+  "crossfit",
+  "ems",
+  "functional_training",
+] as const;
+
+export type StudioTypeKey = (typeof STUDIO_TYPE_KEYS)[number];
+export const DEFAULT_STUDIO_TYPE: StudioTypeKey = "gym";
+export const STUDIO_TYPE_LABELS: Record<StudioTypeKey, string> = {
+  gym: "Klassisches Fitnessstudio",
+  yoga: "Yoga",
+  pilates: "Pilates",
+  crossfit: "CrossFit",
+  ems: "EMS",
+  functional_training: "Functional Training",
+};
+export const STUDIO_TYPE_OPTIONS = STUDIO_TYPE_KEYS.map((studioType) => ({
+  label: STUDIO_TYPE_LABELS[studioType],
+  value: studioType,
+})) as ReadonlyArray<{ label: string; value: StudioTypeKey }>;
+
 export type OrganizationIndustrySettings = {
   franchise_vertical: string | null;
   industry_key: string | null;
   industry_locked: boolean | null;
   prompt_profile_key: string | null;
+  studio_type: string | null;
 };
+
+export function normalizeStudioType(value: string | null | undefined): StudioTypeKey {
+  if (!value) return DEFAULT_STUDIO_TYPE;
+  return (STUDIO_TYPE_KEYS as readonly string[]).includes(value)
+    ? (value as StudioTypeKey)
+    : DEFAULT_STUDIO_TYPE;
+}
 
 export function isFranchiseVerticalKey(value: string): value is FranchiseVerticalKey {
   return (FRANCHISE_VERTICAL_KEYS as readonly string[]).includes(value);
@@ -120,6 +156,7 @@ export function resolveIndustrySettings(
     industryKey,
     industryLocked: settings?.industry_locked ?? true,
     promptProfileKey: resolvePromptProfileKey(settings),
+    studioType: normalizeStudioType(settings?.studio_type),
   };
 }
 
@@ -133,7 +170,7 @@ export async function getOrganizationIndustrySettings(
 
   const { data, error } = await supabase
     .from("organizations")
-    .select("industry_key, prompt_profile_key, industry_locked, franchise_vertical")
+    .select("industry_key, prompt_profile_key, industry_locked, franchise_vertical, studio_type")
     .eq("id", organizationId)
     .maybeSingle<OrganizationIndustrySettings>();
 
